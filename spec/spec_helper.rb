@@ -21,3 +21,6 @@ RSpec.configure do |config|
   config.include Rack::Test::Methods
   config.include Capybara::DSL
 end
+
+#include helpers
+Dir[File.join(File.dirname(__FILE__), "helpers", "*.rb")].each { |f| require f }
