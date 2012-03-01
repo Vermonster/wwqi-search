@@ -4,6 +4,7 @@ require 'sinatra'
 require 'rack/test'
 require 'capybara'
 require 'capybara/dsl'
+require 'pry'
 
 #setup test environment
 set :environment, :test

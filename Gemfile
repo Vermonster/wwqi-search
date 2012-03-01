@@ -10,3 +10,8 @@ group :test do
   gem 'capybara'
   gem 'launchy'
 end
+
+gem 'pry', require: 'pry'
+gem 'pry-nav'
+gem 'pry-doc'
+gem 'pry-stack_explorer'
