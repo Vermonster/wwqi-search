@@ -16,7 +16,14 @@ end
 
 describe "The Search Results page" do
   it "should respond to GET /search?params" do
-    #performs the search,  
-    get('/search').should be_ok
+    get('/search').should be_redirect
+    get('/search?Query=foo').should be_ok
   end
+
+  it "should redirect to / if no query parameter is given" do
+    visit '/search'
+    current_path.should == "/"
+  end
+
+  
 end

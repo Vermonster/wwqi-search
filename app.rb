@@ -7,5 +7,5 @@ get '/' do
 end
 
 get '/search' do
-  
+  redirect to('/') unless params.has_key?("Query") 
 end
