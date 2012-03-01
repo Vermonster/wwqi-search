@@ -25,5 +25,9 @@ describe "The Search Results page" do
     current_path.should == "/"
   end
 
+  it "should use tire to search the elasticsearch index" do
+    Tire.should_receive(:search).with("_all")
+    visit "/search?Query=Foobar"
+  end
   
 end
