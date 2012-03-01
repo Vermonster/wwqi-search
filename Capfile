@@ -1,8 +1,8 @@
 load 'deploy' if respond_to?(:namespace)
 
 set :application, "wwqi-search"
-set :user, "wwqi-search"
-set :use_sudo, false
+set :user, "ubuntu"
+set :use_sudo, true 
 
 set :scm, :git
 set :repository, "git@github.com:jfredett/wwqi-search.git"
