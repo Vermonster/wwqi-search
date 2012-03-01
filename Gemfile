@@ -15,3 +15,5 @@ gem 'pry', require: 'pry'
 gem 'pry-nav'
 gem 'pry-doc'
 gem 'pry-stack_explorer'
+
+gem 'capistrano'
