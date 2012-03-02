@@ -1,9 +1,16 @@
 require 'bundler/capistrano'
+
+$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+require 'rvm/capistrano'
+
 load 'deploy' if respond_to?(:namespace)
 
 set :application, "wwqi-search"
 set :user, "ubuntu"
 set :use_sudo, false
+
+set :rvm_ruby_string, '1.9.2-p290@wwqi-search'
+set :rvm_type, :user
 
 set :scm, :git
 set :repository, "git://github.com/jfredett/wwqi-search.git"
@@ -19,11 +26,11 @@ set :admin_runner, user
 
 namespace :deploy do
   task :start, :roles => [:web, :app] do
-    run "cd #{deploy_to}/current && nohup thin -C thin/production_config.yml -R config.ru start"
-  end
+    run "cd #{deploy_to}/current && source .rvmrc && nohup bundle exec thin -C thin/production_config.yml -R config.ru start"
 
+  end
   task :stop, :roles => [:web, :app] do
-    run "cd #{deploy_to}/current && nohup thin -C thin/production_config.yml -R config.ru stop"
+    run "cd #{deploy_to}/current && source .rvmrc && nohup bundle exec thin -C thin/production_config.yml -R config.ru stop"
   end
 
   task :restart, :roles => [:web, :app] do
