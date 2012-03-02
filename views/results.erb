@@ -3,10 +3,9 @@
     <ul>
       <% @results.each do |result| %>
         <li>
-          <%= result.name_en %>
+          <a href="<%= result.url %>"><%= result.name_en %></a>
         </li>
       <% end %>
     </ul>
   </body>
 </html>
-
