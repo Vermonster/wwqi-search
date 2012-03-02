@@ -1,11 +1,12 @@
+require 'bundler/capistrano'
 load 'deploy' if respond_to?(:namespace)
 
 set :application, "wwqi-search"
 set :user, "ubuntu"
-set :use_sudo, true 
+set :use_sudo, false
 
 set :scm, :git
-set :repository, "git@github.com:jfredett/wwqi-search.git"
+set :repository, "git://github.com/jfredett/wwqi-search.git"
 set :deploy_via, :remote_cache
 set :deploy_to, "/var/www/#{application}"
 
@@ -43,3 +44,7 @@ namespace :"wwqi-search" do
     run "cat #{deploy_to}/current/log/thin.log"
   end
 end
+
+###
+
+
