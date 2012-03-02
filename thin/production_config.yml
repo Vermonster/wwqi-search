@@ -6,7 +6,7 @@ group: ubuntu
 port: 8000
 pid: /var/pids/wwqi-search/thin.pid
 rackup: /var/www/wwqi-search/current/config.ru
-log: /var/logs/wwqi-search.log
+log: /var/log/wwqi-search.log
 max_conns: 1024
 timeout: 30
 max_persistent_conns: 256
