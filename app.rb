@@ -15,6 +15,8 @@ get '/search' do
     query do
       string query_string
     end
+
+    size 100
   end.results
 
   erb :results
