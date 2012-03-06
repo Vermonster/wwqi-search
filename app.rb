@@ -17,7 +17,9 @@ get '/search' do
     end
 
     size 100
-  end.results
+  end
+
+  @results = @results ? @results.results : [] # because Tire returns nil if the search has no results...
 
   erb :results
 
