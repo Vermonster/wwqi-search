@@ -12,7 +12,18 @@ describe "The Search Entry Page" do
     click_button "Search"
     current_url.should =~ %r|/search\?Query=Foo|
   end
+
+  it "should redirect to '/' on GET '/en'" do
+    visit "/en"
+    current_path.should == '/'
+  end
+
+  it "should respond to GET /fa" do
+    get("/fa").should be_ok
+  end
 end
+
+
 
 describe "The Search Results page" do
   it "should respond to GET /search?params" do
