@@ -4,6 +4,7 @@ gem 'sinatra'
 gem 'rake'
 gem 'tire'
 gem 'thin'
+gem 'sass'
 
 group :test do
   gem 'rspec'

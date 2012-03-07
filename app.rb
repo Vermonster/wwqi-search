@@ -37,3 +37,8 @@ get '/search' do
   erb :results
 
 end
+
+
+get '/stylesheet/:file.:ext' do |file, _|
+  scss file
+end

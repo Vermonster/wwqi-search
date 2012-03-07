@@ -74,6 +74,7 @@ GEM
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.8.0)
     rubyzip (0.9.6.1)
+    sass (3.1.15)
     selenium-webdriver (2.19.0)
       childprocess (>= 0.2.5)
       ffi (~> 1.0.9)
@@ -112,6 +113,7 @@ DEPENDENCIES
   rack-test
   rake
   rspec
+  sass
   sinatra
   thin
   tire
