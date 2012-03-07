@@ -1,9 +1,12 @@
 <html lang='fa' dir='rtl'>
+  <head>
+    <link rel="stylesheet" href="/stylesheet/main.css">
+  </head>
   <body>
     <form method='GET' action='/search'>
       <label for='query'>جستجوی کلیدواژه ای</label>
       <input type='text' id='query' name='query'></input> 
-      <input type='hidden' id='search_language' value='farsi'></input>
+      <input type='hidden' name='lang' value='fa'></input>
       <input type='submit' value='جستجو'></input>
     </form>
     <a lang='fa' dir='ltr' href='/en'>Switch to English</a>
