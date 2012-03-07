@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'tire'
+require 'pry'
 
 
 def html(path)
