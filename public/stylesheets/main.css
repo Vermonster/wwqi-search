@@ -1,0 +1,72 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: 16px Helvetica, sans-serif;
+  background: #eee;
+}
+
+.container {
+  background: #fff;
+  margin: 0 auto;
+  width: 960px;
+  padding: 2em;
+  min-height: 500px;
+  box-shadow: 0px 0px 5px #ddd;
+}
+
+ul li {
+  list-style: none;
+  display: block;
+  border-bottom: 1px solid #eee;
+  padding: 2em 0;
+  pointer: cursor;
+}
+
+ul li .thumbnail {
+  display: block;
+  min-width: 150px;
+  float: left;
+  height: 200px;
+  background-color: #ddd;
+  margin-right: 1em;
+  padding: 1em;
+}
+ul li .thumbnail img {
+  max-width: 150px;
+  padding: 0;
+  margin: 0;
+}
+
+ul li a {
+  display: block;
+  text-decoration: none;
+  color: #333;
+}
+ul li:hover {
+  background-color: #eeeeee;
+}
+
+ul li a .name-and-description {
+  display: block;
+  vertical-align: top;
+}
+ul li a .name-and-description:after {
+  clear: both;
+  display: block;
+  content: ".";
+  visibility: hidden;
+
+}
+ul li a .name-and-description .name {
+  font-size: 125%;
+  display: block;
+  margin-bottom: .5em;
+}
+
+
+
+    
+

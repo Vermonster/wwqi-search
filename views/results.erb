@@ -1,23 +1,45 @@
 <html dir=<%= @lang == :en ? "ltr" : "rtl" %>>
   <head>
-    <link rel="stylesheet" href="/stylesheet/main.css">
+    <link rel="stylesheet" href="/stylesheets/main.css">
   </head>
   <body>
+    <div class="container">
+    <% if @lang == :en %>
+      <%= erb :_search_form_en %>
+    <% else %>
+      <%= erb :_search_form_fa %>
+    <% end %>
+
     <ul>
       <% @results.each do |result| %>
         <li>
-        <% if result.thumbnail %>
-          <img src="<%= result.thumbnail  %>"/>
-        <% end %>
-        <a href="http://wwqi-static-site.s3.amazonaws.com<%= result.url(@lang) %>">
-            <% if @lang == :en %>
-              <%= result.name_en %>
-            <% else %>
-              <%= result.name_fa %>
-            <% end %>
+          <a href="http://wwqi-static-site.s3.amazonaws.com<%= result.url(@lang) %>">
+            <span class="thumbnail">
+              <% if result.thumbnail %>
+                <img src="<%= result.thumbnail  %>"/>
+              <% end %>
+            </span>
+            <span class="name-and-description">
+              <% if @lang == :en %>
+                <span class="name">
+                  <%= result.name_en %>
+                </span>
+                <span class="description">
+                  <%= result.description_en %>
+                </span> 
+              <% else %>
+                <span class="name">
+                  <%= result.name_fa %>
+                </span>
+                <span class="description">
+                  <%= result.description_fa %>
+                </span> 
+              <% end %>
+            </span>
           </a>
         </li>
       <% end %>
     </ul>
+  </div>
   </body>
 </html>
