@@ -1,9 +1,21 @@
-<html>
+<html dir=<%= @lang == :en ? "ltr" : "rtl" %>>
+  <head>
+    <link rel="stylesheet" href="/stylesheet/main.css">
+  </head>
   <body>
     <ul>
       <% @results.each do |result| %>
         <li>
-          <a href="http://wwqi-static-site.s3.amazonaws.com<%= result.url %>"><%= result.name_en %></a>
+        <% if result.thumbnail %>
+          <img src="<%= result.thumbnail  %>"/>
+        <% end %>
+        <a href="http://wwqi-static-site.s3.amazonaws.com<%= result.url(@lang) %>">
+            <% if @lang == :en %>
+              <%= result.name_en %>
+            <% else %>
+              <%= result.name_fa %>
+            <% end %>
+          </a>
         </li>
       <% end %>
     </ul>

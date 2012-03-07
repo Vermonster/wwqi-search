@@ -25,6 +25,8 @@ get '/search' do
   redirect to('/') unless params.has_key?("query") 
   query_string = params["query"]
 
+  @lang = (params[:lang] || :en).to_sym
+
   @results = Tire.search("_all") do
     query do
       string query_string
