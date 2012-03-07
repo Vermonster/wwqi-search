@@ -1,9 +1,11 @@
-<html>
+<html lang='en'>
   <body>
-    <form method="GET" action="/search">
-      <label for="Query">Query</label>
-      <input type="text" id="query" name="Query"></input> 
-      <input type="submit" value="Search"></input>
+    <form method='GET' action='/search'>
+      <label for='query'>Enter a keyword</label>
+      <input type='text' id='query' name='query'></input> 
+      <input type='hidden' id='search_language' value='english'></input>
+      <input type='submit' value='Search'></input>
     </form>
+    <a lang='fa' dir='rtl' href="/fa">جستجوی فارسی</a>
   </body>
 </html>

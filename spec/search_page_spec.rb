@@ -21,6 +21,11 @@ describe "The Search Entry Page" do
   it "should respond to GET /fa" do
     get("/fa").should be_ok
   end
+
+  it "should see a search form when it goes to the farsi search page" do
+    visit "/fa"
+    page.should have_content "Query (in farsi)"
+  end
 end
 
 

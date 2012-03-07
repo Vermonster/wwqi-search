@@ -21,8 +21,8 @@ get '/fa' do
 end
 
 get '/search' do
-  redirect to('/') unless params.has_key?("Query") 
-  query_string = params["Query"]
+  redirect to('/') unless params.has_key?("query") 
+  query_string = params["query"]
 
   @results = Tire.search("_all") do
     query do
