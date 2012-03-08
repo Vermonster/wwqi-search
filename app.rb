@@ -7,7 +7,7 @@ require 'sass'
 def return_link(opts = {})
   query = params.merge(opts)
   request_string = query.map {|k,v| "#{k}=#{v}"}.join('&')
-  "#{url}?#{request_string}"
+  "/search?#{request_string}"
 end
 
 get '/' do
