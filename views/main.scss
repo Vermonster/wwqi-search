@@ -13,7 +13,7 @@ body {
   margin: 0 auto;
   width: 960px;
   padding: 2em;
-  min-height: 500px;
+  min-height: 1000px;
   box-shadow: 0px 0px 5px #ddd;
 }
 
@@ -23,59 +23,90 @@ ul li {
   border-bottom: 1px solid #eee;
   padding: 2em 0;
   pointer: cursor;
-}
 
-ul li .thumbnail {
-  display: block;
-  min-width: 150px;
-  float: left;
-  height: 200px;
-  background-color: #ddd;
-  margin-right: 1em;
-  padding: 1em;
-}
-ul li .thumbnail img {
-  max-width: 150px;
-  padding: 0;
-  margin: 0;
-}
+  .thumbnail {
+    display: block;
+    min-width: 150px;
+    float: left;
+    height: 200px;
+    background-color: #ddd;
+    margin-right: 1em;
+    padding: 1em;
 
-ul.search-results li a {
-  display: block;
-  text-decoration: none;
-  color: #333;
-}
-ul.search-results li:hover {
-  background-color: #eeeeee;
-}
+    img {
+      max-width: 150px;
+      padding: 0;
+      margin: 0;
+    }
+  }
 
-ul li a .name-and-description {
-  display: block;
-  vertical-align: top;
-}
-ul li a .name-and-description:after {
-  clear: both;
-  display: block;
-  content: ".";
-  visibility: hidden;
+  a .name-and-description {
+    display: block;
+    vertical-align: top;
 
-}
-ul li a .name-and-description .name {
-  font-size: 125%;
-  display: block;
-  margin-bottom: .5em;
+    &:after {
+      clear: both;
+      display: block;
+      content: ".";
+      visibility: hidden;
+    }
+
+    .name {
+      font-size: 125%;
+      display: block;
+      margin-bottom: .5em;
+    }
+
+  }
 }
 
 ul.search-results {
-  width: 85%;
+  width: 80%;
   display:inline-block;
+
+  li { 
+    a {
+      display: block;
+      text-decoration: none;
+      color: #333;
+    }
+    &:hover {
+      background-color: #eeeeee;
+    }
+  }
 }
+
 ul.search-facets {
+
   display:inline-block;
   float:left;
-  width: 10%;
+  width: 15%;
+
+  padding-top:2em;
+  padding-left:5px;
+
+  li {
+    padding:1em 0;
+
+    ul {
+      padding-left:15px;
+      
+      li {
+        padding:5px; 
+
+        .term-count {
+          float:right;
+        }
+
+        &:hover {
+          background-color: #eee;
+        }
+      }
+    }
+
+  }
 }
 
 
-    
+
 
