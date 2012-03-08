@@ -13,7 +13,7 @@
 
       <ul class="search-facets">
         <% @results.facets.keys.each do |facet_name_full| 
-          facet_name = facet_name_full.split('_').first
+           facet_name = facet_name_full.split('_').first
         %>
           <li class="<%= facet_name %> facet"> 
             <span class='facet-name'> <%= facet_name %> </span>
