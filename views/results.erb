@@ -4,42 +4,33 @@
   </head>
   <body>
     <div class="container">
-    <% if @lang == :en %>
-      <%= erb :_search_form_en %>
-    <% else %>
-      <%= erb :_search_form_fa %>
-    <% end %>
+      <% if @lang == :en %>
+        <%= erb :_search_form_en %>
+      <% else %>
+        <%= erb :_search_form_fa %>
+      <% end %>
 
-    <ul>
-      <% @results.each do |result| %>
-        <li>
-          <a href="http://wwqi-static-site.s3.amazonaws.com<%= result.url(@lang) %>">
+      <ul>
+        <% @results.each do |result| %>
+          <li class="<%= result.type %>">
+          <a href="http://wwqi-static-site.s3.amazonaws.com<%= result.send("url_#{@lang}") %>">
             <span class="thumbnail">
               <% if result.thumbnail %>
-                <img src="<%= result.thumbnail  %>"/>
+                <img src="<%= result.thumbnail %>"/>
               <% end %>
             </span>
             <span class="name-and-description">
-              <% if @lang == :en %>
-                <span class="name">
-                  <%= result.name_en %>
-                </span>
-                <span class="description">
-                  <%= result.description_en %>
-                </span> 
-              <% else %>
-                <span class="name">
-                  <%= result.name_fa %>
-                </span>
-                <span class="description">
-                  <%= result.description_fa %>
-                </span> 
-              <% end %>
+              <span class="name">
+                <%= result.send("name_#{@lang}") %>
+              </span>
+              <span class="description">
+                <%= result.send("description_#{@lang}") %>
+              </span> 
             </span>
           </a>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </body>
 </html>
