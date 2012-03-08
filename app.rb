@@ -59,6 +59,7 @@ get '/search' do
   #set up environment for the template to render
   @lang = lang
   @filter_term = filter_term
+  @query = query_string
   @results = @results ? @results.results : [] # because Tire returns nil if the search has no results...
 
   erb :results

@@ -1,6 +1,6 @@
 <form method='GET' action='/search'>
   <label for='query'>Enter a keyword</label>
-  <input type='text' id='query' name='query'></input> 
+  <input type='text' id='query' name='query' value="<%= @query %>"></input> 
   <input type='hidden' name='lang' value='en'></input>
   <input type='submit' value='Search'></input>
 </form>
