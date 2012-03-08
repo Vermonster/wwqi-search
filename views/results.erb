@@ -1,6 +1,8 @@
 <html dir=<%= @lang == :en ? "ltr" : "rtl" %>>
   <head>
     <link rel="stylesheet" href="/stylesheets/main.css">
+
+  
   </head>
 
   <body>
@@ -15,22 +17,22 @@
         <% @results.facets.keys.each do |facet_name_full| 
            facet_name = facet_name_full.split('_').first
         %>
-          <li class="<%= facet_name %> facet"> 
-            <span class='facet-name'> <%= facet_name %> </span>
-            <ul class="terms"> 
-              <% @results.facets[facet_name_full]["terms"].each do |hash|
-                 name = hash["term"]
-                 count = hash["count"]
-              %>
-                <a href=<%= return_link(:filter_term => "#{facet_name_full}:#{name}") %>>
-                  <li class="term">
-                    <span class="term-name"> <%= name %> </span>
-                    <span class="term-count"> <%= count %> </span>
-                  </li>
-                </a>
-              <% end %>
-            </ul>
-          </li>
+        <li class="<%= facet_name %> facet"> 
+          <span class='facet-name'> <%= facet_name %> </span>
+          <ul class="terms"> 
+            <% @results.facets[facet_name_full]["terms"].each do |hash|
+               name = hash["term"]
+               count = hash["count"]
+            %>
+            <a href=<%= return_link(:filter_term => "#{facet_name_full}:#{name}") %>>
+              <li class="term">
+                <span class="term-name"> <%= name %> </span>
+                <span class="term-count <%= @lang %>"> <%= count %> </span>
+              </li>
+            </a>
+            <% end %>
+          </ul>
+        </li>
         <% end %>
       </ul>
 

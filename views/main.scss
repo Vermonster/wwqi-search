@@ -61,7 +61,7 @@ ul li {
 }
 
 ul.search-results {
-  width: 80%;
+  width: 75%;
   display:inline-block;
 
   li { 
@@ -99,15 +99,23 @@ ul.search-facets {
         padding:5px; 
 
         .term-count {
-          float:right;
+          padding-left:1em;
+
+          &.fa {
+            float:left;
+          }
+
+          &.en {
+            float:right;
+          }
         }
+          
 
         &:hover {
           background-color: #eee;
         }
       }
     }
-
   }
 }
 
