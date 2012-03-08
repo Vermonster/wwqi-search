@@ -4,7 +4,7 @@ html, body {
 }
 
 body {
-  font: 16px Helvetica, sans-serif;
+  font: 14px Helvetica, sans-serif;
   background: #eee;
 }
 
@@ -21,7 +21,7 @@ ul li {
   list-style: none;
   display: block;
   border-bottom: 1px solid #eee;
-  padding: 2em 0;
+  padding: 2em 1em;
   pointer: cursor;
 
   .thumbnail {
@@ -80,23 +80,23 @@ ul.search-facets {
 
   display:inline-block;
   float:left;
-  width: 15%;
+  width: 16.5%;
 
   padding-top:2em;
-  padding-left:5px;
+  padding-left:0em;
 
   li {
     padding:1em 0;
 
     ul {
-      padding-left:15px;
       a {
         text-decoration: none;
         display: block;
         color: #333;
       }
       li {
-        padding:5px; 
+        width: 100%;
+        padding: 0.33em 0;
 
         .term-count {
           padding-left:1em;
