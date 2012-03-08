@@ -41,3 +41,7 @@ get '/search' do
 
 end
 
+get '/stylesheets/main.css' do
+  scss :main
+end
+
