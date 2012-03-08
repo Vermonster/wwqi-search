@@ -10,9 +10,29 @@
         <%= erb :_search_form_fa %>
       <% end %>
 
-      <ul>
+      <ul class="search-facets">
+        <% @results.facets.keys.each do |facet_name| %>
+          <li class="<%= facet_name %> facet"> 
+            <span class='facet-name'> <%= facet_name %> </span>
+            <ul class="terms"> 
+              <% @results.facets[facet_name]["terms"].each do |term_hash| %>
+              <li class="term">
+                <span class="term-name">
+                  <%= term_hash["term"] %>
+                </span>
+                <span class="term-count">
+                  <%= term_hash["count"] %>
+                </span>
+              </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+
+      <ul class="search-results">
         <% @results.each do |result| %>
-          <li class="<%= result.type %>">
+          <li class="<%= result.type.downcase.dasherize %>">
           <a href="http://wwqi-static-site.s3.amazonaws.com<%= result.send("url_#{@lang}") %>">
             <span class="thumbnail">
               <% if result.thumbnail %>
