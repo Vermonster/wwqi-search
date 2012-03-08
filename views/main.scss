@@ -90,7 +90,11 @@ ul.search-facets {
 
     ul {
       padding-left:15px;
-      
+      a {
+        text-decoration: none;
+        display: block;
+        color: #333;
+      }
       li {
         padding:5px; 
 
