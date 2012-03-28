@@ -27,10 +27,12 @@ end
 get '/search' do
   redirect to('/') unless params.has_key?("query") 
   query_string = params["query"]
-  lang = (params[:lang] || :en).to_sym
-  filter_term = params[:filter_term]
-
-  @results = Tire.search("_all") do
+  filter_term  = params[:filter_term]
+  lang = (params[:lang]  || :en).to_sym
+  page = (params["page"] || 1).to_i
+  results_per_page = 10
+  
+  query = Tire.search("_all") do
     query do
       string query_string
     end
@@ -56,11 +58,15 @@ get '/search' do
     size 100
   end
 
+  # paging -- only display some of the results
+  results = (query && query.results) || []
+  @total_pages = (1.0*results.length / results_per_page).ceil
+  @results = results[(page-1)*results_per_page..page*results_per_page-1] || []
+
   #set up environment for the template to render
   @lang = lang
   @filter_term = filter_term
   @query = query_string
-  @results = @results ? @results.results : [] # because Tire returns nil if the search has no results...
 
   erb :results
 

@@ -19,28 +19,6 @@
         <%= erb :_search_form_fa %>
       <% end %>
 
-      <ul class="search-facets">
-        <% @results.facets.keys.each do |facet_name_full| 
-           facet_name = facet_name_full.split('_').first
-        %>
-        <li class="<%= facet_name %> facet"> 
-          <span class='facet-name'> <%= facet_name %> </span>
-          <ul class="terms"> 
-            <% @results.facets[facet_name_full]["terms"].each do |hash|
-               name = hash["term"]
-               count = hash["count"]
-            %>
-            <a href=<%= return_link(:filter_term => "#{facet_name_full}:#{name}") %>>
-              <li class="term">
-                <span class="term-name"> <%= name %> </span>
-                <span class="term-count <%= @lang %>"> <%= count %> </span>
-              </li>
-            </a>
-            <% end %>
-          </ul>
-        </li>
-        <% end %>
-      </ul>
 
       <div id="content">
         <ul class="collections dark-list">
@@ -75,6 +53,14 @@
             </li>
           <% end %>
         </ul>
+
+        <ul class="search-bottom-list">
+        <% @total_pages.times do |i| %>
+          <li>
+          <a href=<%="/search?query=#{params["query"]}&lang=#{params["lang"]}&page=#{i+1}"%>><%= i+1 %></a> 
+          </li>
+        <% end %>
+      </ul>
       </div>
 
     </div>

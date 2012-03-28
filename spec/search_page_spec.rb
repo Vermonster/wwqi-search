@@ -45,6 +45,26 @@ describe "The Search Results page" do
     Tire.should_receive(:search).with("_all")
     visit "/search?query=Foobar"
   end
+
+  it "should have pages when there are enough results" do
+    mocked_results = []
+    15.times do |i|
+      mocked_results << double(
+        title_en: "foo#{i}", 
+        description_en: "bar#{i}",
+        url_en: "",
+        thumbnail_en: nil,
+        thumbnail: nil,
+        name: nil,
+        type: "fooo",
+        created_at: nil
+      )
+    end
+    Tire.stub_chain(:search, :results).and_return(mocked_results)
+    visit "/search?query=*&lang=en"
+    page.should have_content "foo9"
+    page.should_not have_content "foo10"
+    visit "/search?query=*&lang=en&page=2"
+    page.should have_content "foo10"
   end
-  
 end
