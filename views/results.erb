@@ -41,23 +41,38 @@
         <% end %>
       </ul>
 
-      <ul class="search-results">
-        <% @results.each do |result| %>
-          <li class="<%= result.type.downcase.dasherize %>">
-          <a href="http://wwqi-static-site.s3.amazonaws.com<%= result.send("url_#{@lang}") %>">
-            <span class="thumbnail">
-              <% if result.thumbnail %>
-                <img src="<%= result.thumbnail %>"/>
-              <% end %>
-            </span>
-            <span class="name-and-description">
-              <span class="name"> <%= result.send("name_#{@lang}") %> </span>
-              <span class="description"> <%= result.send("description_#{@lang}") %> </span> 
-            </span>
-          </a>
-          </li>
-        <% end %>
-      </ul>
+			<ul class="collections dark-list">
+            <% @results.each do |result| %>
+				<li class="clearfix">
+        <a href="http://wwqi-static-site.s3.amazonaws.com<%= result.send("url_#{@lang}") %>" class="clearfix">
+					<div class="collection-thumb ">
+						 <% if result.thumbnail %>
+		                     <img alt="<%= result.name %>" src="<%= collection.thumbnail %>">
+							 <div class="layer1"></div>
+							 <div class="layer2"></div>
+		                 <% end %>
+						<% if !result.thumbnail %>
+							<img alt="<%= result.name %>" src="/images/empty.jpg">
+							 <div class="layer1"></div>
+							 <div class="layer2"></div>
+		                 <% end %>
+					</div>
+					<div class="collection-meta">
+            <% if result.type.downcase == "collection" %>
+						<span class="items-in-collection"><strong><%= collection.count %></strong>Items</span>
+          <% end %>
+						<div class="collection-essentials">
+							<span class="date"><%= result.created %></span>
+              <h3><%= result.send("name_#{@lang}") %></h3>
+              <p><%= result.send("description_#{@lang}") %></p>
+						</div>
+						
+					</div>
+					</a>
+             </li>
+            <% end %>
+			</ul>
+
     </div>
   </body>
 </html>
