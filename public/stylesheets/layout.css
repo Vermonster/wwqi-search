@@ -33,7 +33,7 @@ body{
 }
 
 
-a{outline-width:0px;color:#decc9d;}
+a{outline-width:0px;color:#decc9d;text-decoration:none;}
 a img {border:none;}
 a:link, a:active, a:visited{text-decoration:none;}
 a:hover{text-decoration:none;}
