@@ -104,6 +104,7 @@ NOTES
       OpenStruct.new(name: "Bushihr", url: "#")
     ]
   end
+
   
 
   def load_example_collection_index! 
@@ -151,5 +152,27 @@ NOTES
       o.title = "an item"
       o.thumbnail = "http://d19ob2c2hogwg9.cloudfront.net/thumbs/it_#{rand(2000)+1}.jpg"
     end
+  end
+end
+
+class Array
+  def present?
+    count > 0
+  end
+end
+
+class Object
+  def try(m)
+    if self
+      self.send(m)
+    else
+      nil
+    end
+  end
+end
+
+class NilClass
+  def try(_)
+    self
   end
 end

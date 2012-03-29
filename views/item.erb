@@ -1,18 +1,18 @@
 <%# encoding: utf-8 %>
 <% load_example_item! unless $GENERATE # prevent loading the example if we're generating the static pages %>
 
-<%= erb "head_content" %>
+<%= partial "head_content" %>
 
 <body>
   <div id="nonFooter">
-    <%= erb "body_header" %>
+    <%= partial "body_header" %>
 
     <div id="content">
       <div class="container clearfix">
         <!-- rails template content -->
 
         <div class="item-page clearfix">
-          <%= erb "item_tools" %>
+          <%= partial "item_tools" %>
 
           <!-- end pagination bar -->
 
@@ -193,14 +193,14 @@
         </div>
       </div>
 
-      <%= erb "print_popup" %>
+      <%= partial "print_popup" %>
 
-      <%= erb "email_popups" %>
+      <%= partial "email_popups" %>
 
       <!-- end rails template content -->
     </div> <!-- end container -->
   </div><!-- end content -->
 </div> <!-- end nonFooter -->
-<%= erb "footer" %>
+<%= partial "footer" %>
 </body>
 </html>

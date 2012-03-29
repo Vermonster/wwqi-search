@@ -1,7 +1,9 @@
 require 'sinatra'
+require 'date'
 require 'tire'
 require 'pry'
 require 'sass'
+require 'active_support'
 
 require './views/view_helpers'
 
@@ -98,9 +100,15 @@ get '/collection/:lang/list' do |lang|
   erb :collection_manifest
 end
 
-get '/collection/:en/:id.html' do |lang, id|
+get '/collection/:lang/:id.html' do |lang, id|
   @lang = lang
   @id = id
   erb :collection
+end
+
+get '/item/:lang/:id.html' do |lang, id|
+  @lang = lang
+  @id = id
+  erb :item
 end
 
