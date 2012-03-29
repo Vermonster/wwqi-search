@@ -25,19 +25,24 @@
   ================================================== -->
 
   <!-- Skeleton Stuff -->
-  <%= stylesheet "base"     %>
-  <%= stylesheet "skeleton" %>
-  <%= stylesheet "layout"   %>
+  <%= stylesheet "base"          %>
+  <%= stylesheet "skeleton"      %>
+  <%= stylesheet "layout"        %>
+  <%  if @lang.to_sym == :fa     %>
+  <%=   stylesheet "skeleton_fa" %>
+  <%=   stylesheet "layout_fa"   %>
+  <%  end                        %>
 
   <!-- WWQI -->
   <%= stylesheet "style", media: "screen", type: "text/css" %> 
 
 	<!-- TODO: Audio Player (Only include if page has audio?)
 	================================================== -->
-	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-	<script type="text/javascript" src="/javascript/jquery.ui.widget.min.js"></script>
-	<script type="text/javascript" src="/javascript/AudioPlayerV1.js"></script>
-	<link rel="stylesheet" href="/stylesheets/audioplayer.css"  />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script type="text/javascript" src="/javascripts/jquery.ui.widget.min.js"></script>
+	<script type="text/javascript" src="/javascripts/AudioPlayerV1.js"></script>
+
+  <%= stylesheet "audioplayer" %>
 
 	<!-- Favicons
 	================================================== -->

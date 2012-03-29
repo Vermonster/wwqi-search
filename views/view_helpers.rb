@@ -105,7 +105,72 @@ NOTES
     ]
   end
 
-  
+  def load_example_item_farsi! 
+    @object = OpenStruct.new
+    @object.thumbnail = "http://d19ob2c2hogwg9.cloudfront.net/thumbs/it_1527.jpg"
+    @object.description =<<DESC
+    در صنعت چاپ، صفحه آرایی و طراحی گرافیک، لورم ایپسوم به متن ساختگی گفته می شود که به عنوان عنصر گرافیکی، برای پر کردن صفحه و ارایه شکل ظاهری صفحه به کار برده می شود تا از نظر گرافیکی نشانگر چگونگی نوع و اندازه فونت و لی آوت متن باشد. 
+DESC
+    @object.instance_eval do 
+      def has_creator? 
+        true
+      end
+    end
+    @object.creator = OpenStruct.new
+    @object.creator.name = "عباس میرزا نایب السلطنه"
+
+
+    @object.date = OpenStruct.new
+    @object.date.representation = " متن ساختگی گفته"
+
+    @object.title = "، لورم ایپسوم به"
+
+    @object.notes =<<NOTES
+در صنعت چاپ، صفحه آرایی و طراحی گرافیک، لورم ایپسوم به متن ساختگی گفته می شود که به عنوان عنصر گرافیکی، برای پر کردن صفحه و ارایه شکل ظاهری صفحه به کار برده می شود تا از نظر گرافیکی نشانگر چگونگی نوع و اندازه فونت و لی آوت متن باشد. 
+NOTES
+    @object.dimensions = "۲۵ دسامبر ۱۹۲۰ تا ۱ مه ۱۹۰۶"
+    @object.collections = [OpenStruct.new(url: "#", title: "Majlis Library, Museum and Document Center")]
+    @object.repository = "در صنعت چاپ، صفحه"
+    @object.restrictions = "در صنعت چاپ، صفحه"
+    @object.created = "۲۵ دسامبر ۱۹۲۰ تا ۱ مه ۱۹۰۶"
+    @object.created.instance_eval do
+      def strftime(*_)
+        self
+      end
+    end
+    @object.updated =  "۲۵ دسامبر ۱۹۲۰ تا ۱ مه ۱۹۰۶"
+    @object.updated.instance_eval do
+      def strftime(*_)
+        self
+      end
+    end
+
+    @object.instance_eval do
+      def url
+        "#"
+      end
+    end
+
+    @object.accession_number = "1018A10"
+    @object.genres = [
+      OpenStruct.new(name: "manuscripts & lithographs", url_to_facet: "#")
+    ]
+    @object.people = [
+      OpenStruct.new(name: "Ziya' al-Saltanah [I]", url: "#"),
+      OpenStruct.new(name: "Mayil Afshar Shaykh al-Shu'ara", url: "#"),
+      OpenStruct.new(name: "Amin al-Saltanah", url: "#")
+    ]
+
+    @object.subjects = [
+      OpenStruct.new(name: "food", url_to_facet: "#"),
+      OpenStruct.new(name: "cooking", url_to_facet: "#"),
+      OpenStruct.new(name: "courtiers", url_to_facet: "#")
+    ]
+
+    @object.places = [
+      OpenStruct.new(name: "Bushihr", url: "#")
+    ]
+  end
 
   def load_example_collection_index! 
     @object = OpenStruct.new.tap do |o|

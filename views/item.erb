@@ -1,8 +1,12 @@
-<%# encoding: utf-8 %>
-<% load_example_item! unless $GENERATE # prevent loading the example if we're generating the static pages %>
+<%# encoding: utf-8                                                                    %>
+<% unless $GENERATE # prevent loading the example if we're generating the static pages %>
+<%   load_example_item! if @lang == "en"                                               %>
+<%   load_example_item_farsi! if @lang == "fa"                                         %>
+<% end                                                                                 %>
+
+
 
 <%= partial "head_content" %>
-
 <body>
   <div id="nonFooter">
     <%= partial "body_header" %>
