@@ -6,6 +6,8 @@ gem 'tire'
 gem 'thin'
 gem 'sass'
 
+gem 'heroku'
+
 group :test do
   gem 'rspec'
   gem 'rack-test'
