@@ -30,8 +30,7 @@
                     <img alt="<%= result.name %>" src="<%= result.thumbnail %>">
                     <div class="layer1"></div>
                     <div class="layer2"></div>
-                  <% end %>
-                  <% if !result.thumbnail %>
+                  <% else %>
                     <img alt="<%= result.name %>" src="/images/empty.jpg">
                     <div class="layer1"></div>
                     <div class="layer2"></div>
