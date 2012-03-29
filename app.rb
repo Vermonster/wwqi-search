@@ -3,12 +3,29 @@ require 'tire'
 require 'pry'
 require 'sass'
 
+require './views/view_helpers'
 
-def return_link(opts = {})
-  query = params.merge(opts)
-  request_string = query.map {|k,v| "#{k}=#{v}"}.join('&')
-  "/search?#{request_string}"
+module Helpers
+  def return_link(opts = {})
+    query = params.merge(opts)
+    request_string = query.map {|k,v| "#{k}=#{v}"}.join('&')
+    "/search?#{request_string}"
+  end
+
+  def partial(path)
+    erb("_#{path}".to_sym)
+  end
+
+  def stylesheet(name, opts = {})
+    extra = opts.inject("") { |a,(key, value)| a << "#{key}=\"#{value}\" " } if opts.keys.any?
+    %Q|<link rel="stylesheet" href="/stylesheets/#{name}.css" #{extra} />|
+  end
 end
+
+helpers ViewHelpers
+helpers Helpers
+
+
 
 get '/' do
   #this will be replaced with a cloudfront-hosted page.
@@ -74,5 +91,16 @@ end
 
 get '/stylesheets/main.css' do
   scss :main
+end
+
+get '/collection/:lang/list' do |lang|
+  @lang = lang
+  erb :collection_manifest
+end
+
+get '/collection/:en/:id.html' do |lang, id|
+  @lang = lang
+  @id = id
+  erb :collection
 end
 

@@ -1,0 +1,206 @@
+<%# encoding: utf-8 %>
+<% load_example_item! unless $GENERATE # prevent loading the example if we're generating the static pages %>
+
+<%= erb "head_content" %>
+
+<body>
+  <div id="nonFooter">
+    <%= erb "body_header" %>
+
+    <div id="content">
+      <div class="container clearfix">
+        <!-- rails template content -->
+
+        <div class="item-page clearfix">
+          <%= erb "item_tools" %>
+
+          <!-- end pagination bar -->
+
+          <div class="item-essentials container clearfix">
+
+            <div class="four columns item-thumbnail">
+              <!-- TODO: Implement subcollections 
+              <span class="image-count">24 images</span>
+              -->
+              <div class="item-image-frame">
+                <img src="<%= @object.thumbnail %>" alt="<%= @object.title_with_date %>">
+              </div>
+
+            </div>
+
+            <div class="six columns">
+              <h2><%= @object.title_with_date %></h2>
+              <p class="description">
+              <%= @object.description %>
+              </p>
+            </div>
+
+            <div class="six columns  omega last-column">
+
+              <div class="item-links">
+                <h1> Images </h1>
+                <a href="<%= @object.harvard_url %>" rel="shadowbox[gallery]" title="Anthology of Food, [ca. 1865]">View This Item</a>
+                <!-- TODO - additional links only if item has multiple links -->
+                <a href="#" title="Anthology of Food, [ca. 1865]">Another Link</a>
+                <a href="#" title="Anthology of Food, [ca. 1865]">Yet Another Link</a>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="item-below-fold">
+
+            <div class="ten columns alpha">
+              <!-- TODO - Render next block only when item has associated audio files -->
+              <!-- beginning of audio block -->
+              <div class="item-audio">
+                <h1> Audio </h1>
+                <h5>Hear Mr. Dee talk about his childhood memories</h5>
+                <audio class="AudioPlayerV1" preload="none" data-fallback="/AudioPlayerV1.swf">
+                <source type="audio/mpeg" src="/chimes.mp3" />
+                </audio>
+              </div>
+              <!-- end of audio block -->
+              <!-- TODO - Render next block only when item has a translation -->
+              <!-- beginning of transcript block -->
+              <div class="item-translation">
+                <h1> Translation </h1>
+                <a href="#">View Item Translation</a>
+              </div>
+              <!-- end of transcript block -->
+              <!-- TODO - Render next block only when item has a transcript -->
+              <!-- beginning of transcript block -->
+              <div class="item-transcript">
+                <h1> Transcript </h1>
+                <a href="#">View Item Transcript</a>
+              </div>
+              <!-- end of transcript block -->
+
+
+              <div class="item-details">
+                <h1>Item Details</h1>
+                <ul>
+
+                  <% if @object.has_creator? %>
+                    <li class="description">
+                    <span>Creator:</span>
+                    <%= @object.creator.name %>
+                    </li>
+                  <% end %>
+
+
+                  <li class="description">
+                  <span>Date:</span>
+                  <%= @object.date.try(:representation) || "Undated" %>
+                  </li>
+
+                  <li>
+                  <span>Notes:</span>
+                  <%= @object.notes %>
+                  </li>
+
+
+                  <li>
+                  <span>Dimensions:</span>
+                  <%= @object.dimensions %>
+                  </li>
+
+                  <li>
+                  <span>Collections:</span>
+                  <% @object.collections.each do |coll| %>
+                    <a href="<%= coll.url %>" class="tag" title="more"><%= coll.name %></a>
+                  <% end %>
+                  </li>
+
+                  <li>
+                  <span>Repository:</span>
+                  <%= @object.repository %>
+                  </li>
+
+                  <% if @object.collections.size == 1 %>
+                    <% # TODO: consider case of item belonging to multiple collections (currently applies to no items) %>
+                    <li>
+                    <span>Restrictions:</span>
+                    <%= @object.collections.first.restrictions %>
+                    </li>
+                  <% end %>
+
+                  <li>
+                  <span>Accessed:</span>
+                  <%= @object.created.strftime("%B %e, %Y") %>
+                  </li>
+                  <li>
+                  <span>Last Edited:</span>
+                  <%= @object.updated.strftime("%B %e, %Y") %>
+                  </li>
+
+                  <li>	
+                  <span>Record no.:</span> <%= @object.accession_number %>		
+                </li>
+
+                <li class="clear">
+                &nbsp;
+                </li>
+              </ul>
+
+            </div>
+          </div>
+          <div class="six columns omega last-column">
+
+            <% if @object.genres.present? || @object.people.present? || @object.places.present? || @object.subjects.present? %>
+              <div class="item_related">
+                <ul>
+                  <% if @object.genres.present? %>
+                    <li>
+                    <span class="title genre">Genres</span>
+                    <% @object.genres.each do |genre| %>
+                      <a href="<%= genre.url_to_facet %>" class="tag"><%= genre.name %></a>
+                    <% end %>
+                    </li>
+                  <% end %>
+
+                  <% if @object.people.present? %>
+                    <li>
+                    <span class="title people">People</span>
+                    <% @object.people.each do |person| %>
+                      <a href="<%= person.url %>" class="tag"><%= person.name %></a>
+                    <% end %>
+                    </li>
+                  <% end %>
+
+                  <% if @object.subjects.present? %>
+                    <li>
+                    <span class="title subject">Subjects</span>
+                    <% @object.subjects.each do |subject| %>
+                      <a href="<%= subject.url_to_facet %>" class="tag"><%= subject.name %></a>
+                    <% end %>
+                    </li>
+                  <% end %>
+
+                  <% if @object.places.present? %>
+                    <li>
+                    <span class="title place">Places</span>
+                    <% @object.places.each do |place| %>
+                      <a href="<%= place.url %>" class="tag"><%= place.name %></a>
+                    <% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <%= erb "print_popup" %>
+
+      <%= erb "email_popups" %>
+
+      <!-- end rails template content -->
+    </div> <!-- end container -->
+  </div><!-- end content -->
+</div> <!-- end nonFooter -->
+<%= erb "footer" %>
+</body>
+</html>

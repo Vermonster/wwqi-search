@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Women's Worlds in Qajar Iran | <%= @object.title %></title>
+	<meta name="description" content="The archive contains manuscripts, pictures, sound files relating to the history of women in Qajar Iran." />
+	<meta name="author" content="Women's World in Qajar Iran">
+
+	<!-- facebook metatags 
+	================================================== -->
+	<meta property="og:site_name" content="Women's Worlds in Qajar Iran"/>
+
+  <meta property="og:title" content="<%= @object.title %>" />
+  <% if @object.respond_to?(:thumbnail) && @object.try(:thumbnail) %>
+    <meta property="og:image" content="<%= @object.thumbnail %>" />
+    <link rel="image_src" href="<%= @object.thumbnail %>" />
+  <% end %>
+
+  <!-- CSS 
+  ================================================== -->
+
+  <!-- Skeleton Stuff -->
+  <%= stylesheet "base"     %>
+  <%= stylesheet "skeleton" %>
+  <%= stylesheet "layout"   %>
+
+  <!-- WWQI -->
+  <%= stylesheet "style", media: "screen", type: "text/css" %> 
+
+	<!-- TODO: Audio Player (Only include if page has audio?)
+	================================================== -->
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script type="text/javascript" src="/javascript/jquery.ui.widget.min.js"></script>
+	<script type="text/javascript" src="/javascript/AudioPlayerV1.js"></script>
+	<link rel="stylesheet" href="/stylesheets/audioplayer.css"  />
+
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+
+</head>

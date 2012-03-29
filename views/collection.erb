@@ -1,0 +1,36 @@
+<%# encoding: utf-8 %>
+<% load_example_collection! unless $GENERATE # prevent loading the example if we're generating the static pages %>
+
+<ul>
+  <li><%= @object.title %></li>
+  <li><%= @object.description %></li>
+  <li><%= @object.history %></li>
+  <li><%= @object.acquisition_notes %></li>
+  <li><%= @object.restrictions %></li>
+  <li><%= @object.creator %></li>
+  <li><%= @object.dates %></li>
+  <li>
+    <ul>
+      <% @object.subjects.each do |subject| %>
+        <li><%= subject %></li>
+      <% end %>
+    </ul>
+  </li>
+  <li>
+    <ul>
+      <% @object.genres.each do |genre| %>
+        <li><%= genre %></li>
+      <% end %>
+    </ul>
+  </li>
+  <li><%= @object.updated %></li>
+  <li><%= @object.created %></li>
+  <li>
+    <ul>
+      <% @object.favorites.each do |favorite| %>
+        <img src="<%=favorite.thumbnail%>" alt="<%=favorite.title%>" />
+      <% end %>
+    </ul>
+  </li>
+  <li><%= @object.accession_number %></li>
+</ul>
