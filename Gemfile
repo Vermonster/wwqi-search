@@ -1,10 +1,13 @@
 source "https://rubygems.org"
 
+gem 'activesupport'
 gem 'sinatra'
 gem 'rake'
 gem 'tire'
 gem 'thin'
 gem 'sass'
+
+gem 'heroku'
 
 group :test do
   gem 'rspec'

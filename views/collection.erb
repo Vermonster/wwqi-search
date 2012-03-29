@@ -1,0 +1,142 @@
+<%# encoding: utf-8 %>
+<% load_example_collection! unless $GENERATE # prevent loading the example if we're generating the static pages %>
+<%= partial "head_content" %>
+
+<body>
+  <div id="nonFooter">
+    <%= partial "body_header" %>
+
+    <div id="content">
+      <div class="container clearfix">
+        <!-- rails template content -->
+
+        <div class="item-page clearfix">
+          <div class="page-head">
+          </div>
+          <!-- end pagination bar -->
+
+          <div class="item-essentials collection-details container clearfix">
+            <div class="ten columns">
+              <h2><%= @object.title %></h2>
+              <p class="description">
+              <%= @object.description %>
+              </p>
+            </div>
+
+            <div class="six columns  omega last-column">
+
+              <div class="browse-collection">
+                <h1> <a href="#">Browse This Collection </a></h1>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="collection-highlights">
+            <h1>Collection Highlights </h1>
+            <% @object.favorites.each do |favorite| %>
+              <div><img src="<%=favorite.thumbnail%>" alt="<%=favorite.title%>" /> </div>
+            <% end %>
+
+          </div>
+          <div class="item-below-fold">
+
+            <div class="ten columns alpha">
+
+
+              <div class="item-details">
+                <h1>Collection Details</h1>
+                <ul>
+
+                  <% if @object.has_creator? %>
+                    <li class="description">
+                    <span>Creator:</span>
+                    <%= @object.creator %>
+                    </li>
+                  <% end %>
+
+
+                  <li class="description">
+                  <span>Dates:</span>
+                  <%= @object.dates %>
+                  </li>
+
+                  <li>
+                  <span>Acquisition Notes:</span>
+                  <%= @object.acquisition_notes %>
+                  </li>
+
+                  <li>
+                  <span>History:</span>
+                  <%= @object.history %>
+                  </li>
+
+
+
+                  <li>
+                  <span>Restrictions:</span>
+                  <%= @object.restrictions %>
+                  </li>
+
+
+                  <li>
+                  <span>Created:</span>
+                  <%= @object.created %>
+                  </li>
+                  <li>
+                  <span>Last Edited:</span>
+                  <%= @object.updated %>
+                  </li>
+
+                  <li>	<span>Accession Number:</span>
+                  <%= @object.accession_number %>	
+                  </li>
+
+                  <li class="clear">
+                  &nbsp;
+                  </li>
+                </ul>
+
+              </div>
+            </div>
+            <div class="six columns omega last-column">
+
+              <% if @object.genres.present? || @object.people.present? || @object.places.present? || @object.subjects.present? %>
+                <div class="item_related">
+                  <ul>
+                    <% if @object.genres.present? %>
+                      <li>
+                      <span class="title genre">Genres</span>
+                      <% @object.genres.each do |genre| %>
+                        <a href="#" class="tag"><%= genre %></a>
+                      <% end %>
+                      </li>
+                    <% end %>
+
+                    <% if @object.subjects.present? %>
+                      <li>
+                      <span class="title subject">Subjects</span>
+                      <% @object.subjects.each do |subject| %>
+                        <a href="#" class="tag"><%= subject %></a>
+                      <% end %>
+                      </li>
+                    <% end %>
+
+
+
+                  </ul>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- end rails template content -->
+      </div> <!-- end container -->
+    </div><!-- end content -->
+  </div> <!-- end nonFooter -->
+  <%= partial "footer" %>
+</body>
+</html>

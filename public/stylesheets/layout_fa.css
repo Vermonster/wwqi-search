@@ -1,0 +1,231 @@
+/*
+* farsi overrides for the general layout stylesheet
+*/
+
+
+/* #Site Styles
+================================================== */
+
+body{
+    direction:rtl;
+
+}
+.right{float:left}
+.left{float:right}
+
+
+.header .toolbar h1{margin:0 140px 0 0px;float:right;}
+.header .toolbar ul{float:right;}
+.header .menu ul{margin:0px 120px 0px 0px;}
+.header .menu ul li{float:right;}
+.header .menu ul li a{float:right;padding:12px 0px 0 25px;border-right:1px solid #444;}
+
+
+
+.item-page .item-head .add_this_tools{float:right;}
+.item-essentials h2{padding-right:25px; padding-left:0}
+.item-essentials p.description{padding-right:25px;	padding-left:0px;}
+
+.item-essentials.collection-details h2,
+.item-essentials.collection-details p{padding-right:10px;}
+.item-thumbnail .image-count{
+	right:8px;
+	left:auto;
+	padding:0 5px 0 10px;
+	background:url(../images/bg_white_ribbon.png) top right no-repeat;
+}
+
+.item-audio h1{
+	padding-right:40px;
+	background:url(../images/icon-audio.png) 100% 0 no-repeat;
+	padding-left:0;
+}
+
+.item-links h1,
+.item-transcript h1,
+.item-translation h1{
+	padding-right:40px;
+	padding-left:0;
+	background:url(../images/icon-image.png) 100% 0 no-repeat;
+}
+
+.browse-collection h1{
+	padding-right:40px;
+	padding-left:0;
+	background:url(../images/icon-image.png) 100% 0 no-repeat;
+}
+
+.item-transcript h1{
+	background:url(../images/icon-transcript.png) 100% 0 no-repeat;
+}
+.item-translation h1{
+	background:url(../images/icon-translation.png) 100% 0 no-repeat;
+}
+
+.last-column{float:right!important;}
+.item_related .title{padding: 10px 25px 10px 0px;}
+.item-details ul li,
+.item_related ul li{clear:left;}
+
+
+.item-details ul li ul li{	padding:4px 10px 4px 0px;}
+img.icon{float:right;margin:0 0px 0 3px;}
+.clear{
+	clear:right!important;
+}
+
+
+/* Collections List
+-------------------------------------------------------------- */
+
+ul.collections li .collection-thumb{
+	float:right;
+	margin-right:30px;
+	margin-left:0;
+}
+
+ul.collections li .collection-meta{
+	margin-right:200px;
+	margin-left:30px;
+}
+
+ul.collections li .collection-thumb .layer1{
+	left:0px;
+	right:2px;
+}
+ul.collections li .collection-thumb .layer2{
+	right:2px;
+	left:4px;
+}
+
+ul.collections li a span.date{
+	padding-right:20px;
+	padding-left:0;
+}
+
+ul.collections li a .collection-essentials{
+	margin-right:70px;
+	margin-left:0;
+	border-right:1px solid #393939;
+	border-left:none;
+	padding-right:10px;
+	padding-left:0;
+}
+ul.collections li a .items-in-collection{float:right;}
+
+/* #Collection Details
+================================================== */
+
+
+.collection-highlights div{float:right;}
+
+/* #Page Styles
+================================================== */
+
+/* #Media Queries
+================================================== */
+
+	/* Smaller than standard 960 (devices and browsers) */
+	@media only screen and (max-width: 959px) {}
+
+	/* Tablet Portrait size to standard 960 (devices and browsers) */
+	@media only screen and (min-width: 768px) and (max-width: 959px) {
+		
+	}
+
+	/* All Mobile Sizes (devices and browser) */
+	@media only screen and (max-width: 767px) {
+	
+		
+		.header .toolbar ul{float:right;}
+		.header .toolbar h1{
+			margin-right:60px;
+			margin-left:0;	
+		}
+	
+		.header .menu ul li,
+		.header .menu ul li a,
+		.header .menu ul {
+			float:right;
+		}
+		
+		.header .menu ul li span{display:none}
+		.header .menu ul li.sub{
+			float:right;
+		}
+		.header .menu ul li.sub a{
+		}
+	
+	
+		.item-essentials h2,
+		.item-essentials p{
+			padding-right:10px;
+			padding-left:0;
+		}
+		
+		ul.collections li .collection-thumb{
+			float:right;
+			margin-left:0;
+			margin-right:30px;
+		}
+		ul.collections li .collection-meta{
+			margin-right:120px;
+			margin-left:30px;
+		}
+		ul.collections li a .collection-essentials{
+			margin-left:50px;	
+			margin-right:0;
+		}
+		
+		.collection-highlights div{
+			float:right;
+		}
+		.item-essentials.collection-details h2,
+		.item-essentials.collection-details p{
+			padding-right:20px;
+			padding-left:20px;
+		}
+		
+	}
+
+	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+	@media only screen and (min-width: 480px) and (max-width: 767px) {
+	
+	}
+
+	/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+	@media only screen and (max-width: 479px) {
+			
+			ul.collections li .collection-thumb{
+				margin-right:30px;
+				margin-left:30px;
+			}
+		
+			ul.collections li .collection-meta{
+				margin-right:30px;
+				margin-left:30px;
+				margin-top:10px;
+			}
+			.collection-highlights div{
+				float:right;
+			}
+	}
+
+
+/* #Font-Face
+================================================== */
+/* 	This is the proper syntax for an @font-face file
+		Just create a "fonts" folder at the root,
+		copy your FontName into code below and remove
+		comment brackets */
+
+/*	@font-face {
+	    font-family: 'FontName';
+	    src: url('../fonts/FontName.eot');
+	    src: url('../fonts/FontName.eot?iefix') format('eot'),
+	         url('../fonts/FontName.woff') format('woff'),
+	         url('../fonts/FontName.ttf') format('truetype'),
+	         url('../fonts/FontName.svg#webfontZam02nTh') format('svg');
+	    font-weight: normal;
+	    font-style: normal; }
+*/

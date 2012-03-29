@@ -1,0 +1,43 @@
+<div id="email-confirmation-popup" style="display:none;">
+  <div id="email-popup-content" style="padding:20px;color:#fff;">
+    <h2>Send Citation(s) By Email</h2>
+    <span>
+      <div id="email_confirmation">
+        <p>Your citations were emailed on <br><%= Date.today %></p>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div id="email-popup" style="display:none;">
+  <div id="email-popup-content" style="padding:20px;color:#fff;">
+    <h2>Send Citation(s) By Email</h2>
+    <form accept-charset="UTF-8" action="/archive/email" id="email-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="alH7ycTNWD9obln5P588gAcVth8+ZJQVLB4aPWSQnLU="></div>
+      <input id="ids" name="ids" type="hidden" value="1527">
+      <div class="form_row">
+        <label for="from">Email From</label> <span class="mandatory">*</span>
+        <br>
+        <input id="from" name="from" type="email" placeholder="example@domain.com" required="" autofocus="">
+      </div>
+      <div class="form_row">
+        <label for="to">Email To</label> <span class="mandatory">*</span>
+        <br>
+        <input id="to" name="to" type="email" placeholder="example@domain.com" required="">
+      </div>
+      <div class="form_row">
+        Note
+        <br>
+        <textarea cols="76" id="note" name="note" rows="5"></textarea>
+      </div>
+      <div class="form_row">
+        <input class="redButton" data-disable-with="Sending email..." name="commit" type="submit" value="Send Email">
+      </div>
+      </form>		<div id="email_confirmation_wrapper">
+      <span>
+        <div id="email_confirmation">
+          <p>* please enter all required fields</p>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

@@ -1,14 +1,33 @@
 require 'sinatra'
+require 'date'
 require 'tire'
 require 'pry'
 require 'sass'
+require 'active_support'
 
+require './views/view_helpers'
 
-def return_link(opts = {})
-  query = params.merge(opts)
-  request_string = query.map {|k,v| "#{k}=#{v}"}.join('&')
-  "/search?#{request_string}"
+module Helpers
+  def return_link(opts = {})
+    query = params.merge(opts)
+    request_string = query.map {|k,v| "#{k}=#{v}"}.join('&')
+    "/search?#{request_string}"
+  end
+
+  def partial(path)
+    erb("_#{path}".to_sym)
+  end
+
+  def stylesheet(name, opts = {})
+    extra = opts.inject("") { |a,(key, value)| a << "#{key}=\"#{value}\" " } if opts.keys.any?
+    %Q|<link rel="stylesheet" href="/stylesheets/#{name}.css" #{extra} />|
+  end
 end
+
+helpers ViewHelpers
+helpers Helpers
+
+
 
 get '/' do
   #this will be replaced with a cloudfront-hosted page.
@@ -27,10 +46,12 @@ end
 get '/search' do
   redirect to('/') unless params.has_key?("query") 
   query_string = params["query"]
-  lang = (params[:lang] || :en).to_sym
-  filter_term = params[:filter_term]
-
-  @results = Tire.search("_all") do
+  filter_term  = params[:filter_term]
+  lang = (params[:lang]  || :en).to_sym
+  page = (params["page"] || 1).to_i
+  results_per_page = 10
+  
+  query = Tire.search("_all") do
     query do
       string query_string
     end
@@ -56,11 +77,15 @@ get '/search' do
     size 100
   end
 
+  # paging -- only display some of the results
+  results = (query && query.results) || []
+  @total_pages = (1.0*results.length / results_per_page).ceil
+  @results = results[(page-1)*results_per_page..page*results_per_page-1] || []
+
   #set up environment for the template to render
   @lang = lang
   @filter_term = filter_term
   @query = query_string
-  @results = @results ? @results.results : [] # because Tire returns nil if the search has no results...
 
   erb :results
 
@@ -68,5 +93,22 @@ end
 
 get '/stylesheets/main.css' do
   scss :main
+end
+
+get '/collection/:lang/list' do |lang|
+  @lang = lang
+  erb :collection_manifest
+end
+
+get '/collection/:lang/:id.html' do |lang, id|
+  @lang = lang
+  @id = id
+  erb :collection
+end
+
+get '/item/:lang/:id.html' do |lang, id|
+  @lang = lang
+  @id = id
+  erb :item
 end
 
