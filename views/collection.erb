@@ -35,7 +35,7 @@
           <div class="collection-highlights">
             <h1>Collection Highlights </h1>
             <% @object.favorites.sample(6).each do |favorite| %>
-              <div><img src="<%=favorite.thumbnail%>" alt="<%=favorite.title%>" /> </div>
+              <div><img src="<%=favorite.thumbnail%>" alt="<%=favorite.name%>" /> </div>
             <% end %>
 
           </div>
@@ -113,17 +113,12 @@
                       <% end %>
                       </li>
                     <% end %>
-
-
-
                   </ul>
                 </div>
               <% end %>
             </div>
           </div>
         </div>
-
-
 
         <!-- end rails template content -->
       </div> <!-- end container -->
