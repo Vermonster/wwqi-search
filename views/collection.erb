@@ -34,7 +34,7 @@
 
           <div class="collection-highlights">
             <h1>Collection Highlights </h1>
-            <% @object.favorites.each do |favorite| %>
+            <% @object.favorites.sample(6).each do |favorite| %>
               <div><img src="<%=favorite.thumbnail%>" alt="<%=favorite.title%>" /> </div>
             <% end %>
 
