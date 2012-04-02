@@ -7,6 +7,13 @@ require 'active_support'
 
 require './views/view_helpers'
 
+
+Tire.configure do 
+  url               'http://index.bonsai.io'
+  global_index_name URI.parse(ENV['BONSAI_INDEX_URL']).path[1..-1]
+end
+
+
 module Helpers
   def return_link(opts = {})
     query = params.merge(opts)
