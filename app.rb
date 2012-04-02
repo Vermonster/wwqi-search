@@ -8,9 +8,10 @@ require 'active_support'
 require './views/view_helpers'
 
 
+ROOT_INDEX = URI.parse(ENV['BONSAI_INDEX_URL']).path[1..-1]
 Tire.configure do 
   url               'http://index.bonsai.io'
-  global_index_name URI.parse(ENV['BONSAI_INDEX_URL']).path[1..-1]
+  global_index_name ROOT_INDEX
 end
 
 
@@ -58,7 +59,7 @@ get '/search' do
   page = (params["page"] || 1).to_i
   results_per_page = 10
   
-  query = Tire.search("_all") do
+  query = Tire.search(ROOT_INDEX) do
     query do
       string query_string
     end
