@@ -34,8 +34,8 @@
 
           <div class="collection-highlights">
             <h1>Collection Highlights </h1>
-            <% @object.favorites.each do |favorite| %>
-              <div><img src="<%=favorite.thumbnail%>" alt="<%=favorite.title%>" /> </div>
+            <% @object.favorites.sample(6).each do |favorite| %>
+              <div><img src="<%=favorite.thumbnail%>" alt="<%=favorite.name%>" /> </div>
             <% end %>
 
           </div>
@@ -47,14 +47,6 @@
               <div class="item-details">
                 <h1>Collection Details</h1>
                 <ul>
-
-                  <% if @object.has_creator? %>
-                    <li class="description">
-                    <span>Creator:</span>
-                    <%= @object.creator %>
-                    </li>
-                  <% end %>
-
 
                   <li class="description">
                   <span>Dates:</span>
@@ -101,7 +93,7 @@
             </div>
             <div class="six columns omega last-column">
 
-              <% if @object.genres.present? || @object.people.present? || @object.places.present? || @object.subjects.present? %>
+              <% if @object.genres.present? || @object.subjects.present? %>
                 <div class="item_related">
                   <ul>
                     <% if @object.genres.present? %>
@@ -121,17 +113,12 @@
                       <% end %>
                       </li>
                     <% end %>
-
-
-
                   </ul>
                 </div>
               <% end %>
             </div>
           </div>
         </div>
-
-
 
         <!-- end rails template content -->
       </div> <!-- end container -->

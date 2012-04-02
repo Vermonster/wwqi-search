@@ -1,67 +1,59 @@
-<html dir=<%= @lang == :en ? "ltr" : "rtl" %>>
-  <head>
-    <link rel="stylesheet" href="/stylesheets/skeleton.css">
-    <link rel="stylesheet" href="/stylesheets/layout.css">
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <%#<link rel="stylesheet" href="/stylesheets/main.css">%>
-    <%#<link rel="stylesheet" href="/stylesheets/base.css">%>
-    <%#<link rel="stylesheet" href="/stylesheets/screen.css">%>
-    <%#<link rel="stylesheet" href="/stylesheets/style_fa.css">%>
-    <%#<link rel="stylesheet" href="/stylesheets/audioplayer.css">%> 
-  
-  </head>
+<%= partial :head_content %>
 
-  <body>
-    <div class="container">
-      <% if @lang == :en %>
-        <%= erb :_search_form_en %>
-      <% else %>
-        <%= erb :_search_form_fa %>
-      <% end %>
+<body>
+
+  <%= partial :body_header %>
+
+  <div class="container">
+    <% if @lang == :en %>
+      <%= partial :search_form_en %>
+    <% else %>
+      <%= partial :search_form_fa %>
+    <% end %>
 
 
-      <div id="content">
-        <ul class="collections dark-list">
-          <% @results.each do |result| %>
-            <li class="clearfix">
-              <a href="http://wwqi-static-site.s3.amazonaws.com<%= result.send("url_#{@lang}") %>" class="clearfix">
-                <div class="collection-thumb ">
-                  <% if result.thumbnail %>
-                    <img alt="<%= result.name %>" src="<%= result.thumbnail %>">
-                    <div class="layer1"></div>
-                    <div class="layer2"></div>
-                  <% else %>
-                    <img alt="<%= result.name %>" src="/images/empty.jpg">
-                    <div class="layer1"></div>
-                    <div class="layer2"></div>
-                  <% end %>
-                </div>
-                <div class="collection-meta">
-                  <% if result.type.downcase == "collection" %>
-                    <span class="items-in-collection"><strong><%= result.count %></strong>Items</span>
-                  <% else %>
-                    <span class="items-in-collection"><%= result.type %></span>
-                  <% end %>
-                  <div class="collection-essentials">
-                    <span class="date"><%= result.created_at %></span>
-                    <h3><%= result.send("title_#{@lang}") || result.send("name_#{@lang}")%></h3>
-                    <p><%= result.send("description_#{@lang}") %></p>
-                  </div>
-                </div>
-              </a>
-            </li>
-          <% end %>
-        </ul>
+    <div id="content">
+      <ul class="collections dark-list">
+        <% @results.each do |result| %>
+          <li class="clearfix">
+          <a href="http://wwqi-static-site.s3.amazonaws.com<%= result.send("url_#{@lang}") %>" class="clearfix">
+            <div class="collection-thumb ">
+              <% if result.thumbnail %>
+                <img alt="<%= result.name %>" src="<%= result.thumbnail %>">
+                <div class="layer1"></div>
+                <div class="layer2"></div>
+              <% else %>
+                <img alt="<%= result.name %>" src="/images/empty.jpg">
+                <div class="layer1"></div>
+                <div class="layer2"></div>
+              <% end %>
+            </div>
+            <div class="collection-meta">
+              <% if result.type.downcase == "collection" %>
+                <span class="items-in-collection"><strong><%= result.count %></strong>Items</span>
+              <% else %>
+                <span class="items-in-collection"><%= result.type %></span>
+              <% end %>
+              <div class="collection-essentials">
+                <span class="date"><%= result.created_at %></span>
+                <h3><%= result.send("title_#{@lang}") || result.send("name_#{@lang}")%></h3>
+                <p><%= result.send("description_#{@lang}") %></p>
+              </div>
+            </div>
+          </a>
+          </li>
+        <% end %>
+      </ul>
 
-        <ul class="search-bottom-list">
+      <ul class="search-bottom-list">
         <% @total_pages.times do |i| %>
           <li>
           <a href=<%="/search?query=#{params["query"]}&lang=#{params["lang"]}&page=#{i+1}"%>><%= i+1 %></a> 
           </li>
         <% end %>
       </ul>
-      </div>
-
     </div>
-  </body>
+
+  </div>
+</body>
 </html>
