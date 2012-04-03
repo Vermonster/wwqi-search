@@ -1,3 +1,15 @@
+GIT
+  remote: git://github.com/jfredett/tire.git
+  revision: 5bce2b5294b6356c39e939f1203da1f7c71279b3
+  ref: 5bce2b5294b6356c39e939f1203da1f7c71279b3
+  specs:
+    tire (0.4.0)
+      activemodel (>= 3.0)
+      hashr (~> 0.0.19)
+      multi_json (~> 1.0)
+      rake
+      rest-client (~> 1.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -30,6 +42,7 @@ GEM
     diff-lcs (1.1.3)
     eventmachine (0.12.10)
     ffi (1.0.11)
+    hashr (0.0.19)
     heroku (2.23.0)
       launchy (>= 0.3.2)
       netrc (~> 0.7.1)
@@ -96,11 +109,6 @@ GEM
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
     tilt (1.3.3)
-    tire (0.3.12)
-      activemodel (~> 3.0)
-      multi_json (~> 1.0)
-      rake
-      rest-client (~> 1.6.0)
     xpath (0.1.4)
       nokogiri (~> 1.3)
     yard (0.7.5)
@@ -124,4 +132,4 @@ DEPENDENCIES
   sass
   sinatra
   thin
-  tire
+  tire!
