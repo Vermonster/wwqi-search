@@ -120,3 +120,21 @@ get '/item/:lang/:id.html' do |lang, id|
   erb :item
 end
 
+def item_index(lang, type)
+  facet_name = "#{type}_#{lang}" 
+  query = Tire.search ROOT_INDEX do
+    query { string "*" } 
+    facet facet_name do
+      terms facet_name
+    end
+  end
+  @lang = lang
+  @content = query.results.facets[facet_name]["terms"].map(&:values)
+
+  erb :item_index 
+end
+
+get '/:lang/genres'   do |lang| item_index(lang, :genres)   end
+get '/:lang/subjects' do |lang| item_index(lang, :subjects) end
+get '/:lang/people'   do |lang| item_index(lang, :people)   end
+get '/:lang/places'   do |lang| item_index(lang, :places)   end
