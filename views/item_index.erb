@@ -1,0 +1,19 @@
+<%= partial "head_content" %>
+<body>
+  <div id="nonFooter">
+    <%= partial "body_header" %>
+
+    <ul>
+      <% @content.each do |name, count| %>
+      <li>
+        <span><%= name %> </span> 
+        <span><%= count %> </span> 
+      </li>
+      <% end %>
+    </ul>
+
+  </div><!-- end content -->
+</div> <!-- end nonFooter -->
+<%= partial "footer" %>
+</body>
+</html>
