@@ -62,8 +62,8 @@ html{height: 100%;}
 body{height: 100%;}
 #nonFooter{position: relative;min-height: 100%;}
 * html #nonFooter{height: 100%;}
-#content{padding-bottom: 300px}
-#pageFooterWrapper{position: relative;margin-top: -300px}
+#content{padding-bottom: 200px}
+#pageFooterWrapper{position: relative;margin-top: -200px}
 
 
 
@@ -990,6 +990,62 @@ ul.collections li a .items-in-collection strong{
 
 
 
+/* #Footer
+================================================== */
+
+#pageFooterWrapper { 
+    width: 100% !important;
+    background: url(../images/black_paper.png);
+    text-shadow: #000 0px -1px 1px;
+    clear:left;}
+#pageFooter { 
+    
+    margin: 0 auto 0 auto;
+    height: 150px;
+    padding-top: 50px;
+    font-size: 12px;
+    line-height: 1em; color: #999999;
+}
+
+
+#pageFooter ul { list-style: none; padding: 0; margin: 0; }
+
+
+#pageFooter li { 
+    float:left;
+    display: block;
+    padding: 0 0 3px 0;
+    margin: 0 15px 3px 0;
+    line-height: 1.8em;
+    font-size: 1.167em;
+    font-weight:bold;
+    text-transform:uppercase;
+    color:#A3A798 }
+
+#pageFooter a:link { 
+    color: #aaa;
+    padding: 0 0 0 10px; }
+
+#pageFooter  a:visited { 
+    color: #aaa;
+    text-decoration: none;
+    padding: 0 0 0 10px; }
+
+#pageFooter a:hover { 
+    color: #C5112C;
+    text-decoration: none;
+    padding: 0 0 0 10px; }
+
+#pageFooter a:active { 
+    color: #555;
+    text-decoration: none;
+    padding: 0 0 0 10px; }
+
+#pageFooter  p{
+    color:#888;
+    margin:3px 0 0 40px;
+    font-size:10px;
+}
 /* #Page Styles
 ================================================== */
 
@@ -1001,6 +1057,8 @@ ul.collections li a .items-in-collection strong{
 
 	/* Tablet Portrait size to standard 960 (devices and browsers) */
 	@media only screen and (min-width: 768px) and (max-width: 959px) {
+		#home-main .side-stuff #about p {max-height:100px; overflow:hidden; text-overflow:ellipsis}
+		#home-main #search-wrapper #search-form input{width:160px}
 		
 	}
 
@@ -1133,8 +1191,13 @@ ul.collections li a .items-in-collection strong{
 		#indexList .otherIndexes a {
 			margin:4px 5px 5px 0; display:inline-block; font-size:11px;
 		}
-		
+		#home-main .side-stuff{margin:0}
+		#home-main #search-wrapper{left:0}
 		#content .item-page, #content .shaded-panel{margin-top:5px}
+		#pageFooter li { font-size:11px; margin-right:5px} 
+		#home-main #search-wrapper #search-form{margin-right:20px}
+		#home-main .side-stuff #about p {max-height:none; margin-bottom:15px;}
+		#home-main .side-stuff #about {padding-left:0; margin-right:10px}
 		
 	}
 
