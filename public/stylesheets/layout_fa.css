@@ -8,6 +8,7 @@
 
 body{
     direction:rtl;
+	text-align:right;
 
 }
 .right{float:left}
@@ -15,14 +16,14 @@ body{
 
 
 .header .toolbar h1{margin:0 140px 0 0px;float:right;}
-.header .toolbar ul{float:right;}
+.header .toolbar ul{float:left;}
 .header .menu ul{margin:0px 120px 0px 0px;}
 .header .menu ul li{float:right;}
-.header .menu ul li a{float:right;padding:12px 0px 0 25px;border-right:1px solid #444;}
+.header .menu ul li a{float:right;padding:12px 25px 0 25px;border-left:1px solid #444; border-right:none}
+.header .toolbar .branding{right:0;left:auto; background-position:-5px 0}
 
 
-
-.item-page .item-head .add_this_tools{float:right;}
+.item-page .item-head .add_this_tools{float:left;}
 .item-essentials h2{padding-right:25px; padding-left:0}
 .item-essentials p.description{padding-right:25px;	padding-left:0px;}
 
@@ -62,8 +63,8 @@ body{
 	background:url(../images/icon-translation.png) 100% 0 no-repeat;
 }
 
-.last-column{float:right!important;}
-.item_related .title{padding: 10px 25px 10px 0px;}
+.last-column{float:left!important;}
+.item_related .title{padding: 10px 25px 10px 0px; background-position:100% 50%!important}
 .item-details ul li,
 .item_related ul li{clear:left;}
 
@@ -73,7 +74,12 @@ img.icon{float:right;margin:0 0px 0 3px;}
 .clear{
 	clear:right!important;
 }
+.item-links a{background-position:0 50%}
 
+.tag {
+	background: url(../images/bullet_fa.gif) 100% 5px no-repeat;
+
+}
 
 /* Collections List
 -------------------------------------------------------------- */

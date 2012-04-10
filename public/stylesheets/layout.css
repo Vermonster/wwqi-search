@@ -29,7 +29,8 @@ body{
     background-position:top center;
     background-repeat:repeat;
     background-color:#72808a;
-
+	text-align:left;
+	direction:ltr;
 }
 
 
@@ -124,6 +125,9 @@ h6 { font-size: 1em; }
     text-indent: -9999px;
 	position:absolute;
 	z-index:1000;
+	top:0;
+	overflow:hidden;
+	left:0;
 }
 .header .toolbar .branding:hover{margin-top:-3px}
 
@@ -227,7 +231,9 @@ span.notification{
 	margin-bottom:30px;
 	margin-top:-32px;
 }
-
+#content .shaded-panel.has-sidebar{
+	background:#fff url(../images/sidebar-panel.png) 715px 0 repeat-y;
+}
 
 #content .page-head{
 	background:url(../images/bg-stack.png) 0 0 repeat-x;
@@ -1045,6 +1051,175 @@ ul.collections li a .items-in-collection strong{
     color:#888;
     margin:3px 0 0 40px;
     font-size:10px;
+}
+
+
+/* #Brwose Page
+================================================== */
+
+/* sidebar */
+#browseBar{
+	
+	background:#efefef;
+	color:#333;
+}
+
+#browseBar h2{
+	border-bottom: 1px dotted #CECECE;
+	color: #444;
+	font-weight: bold;
+	margin:0;
+	padding-bottom: 10px;
+	text-shadow: white 1px 1px 0px;
+	font-size:18px;
+	
+}
+
+#browseBar h3{
+	padding:8px 5px 8px 15px;
+	margin:0;
+	border-bottom:1px solid #ccc;
+	border-top:1px solid #fff;
+	background: url("../images/arrow_collapsed.png") 0 12px no-repeat;
+	font-weight:bold;
+}
+#browseBar h3.last{
+	border-bottom:none;
+}
+
+#browseBar h3.active{
+	background:  url("../images/arrow_expanded.png") 0 12px no-repeat;
+	border-bottom:none;
+}
+
+#browseBar h3 a{
+	font-size:14px;
+	color:#CA3723
+}
+
+#browseBar .list{
+	background:#fff;
+	margin:0;
+	padding:0;
+	-moz-border-radius:5px 5px 0 0;
+	-webkit-border-radius:5px 5px 0 0;
+	border-radius:5px 5px 0 0;
+	display:none;
+}
+#browseBar .more{
+	margin-top: 5px;
+	border-top:1px dotted #ccc;
+	padding-top: 5px;
+}
+#browseBar .list a{
+	color:#333;
+}
+
+#browseBar .list a:hover{
+	color:#CA3723
+}
+#browseBar .list ul{
+	padding:5px 0;
+}
+
+#browseBar .list li{
+	padding:0 4px 0 10px;
+	font-size:12px;
+	line-height:14px;
+	background:url(../images/bullet.gif) 0 5px no-repeat;
+	margin: 4px 0 4px 10px;
+}
+
+#browseBar .list li span{
+	font-size:10px;
+	color:#999;
+}
+
+#browseBar a.moreLink{
+	color:#CA3723;
+	padding-left:18px;
+	background: url(../images/arrow_red_bottom.png) 10px 8px no-repeat;
+	margin:0px 5px 0;
+	display:block;
+	border-top:1px solid #efefef;
+
+}
+
+#browseBar a.moreLink.less{
+	color:#CA3723;
+	padding-left:18px;
+	background: url(../images/arrow_red_top.png) 10px 8px no-repeat;
+	margin:0px 5px 0;
+	display:block;
+	border-top:1px solid #efefef;
+	
+}
+
+#browseBar ul.more{
+	display:none;
+}
+
+
+
+
+#browseBar .current-filter-list{
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	background:#ddd;
+	color:#333;
+	padding:5px;
+	margin-top:5px;
+}
+
+#browseBar .current-filter-list h3{
+	border:none;
+	color:#333!important;
+	background:none;
+	padding:0;
+	margin:0px 0 5px 0;
+	font-size:14px;
+}
+
+#browseBar .current-filter-list li{
+	margin:0px 0 5px 0;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	background:#fff;
+	color:#333;
+	padding:5px 5px;
+	position:relative;
+}
+#browseBar .current-filter-list li:last-child{
+	margin:0;
+}
+
+#browseBar .current-filter-list li strong{
+	margin-right:20px;
+	display:block;
+	font-family:Tahoma, Geneva, sans-serif;
+	color:#555;
+	font-weight:normal;
+	line-height:13px;
+}
+
+#browseBar .current-filter-list li span{
+	position:absolute;
+	width:16px;
+	height:16px;
+	top:50%;
+	right:5px;
+	margin-top:-8px;
+}
+
+#browseBar .current-filter-list li span a{
+	display:block;
+	width:16px;
+	height:16px;
+	background:url(..../images/icon_remove.png) top left no-repeat;
+	text-indent:-9999999px;
+	margin-top:1px;
 }
 /* #Page Styles
 ================================================== */
