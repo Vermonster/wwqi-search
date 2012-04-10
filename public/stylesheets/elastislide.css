@@ -1,0 +1,89 @@
+/* Elastislide Style */
+.es-carousel-wrapper{
+	background:-moz-linear-gradient(center top , #555555, #111) repeat scroll 0 0 transparent;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#555555', endColorstr='#111111'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#555555), to(#111111)); /* for webkit browsers */
+	padding:10px 37px;
+	position:relative;
+}
+.es-carousel{
+	overflow:hidden;
+}
+.es-carousel ul{
+	display:none;
+}
+.es-carousel ul li{
+	height:100%;
+	float:left;
+	display:block;
+	-moz-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.6);
+	-webkit-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.6);
+	box-shadow: 0 0px 3px rgba(0, 0, 0, 0.6);
+	overflow: hidden;
+	cursor: pointer;
+	
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+.es-carousel ul li a{
+	display:block;
+	border-style:solid;
+	border-color:#222;
+	position:relative;
+	
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+.es-carousel ul li a  span{
+	position:absolute;
+	width:100%;
+	bottom:15px;
+	left:0;
+	text-shadow:0px 1px 5px rgba(0,0,0,0.9);
+	font-weight:bold;
+	z-index:10;
+	text-indent:10px;
+	padding:8px 0;
+	color:#fff; font-weight:bold;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	-webkit-transition: all 0.2s ease-out;  /* Saf3.2+, Chrome */
+     -moz-transition: all 0.2s ease-out;  /* FF4+ */
+      -ms-transition: all 0.2s ease-out;  /* IE10? */
+       -o-transition: all 0.2s ease-out;  /* Opera 10.5+ */
+          transition: all 0.2s ease-out;
+		background:rgba(0,0,0,0.5); 
+		display:none;
+}
+.es-carousel ul li a:hover  span{display:block}
+.es-carousel ul li a img{
+	display:block;
+	border:none;
+	max-height:100%;
+	width:100%;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+.es-nav span{
+	position:absolute;
+	top:50%;
+	left:12px;
+	background:transparent url(../images/nav.png) no-repeat top left;
+	width:14px;
+	height:26px;
+	text-indent:-9000px;
+	cursor:pointer;
+	opacity:0.8;
+}
+.es-nav span.es-nav-next{
+	right:12px;
+	left:auto;
+	background-position:top right;
+}
+.es-nav span:hover{
+	opacity:1.0;
+}

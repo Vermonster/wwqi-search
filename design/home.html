@@ -37,7 +37,10 @@
 	================================================== -->
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 	<script type="text/javascript" src="../public/javascripts/responsiveslides.js"></script>
+	<script type="text/javascript" src="../public/javascripts/jquery.elastislide.js"></script>
+	<script type="text/javascript" src="../public/javascripts/jquery.easing.1.3.js"></script>
 	<link rel="stylesheet" href="../public/stylesheets/responsiveslides.css"  />
+	<link rel="stylesheet" href="../public/stylesheets/elastislide.css">
 
 	<!-- Favicons
 	================================================== -->
@@ -105,132 +108,45 @@
 					</div>	
 				</div>
 			</div>
-			
-			<div id="featured">
-			            	<div id="head" class="clearfix"> 
-
-			                    <h2>featured collections</h2>
-			                    <ul class="dots">
-			                        <li><a href="#" class="active" id="firstFeature">first</a></li>
-			                        <li><a href="#" id="secondFeature">second</a></li>	
-			                        <li><a href="#" id="thirdFeature">third</a></li>	
-			                        <li><a href="#" id="fourthFeature">fourth</a></li>	
-			                    </ul>
-			                </div>
-			            	<div id="featuredContent" class="clearfix ">
-			                	<div id="featureContainer" class="clearfix">
-			                        <div class="featuredItem four columns">
-										<div class="thumb">
-											<img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_33.jpg" alt="">
-										</div>
-										<div class="text">
-											<a href="/archive/collections/33">Shirin Dukht Sultani Nuri</a>
-											<p>A collection of family letters, a sales settlement, and a marriage contract. </p>
-			                        	</div>
-			                        </div>
-			                        <div class="featuredItem four columns">
-										<div class="thumb">
-											<img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_35.jpg" alt="">
-										</div>
-										<div class="text">
-											<a href="/archive/collections/35">Moezzi family</a>
-											<p>A collection of family letters and papers, photographs, and objects, featuring several marriage contracts and household items.</p>
-			                        	</div>
-			                        </div>
-			                        <div class="featuredItem four columns">
-										<div class="thumb">
-											<img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_8.jpg" alt="">
-										</div>
-										<div class="text">
-											<a href="/archive/collections/8">Bahram Sheikholeslami</a>
-											<p>A family collection of letters, financial and legal documents, photos, and everyday objects.</p>
-			                        	</div>
-			                        </div>
-			                        <div class="featuredItem four columns">
-										<div class="thumb">
-											<img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_25.jpg" alt="">
-										</div>
-										<div class="text">
-											<a href="/archive/collections/25">Bahman Bayani Collection</a>
-											<p>A private collection of several albums containing letters and envelopes, dowry lists, settlements, wills as well as photographs and unique everyday objects.</p>
-			                        	</div>
-			                        </div>
-			                        <div class="featuredItem">
-										<div class="thumb">
-											<img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_26.jpg" alt="">
-										</div>
-										<div class="text">
-											<a href="/archive/collections/26">Nush Afarin Ansari</a>
-											<p>A Qur’an hand written by Ziya’ al-Saltanah, family birth and genealogy records, and a marriage contract. </p>
-			                        	</div>
-			                        </div>
-			                        <div class="featuredItem">
-										<div class="thumb">
-											<img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_21.jpg" alt="">
-										</div>
-										<div class="text">
-											<a href="/archive/collections/21">The Center for Iranian Jewish Oral History</a>
-											<p>A collection of photographs and documents related to Iranian Jewry courtesy of The Center for Iranian Jewish Oral History (CIJOH).</p>
-			                        	</div>
-			                        </div>
-			                        <div class="featuredItem">
-										<div class="thumb">
-											<img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_6.jpg" alt="">
-										</div>
-										<div class="text">
-											<a href="/archive/collections/6">Houri Mostofi Moghadam</a>
-											<p>A collection of photographs and documents, including twelve pages from a family photo album.</p>
-			                        	</div>
-			                        </div>
-			                        <div class="featuredItem">
-										<div class="thumb">
-											<img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_28.jpg" alt="">
-										</div>
-										<div class="text">
-											<a href="/archive/collections/28">Najm al-Saltanah</a>
-											<p>A collection of papers related to Najm al-Saltanah (1270-1350 AH) and the Farmanfarma family.</p>
-			                        	</div>
-			                        </div>
-			                        <div class="featuredItem">
-										<div class="thumb">
-											<img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_2.jpg" alt="">
-										</div>
-										<div class="text">
-											<a href="/archive/collections/2">Nusrat Mozaffari</a>
-											<p>A family collection of letters, financial and legal documents, and photographs.</p>
-			                        	</div>
-			                        </div>
-			                        <div class="featuredItem">
-										<div class="thumb">
-											<img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_7.jpg" alt="">
-										</div>
-										<div class="text">
-											<a href="/archive/collections/7">Najmabadi Papers</a>
-											<p>A collection of family letters and the registries of Shaykh Baqir Najmabadi and Shaykh Mahdi Najmabadi.</p>
-			                        	</div>
-			                        </div>
-			                        <div class="featuredItem">
-										<div class="thumb">
-											<img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_19.jpg" alt="">
-										</div>
-										<div class="text">
-											<a href="/archive/collections/19">Majlis Library, Museum and Document Center</a>
-											<p>A selection of manuscripts and financial and legal documents.</p>
-			                        	</div>
-			                        </div>
-			                        <div class="featuredItem">
-										<div class="thumb">
-											<img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_12.jpg" alt="">
-										</div>
-										<div class="text">
-											<a href="/archive/collections/12">Sadiqah Dawlatabadi</a>
-											<p>A collection of documents and photos related to the life and career of Sadiqah Dawlatabadi, 1882-1961.</p>
-			                        	</div>
-			                        </div>
-			                    </div>
-			                </div>
-
-			            </div>
+				<!-- Elastislide Carousel -->
+				<div id="carousel" class="es-carousel-wrapper">
+					<h2>featured collections</h2>
+					<div class="es-carousel">
+						<ul>
+							<li><a href="#">
+								<div class="collection-thumb"><img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_33.jpg" alt="">
+								<span>	Shirin Dukht Sultani Nuri</span>	<div class="layer1"></div>
+									 <div class="layer2"></div></div>
+                        		</a>
+							</li>
+							<li><a href="#"><div class="collection-thumb"><img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_35.jpg" alt=""><span>Moezzi family</span><div class="layer1"></div>
+							 <div class="layer2"></div></div></a></li>
+							<li><a href="#"><div class="collection-thumb"><img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_8.jpg" alt=""><span>Bahram Sheikholeslami</span><div class="layer1"></div>
+							 <div class="layer2"></div></div></a></li>
+							<li><a href="#"><div class="collection-thumb"><img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_25.jpg" alt=""><span>Bahman Bayani Collection</span><div class="layer1"></div>
+							 <div class="layer2"></div></div></a></li>
+							<li><a href="#"><div class="collection-thumb"><img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_26.jpg" alt=""><span>Nush Afarin Ansari</span><div class="layer1"></div>
+							 <div class="layer2"></div></div></a></li>
+							<li><a href="#"><div class="collection-thumb"><img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_21.jpg" alt=""><span>The Center for Iranian Jewish Oral History</span><div class="layer1"></div>
+							 <div class="layer2"></div></div></a></li>
+							<li><a href="#"><div class="collection-thumb"><img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_6.jpg" alt=""><span>Houri Mostofi Moghadam</span><div class="layer1"></div>
+							 <div class="layer2"></div></div></a></li>
+							<li><a href="#"><div class="collection-thumb"><img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_28.jpg" alt=""><span>Najm al-Saltanah</span><div class="layer1"></div>
+							 <div class="layer2"></div></div></a></li>
+							<li><a href="#"><div class="collection-thumb"><img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_2.jpg" alt=""><span>Nusrat Mozaffari</span><div class="layer1"></div>
+							 <div class="layer2"></div></div></a></li>
+							<li><a href="#"><div class="collection-thumb"><img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_7.jpg" alt=""><span>Najmabadi Papers</span><div class="layer1"></div>
+							 <div class="layer2"></div></div></a></li>
+							<li><a href="#"><div class="collection-thumb"><img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_19.jpg" alt="image11" /><span>Majlis Library, Museum and Document Center</span><div class="layer1"></div>
+							 <div class="layer2"></div></div></a></li>
+							<li><a href="#"><div class="collection-thumb"><img src="http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_12.jpg" alt="image12" /><span>Sadiqah Dawlatabadi</span><div class="layer1"></div>
+							 <div class="layer2"></div></div></a></li>
+						
+						</ul>
+					</div>
+				</div>
+				<!-- End Elastislide Carousel -->
+	
 
 </div>
 								<!-- end rails template content -->
@@ -278,37 +194,20 @@
 	        maxwidth: 800,
 	        speed: 800
 	      });
-
+			
+			$('#carousel').elastislide({
+				imageW 		: 200,
+				minItems	: 3,
+				border		: 0,
+				margin: 10
+			});
 	    
 		    $(document).ready( function() {
 
-		        $("#fourthFeature").click( function() {
-		            $(".dots a").removeClass("active");
-		            $(this).addClass("active");
-		            $("#featureContainer").animate({left: '-2843px'}, 300);
-		            return false;
-		        });
-		        $("#thirdFeature").click( function() {
-		            $(".dots a").removeClass("active");
-		            $(this).addClass("active");
-		            $("#featureContainer").animate({left: '-1893px'}, 300);
-		            return false;
-		        });
-		        $("#secondFeature").click( function() {
-		            $(".dots a").removeClass("active");
-		            $(this).addClass("active");
-		            $("#featureContainer").animate({left: '-942px'}, 300);
-		            return false;
-		        });
-		        $("#firstFeature").click( function() {
-		            $(".dots a").removeClass("active");
-		            $(this).addClass("active");
-		            $("#featureContainer").animate({left: '10px'}, 300);
-		            return false;
-		        });
-				$(".featuredItem").click(function(){
-					window.location = $(this).find("a").attr("href");
-				});
+		       	
+				
+				
+				
 		    });
 	
 
