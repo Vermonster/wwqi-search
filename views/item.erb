@@ -4,8 +4,6 @@
 <%   load_example_item_farsi! if @lang == "fa"                                         %>
 <% end                                                                                 %>
 
-
-
 <%= partial "head_content" %>
 <body>
   <div id="nonFooter">
@@ -56,22 +54,25 @@
           <div class="item-below-fold">
 
             <div class="ten columns alpha">
-              <!-- TODO - Render next block only when item has associated audio files -->
-              <!-- beginning of audio block -->
-              <div class="item-audio">
-                <h1> Audio </h1>
-                <h5>Hear Mr. Dee talk about his childhood memories</h5>
-                <audio class="AudioPlayerV1" preload="none" data-fallback="/AudioPlayerV1.swf">
-                <source type="audio/mpeg" src="/chimes.mp3" />
-                </audio>
-              </div>
-              <!-- end of audio block -->
+
+              <% if @object.audio_clip %>
+                <div class="item-audio">
+                  <h1>Audio</h1>
+                  <h5><%= @object.audio_clip_caption %></h5>
+                  <audio class="AudioPlayerV1" preload="none" data-fallback="/AudioPlayerV1.swf">
+                    <source type="audio/mpeg" src="<%= @object.audio_clip %>" />
+                  </audio>
+                </div>
+              <% end %>
+
+
               <!-- TODO - Render next block only when item has a translation -->
               <!-- beginning of transcript block -->
               <div class="item-translation">
                 <h1> Translation </h1>
                 <a href="#">View Item Translation</a>
               </div>
+
               <!-- end of transcript block -->
               <!-- TODO - Render next block only when item has a transcript -->
               <!-- beginning of transcript block -->
