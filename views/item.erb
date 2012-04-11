@@ -25,13 +25,13 @@
               <span class="image-count">24 images</span>
               -->
               <div class="item-image-frame">
-                <img src="<%= @object.thumbnail %>" alt="<%= @object.title_with_date %>">
+                <img src="<%= @object.thumbnail %>" alt="<%= @object.title %>">
               </div>
 
             </div>
 
             <div class="six columns">
-              <h2><%= @object.title_with_date %></h2>
+              <h2><%= @object.title %></h2>
               <p class="description">
               <%= @object.description %>
               </p>
@@ -60,27 +60,27 @@
                   <h1>Audio</h1>
                   <h5><%= @object.audio_clip_caption %></h5>
                   <audio class="AudioPlayerV1" preload="none" data-fallback="/AudioPlayerV1.swf">
-                    <source type="audio/mpeg" src="<%= @object.audio_clip %>" />
+                  <source type="audio/mpeg" src="<%= @object.audio_clip %>" />
                   </audio>
                 </div>
               <% end %>
 
 
-              <!-- TODO - Render next block only when item has a translation -->
-              <!-- beginning of transcript block -->
-              <div class="item-translation">
-                <h1> Translation </h1>
-                <a href="#">View Item Translation</a>
-              </div>
+              <% if false # not working yet %>
+                <% if @object.translation.present? %>
+                  <div class="item-translation">
+                    <h1><%= t('translation') %></h1>
+                    <a href="#">View Item Translation</a>
+                  </div>
+                <% end %>
 
-              <!-- end of transcript block -->
-              <!-- TODO - Render next block only when item has a transcript -->
-              <!-- beginning of transcript block -->
-              <div class="item-transcript">
-                <h1> Transcript </h1>
-                <a href="#">View Item Transcript</a>
-              </div>
-              <!-- end of transcript block -->
+                <% if @object.transcript.present? %>
+                  <div class="item-transcript">
+                    <h1> Transcript </h1>
+                    <a href="#">View Item Transcript</a>
+                  </div>
+                <% end %> 
+              <% end %> 
 
 
               <div class="item-details">
@@ -94,48 +94,58 @@
                     </li>
                   <% end %>
 
-                  <li class="description">
-                  <span>Date:</span>
-                  <%= @object.date.try(:representation) || "Undated" %>
-                  </li>
-
-                  <li>
-                  <span>Notes:</span>
-                  <%= @object.notes %>
-                  </li>
-
-                  <li>
-                  <span>Dimensions:</span>
-                  <%= @object.dimensions %>
-                  </li>
-
-                  <li>
-                  <span>Collections:</span>
-                  <% @object.collections.each do |coll| %>
-                    <a href="<%= coll.url %>" class="tag" title="more"><%= coll.name %></a>
+                  <% if @object.date.present? %>
+                    <li class="description">
+                    <span>Date:</span>
+                    <%= @object.date.try(:representation) || "Undated" %>
+                    </li>
                   <% end %>
-                  </li>
 
-                  <li>
-                  <span>Repository:</span>
-                  <%= @object.repository %>
-                  </li>
-
-                  <% if @object.collections.size == 1 %>
-                    <% # TODO: consider case of item belonging to multiple collections (currently applies to no items) %>
+                  <% if @object.notes.present? %>
                     <li>
-                    <span>Restrictions:</span>
-                    <%= @object.collections.first.restrictions %>
+                    <span>Notes:</span>
+                    <%= @object.notes %>
+                    </li>
+                  <% end %>
+
+                  <% if @object.dimensions.present? %>
+                    <li>
+                    <span>Dimensions:</span>
+                    <%= @object.dimensions %>
+                    </li>
+                  <% end %>
+
+                  <% unless @object.collections.empty? %>
+                    <li>
+                    <span>Collections:</span>
+                    <% @object.collections.each do |coll| %>
+                      <a href="<%= coll.url %>" class="tag" title="more"><%= coll.title %></a>
+                    <% end %>
+                    </li>
+                  <% end %>
+
+                  <% if @object.repository.present? %>
+                    <li>
+                    <span>Repository:</span>
+                    <%= @object.repository %>
+                    </li>
+                  <% end %>
+
+                  <% if @object.collections.first.restrictions.present? %>
+                    <li>
+                      <span>Restrictions:</span>
+                      <%= @object.collections.first.restrictions %>
                     </li>
                   <% end %>
 
                   <li>
                   <span>Accessed:</span>
-                  <%= @object.created.strftime("%B %e, %Y") %>
+                  <%= @object.created %>
                   </li>
+
                   <li>
                   <span>Last Edited:</span>
-                  <%= @object.updated.strftime("%B %e, %Y") %>
+                  <%= @object.updated %>
                   </li>
 
                   <li>	
