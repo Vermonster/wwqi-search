@@ -1,0 +1,70 @@
+<%= partial :head_content %>
+
+<body>
+  <div id="nonFooter">
+    <%= partial :body_header %>
+
+    <div id="content">
+      <div class="container clearfix">
+        <div class="clearfix shaded-panel">
+          <div class="page-head dark">
+          </div>
+          <div id="home-main">
+            <div class="eleven columns">
+              <ul id="slides">
+                <li><a href="/browse"><img src="/images/slideshow1.jpg" alt="" /></a></li>
+                <li><a href="/browse"><img src="/images/slideshow2.jpg" alt="" /></a></li>
+                <li><a href="/browse"><img src="/images/slideshow3.jpg" alt="" /></a></li>
+              </ul>
+            </div>
+            <div class="five columns side-stuff">
+
+              <div id="about">
+                <p>
+                  Explore the lives of women during the Qajar era (1796-1925) through a wide array of materials from private family holdings and participating institutions. Women’s Worlds in Qajar Iran provides bilingual access to thousands of personal papers, manuscripts, photographs, publications, everyday objects, works of art and audio materials, making it a unique online resource for social and cultural histories of the Qajar world. <a href="http://www.qajarwomen.org/about">More...</a>
+                </p>
+              </div>
+
+              <%= partial :search_form_en %>
+
+            </div>
+          </div>
+          <!-- Elastislide Carousel -->
+          <div id="carousel" class="es-carousel-wrapper">
+            <h2>featured collections</h2>
+            <div class="es-carousel">
+              <ul>
+                <% carousel.each do |entry| %>
+                  <%= carousel_entry entry %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+          <!-- End Elastislide Carousel -->
+        </div>
+        <!-- end rails template content -->
+      </div>
+    </div><!-- end content -->
+  </div> <!-- end nonFooter -->
+  <%= partial :footer %>
+  <script>
+    $(function () {
+
+      // Slideshow 1
+      $("#slides").responsiveSlides({
+        maxwidth : 800,
+        speed    : 800
+      });
+
+      $('#carousel').elastislide({
+        imageW   : 200,
+        minItems : 3,
+        border   : 0,
+        margin   : 10
+      });
+
+      $(document).ready( function() { });
+    });
+  </script>
+</body>
+</html>
