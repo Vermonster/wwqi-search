@@ -11,7 +11,7 @@ require './views/view_helpers'
 
 ENV["MAIN_SITE_URL"] ||= 'http://www.wwqidev.com'
 ENV["ASSET_URL"] ||= 'http://assets.wwqidev.com'
-ENV["SEARCH_URL"] ||= 'http://search.wwqidev.com'
+ENV["SEARCH_URL"] ||= 'http://www.wwqidev.com/search'
 
 ROOT_INDEX = URI.parse(ENV['BONSAI_INDEX_URL']).path[1..-1]
 Tire.configure do 
