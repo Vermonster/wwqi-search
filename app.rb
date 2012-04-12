@@ -9,6 +9,9 @@ require 'active_support/core_ext'
 require './views/view_helpers'
 
 
+ENV["MAIN_SITE_URL"] ||= 'http://www.wwqidev.com'
+
+
 ROOT_INDEX = URI.parse(ENV['BONSAI_INDEX_URL']).path[1..-1]
 Tire.configure do 
   url               'http://index.bonsai.io'
@@ -39,15 +42,14 @@ helpers Helpers
 
 
 get '/' do
-  #this will be replaced with a cloudfront-hosted page.
-  erb :search_form_en
+  redirect ENV["MAIN_SITE_URL"], 301
 end
 
-get '/en' do
-  redirect to('/')
+get '/en/search_form' do
+  redirect to('/search_form')
 end
 
-get '/fa' do
+get '/fa/search_form' do
   #this will be replaced with a cloudfront-hosted page.
   erb :search_form_fa
 end
