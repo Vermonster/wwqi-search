@@ -20,6 +20,18 @@ DESC
     @object.creator = OpenStruct.new
     @object.creator.name = "Mayil Afshar Shaykh al-Shu'ara"
 
+    @object.audio_clip = 'http://s3.amazonaws.com/wwqi-static/clips/it_1_1_clip.mp3?1329177600'
+    @object.audio_clip_caption = 'Lorem Ipsum Dolor Sit Amet'
+
+    @object.harvard_url = "http://nrs.harvard.edu/urn-3:FHCL:7984115"
+    @object.secondary_urls = [
+      "http://nrs.harvard.edu/urn-3:FHCL:7984115",
+      "http://nrs.harvard.edu/urn-3:FHCL:7984114",
+      "http://nrs.harvard.edu/urn-3:FHCL:7984112",
+      "http://nrs.harvard.edu/urn-3:FHCL:7984111",
+      "http://nrs.harvard.edu/urn-3:FHCL:7984116",
+      "http://nrs.harvard.edu/urn-3:FHCL:7984113"
+    ]
 
     @object.date = OpenStruct.new
     @object.date.representation = "[ca. 1873 or 1874]"
