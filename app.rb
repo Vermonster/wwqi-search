@@ -207,10 +207,13 @@ get '/search' do
       binding.pry
       filter :terms, { facet_name => [items] }
     end
+
+    size 100000
   end
 
   # paging -- only display some of the results
   results = (query && query.results) || []
+  @total_results = results.count
   @total_pages = (1.0*results.length / results_per_page).ceil
   @results = results[(page-1)*results_per_page..page*results_per_page-1] || []
   @facets = results.facets
