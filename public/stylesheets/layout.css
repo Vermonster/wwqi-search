@@ -664,6 +664,11 @@ ul.collections li .collection-thumb{
 	margin-left:30px;
 	position:relative;
 }
+
+ul.search-results {
+  margin: 0 -10px;
+}
+
 #carousel .collection-thumb{position:relative; padding-bottom:5px}
 ul.collections li .collection-meta{
 	margin-left:200px;

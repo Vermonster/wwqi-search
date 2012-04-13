@@ -5,13 +5,14 @@ require 'pry'
 require 'sass'
 require 'active_support'
 require 'active_support/core_ext'
+require 'forwardable'
 
 require './views/view_helpers'
 
 
-ENV["MAIN_SITE_URL"] ||= 'http://www.wwqidev.com'
+ENV["MAIN_SITE_URL"] ||= 'http://localhost:4567'
 ENV["ASSET_URL"] ||= 'http://assets.wwqidev.com'
-ENV["SEARCH_URL"] ||= 'http://www.wwqidev.com/search'
+ENV["SEARCH_URL"] ||= 'http://localhost:4567/search'
 
 ROOT_INDEX = URI.parse(ENV['BONSAI_INDEX_URL']).path[1..-1]
 Tire.configure do 
@@ -20,11 +21,75 @@ Tire.configure do
 end
 
 
+
+class Filter
+  def initialize(str)
+    @filter = parse_filters(str)
+  end
+
+  include Enumerable
+  extend Forwardable
+  delegate [:keys, :delete, :each, :[], :[]=] => :@filter
+
+  def to_s
+    map do |type, value|
+      "#{type}:#{URI.escape(value)}"
+    end.join('|')
+  end
+  alias inspect to_s
+
+  def has_filters? 
+    !keys.empty? 
+  end
+
+  private
+  def parse_filters(str)
+    return {} if str.blank?
+    str.split('|').each_with_object({}) do |pair, acc| 
+      type, value = pair.split(":") 
+      acc[type] = value 
+    end
+  end
+end
+
+class Loopback
+  attr_reader :filters
+
+  def initialize(params)
+    @query = params["query"]
+    @page = params["page"].to_i
+    @lang = params["lang"].to_sym
+    @filters = Filter.new(params["filter"])
+  end
+
+  def to_url
+    "#{ENV["SEARCH_URL"]}?query=#{@query}&lang=#{@lang}&page=#{@page}&filter=#{@filters}"
+  end
+
+  def increment_page
+    @page += 1
+    self
+  end
+
+  def update_filter(type, value)
+    @filters[type] = value
+    self
+  end
+
+  def remove_filter(type)
+    @filters.delete(type)
+    self
+  end
+end
+
+
 module Helpers
-  def return_link(opts = {})
-    query = params.merge(opts)
-    request_string = query.map {|k,v| "#{k}=#{v}"}.join('&')
-    "/search?#{request_string}"
+  def return_link(*_)
+    Loopback.new(params).to_url
+  end
+
+  def loopback
+    Loopback.new(params)
   end
 
   def partial(path)
@@ -52,6 +117,7 @@ module Helpers
       "1134"         => { lang: @lang, img: "collection_35.jpg", text: "Moezzi Family"                             , acc: "1134"         },
       "1016-1139"    => { lang: @lang, img: "collection_8.jpg" , text: "Bahram Sheikholeslami"                     , acc: "1016-1139"    },
       "1131-1142"    => { lang: @lang, img: "collection_25.jpg", text: "Bahman Bayani Collection"                  , acc: "1131-1142"    },
+
       "1019"         => { lang: @lang, img: "collection_26.jpg", text: "Nush Afarin Ansari"                        , acc: "1019"         },
       "1025"         => { lang: @lang, img: "collection_21.jpg", text: "The Center for Iranian Jewish Oral History", acc: "1025"         },
       "911"          => { lang: @lang, img: "collection_6.jpg" , text: "Houri Mostofi Moghadam"                    , acc: "911"          },
@@ -114,10 +180,9 @@ get '/fa/home' do
 end
 
 get '/search' do
-  redirect to('/') unless params.has_key?("query") 
   query_string = params["query"]
-  filter_term  = params[:filter_term]
-  lang = (params[:lang]  || :en).to_sym
+  filters  = Filter.new(params["filter"])
+  lang = (params["lang"] || :en).to_sym
   page = (params["page"] || 1).to_i
   results_per_page = 10
 
@@ -138,23 +203,20 @@ get '/search' do
       terms :type
     end
 
-    if filter_term 
-      filter_items = filter_term.split(":")
-      facet_name = filter_items.shift
-      filter :terms, { facet_name => filter_items }
+    filters.each do |facet_name, items|
+      binding.pry
+      filter :terms, { facet_name => [items] }
     end
-
-    size 100
   end
 
   # paging -- only display some of the results
   results = (query && query.results) || []
   @total_pages = (1.0*results.length / results_per_page).ceil
   @results = results[(page-1)*results_per_page..page*results_per_page-1] || []
+  @facets = results.facets
 
   #set up environment for the template to render
   @lang = lang
-  @filter_term = filter_term
   @query = query_string
 
   erb :results
