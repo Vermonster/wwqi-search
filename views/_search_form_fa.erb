@@ -1,10 +1,5 @@
-<div id="search-wrapper" class="five columns">
-  <h4>Search over 11,738 images.</h4>
-  <div class="clearfix" id="search-form">
-    <form method="get" class="" action="<%= search_url %>">
-      <input type="text" value="جستجوی کلیدواژه ای" name="query" class="swap_value" id="s" style="color: rgb(170, 170, 170); " onfocus="if(this.value=='Enter a keyword'){this.value='';this.style.color = '#000';}" onblur="if(this.value==''){this.value='Enter a keyword';this.style.color = '#aaa';}">
-      <button id="search" type="submit"></button>
-      <input type='hidden' name='lang' value='fa'></input>
-    </form>
-  </div>
-</div>	
+<form method="get" class="" action="<%= search_url %>">
+  <input type="text" value="جستجوی کلیدواژه ای" name="query" class="swap_value" id="s" style="color: rgb(170, 170, 170); " onfocus="if(this.value=='Enter a keyword'){this.value='';this.style.color = '#000';}" onblur="if(this.value==''){this.value='Enter a keyword';this.style.color = '#aaa';}">
+  <button id="search" type="submit"></button>
+  <input type='hidden' name='lang' value='fa'></input>
+</form>

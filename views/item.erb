@@ -66,20 +66,18 @@
               <% end %>
 
 
-              <% if false # not working yet %>
-                <% if @object.translation.present? %>
-                  <div class="item-translation">
-                    <h1><%= t('translation') %></h1>
-                    <a href="#">View Item Translation</a>
-                  </div>
-                <% end %>
+              <% if @object.translation_to_english.present? %>
+                <div class="item-translation">
+                  <h1><%= t('translation') %></h1>
+                  <a href="#">View Item Translation</a>
+                </div>
+              <% end %>
 
-                <% if @object.transcript.present? %>
-                  <div class="item-transcript">
-                    <h1> Transcript </h1>
-                    <a href="#">View Item Transcript</a>
-                  </div>
-                <% end %> 
+              <% if @object.transcription_from_farsi.present? %>
+                <div class="item-transcript">
+                  <h1> Transcript </h1>
+                  <a href="#">View Item Transcript</a>
+                </div>
               <% end %> 
 
 
@@ -101,10 +99,10 @@
                     </li>
                   <% end %>
 
-                  <% if @object.notes.present? %>
+                  <% if @object.remarks.present? %>
                     <li>
                     <span>Notes:</span>
-                    <%= @object.notes %>
+                    <%= @object.remarks %>
                     </li>
                   <% end %>
 
@@ -131,10 +129,10 @@
                     </li>
                   <% end %>
 
-                  <% if @object.collections.first.restrictions.present? %>
+                  <% if @object.restrictions.present? %>
                     <li>
                       <span>Restrictions:</span>
-                      <%= @object.collections.first.restrictions %>
+                      <%= @object.restrictions %>
                     </li>
                   <% end %>
 
