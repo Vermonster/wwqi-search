@@ -26,7 +26,7 @@
             <div class="six columns  omega last-column">
 
               <div class="browse-collection">
-                <h1> <a href="/search?query=*&lang=<%= @lang %>&filter=collection:<%= URI.escape @object.accession_number %>">Browse This Collection </a></h1>
+                <h1> <a href="/search?query=*&lang=<%= @lang %>&filter=collection:<%= @object.accession_number.strip %>">Browse This Collection </a></h1>
               </div>
             </div>
 
