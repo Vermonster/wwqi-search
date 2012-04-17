@@ -41,7 +41,7 @@
 
               <div class="item-links">
                 <h1> Images </h1>
-                <a href="<%= @object.harvard_url %>" rel="shadowbox[gallery]" title="Anthology of Food, [ca. 1865]">View This Item</a>
+                <a href="<%= @object.harvard_url %>" rel="shadowbox[gallery]" title="<%= @object.title %>">View This Item</a>
                 <% @object.secondary_urls.each do |url| %>
                   <a href="<%= url %>" title="View Additional Image">View Additional Image</a>
                 <% end %>
