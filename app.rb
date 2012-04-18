@@ -84,6 +84,15 @@ end
 
 
 module Helpers
+
+  def lang_link_to(text, link, opts={})
+    lang = opts.delete(:lang) {|el| 'en'}
+    url = URI.join(ENV["MAIN_SITE_URL"], "#{lang}/", "#{link}")
+    attributes = ""
+    opts.each { |key,value| attributes << key.to_s << "=\"" << value << "\" "}
+    "<a href=\"#{url}\" #{attributes}>#{text}</a>"
+  end
+  
   def return_link(*_)
     Loopback.new(params).to_url
   end
