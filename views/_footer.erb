@@ -4,19 +4,19 @@
     <div class="ten columns">
       <ul class="footerNav">
         <li>
-        <a href="/en/about">About</a>
+        <%= lang_link_to('About', 'about.html', lang: @lang) %>
         </li>
         <li>
-        <a href="/en/credits">credits</a>
+        <%= lang_link_to('Credits', 'credits.html', lang: @lang) %>
         </li>
         <li>
-        <a href="/en/permissions">permissions</a>
+        <%= lang_link_to('Permissions', 'permissions.html', lang: @lang) %>
         </li>
         <li>
-        <a href="/en/links">Related Links</a>
+        <%= lang_link_to('Related Links', 'links.html', lang: @lang) %>
         </li>
         <li>
-        <a href="/en/donate">How to Give</a>
+        <%= lang_link_to('How to Give', 'donate.html', lang: @lang) %>
         </li>
       </ul>
     </div>
