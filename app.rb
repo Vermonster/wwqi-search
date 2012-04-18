@@ -86,6 +86,10 @@ end
 
 module Helpers
 
+  def javascript(name)
+    %Q|<script type='text/javascript' src='/javascripts/#{name}.js'></script>|
+  end
+
   def lang_link_to(text, link, opts={})
     lang = opts.delete(:lang) {|el| 'en'}
     url = URI.join(ENV["MAIN_SITE_URL"], "#{lang}/", "#{link}")
