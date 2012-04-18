@@ -6,6 +6,7 @@ require 'sass'
 require 'active_support'
 require 'active_support/core_ext'
 require 'forwardable'
+require 'cgi'
 
 require './views/view_helpers'
 
@@ -33,7 +34,7 @@ class Filter
 
   def to_s
     map do |type, value|
-      "#{type}:#{URI.escape(value)}"
+      "#{type}:#{CGI.escape(value)}"
     end.join('|')
   end
   alias inspect to_s
@@ -47,7 +48,7 @@ class Filter
     return {} if str.blank?
     str.split('|').each_with_object({}) do |pair, acc| 
       type, value = pair.split(":") 
-      acc[type] = value 
+      acc[type] = CGI::unescape(value)
     end
   end
 end
@@ -213,7 +214,6 @@ get '/search' do
     end
 
     filters.each do |facet_name, items|
-      binding.pry
       filter :terms, { facet_name => [items] }
     end
 
