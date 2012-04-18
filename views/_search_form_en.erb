@@ -1,5 +1,5 @@
 <form class='searchform' method='GET' action='<%= ENV["SEARCH_URL"] %>'>
-  <input type="text" value="<%= params["query"] %>" placeholder="Enter a Keyword" name="query" class="swap_value" id="s" />
+  <input type="text" value="<%= respond_to?(:params) && params["query"] %>" placeholder="Enter a Keyword" name="query" class="swap_value" id="s" />
   <input type='hidden' name='lang' value='en' />
   <button id="search" type="submit"></button>
 </form>
