@@ -15,15 +15,12 @@
 
               <h1> Search </h1>
               <div class="clearfix searchbox">
-                <form method="get" class="searchform" action="/archive/browser">
-                  <input type="text" value="Enter a keyword" name="keyword_filter" class="swap_value" id="s" style="color:#aaa;" onfocus="if(this.value=='Enter a keyword'){this.value='';this.style.color = '#000';}" onblur="if(this.value==''){this.value='Enter a keyword';this.style.color = '#aaa';}">
-                  <button type="submit" id="search">
-                  </button>
-                </form>
+                <div class="clearfix" id="search-form">
+                  <%= partial :search_form_en %>
+                </div>
               </div>
-              <a class="right advanced-search" href="/archive/advanced_search">Advanced Search</a>
-              <span class="examples">Examples: "dowry", or "love marriage"</span>
             </div>
+
             <div class="browse-by-type">
               <h1>View By Type</h1>
               <div class="twelve-columns clearfix">
