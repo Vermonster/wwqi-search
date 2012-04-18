@@ -41,7 +41,7 @@
             <ul class="search-results collections dark-list">
               <% @results.each do |result| %>
                 <li class="clearfix">
-                <a href="<%= "#{ENV["ASSET_URL"]}/#{result.send("url_#{@lang}")}" %>" class="clearfix">
+                <a href="<%= "#{ENV["MAIN_SITE_URL"]}#{result.send("url_#{@lang}")}" %>" class="clearfix">
                   <div class="collection-thumb ">
                     <% if result.thumbnail %>
                       <img alt="<%= result.name %>" src="<%= result.thumbnail %>">
