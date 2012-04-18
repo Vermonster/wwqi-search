@@ -1,0 +1,164 @@
+<%= partial :head_content %>
+
+<body>
+  <div id="nonFooter">
+    <%= partial :body_header %>
+
+    <div id="content">
+      <div class="container clearfix">
+        <div class="clearfix shaded-panel has-sidebar main-panel-is-dark">
+          <div class="page-head short">
+          </div>
+
+          <div class="clearfix twelve columns">
+            <div class="browse-search">
+
+              <h1> Search </h1>
+              <div class="clearfix searchbox">
+                <div class="clearfix" id="search-form">
+                  <%= partial :search_form_en %>
+                </div>
+              </div>
+            </div>
+
+            <div class="browse-by-type">
+              <h1>View By Type</h1>
+              <div class="twelve-columns clearfix">
+                <div class="two columns alpha">
+                  <a href="/archive/browser?genre_filter[]=208">
+                    <span class="icon">N</span>
+                    Manuscripts
+                  </a>
+                </div>
+                <div class="two columns">
+                  <a href="/archive/browser?genre_filter[]=231">
+                    <span class="icon">b</span>
+                    Objects
+                  </a>
+                </div>
+                <div class="two columns">
+                  <a href="/archive/browser?genre_filter[]=581">
+                    <span class="icon">Y</span>
+                    Legal &amp; Financial
+                  </a>
+                </div>
+                <div class="two columns">
+                  <a href="/archive/browser?genre_filter[]=598">
+                    <span class="icon">v</span>
+                    Photographs
+                  </a>
+                </div>
+                <div class="two columns">
+                  <a href="/archive/browser?genre_filter[]=598">
+                    <span class="icon">F</span>
+                    Letters
+                  </a>
+                </div>
+                <div class="two columns omega">
+                  <a href="/archive/browser?genre_filter[]=598">
+                    <span class="icon"><</span>
+                    Audio Files
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="browse-bar" class="four columns">
+            <h1>Browse</h1>
+            <h3 class="first has-children"><a href="#">Periods</a></h3>
+            <div class="list">
+              <ul class="default">
+                <li>
+                <a href="/archive/browser?period_filter[]=3" class=""><span class="icon">\</span> Pre-Qajar Period</a>
+                <span>(5)</span>
+                </li>
+                <li>
+                <a href="/archive/browser?period_filter[]=2" class=""><span class="icon">\</span> Fath 'Ali Shah Period</a>
+                <span>(8)</span>
+                </li>
+                <li>
+                <a href="/archive/browser?period_filter[]=4" class=""><span class="icon">\</span> Muhammad Shah Period</a>
+                <span>(9)</span>
+                </li>
+                <li>
+                <a href="/archive/browser?period_filter[]=5" class=""><span class="icon">\</span> Nasir al-Din Shah Period</a>
+                <span>(107)</span>
+                </li>
+                <li>
+                <a href="/archive/browser?period_filter[]=6" class=""><span class="icon">\</span> Muzaffar al-Din Shah Period</a>
+                <span>(91)</span>
+                </li>
+                <li>
+                <a href="/archive/browser?period_filter[]=7" class=""><span class="icon">\</span> Muhammad 'Ali Shah Period</a>
+                <span>(17)</span>
+                </li>
+                <li>
+                <a href="/archive/browser?period_filter[]=8" class=""><span class="icon">\</span> Ahmad Shah Period</a>
+                <span>(298)</span>
+                </li>
+                <li>
+                <a href="/archive/browser?period_filter[]=9" class=""><span class="icon">\</span> Early Pahlavi Period</a>
+                <span>(290)</span>
+                </li>
+                <li>
+                <a href="/archive/browser?period_filter[]=11" class=""><span class="icon">\</span> Undated</a>
+                <span>(519)</span>
+                </li>
+              </ul>
+            </div>
+            <h3 class="has-children"><a href="#">Indices</a></h3>
+            <div class="list">
+              <ul class="default">
+                <li>
+                <a href="/archive/genres"><span class="icon">l</span> Genre</a>
+                </li>
+                <li>
+                <a href="/archive/people"><span class="icon">g</span> People</a>
+                </li>
+                <li>
+                <a href="/archive/places"><span class="icon">@</span> Place</a>
+                </li>
+                <li>
+                <a href="/archive/subjects"><span class="icon">n</span> Subject</a>
+                </li>
+              </ul>
+            </div>
+
+            <h3><a href="/archive/collections" ><span class="icon">P</span> Collections</a></h3>
+            <h3><a href="/archive/collections" ><span class="icon">></span> Translations</a></h3>
+            <h3 class="last"><a href="/archive/collections" ><span class="icon">'</span> Recent Additions</a></h3>
+
+
+
+          </div>
+
+
+
+        </div>
+        <!-- end rails template content -->
+
+      </div>
+    </div><!-- end content -->
+  </div> <!-- end nonFooter -->
+  <%= partial :footer %>
+  <script>
+    $(function () {
+
+      // Slideshow 1
+      $("#slides").responsiveSlides({
+        maxwidth : 800,
+        speed    : 800
+      });
+
+      $('#carousel').elastislide({
+        imageW   : 200,
+        minItems : 3,
+        border   : 0,
+        margin   : 10
+      });
+
+      $(document).ready( function() { });
+    });
+  </script>
+</body>
+</html>

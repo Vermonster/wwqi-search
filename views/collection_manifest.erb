@@ -11,48 +11,44 @@
         <!-- rails template content -->
         <div class="clearfix shaded-panel">
           <div class="page-head">
-			<div class="extra-padding">
-            <h1><%= @object.title %></h1>
-            <p>	
+            <div class="extra-padding">
+              <h1><%= @object.title %></h1>
+              <p>	
               <%= @object.description %>
-            </p>
-			</div>
-			</div>
-			<ul class="collections dark-list">
-            <% @object.content.each do |collection| %>
-				<li class="clearfix">
-					<a href="<%= collection.url %>" class="clearfix">
-					<div class="collection-thumb ">
-						 <% if collection.thumbnail %>
-		                     <img alt="<%= collection.title %>" src="<%= collection.thumbnail %>">
-							 <div class="layer1"></div>
-							 <div class="layer2"></div>
-		                 <% end %>
-						<% if !collection.thumbnail %>
-							<img alt="<%= collection.title %>" src="/images/empty.jpg">
-							 <div class="layer1"></div>
-							 <div class="layer2"></div>
-		                 <% end %>
-					</div>
-					<div class="collection-meta">
-						<span class="items-in-collection"><strong><%= collection.count %></strong>Items</span>
-						<div class="collection-essentials">
-							<span class="date"><%= collection.created %></span>
-							<h3><%= collection.title %></h3>
-							<p><%= collection.description %></p>
-						</div>
-						
-					</div>
-					</a>
-             </li>
-            <% end %>
-			</ul>
+              </p>
+            </div>
           </div>
+          <ul class="collections dark-list">
+            <% @object.content.each do |collection| %>
+              <li class="clearfix">
+              <a href="<%= ENV["MAIN_SITE_URL"] %>/<%= collection.url %>" class="clearfix">
+                <div class="collection-thumb ">
+                  <% if collection.thumbnail %>
+                    <img alt="<%= collection.title %>" src="<%= collection.thumbnail %>">
+                  <% else %>
+                    <img alt="<%= collection.title %>" src="/images/empty.jpg">
+                  <% end %>
+                  <div class="layer1"></div>
+                  <div class="layer2"></div>
+                </div>
+                <div class="collection-meta">
+                  <span class="items-in-collection"><strong><%= collection.count %></strong>Items</span>
+                  <div class="collection-essentials">
+                    <span class="date"><%= collection.created %></span>
+                    <h3><%= collection.title %></h3>
+                    <p><%= collection.description %></p>
+                  </div>
+                </div>
+              </a>
+              </li>
+            <% end %>
+          </ul>
         </div>
-        <!-- end rails template content -->
-      </div> <!-- end container -->
-    </div><!-- end content -->
-  </div> <!-- end nonFooter -->
-  <%= partial "footer" %>
+      </div>
+      <!-- end rails template content -->
+    </div> <!-- end container -->
+  </div><!-- end content -->
+</div> <!-- end nonFooter -->
+<%= partial "footer" %>
 </body>
 </html>
