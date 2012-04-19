@@ -296,12 +296,13 @@ def item_index(lang, type)
     end
   end
   @lang = lang
+  @type = type
   @content = query.results.facets[facet_name]["terms"].map(&:values)
 
   erb :item_index 
 end
 
-get '/:lang/genres'   do |lang| item_index(lang, :genres)   end
-get '/:lang/subjects' do |lang| item_index(lang, :subjects) end
-get '/:lang/people'   do |lang| item_index(lang, :people)   end
-get '/:lang/places'   do |lang| item_index(lang, :places)   end
+get '/:lang/genres.html'   do |lang| item_index(lang, :genres)   end
+get '/:lang/subjects.html' do |lang| item_index(lang, :subjects) end
+get '/:lang/people.html'   do |lang| item_index(lang, :people)   end
+get '/:lang/places.html'   do |lang| item_index(lang, :places)   end
