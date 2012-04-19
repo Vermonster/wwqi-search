@@ -58,12 +58,17 @@
                 </li>
               <% end %>
             </ul>
-            <ul class="search-bottom-list">
-              <% @total_pages.times do |i| %>
-                <li>
-                  <a href=<%= loopback.increment_page.to_url %>><%= i+1 %></a> 
-                </li>
+            <ul id="pagin" class="search-bottom-list">
+              <li>
+              <% if loopback.prev_page?(@total_results) %>
+                <a href=<%= loopback.decrement_page.to_url %>><< prev</a> 
               <% end %>
+              </li>
+              <li>
+              <% if loopback.next_page?(@total_results) %>
+                <a href=<%= loopback.increment_page.to_url %>>next >></a> 
+              <% end %>
+              </li>
             </ul>
           </div>
           <div id="browse-bar" class="four columns">
