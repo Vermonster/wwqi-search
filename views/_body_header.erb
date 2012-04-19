@@ -1,29 +1,35 @@
 <div class="header">
   <div class="toolbar">
     <div class="container clearfix">
-      <a href="/" title="back to home" class="branding box-transition">Women's Worlds in Qajar Iran</a>
+      <%= lang_link_to "Women's Worlds in Qajar Iran", 'index.html', lang: @lang, title: 'back to home', class: 'branding box-transition' %>
       <h1><strong>Women's Worlds</strong> in Qajar Iran</h1>
       <ul>
-        <li class="my-selections"> 
-          <a href="/archive/my_selections" class="module-link">My Selections <span class="notification">12</span></a>
-        </li>
+        <%#<li class="my-selections"> %>
+          <%#<a href="/archive/my_selections.html" class="module-link">My Selections <span class="notification">12</span></a>%>
+        <%#</li>%>
         <li>
-
-        <!-- #<a class="lang" dir="rtl" href="<#%= ENV["MAIN_SITE_URL"] %#>/<#= @object.key(@lang == :en ? :fa : :en) %#>"> 
-          فارسی</a></li>-->
-
+          <% target_lang = @lang == :en ? :fa : :en %>
+          <% text_lang = @lang == :en ? 'فارسی' : 'English' %>
+          <%= lang_link_to(text_lang, 'index.html', lang: target_lang, class: 'lang', dir: 'rtl') %> 
         </li>
-
       </ul>
     </div>
   </div>
   <div class="menu">
     <div class="container clearfix">
       <ul class="clearfix">
-        <li><a href="<%= ENV["MAIN_SITE_URL"] %>/<%= @lang %>/index.html">Browse <span>Explore the archives </span></a></li>
-        <li><a href="<%= ENV["MAIN_SITE_URL"] %>/<%= @lang %>/collections/manifest.html">Collections <span> View our holdings</span></a></li>
-        <li><a href="<%= ENV["MAIN_SITE_URL"] %>/<%= @lang %>/contact.html">Contact Us<span>Get in touch</span></a></li>
-        <li><a href="<%= ENV["MAIN_SITE_URL"] %>/<%= @lang %>/faq.html">FAQ<span>Have questions? </span></a></li>
+        <li>
+          <%= lang_link_to('Browse <span>Explore the archives </span>', 'index.html', lang: @lang) %>
+        </li>
+        <li>
+          <%= lang_link_to('Collections <span>View our holdings</span>', 'collections/manifest.html', lang: @lang) %>
+        </li>
+        <li>
+          <%= lang_link_to('Contact Us<span>Get in touch</span>', 'contact.html', lang: @lang) %>
+        </li>
+        <li>
+          <%= lang_link_to('FAQ<span>Have questions?</span>', 'faq.html', lang: @lang) %>
+        </li>
       </ul>
     </div>
   </div>

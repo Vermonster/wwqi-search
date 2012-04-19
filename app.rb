@@ -6,6 +6,7 @@ require 'sass'
 require 'active_support'
 require 'active_support/core_ext'
 require 'forwardable'
+require 'cgi'
 
 require './views/view_helpers'
 
@@ -33,7 +34,7 @@ class Filter
 
   def to_s
     map do |type, value|
-      "#{type}:#{URI.escape(value)}"
+      "#{type}:#{CGI.escape(value)}"
     end.join('|')
   end
   alias inspect to_s
@@ -47,7 +48,7 @@ class Filter
     return {} if str.blank?
     str.split('|').each_with_object({}) do |pair, acc| 
       type, value = pair.split(":") 
-      acc[type] = value 
+      acc[type] = CGI::unescape(value)
     end
   end
 end
@@ -84,6 +85,19 @@ end
 
 
 module Helpers
+
+  def javascript(name)
+    %Q|<script type='text/javascript' src='/javascripts/#{name}.js'></script>|
+  end
+
+  def lang_link_to(text, link, opts={})
+    lang = opts.delete(:lang) 
+    url = URI.join(ENV["MAIN_SITE_URL"], "#{lang}/", "#{link}")
+    attributes = ""
+    opts.each { |key,value| attributes << key.to_s << "=\"" << value << "\" "}
+    "<a href=\"#{url}\" #{attributes}>#{text}</a>"
+  end
+  
   def return_link(*_)
     Loopback.new(params).to_url
   end
@@ -204,7 +218,6 @@ get '/search' do
     end
 
     filters.each do |facet_name, items|
-      binding.pry
       filter :terms, { facet_name => [items] }
     end
 

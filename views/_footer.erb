@@ -4,27 +4,27 @@
     <div class="ten columns">
       <ul class="footerNav">
         <li>
-        <a href="/en/about">About</a>
+        <%= lang_link_to('About', 'about.html', lang: @lang) %>
         </li>
         <li>
-        <a href="/en/credits">credits</a>
+        <%= lang_link_to('Credits', 'credits.html', lang: @lang) %>
         </li>
         <li>
-        <a href="/en/permissions">permissions</a>
+        <%= lang_link_to('Permissions', 'permissions.html', lang: @lang) %>
         </li>
         <li>
-        <a href="/en/links">Related Links</a>
+        <%= lang_link_to('Related Links', 'links.html', lang: @lang) %>
         </li>
         <li>
-        <a href="/en/donate">How to Give</a>
+        <%= lang_link_to('How to Give', 'donate.html', lang: @lang) %>
         </li>
       </ul>
     </div>
     <div class="six columns">
       <a class="noimage" href="http://www.harvard.edu" target="_blank">
-        <img alt="Harvard Logo" src="../public/images/harvard.gif"></a>
+        <img alt="Harvard Logo" src="/images/harvard.gif"></a>
       <p>
-      Copyright © 2010  WWQI. All rights reserved.
+      Copyright © 2012  WWQI. All rights reserved.
       </p>
     </div>
 

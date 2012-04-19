@@ -73,48 +73,34 @@ NOTES
 
     @object.accession_number = "1018A10"
     @object.genres = [
-      OpenStruct.new(name: "manuscripts & lithographs", url_to_facet: "#")
+      fake_facet
     ]
+    @object
     @object.people = [
-      OpenStruct.new(name: "Nasir al-Din Shah", url: "#"),
-      OpenStruct.new(name: "Ziya' al-Saltanah [I]", url: "#"),
-      OpenStruct.new(name: "Mayil Afshar Shaykh al-Shu'ara", url: "#"),
-      OpenStruct.new(name: "Aqa Vajih", url: "#"),
-      OpenStruct.new(name: "Fakhr al-Muluk", url: "#"),
-      OpenStruct.new(name: "'Ismat al-Dawlah", url: "#"),
-      OpenStruct.new(name: "Nazim al-Bika'", url: "#"),
-      OpenStruct.new(name: "Shaykh al-Islam", url: "#"),
-      OpenStruct.new(name: "I'timad al-Saltanah", url: "#"),
-      OpenStruct.new(name: "Atabak A'zam", url: "#"),
-      OpenStruct.new(name: "Imam Jum'ah", url: "#"),
-      OpenStruct.new(name: "Amin Aqdas", url: "#"),
-      OpenStruct.new(name: "Hajiyah Khanum", url: "#"),
-      OpenStruct.new(name: "'A'ishah Khanum", url: "#"),
-      OpenStruct.new(name: "'Iffat al-Saltanah", url: "#"),
-      OpenStruct.new(name: "Zaynab al-Saltanah", url: "#"),
-      OpenStruct.new(name: "Badr al-Saltanah", url: "#"),
-      OpenStruct.new(name: "Akhtar al-Saltanah", url: "#"),
-      OpenStruct.new(name: "Shams al-Dawlah", url: "#"),
-      OpenStruct.new(name: "Taj al-Dawlah", url: "#"),
-      OpenStruct.new(name: "Shukuh al-Saltanah [I]", url: "#"),
-      OpenStruct.new(name: "Inis al-Dawlah", url: "#"),
-      OpenStruct.new(name: "Tuman Aqa", url: "#"),
-      OpenStruct.new(name: "Turan Aqa", url: "#"),
-      OpenStruct.new(name: "Amin al-Saltanah", url: "#")
+      fake_facet,
+      fake_facet,
+      fake_facet,
+      fake_facet,
     ]
 
     @object.subjects = [
-      OpenStruct.new(name: "food", url_to_facet: "#"),
-      OpenStruct.new(name: "satire", url_to_facet: "#"),
-      OpenStruct.new(name: "poetry", url_to_facet: "#"),
-      OpenStruct.new(name: "cookbooks", url_to_facet: "#"),
-      OpenStruct.new(name: "cooking", url_to_facet: "#"),
-      OpenStruct.new(name: "courtiers", url_to_facet: "#")
+      fake_facet
     ]
 
     @object.places = [
-      OpenStruct.new(name: "Bushihr", url: "#")
+      fake_facet
     ]
+  end
+
+  def fake_facet
+    os = OpenStruct.new
+    os.name = 'THE Facet'
+    os.instance_eval do
+      def url_to_facet(*args)
+        '#'
+      end
+    end
+    os
   end
 
   def load_example_item_farsi! 

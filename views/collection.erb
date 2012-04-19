@@ -32,13 +32,17 @@
 
           </div>
 
-          <div class="collection-highlights">
-            <h1>Collection Highlights </h1>
-            <% @object.favorites.sample(6).each do |favorite| %>
-              <div><img src="<%=favorite.thumbnail%>" alt="<%=favorite.name%>" /> </div>
-            <% end %>
+          <% if @object.favorites.present? %>
+            <div class="collection-highlights">
+              <h1>Collection Highlights </h1>
+              <% @object.favorites.sample(6).each do |favorite| %>
+                <div>
+                  <%= lang_link_to(%Q|<img src='#{favorite.thumbnail}' alt='#{favorite.name}'/>|, favorite.url(@lang)) %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
 
-          </div>
           <div class="item-below-fold">
 
             <div class="ten columns alpha">
@@ -88,11 +92,12 @@
               <% if @object.genres.present? || @object.subjects.present? %>
                 <div class="item_related">
                   <ul>
+
                     <% if @object.genres.present? %>
                       <li>
                       <span class="title genre">Genres</span>
                       <% @object.genres.each do |genre| %>
-                        <a href="#" class="tag"><%= genre %></a>
+                        <a href="<%= ENV["SEARCH_URL"] %>?<%= genre.url_to_facet(@lang) %>" class="tag"><%= genre.name %></a>
                       <% end %>
                       </li>
                     <% end %>
@@ -101,10 +106,11 @@
                       <li>
                       <span class="title subject">Subjects</span>
                       <% @object.subjects.each do |subject| %>
-                        <a href="#" class="tag"><%= subject %></a>
+                        <a href="<%= ENV["SEARCH_URL"] %>?<%= subject.url_to_facet(@lang) %>" class="tag"><%= subject.name %></a>
                       <% end %>
                       </li>
                     <% end %>
+
                   </ul>
                 </div>
               <% end %>
