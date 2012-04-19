@@ -91,7 +91,7 @@ module Helpers
   end
 
   def lang_link_to(text, link, opts={})
-    lang = opts.delete(:lang) {|el| 'en'}
+    lang = opts.delete(:lang) 
     url = URI.join(ENV["MAIN_SITE_URL"], "#{lang}/", "#{link}")
     attributes = ""
     opts.each { |key,value| attributes << key.to_s << "=\"" << value << "\" "}

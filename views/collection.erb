@@ -32,15 +32,17 @@
 
           </div>
 
-          <div class="collection-highlights">
-            <h1>Collection Highlights </h1>
-            <% @object.favorites.sample(6).each do |favorite| %>
-              <div>
-                <%= lang_link_to(%Q|<img src='#{favorite.thumbnail}' alt='#{favorite.name}'/>|, favorite.url(@lang), lang: @lang) %>
-              </div>
-            <% end %>
+          <% if @object.favorites.present? %>
+            <div class="collection-highlights">
+              <h1>Collection Highlights </h1>
+              <% @object.favorites.sample(6).each do |favorite| %>
+                <div>
+                  <%= lang_link_to(%Q|<img src='#{favorite.thumbnail}' alt='#{favorite.name}'/>|, favorite.url(@lang)) %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
 
-          </div>
           <div class="item-below-fold">
 
             <div class="ten columns alpha">
