@@ -669,6 +669,12 @@ ul.search-results {
   margin: 0 -10px;
 }
 
+.results-found {
+  color: #FFF;
+  font-size: 1.5em;
+  margin-top: 1em;
+}
+
 #carousel .collection-thumb{position:relative; padding-bottom:5px}
 ul.collections li .collection-meta{
 	margin-left:200px;

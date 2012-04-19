@@ -21,20 +21,9 @@
                   <%= partial :search_form_fa %>
                 <% end %>
               </div>
-              <span class="examples">
-                Currently filtering by
-                <ul>
-                  <% loopback.filters.each do |type, value| %>
-                    <li>
-                    <a href='<%= loopback.remove_filter(type).to_url %>'>x</a>
-                      <%= type %>: <%= value %> 
-                    </li>
-                  <% end %>
-                </ul> 
-              </span>
-              <span>
+              <div class="results-found">
                 Total results found: <%= @total_results %>
-              </span>
+              </div>
             </div>
 
 
@@ -85,11 +74,20 @@
                 <h3 class='has-children <%= first_last %> active'><a href='#'><%= facet %></a></h3>
                 <div class='list'>
                   <ul class='default'>
+                    <% if loopback.filters.any? %>
+                      <% content['terms'].delete_if {|term| loopback.filters.any? {|type, value| value != term['term'] && type == facet} } %>
+                    <% end %>
                     <% content['terms'].each do |term| %>
                       <li> 
-                        <a href="<%= loopback.update_filter(facet, term['term']).to_url %>">
+                      <% current_filter = loopback.filters.any? {|type, value| value == term['term']} %>
+                        <% if current_filter  %>
+                          <a href='<%= loopback.remove_filter(facet).to_url %>'>x</a>
                           <%= term['term'] %>
-                        </a>
+                        <% else %>
+                          <a href="<%= loopback.update_filter(facet, term['term']).to_url %>">
+                            <%= term['term'] %>
+                          </a>
+                      <% end %>
                         <!-- <span>(<%= term['count'] %>)</span> -->
                       </li>
                     <% end %>
