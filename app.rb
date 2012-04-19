@@ -194,7 +194,8 @@ get '/fa/home' do
 end
 
 get '/search' do
-  query_string = params["query"]
+  query_string = params["query"] || '*'
+
   filters  = Filter.new(params["filter"])
   lang = (params["lang"] || :en).to_sym
   page = (params["page"] || 1).to_i
@@ -202,34 +203,41 @@ get '/search' do
 
   query = Tire.search(ROOT_INDEX) do
     query do
-      string query_string
+      boolean do
+        must { string query_string, :analyzer => :snowball }
+        filters.each do |facet, item|
+          must { term facet, item }
+        end
+      end
     end
 
-    facet "subjects_#{lang}" do
+    filters.each do |facet, item|
+      filter :terms, { facet => [item] }
+    end
+
+    facet "subjects_#{lang}", :global => false do
       terms "subjects_#{lang}"
     end
 
-    facet "genres_#{lang}" do
+    facet "genres_#{lang}", :global => false do
       terms "genres_#{lang}"
     end
 
-    facet 'type' do
+    facet 'type', :global => false do
       terms :type
-    end
-
-    filters.each do |facet_name, items|
-      filter :terms, { facet_name => [items] }
     end
 
     size 100000
   end
+
+  #puts query.to_curl
 
   # paging -- only display some of the results
   results = (query && query.results) || []
   @total_results = results.count
   @total_pages = (1.0*results.length / results_per_page).ceil
   @results = results[(page-1)*results_per_page..page*results_per_page-1] || []
-  @facets = results.facets
+  @facets = results.facets || []
 
   #set up environment for the template to render
   @lang = lang
