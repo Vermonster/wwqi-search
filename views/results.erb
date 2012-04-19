@@ -105,23 +105,5 @@
       </div>
     </div>
   </div> <!-- end nonFooter -->
-  <script>
-    $(function () {
-
-      $("#browse-bar h3.has-children a").click( function() {
-
-        $(this).parent().toggleClass("active").next(".list").animate({
-          opacity: 'toggle',
-          height: 'toggle'
-        }, 300);
-        $(this).parent().next(".list").find("ul.more").hide();
-        $(this).parent().next(".list").find("a.moreLink").removeClass("less").html("more");
-        return false;
-
-      });
-
-
-    });
-  </script>
 </body>
 </html>
