@@ -37,16 +37,19 @@
               </p>
             </div>
 
-            <div class="six columns  omega last-column">
-
-              <div class="item-links">
-                <h1> Images </h1>
-                <a href="<%= @object.harvard_url %>" rel="shadowbox[gallery]" title="<%= @object.title %>">View This Item</a>
-                <% @object.secondary_urls.each do |url| %>
-                  <a href="<%= url %>" title="View Additional Image">View Additional Image</a>
-                <% end %>
+            <% if @object.harvard_link? %>
+              <div class="six columns  omega last-column">
+                <div class="item-links">
+                  <h1> Images </h1>
+                  <a href="<%= @object.harvard_urls[:preferred] %>" rel="shadowbox[gallery]" title="<%= @object.title %>">View This Item</a>
+                  <% if @object.secondary_urns? %>
+                    <% @object.harvard_urls[:secondary].each do |url| %>
+                      <a href="<%= url %>" title="View Additional Image">View Additional Image</a>
+                    <% end %>
+                  <% end %>
+                </div>
               </div>
-            </div>
+            <% end %>
 
           </div>
 
