@@ -1122,7 +1122,7 @@ ul.collections li a .items-in-collection strong{
 #browse-bar  .list{
 	margin:0;
 	padding:0;
-	display:none;
+  /*display:none;*/
 	border-bottom:1px solid #ccc;
 }
 #browse-bar  .more{

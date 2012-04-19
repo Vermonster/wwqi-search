@@ -69,7 +69,6 @@
                 </li>
               <% end %>
             </ul>
-
             <ul class="search-bottom-list">
               <% @total_pages.times do |i| %>
                 <li>
@@ -83,7 +82,7 @@
               <% first_last = 'first' %>
               <% @facets.each.with_index do |(facet, content), i| %>
                 <% first_last = 'last' if i + 1 == @facets.size %>
-                <h3 class='has-children <%= first_last %>'><a href='#'><%= facet %></a></h3>
+                <h3 class='has-children <%= first_last %> active'><a href='#'><%= facet %></a></h3>
                 <div class='list'>
                   <ul class='default'>
                     <% content['terms'].each do |term| %>
