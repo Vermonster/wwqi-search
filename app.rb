@@ -204,7 +204,7 @@ get '/search' do
   query = Tire.search(ROOT_INDEX) do
     query do
       boolean do
-        must { string "*#{query_string}*", :analyzer => :keyword }
+        must { string query_string, :analyzer => :keyword }
         filters.each do |facet, item|
           must { term facet, item }
         end
