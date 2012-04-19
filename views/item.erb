@@ -55,7 +55,7 @@
 
             <div class="ten columns alpha">
 
-              <% if @object.audio_clip %>
+              <% if @object.audio_clip? %>
                 <div class="item-audio">
                   <h1>Audio</h1>
                   <h5><%= @object.audio_clip_caption %></h5>
@@ -66,16 +66,16 @@
               <% end %>
 
 
-              <% if @object.translation_to_english.present? %>
+              <% if @object.translation_to_english? %>
                 <div class="item-translation">
                   <h1><%= t('translation') %></h1>
                   <a href="#">View Item Translation</a>
                 </div>
               <% end %>
 
-              <% if @object.transcription_of_farsi.present? %>
+              <% if @object.transcription_of_farsi? %>
                 <div class="item-transcript">
-                  <h1> Transcript </h1>
+                  <h1><%= t('transcription') %></h1>
                   <a href="#">View Item Transcript</a>
                 </div>
               <% end %> 
