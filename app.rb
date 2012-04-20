@@ -80,12 +80,12 @@ class Loopback
   end
 
   def filter_field
-    return "" unless @filters
+    return "" unless @filters.has_filters?
     "&filter=#{@filters}" 
   end
 
   def page_field
-    return "" unless @page
+    return "" unless @page and @page != "0"
     "&page=#{@page}" 
   end
 
@@ -127,7 +127,7 @@ class Loopback
   end
 
   def update_filter(type, value)
-    @filters[type] = value
+    @filters[type] = CGI.escape(value)
     self
   end
 
