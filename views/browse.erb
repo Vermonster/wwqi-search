@@ -72,7 +72,7 @@
                   <%# this is presently toast due to lack of proper modelling %>
                   <li> 
                     <a href="<%= loopback(lang: @lang).from(period.start_at).to(period.end_at).to_url %>">
-                      <%= period.send("name_#{@lang}") %>
+                      <%= period.send("title_#{@lang}") %>
                     </a> 
                   </li>
                 <% end %>
