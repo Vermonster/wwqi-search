@@ -55,7 +55,7 @@
                   </a>
                 </div>
                 <div class="two columns omega">
-                  <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "audio files")%>">
+                  <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "audio files").to_url %>">
                     <span class="icon"><</span>
                     Audio Files
                   </a>
@@ -82,33 +82,27 @@
             <div class="list">
               <ul class="default">
                 <li>
-                <a href="/archive/genres"><span class="icon">l</span> Genre</a>
+                <a href="/<%= @lang %>/genres.html"><span class="icon">l</span> Genre</a>
                 </li>
                 <li>
-                <a href="/archive/people"><span class="icon">g</span> People</a>
+                <a href="/<%= @lang %>/people"><span class="icon">g</span> People</a>
                 </li>
                 <li>
-                <a href="/archive/places"><span class="icon">@</span> Place</a>
+                <a href="/<%= @lang %>/places"><span class="icon">@</span> Place</a>
                 </li>
                 <li>
-                <a href="/archive/subjects"><span class="icon">n</span> Subject</a>
+                <a href="/<%= @lang %>/subjects"><span class="icon">n</span> Subject</a>
                 </li>
               </ul>
             </div>
 
-            <h3><a href="/archive/collections" ><span class="icon">P</span> Collections</a></h3>
-            <h3><a href="/archive/collections" ><span class="icon">></span> Translations</a></h3>
-            <h3 class="last"><a href="/archive/collections" ><span class="icon">'</span> Recent Additions</a></h3>
+            <h3><a href="/<%= @lang %>/collections/manifest.html" ><span class="icon">P</span> Collections</a></h3>
 
-
-
+            <%#<h3><a href="/archive/collections" ><span class="icon">></span> Translations</a></h3>%>
+            <%#<h3 class="last"><a href="/archive/collections" ><span class="icon">'</span> Recent Additions</a></h3>%>
           </div>
-
-
-
         </div>
         <!-- end rails template content -->
-
       </div>
     </div><!-- end content -->
   </div> <!-- end nonFooter -->

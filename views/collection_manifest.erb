@@ -21,7 +21,7 @@
           <ul class="collections dark-list">
             <% @object.content.each do |collection| %>
               <li class="clearfix">
-              <a href="<%= ENV["MAIN_SITE_URL"] %>/<%= collection.url %>" class="clearfix">
+              <a href="<%= ENV["MAIN_SITE_URL"] %><%= collection.url %>" class="clearfix">
                 <div class="collection-thumb ">
                   <% if collection.thumbnail %>
                     <img alt="<%= collection.title %>" src="<%= collection.thumbnail %>">
