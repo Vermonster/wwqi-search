@@ -54,13 +54,12 @@
                     Letters
                   </a>
                 </div>
-                <!-- TODO: Fix audio indexing -->
-                <%#<div class="two columns omega">%>
-                  <%#<a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "photographs") ">%>
-                    <%#<span class="icon"><</span>%>
-                    <%#Audio Files%>
-                  <%#</a>%>
-                <%#</div>%>
+                <div class="two columns omega">
+                  <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "audio files")%>">
+                    <span class="icon"><</span>
+                    Audio Files
+                  </a>
+                </div>
               </div>
             </div>
           </div>
