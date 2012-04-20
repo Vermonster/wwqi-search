@@ -58,6 +58,7 @@ class Loopback
   attr_reader :filters
 
   def initialize(params)
+    params = params.with_indifferent_access
     @query = params["query"]
     @page = params["page"].to_i || 1
     @lang = params["lang"].to_sym
@@ -68,8 +69,33 @@ class Loopback
     10
   end
 
+  def query_field
+    return "" unless @query
+    "&query=#{@query}" 
+  end
+
+  def lang_field
+    return "" unless @lang
+    "lang=#{@lang}" 
+  end
+
+  def filter_field
+    return "" unless @filters.has_filters?
+    "&filter=#{@filters}" 
+  end
+
+  def page_field
+    return "" if @page.nil? or @page == 0
+    "&page=#{@page}" 
+  end
+
+  def date_field
+    return "" unless @from and @to
+    "&#{@from}TO#{@to}"
+  end
+
   def to_url
-    "#{ENV["SEARCH_URL"]}?query=#{@query}&lang=#{@lang}&page=#{@page}&filter=#{@filters}"
+    "#{ENV["SEARCH_URL"]}?" + lang_field + query_field + filter_field + page_field + date_field
   end
 
   def increment_page
@@ -82,6 +108,16 @@ class Loopback
     self
   end
 
+  def to(date)
+    @to = date
+    self
+  end
+
+  def from(date)
+    @from = date
+    self
+  end
+
   def prev_page?(total)
     @page + 1 > 1
   end
@@ -91,7 +127,7 @@ class Loopback
   end
 
   def update_filter(type, value)
-    @filters[type] = value
+    @filters[type] = CGI.escape(value)
     self
   end
 
@@ -111,6 +147,7 @@ module Helpers
   def lang_link_to(text, link, opts={})
     lang = opts.delete(:lang) 
     url = URI.join(ENV["MAIN_SITE_URL"], "#{lang}/", "#{link}")
+    
     attributes = ""
     opts.each { |key,value| attributes << key.to_s << "=\"" << value << "\" "}
     "<a href=\"#{url}\" #{attributes}>#{text}</a>"
@@ -289,22 +326,22 @@ get '/item/:lang/:id.html' do |lang, id|
   erb :item
 end
 
-def item_index(lang, type)
+def item_index(lang, type, letter)
   facet_name = "#{type}_#{lang}" 
   query = Tire.search ROOT_INDEX do
     query { string "*" } 
-    facet facet_name do
-      terms facet_name
+    facet facet_name, :global => true do
+      terms facet_name, :size => 100
     end
   end
   @lang = lang
   @type = type
-  @content = query.results.facets[facet_name]["terms"].map(&:values)
+  @content = query.results.facets[facet_name]["terms"].map(&:values).delete_if{|item| !item[0].downcase.starts_with?(letter.downcase) if letter }
 
   erb :item_index 
 end
 
-get '/:lang/genres.html'   do |lang| item_index(lang, :genres)   end
-get '/:lang/subjects.html' do |lang| item_index(lang, :subjects) end
-get '/:lang/people.html'   do |lang| item_index(lang, :people)   end
-get '/:lang/places.html'   do |lang| item_index(lang, :places)   end
+get '/:lang/genres.html'   do |lang| item_index(lang, :genres, params["letter"])   end
+get '/:lang/subjects.html' do |lang| item_index(lang, :subjects, params["letter"]) end
+get '/:lang/people.html'   do |lang| item_index(lang, :people, params["letter"])   end
+get '/:lang/places.html'   do |lang| item_index(lang, :places, params["letter"])   end

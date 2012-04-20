@@ -54,13 +54,12 @@
                     Letters
                   </a>
                 </div>
-                <!-- TODO: Fix audio indexing -->
-                <%#<div class="two columns omega">%>
-                  <%#<a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "photographs") ">%>
-                    <%#<span class="icon"><</span>%>
-                    <%#Audio Files%>
-                  <%#</a>%>
-                <%#</div>%>
+                <div class="two columns omega">
+                  <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "audio files")%>">
+                    <span class="icon"><</span>
+                    Audio Files
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -72,8 +71,8 @@
                 <% Period.all.each do |period| %>
                   <%# this is presently toast due to lack of proper modelling %>
                   <li> 
-                    <a href="<%= loopback(lang: @lang).from(period.start_end).to(period.end_date).to_url %>">
-                      <%= period.send("name_#{@lang}") %>
+                    <a href="<%= loopback(lang: @lang).from(period.start_at).to(period.end_at).to_url %>">
+                      <%= period.send("title_#{@lang}") %>
                     </a> 
                   </li>
                 <% end %>

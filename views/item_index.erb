@@ -15,40 +15,41 @@
               <%= lang_link_to('» Subject Index', 'subjects.html', lang: @lang) %>
 						</div>
             <h2><%= @type.capitalize %> Index</h2>
-						<ul class="alphabet">
+            <ul class="alphabet">
               <% ('A'..'Z').each do |letter| %>
 							<li>
-              <a href="/archive/?filter_letter=<%= letter %>" class=" "><%= letter %></a>
+                <%= lang_link_to(letter, "#{@type}.html?letter=#{letter}", lang: @lang) %>
               </li>
-              <%end%>
+              <% end %>
               <li>
-								<a href="/archive/people?filter_letter=%CA%BB" class=" ">ʻ</a>
+                <%= lang_link_to("ʻ", "#{@type}.html?letter=%CA%BB", lang: @lang) %>
 							</li>
 							<li>
-								<a href="/archive/people?filter_letter=ALL" class=" ">ALL</a>
+                <%= lang_link_to("ALL", "#{@type}.html", lang: @lang) %>
 							</li>
 						</ul>
 					</div>
+          <%
+            column_2 = @content.slice!((@content.size/2.0).round..@content.size)
+          %>
 					<div class="sixteen columns clearfix offset-by-one">
 						<ul class="subjects_list seven columns alpha">
               <% @content.sort_by{|name, count| name}.each do |name, count| %>
 							<li class="person_item">
-              » <a href=""><%= name %> <span>(<%= count %>)</span></a>
+              <a href="<%= loopback(lang: @lang).update_filter("#{@type.downcase}_#{@lang}".to_sym, name).to_url %>"><%= name %> <span>(<%= count %>)</span></a>
 							</li>
             <% end %>
 						</ul>
-					</div>
+						<ul class="subjects_list seven columns alpha">
+              <% column_2.sort_by{|name, count| name}.each do |name, count| %>
+							<li class="person_item">
+                <a href="<%= loopback(lang: @lang).update_filter("#{@type}_#{@lang}".to_sym, name).to_url %>"><%= name %> <span>(<%= count %>)</span></a>
+							</li>
+            <% end %>
+						</ul>
 				</div>
-
-
 				<!-- end rails template content -->
-
 			</div>
-
-
-
-
-
   </div><!-- end content -->
 </div> <!-- end nonFooter -->
 <%= partial "footer" %>
