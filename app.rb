@@ -58,9 +58,13 @@ class Loopback
 
   def initialize(params)
     @query = params["query"]
-    @page = params["page"].to_i
+    @page = params["page"].to_i || 1
     @lang = params["lang"].to_sym
     @filters = Filter.new(params["filter"])
+  end
+
+  def self.results_per_page
+    10
   end
 
   def to_url
@@ -70,6 +74,19 @@ class Loopback
   def increment_page
     @page += 1
     self
+  end
+
+  def decrement_page
+    @page -= 1
+    self
+  end
+
+  def prev_page?(total)
+    @page + 1 > 1
+  end
+
+  def next_page?(total)
+    @page + 1 < (1.0 * total / Loopback.results_per_page).ceil 
   end
 
   def update_filter(type, value)
@@ -194,43 +211,53 @@ get '/fa/home' do
 end
 
 get '/search' do
-  query_string = params["query"]
+  query_string = params["query"] || '*'
+
   filters  = Filter.new(params["filter"])
   lang = (params["lang"] || :en).to_sym
-  page = (params["page"] || 1).to_i
-  results_per_page = 10
+  page = (params["page"] || 0)
 
   query = Tire.search(ROOT_INDEX) do
     query do
-      string query_string
+      boolean do
+        must { string query_string, :analyzer => :keyword }
+        filters.each do |facet, item|
+          must { term facet, item }
+        end
+      end
     end
 
-    facet "subjects_#{lang}" do
+    filters.each do |facet, item|
+      filter :terms, { facet => [item] }
+    end
+
+    facet "subjects_#{lang}", :global => false do
       terms "subjects_#{lang}"
     end
 
-    facet "genres_#{lang}" do
+    facet "genres_#{lang}", :global => false do
       terms "genres_#{lang}"
     end
 
-    facet 'type' do
+    facet 'type', :global => false do
       terms :type
     end
 
     filters.each do |facet_name, items|
       filter :terms, { facet_name => [items] }
     end
-
-    size 100000
+    size Loopback.results_per_page
+    from(page)
   end
+
+  #puts query.to_curl
 
   # paging -- only display some of the results
   results = (query && query.results) || []
-  @total_results = results.count
-  @total_pages = (1.0*results.length / results_per_page).ceil
-  @results = results[(page-1)*results_per_page..page*results_per_page-1] || []
+  @total_results = results.total
+  @total_pages = (1.0 * results.total / Loopback.results_per_page).ceil
+  @results = results
   @facets = results.facets
-
   #set up environment for the template to render
   @lang = lang
   @query = query_string
@@ -269,12 +296,13 @@ def item_index(lang, type)
     end
   end
   @lang = lang
+  @type = type
   @content = query.results.facets[facet_name]["terms"].map(&:values)
 
   erb :item_index 
 end
 
-get '/:lang/genres'   do |lang| item_index(lang, :genres)   end
-get '/:lang/subjects' do |lang| item_index(lang, :subjects) end
-get '/:lang/people'   do |lang| item_index(lang, :people)   end
-get '/:lang/places'   do |lang| item_index(lang, :places)   end
+get '/:lang/genres.html'   do |lang| item_index(lang, :genres)   end
+get '/:lang/subjects.html' do |lang| item_index(lang, :subjects) end
+get '/:lang/people.html'   do |lang| item_index(lang, :people)   end
+get '/:lang/places.html'   do |lang| item_index(lang, :places)   end

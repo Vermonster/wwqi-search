@@ -3,14 +3,51 @@
   <div id="nonFooter">
     <%= partial "body_header" %>
 
-    <ul>
-      <% @content.each do |name, count| %>
-      <li>
-        <span><%= name %> </span> 
-        <span><%= count %> </span> 
-      </li>
-      <% end %>
-    </ul>
+ 		<div id="content">
+			<div class="container clearfix">
+				<div class="clearfix shaded-panel" id="indexList">
+
+<div class="page-head">
+						<div class="otherIndexes">
+              <%= lang_link_to('» Genres Index', 'genres.html', lang: @lang) %>
+              <%= lang_link_to('» People Index', 'people.html', lang: @lang) %>
+              <%= lang_link_to('» Places Index', 'places.html', lang: @lang) %>
+              <%= lang_link_to('» Subject Index', 'subjects.html', lang: @lang) %>
+						</div>
+            <h2><%= @type.capitalize %> Index</h2>
+						<ul class="alphabet">
+              <% ('A'..'Z').each do |letter| %>
+							<li>
+              <a href="/archive/?filter_letter=<%= letter %>" class=" "><%= letter %></a>
+              </li>
+              <%end%>
+              <li>
+								<a href="/archive/people?filter_letter=%CA%BB" class=" ">ʻ</a>
+							</li>
+							<li>
+								<a href="/archive/people?filter_letter=ALL" class=" ">ALL</a>
+							</li>
+						</ul>
+					</div>
+					<div class="sixteen columns clearfix offset-by-one">
+						<ul class="subjects_list seven columns alpha">
+              <% @content.sort_by{|name, count| name}.each do |name, count| %>
+							<li class="person_item">
+              » <a href=""><%= name %> <span>(<%= count %>)</span></a>
+							</li>
+            <% end %>
+						</ul>
+					</div>
+				</div>
+
+
+				<!-- end rails template content -->
+
+			</div>
+
+
+
+
 
   </div><!-- end content -->
 </div> <!-- end nonFooter -->
