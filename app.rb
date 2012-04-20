@@ -119,8 +119,8 @@ module Helpers
     Loopback.new(params).to_url
   end
 
-  def loopback
-    Loopback.new(params)
+  def loopback(opts = nil)
+    Loopback.new(opts || params)
   end
 
   def partial(path)
@@ -132,11 +132,9 @@ module Helpers
     %Q|<link rel="stylesheet" href="/stylesheets/#{name}.css" #{extra} />|
   end
 
-
   def search_url
     ENV["SEARCH_URL"]
   end
-
 
   def carousel
     ["1131-1141","1134","1016-1139","1131-1142","1019","1025","911","1021A","907-1023","1014","1018","905-906-1017"]
