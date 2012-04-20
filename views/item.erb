@@ -169,7 +169,9 @@
                     <li>
                     <span class="title genre">Genres</span>
                     <% @object.genres.each do |genre| %>
-                      <a href="<%= ENV["SEARCH_URL"] %>?<%= genre.url_to_facet(@lang) %>" class="tag"><%= genre.name %></a>
+                      <a href="<%= loopback(lang: @lang).update_filter("genres_#{@lang}", genre.name).to_url %>" class="tag">
+                        <%= genre.name %>
+                      </a>
                     <% end %>
                     </li>
                   <% end %>
@@ -178,7 +180,9 @@
                     <li>
                     <span class="title people">People</span>
                     <% @object.people.each do |person| %>
-                      <a href="<%= ENV["SEARCH_URL"] %>?<%= person.url_to_facet(@lang) %>" class="tag"><%= person.name %></a>
+                      <a href="<%= loopback(lang: @lang).update_filter("people_#{@lang}", person.name).to_url %>" class="tag">
+                        <%= person.name %>
+                      </a>
                     <% end %>
                     </li>
                   <% end %>
@@ -187,7 +191,9 @@
                     <li>
                     <span class="title subject">Subjects</span>
                     <% @object.subjects.each do |subject| %>
-                      <a href="<%= ENV["SEARCH_URL"] %>?<%= subject.url_to_facet(@lang) %>" class="tag"><%= subject.name %></a>
+                      <a href="<%= loopback(lang: @lang).update_filter("subjects_#{@lang}", subject.name).to_url %>" class="tag">
+                        <%= subject.name %>
+                      </a>
                     <% end %>
                     </li>
                   <% end %>
@@ -196,7 +202,9 @@
                     <li>
                     <span class="title place">Places</span>
                     <% @object.places.each do |place| %>
-                      <a href="<%= ENV["SEARCH_URL"] %>?<%= place.url_to_facet(@lang) %>" class="tag"><%= place.name %></a>
+                      <a href="<%= loopback(lang: @lang).update_filter("places_#{@lang}", place.name).to_url %>" class="tag">
+                        <%= place.name %>
+                      </a>
                     <% end %>
                     </li>
                   <% end %>
