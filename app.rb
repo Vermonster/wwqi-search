@@ -119,8 +119,8 @@ module Helpers
     Loopback.new(params).to_url
   end
 
-  def loopback
-    Loopback.new(params)
+  def loopback(opts = nil)
+    Loopback.new(opts || params)
   end
 
   def partial(path)
@@ -132,11 +132,9 @@ module Helpers
     %Q|<link rel="stylesheet" href="/stylesheets/#{name}.css" #{extra} />|
   end
 
-
   def search_url
     ENV["SEARCH_URL"]
   end
-
 
   def carousel
     ["1131-1141","1134","1016-1139","1131-1142","1019","1025","911","1021A","907-1023","1014","1018","905-906-1017"]
@@ -185,8 +183,6 @@ end
 helpers ViewHelpers
 helpers Helpers
 
-
-
 get '/' do
   redirect ENV["MAIN_SITE_URL"], 301
 end
@@ -212,6 +208,8 @@ end
 
 get '/search' do
   query_string = params["query"] || '*'
+  date = params["date"]
+  date_start, date_end = params["date"] && params["date"].split('TO')
 
   filters  = Filter.new(params["filter"])
   lang = (params["lang"] || :en).to_sym
@@ -220,7 +218,9 @@ get '/search' do
   query = Tire.search(ROOT_INDEX) do
     query do
       boolean do
+        must { range :date, { from: date_start, to: date_end, boost: 10.0 } } if date
         must { string query_string, :analyzer => :keyword }
+
         filters.each do |facet, item|
           must { term facet, item }
         end
