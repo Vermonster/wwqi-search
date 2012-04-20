@@ -37,7 +37,7 @@
               <h1>Collection Highlights </h1>
               <% @object.favorites.sample(6).each do |favorite| %>
                 <div>
-                  <%= lang_link_to(%Q|<img src='#{favorite.thumbnail}' alt='#{favorite.name}'/>|, favorite.url(@lang)) %>
+                  <%= lang_link_to(%Q|<img src='#{favorite.thumbnail}' alt='#{favorite.name}'/>|, favorite.send("url_#{@lang}").to_s) %>
                 </div>
               <% end %>
             </div>
