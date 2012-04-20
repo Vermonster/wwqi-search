@@ -146,6 +146,7 @@ module Helpers
   def lang_link_to(text, link, opts={})
     lang = opts.delete(:lang) 
     url = URI.join(ENV["MAIN_SITE_URL"], "#{lang}/", "#{link}")
+    
     attributes = ""
     opts.each { |key,value| attributes << key.to_s << "=\"" << value << "\" "}
     "<a href=\"#{url}\" #{attributes}>#{text}</a>"
@@ -324,13 +325,14 @@ get '/item/:lang/:id.html' do |lang, id|
   erb :item
 end
 
-def item_index(lang, type)
+def item_index(lang, type, query)
   facet_name = "#{type}_#{lang}" 
   query = Tire.search ROOT_INDEX do
     query { string "*" } 
-    facet facet_name do
-      terms facet_name
+    facet facet_name, :global => true do
+      terms facet_name, :size => 1000
     end
+    size 1000
   end
   @lang = lang
   @type = type
@@ -339,7 +341,7 @@ def item_index(lang, type)
   erb :item_index 
 end
 
-get '/:lang/genres.html'   do |lang| item_index(lang, :genres)   end
-get '/:lang/subjects.html' do |lang| item_index(lang, :subjects) end
-get '/:lang/people.html'   do |lang| item_index(lang, :people)   end
-get '/:lang/places.html'   do |lang| item_index(lang, :places)   end
+get '/:lang/genres.html'   do |lang| item_index(lang, :genres, params["letter"])   end
+get '/:lang/subjects.html' do |lang| item_index(lang, :subjects, params["letter"]) end
+get '/:lang/people.html'   do |lang| item_index(lang, :people, params["letter"])   end
+get '/:lang/places.html'   do |lang| item_index(lang, :places, params["letter"])   end
