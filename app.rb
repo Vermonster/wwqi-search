@@ -185,8 +185,6 @@ end
 helpers ViewHelpers
 helpers Helpers
 
-
-
 get '/' do
   redirect ENV["MAIN_SITE_URL"], 301
 end
@@ -212,6 +210,8 @@ end
 
 get '/search' do
   query_string = params["query"] || '*'
+  date = params["date"]
+  date_start, date_end = params["date"] && params["date"].split('TO')
 
   filters  = Filter.new(params["filter"])
   lang = (params["lang"] || :en).to_sym
@@ -220,7 +220,9 @@ get '/search' do
   query = Tire.search(ROOT_INDEX) do
     query do
       boolean do
+        must { range :date, { from: date_start, to: date_end, boost: 10.0 } } if date
         must { string query_string, :analyzer => :keyword }
+
         filters.each do |facet, item|
           must { term facet, item }
         end
