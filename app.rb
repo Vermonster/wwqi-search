@@ -68,8 +68,33 @@ class Loopback
     10
   end
 
+  def query_field
+    return "" unless @query
+    "&query=#{@query}" 
+  end
+
+  def lang_field
+    return "" unless @lang
+    "lang=#{@lang}" 
+  end
+
+  def filter_field
+    return "" unless @filters
+    "&filter=#{@filters}" 
+  end
+
+  def page_field
+    return "" unless @page
+    "&page=#{@page}" 
+  end
+
+  def date_field
+    return "" unless @from and @to
+    "&#{@from}TO#{@to}"
+  end
+
   def to_url
-    "#{ENV["SEARCH_URL"]}?query=#{@query}&lang=#{@lang}&page=#{@page}&filter=#{@filters}"
+    "#{ENV["SEARCH_URL"]}?" + lang_field + query_field + filter_field + page_field + date_field
   end
 
   def increment_page
@@ -79,6 +104,16 @@ class Loopback
 
   def decrement_page
     @page -= 1
+    self
+  end
+
+  def to(date)
+    @to = date
+    self
+  end
+
+  def from(date)
+    @from = date
     self
   end
 
