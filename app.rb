@@ -21,6 +21,7 @@ Tire.configure do
   global_index_name ROOT_INDEX
 end
 
+Period = []
 
 
 class Filter
