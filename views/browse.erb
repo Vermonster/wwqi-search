@@ -25,41 +25,42 @@
               <h1>View By Type</h1>
               <div class="twelve-columns clearfix">
                 <div class="two columns alpha">
-                  <a href="/archive/browser?genre_filter[]=208">
+                  <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "manuscripts & lithographs").to_url  %>">
                     <span class="icon">N</span>
                     Manuscripts
                   </a>
                 </div>
                 <div class="two columns">
-                  <a href="/archive/browser?genre_filter[]=231">
+                  <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "objects").to_url  %>">
                     <span class="icon">b</span>
                     Objects
                   </a>
                 </div>
                 <div class="two columns">
-                  <a href="/archive/browser?genre_filter[]=581">
+                  <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "legal & financial").to_url  %>">
                     <span class="icon">Y</span>
                     Legal &amp; Financial
                   </a>
                 </div>
                 <div class="two columns">
-                  <a href="/archive/browser?genre_filter[]=598">
+                  <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "photographs").to_url  %>">
                     <span class="icon">v</span>
                     Photographs
                   </a>
                 </div>
                 <div class="two columns">
-                  <a href="/archive/browser?genre_filter[]=598">
+                  <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "letters").to_url %>">
                     <span class="icon">F</span>
                     Letters
                   </a>
                 </div>
-                <div class="two columns omega">
-                  <a href="/archive/browser?genre_filter[]=598">
-                    <span class="icon"><</span>
-                    Audio Files
-                  </a>
-                </div>
+                <!-- TODO: Fix audio indexing -->
+                <%#<div class="two columns omega">%>
+                  <%#<a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "photographs") ">%>
+                    <%#<span class="icon"><</span>%>
+                    <%#Audio Files%>
+                  <%#</a>%>
+                <%#</div>%>
               </div>
             </div>
           </div>
@@ -68,42 +69,14 @@
             <h3 class="first has-children"><a href="#">Periods</a></h3>
             <div class="list">
               <ul class="default">
-                <li>
-                <a href="/archive/browser?period_filter[]=3" class=""><span class="icon">\</span> Pre-Qajar Period</a>
-                <span>(5)</span>
-                </li>
-                <li>
-                <a href="/archive/browser?period_filter[]=2" class=""><span class="icon">\</span> Fath 'Ali Shah Period</a>
-                <span>(8)</span>
-                </li>
-                <li>
-                <a href="/archive/browser?period_filter[]=4" class=""><span class="icon">\</span> Muhammad Shah Period</a>
-                <span>(9)</span>
-                </li>
-                <li>
-                <a href="/archive/browser?period_filter[]=5" class=""><span class="icon">\</span> Nasir al-Din Shah Period</a>
-                <span>(107)</span>
-                </li>
-                <li>
-                <a href="/archive/browser?period_filter[]=6" class=""><span class="icon">\</span> Muzaffar al-Din Shah Period</a>
-                <span>(91)</span>
-                </li>
-                <li>
-                <a href="/archive/browser?period_filter[]=7" class=""><span class="icon">\</span> Muhammad 'Ali Shah Period</a>
-                <span>(17)</span>
-                </li>
-                <li>
-                <a href="/archive/browser?period_filter[]=8" class=""><span class="icon">\</span> Ahmad Shah Period</a>
-                <span>(298)</span>
-                </li>
-                <li>
-                <a href="/archive/browser?period_filter[]=9" class=""><span class="icon">\</span> Early Pahlavi Period</a>
-                <span>(290)</span>
-                </li>
-                <li>
-                <a href="/archive/browser?period_filter[]=11" class=""><span class="icon">\</span> Undated</a>
-                <span>(519)</span>
-                </li>
+                <% Period.all.each do |period| %>
+                  <%# this is presently toast due to lack of proper modelling %>
+                  <li> 
+                    <a href="<%= loopback(lang: @lang).from(period.start_end).to(period.end_date).to_url %>">
+                      <%= period.send("name_#{@lang}") %>
+                    </a> 
+                  </li>
+                <% end %>
               </ul>
             </div>
             <h3 class="has-children"><a href="#">Indices</a></h3>
