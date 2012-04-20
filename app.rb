@@ -206,8 +206,16 @@ get '/fa/home' do
   erb :home
 end
 
+def add_facet(name)
+  facet name do
+    terms name, size: 20
+    yield if block_given?
+  end
+end
+
+
 get '/search' do
-  query_string = params["query"] || '*'
+  query_string = params["query"] 
   date = params["date"]
   date_start, date_end = params["date"] && params["date"].split('TO')
 
@@ -219,7 +227,14 @@ get '/search' do
     query do
       boolean do
         must { range :date, { from: date_start, to: date_end, boost: 10.0 } } if date
-        must { string query_string, :analyzer => :keyword }
+
+        if query_string
+          should { fuzzy "title_#{lang}".to_sym       , query_string , min_similarity: 0.6 , boost: 2   }
+          should { fuzzy "description_#{lang}".to_sym , query_string , min_similarity: 0.4 , boost: 0.5 }
+          should { string query_string                , boost: 5 }
+        else
+          should { string '*' } 
+        end
 
         filters.each do |facet, item|
           must { term facet, item }
@@ -227,30 +242,16 @@ get '/search' do
       end
     end
 
-    filters.each do |facet, item|
-      filter :terms, { facet => [item] }
-    end
+    add_facet "subjects_#{lang}"
+    add_facet "genres_#{lang}" 
+    add_facet "people_#{lang}" 
+    add_facet "places_#{lang}" 
+    add_facet 'type'
+    #add_facet 'has_audio'
 
-    facet "subjects_#{lang}", :global => false do
-      terms "subjects_#{lang}"
-    end
-
-    facet "genres_#{lang}", :global => false do
-      terms "genres_#{lang}"
-    end
-
-    facet 'type', :global => false do
-      terms :type
-    end
-
-    filters.each do |facet_name, items|
-      filter :terms, { facet_name => [items] }
-    end
     size Loopback.results_per_page
     from(page)
   end
-
-  #puts query.to_curl
 
   # paging -- only display some of the results
   results = (query && query.results) || []
