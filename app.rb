@@ -85,7 +85,7 @@ class Loopback
   end
 
   def page_field
-    return "" unless @page and @page != 0
+    return "" if @page.nil? or @page == 0
     "&page=#{@page}" 
   end
 
