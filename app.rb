@@ -58,6 +58,7 @@ class Loopback
   attr_reader :filters
 
   def initialize(params)
+    params = params.with_indifferent_access
     @query = params["query"]
     @page = params["page"].to_i || 1
     @lang = params["lang"].to_sym
@@ -325,18 +326,17 @@ get '/item/:lang/:id.html' do |lang, id|
   erb :item
 end
 
-def item_index(lang, type, query)
+def item_index(lang, type, letter)
   facet_name = "#{type}_#{lang}" 
   query = Tire.search ROOT_INDEX do
     query { string "*" } 
     facet facet_name, :global => true do
-      terms facet_name, :size => 1000
+      terms facet_name, :size => 100
     end
-    size 1000
   end
   @lang = lang
   @type = type
-  @content = query.results.facets[facet_name]["terms"].map(&:values)
+  @content = query.results.facets[facet_name]["terms"].map(&:values).delete_if{|item| !item[0].downcase.starts_with?(letter.downcase) if letter }
 
   erb :item_index 
 end
