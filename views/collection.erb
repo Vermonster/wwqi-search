@@ -97,7 +97,7 @@
                       <li>
                       <span class="title genre">Genres</span>
                       <% @object.genres.each do |genre| %>
-                        <a href="<%= loopback(lang: @lang).update_filter("genres_#{@lang}", genre.name).to_url %>" class="tag">
+                        <a href="<%= loopback(lang: @lang).update_filter("genres_#{@lang}", genre.name.to_s).to_url %>" class="tag">
                           <%= genre.name %>
                         </a>
                       <% end %>
@@ -108,7 +108,7 @@
                       <li>
                       <span class="title subject">Subjects</span>
                       <% @object.subjects.each do |subject| %>
-                        <a href="<%= loopback(lang: @lang).update_filter("subjects_#{@lang}", subject.name).to_url %>" class="tag">
+                        <a href="<%= loopback(lang: @lang).update_filter("subjects_#{@lang}", subject.name.to_s).to_url %>" class="tag">
                           <%= subject.name %>
                         </a>
                       <% end %>
