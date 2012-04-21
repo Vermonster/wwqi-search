@@ -15,13 +15,22 @@ ENV["MAIN_SITE_URL"] ||= 'http://localhost:4567'
 ENV["ASSET_URL"] ||= 'http://assets.wwqidev.com'
 ENV["SEARCH_URL"] ||= 'http://localhost:4567/search'
 
+SEARCH_BASE_URL = "http://#{URI.parse(ENV["SEARCH_URL"]).host}"
+
 ROOT_INDEX = URI.parse(ENV['BONSAI_INDEX_URL']).path[1..-1]
 Tire.configure do 
   url               'http://index.bonsai.io'
   global_index_name ROOT_INDEX
 end
 
-Period = []
+def period(i)
+  OpenStruct.new(title_en: "Period #{i}",
+                 title_fa: "Period_farsi #{i}",
+                 end_at: "1900-01-01",
+                 start_at: "1800-01-01")
+end
+
+Period = [period(1), period(2), period(3), period(4)]
 
 class Array
   def all
