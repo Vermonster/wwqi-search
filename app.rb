@@ -23,6 +23,12 @@ end
 
 Period = []
 
+class Array
+  def all
+    self
+  end
+end
+
 
 class Filter
   def initialize(str)
@@ -243,6 +249,17 @@ get '/fa/home' do
   @lang = :fa
   erb :home
 end
+
+get '/en/browse' do
+  @lang = :en
+  erb :browse
+end
+
+get '/fa/browse' do
+  @lang = :fa
+  erb :browse
+end
+
 
 def add_facet(name)
   facet name do
