@@ -82,16 +82,16 @@
             <div class="list">
               <ul class="default">
                 <li>
-                <a href="/<%= @lang %>/genres.html"><span class="icon">l</span> Genre</a>
+                <a href="<%= ENV["SEARCH_URL"] %>/<%= @lang %>/genres.html"><span class="icon">l</span> Genre</a>
                 </li>
                 <li>
-                <a href="/<%= @lang %>/people"><span class="icon">g</span> People</a>
+                <a href="<%= ENV["SEARCH_URL"] %>/<%= @lang %>/people"><span class="icon">g</span> People</a>
                 </li>
                 <li>
-                <a href="/<%= @lang %>/places"><span class="icon">@</span> Place</a>
+                <a href="<%= ENV["SEARCH_URL"] %>/<%= @lang %>/places"><span class="icon">@</span> Place</a>
                 </li>
                 <li>
-                <a href="/<%= @lang %>/subjects"><span class="icon">n</span> Subject</a>
+                <a href="<%= ENV["SEARCH_URL"] %>/<%= @lang %>/subjects"><span class="icon">n</span> Subject</a>
                 </li>
               </ul>
             </div>
