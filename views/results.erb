@@ -29,24 +29,22 @@
 
             <ul class="search-results collections dark-list">
               <% @results.each do |result| %>
-                <li class="clearfix">
+                <li class="clearfix <%= result.type %><% if result.type.downcase == "item" %><%= result.image_count %><% end %>">
                 <a href="<%= "#{ENV["MAIN_SITE_URL"]}#{result.send("url_#{@lang}")}" %>" class="clearfix">
-                  <div class="collection-thumb ">
+                  <div class="collection-thumb stack rotated">
                     <% if result.thumbnail %>
                       <img alt="<%= result.name %>" src="<%= result.thumbnail %>">
-                      <div class="layer1"></div>
-                      <div class="layer2"></div>
+                      
                     <% else %>
                       <img alt="<%= result.name %>" src="/images/empty.jpg">
-                      <div class="layer1"></div>
-                      <div class="layer2"></div>
+                      
                     <% end %>
                   </div>
                   <div class="collection-meta">
                     <% if result.type.downcase == "collection" %>
                       <span class="items-in-collection"><strong><%= result.count %></strong>Items</span>
                     <% else %>
-                      <span class="items-in-collection"><%= result.type %></span>
+                      <span class="items-in-collection"><strong><%= result.image_count %></strong> Image<span class="plural">s</span></span>
                     <% end %>
                     <div class="collection-essentials">
                       <span class="date"><%= result.created_at %></span>

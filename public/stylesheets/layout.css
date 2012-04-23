@@ -98,6 +98,93 @@ body{height: 100%;}
 #pageFooterWrapper{position: relative;margin-top: -200px}
 .container.dark{background:url(../images/classy_fabric.png)}
 
+
+
+/* stacked effect
+-------------------------------------------------------------- */
+.stack {  position: relative; z-index: 10; }
+.stack img { max-width: 100%; height: auto; vertical-align: bottom; 
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.stack:before, .stack:after { content: ""; border-radius: 3px; width: 100%; height: 100%; position: absolute; border: 10px solid #fff; left: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+	-webkit-transition: 0.3s all ease-out;
+	-moz-transition: 0.3s all ease-out;
+	transition: 0.3s all ease-out;
+}
+.stack:before { top: 4px; z-index: -10; } /* 1st element in stack (behind image) */	
+.stack:after { top: 8px; z-index: -20; } /* 2nd element in stack (behind image) */
+
+/* Third stack example (One stack element rotated in the opposite direction) */
+.stack.rotated:before { 
+	-webkit-transform-origin: bottom left;
+		-moz-transform-origin: bottom left;
+		transform-origin: bottom left;
+		-webkit-transform: rotate(-2deg);
+		-moz-transform: rotate(-2deg);
+		transform: rotate(-2deg);
+}
+.stack.rotated:after { 
+	-webkit-transform-origin: bottom left;
+		-moz-transform-origin: bottom left;
+		transform-origin: bottom left;
+		-webkit-transform: rotate(-4deg);
+		-moz-transform: rotate(-4deg);
+		transform: rotate(-4deg);
+}
+
+.item1 	.stack:before,
+.item1 .stack:after{display:none}
+
+.collection .stack:after{
+	background:#eac574;
+  	background-image: -webkit-gradient(linear, left top, left bottom, from(#eac574), to(#f7e5b6)); /* Saf4+, Chrome */
+  	background-image: -webkit-linear-gradient(top, #eac574, #f7e5b6); /* Chrome 10+, Saf5.1+, iOS 5+ */
+  	background-image:    -moz-linear-gradient(top, #eac574, #f7e5b6); /* FF3.6 */
+  	background-image:     -ms-linear-gradient(top, #eac574, #f7e5b6); /* IE10 */
+  	background-image:      -o-linear-gradient(top, #eac574, #f7e5b6); /* Opera 11.10+ */
+  	background-image:         linear-gradient(top, #eac574, #f7e5b6);
+	border:none;
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	transform: rotate(0deg);
+	top: -4px; 
+	bottom: -4px; 
+	right: -8px; 
+	left: -8px;
+	width:auto;
+	height:auto;
+}
+
+.collection .stack:before{
+	background:#eac574;
+	width:25%;
+	border:none;
+	height:11px;
+	top:auto;
+	right:auto;
+	bottom:100%;
+	left:1%;
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	transform: rotate(0deg);
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+
 /* Headings
 -------------------------------------------------------------- */
 
@@ -793,18 +880,19 @@ ul.collections li .collection-meta{
 }
 ul.collections li .collection-thumb img,
 .collection-thumb img{
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	border-radius:5px;
+	-moz-border-radius:7px;
+	-webkit-border-radius:7px;
+	border-radius:7px;
 	width:100%;
 	z-index:6;
 	position:relative;
 	bottom:auto!important;
-	border: 1px solid rgba(0, 0, 0, 0.25);
-	box-shadow: 0 1px 3px rgba(0,0,0,0.8);
-	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.8);
-	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.8);
+
+	box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+	-moz-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+	-webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
 }
+ul.collections li.collection .collection-thumb img{width:80%; margin:5px auto; display:block}
 ul.collections li .collection-thumb .layer1,
 ul.collections li .collection-thumb .layer2,
 .collection-thumb .layer1,
@@ -824,19 +912,24 @@ ul.collections li .collection-thumb .layer2,
 	background: -webkit-linear-gradient(bottom, #ffffff 0%, #fefefe 40%, #fefefe 100%);
 	border: 1px solid rgba(34, 25, 25, 0.25);
 }
+.item1 .plurals{display:none}
+li.collection .collection-thumb{
+	background:url(../bg-folder.png) 0 0 no-repeat;
+	background-size:100% 100%;
+}
 ul.collections li .collection-thumb .layer1,
 .collection-thumb .layer1{
 	z-index:2;
 	right:0px;
 	left:2px;
-	bottom:2px;
+	bottom:1px;
 }
 ul.collections li .collection-thumb .layer2,
 .collection-thumb .layer2{
 	z-index:1;
 	right:2px;
 	left:4px;
-	bottom:-1px;
+	bottom:-2px;
 }
 
 ul.collections li a span.date{
