@@ -3,6 +3,8 @@
 
 <%= partial "head_content" %>
 
+
+
 <body>
   <div id="nonFooter">
     <%= partial "body_header" %>
@@ -20,6 +22,10 @@
           </div>
           <ul class="collections dark-list">
             <% @object.content.each do |collection| %>
+
+              <% if collection.in_process? %>
+              <% end %>
+
               <li class="clearfix">
               <a href="<%= collection.url %>" class="clearfix">
                 <div class="collection-thumb ">

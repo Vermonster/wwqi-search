@@ -2,6 +2,19 @@
 <% load_example_collection! unless $GENERATE # prevent loading the example if we're generating the static pages %>
 <%= partial "head_content" %>
 
+
+
+
+<% if @object.in_process? %>
+  <!-- CODE HERE -->
+<% end %>
+
+
+
+
+
+
+
 <body>
   <div id="nonFooter">
     <%= partial "body_header" %>
