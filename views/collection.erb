@@ -1,145 +1,118 @@
 <%# encoding: utf-8 %>
 <% load_example_collection! unless $GENERATE # prevent loading the example if we're generating the static pages %>
-<%= partial "head_content" %>
-
-
-
 
 <% if @object.in_process? %>
   <!-- CODE HERE -->
 <% end %>
 
+<%= partial "header" %>
+<div id="content">
+  <div class="container clearfix">
+    <div class="item-page clearfix">
+      <div class="page-head"> </div>
 
-
-
-
-
-
-<body>
-  <div id="nonFooter">
-    <%= partial "body_header" %>
-
-    <div id="content">
-      <div class="container clearfix">
-        <!-- rails template content -->
-
-        <div class="item-page clearfix">
-          <div class="page-head">
-          </div>
-          <!-- end pagination bar -->
-
-          <div class="item-essentials collection-details container clearfix">
-            <div class="ten columns">
-              <h2><%= @object.title %></h2>
-              <p class="description">
-              <%= @object.description %>
-              </p>
-            </div>
-
-            <div class="six columns  omega last-column">
-              <a href="<%= loopback(lang: @lang).update_filter(:collections, @object.accession_number).to_url %>">
-                <div class="browse-collection">
-                  <h1> Browse This Collection </h1>
-                </div>
-              </a>
-            </div>
-
-          </div>
-
-          <% if @object.favorites.present? %>
-            <div class="collection-highlights">
-              <h1>Collection Highlights </h1>
-              <% @object.favorites.sample(6).each do |favorite| %>
-                <div>
-                  <%= lang_link_to(%Q|<img src='#{favorite.thumbnail}' alt='#{favorite.name}'/>|, favorite.send("url_#{@lang}").to_s) %>
-                </div>
-              <% end %>
-            </div>
-          <% end %>
-
-          <div class="item-below-fold">
-
-            <div class="ten columns alpha">
-
-
-              <div class="item-details">
-                <h1>Collection Details</h1>
-                <ul>
-
-                  <li class="description">
-                  <span>Dates:</span>
-                  <%= @object.dates %>
-                  </li>
-
-                  <li>
-                  <span>Acquisition Notes:</span>
-                  <%= @object.acquisition_notes %>
-                  </li>
-
-                  <li>
-                  <span>History:</span>
-                  <%= @object.history %>
-                  </li>
-
-                  <li>
-                  <span>Created:</span>
-                  <%= @object.created %>
-                  </li>
-                  <li>
-                  <span>Last Edited:</span>
-                  <%= @object.updated %>
-                  </li>
-
-                  <li>	<span>Accession Number:</span>
-                  <%= @object.accession_number %>	
-                  </li>
-
-                  <li class="clear">
-                  &nbsp;
-                  </li>
-                </ul>
-
-              </div>
-            </div>
-            <div class="six columns omega last-column">
-
-              <% if @object.genres.present? || @object.subjects.present? %>
-                <div class="item_related">
-                  <ul>
-
-                    <% if @object.genres.present? %>
-                      <li>
-                      <span class="title genre">Genres</span>
-                      <% @object.genres.each do |genre| %>
-                        <a href="<%= loopback(lang: @lang).update_filter("genres_#{@lang}", genre.name.to_s).to_url %>" class="tag">
-                          <%= genre.name %>
-                        </a>
-                      <% end %>
-                      </li>
-                    <% end %>
-
-                    <% if @object.subjects.present? %>
-                      <li>
-                      <span class="title subject">Subjects</span>
-                      <% @object.subjects.each do |subject| %>
-                        <a href="<%= loopback(lang: @lang).update_filter("subjects_#{@lang}", subject.name.to_s).to_url %>" class="tag">
-                          <%= subject.name %>
-                        </a>
-                      <% end %>
-                      </li>
-                    <% end %>
-
-                  </ul>
-                </div>
-              <% end %>
-            </div>
-          </div>
+      <div class="item-essentials collection-details container clearfix">
+        <div class="ten columns">
+          <h2><%= @object.title %></h2>
+          <p class="description">
+          <%= @object.description %>
+          </p>
         </div>
 
-        <!-- end rails template content -->
-      </div> <!-- end container -->
-    </div><!-- end content -->
-  </div> <!-- end nonFooter -->
-  <%= partial "footer" %>
-</body>
-</html>
+        <div class="six columns  omega last-column">
+          <a href="<%= loopback(lang: @lang).update_filter(:collections, @object.accession_number).to_url %>">
+            <div class="browse-collection">
+              <h1> Browse This Collection </h1>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <% if @object.favorites.present? %>
+        <div class="collection-highlights">
+          <h1>Collection Highlights </h1>
+          <% @object.favorites.sample(6).each do |favorite| %>
+            <div>
+              <%= lang_link_to(%Q|<img src='#{favorite.thumbnail}' alt='#{favorite.name}'/>|, favorite.send("url_#{@lang}").to_s) %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class="item-below-fold">
+        <div class="ten columns alpha">
+          <div class="item-details">
+            <h1>Collection Details</h1>
+            <ul>
+              <li class="description">
+              <span>Dates:</span>
+              <%= @object.dates %>
+              </li>
+
+              <li>
+              <span>Acquisition Notes:</span>
+              <%= @object.acquisition_notes %>
+              </li>
+
+              <li>
+              <span>History:</span>
+              <%= @object.history %>
+              </li>
+
+              <li>
+              <span>Created:</span>
+              <%= @object.created %>
+              </li>
+              <li>
+              <span>Last Edited:</span>
+              <%= @object.updated %>
+              </li>
+
+              <li>	<span>Accession Number:</span>
+              <%= @object.accession_number %>	
+              </li>
+
+              <li class="clear">
+              &nbsp;
+              </li>
+            </ul>
+
+          </div>
+        </div>
+        <div class="six columns omega last-column">
+
+          <% if @object.genres.present? || @object.subjects.present? %>
+            <div class="item_related">
+              <ul>
+
+                <% if @object.genres.present? %>
+                  <li>
+                  <span class="title genre">Genres</span>
+                  <% @object.genres.each do |genre| %>
+                    <a href="<%= loopback(lang: @lang).update_filter("genres_#{@lang}", genre.name.to_s).to_url %>" class="tag">
+                      <%= genre.name %>
+                    </a>
+                  <% end %>
+                  </li>
+                <% end %>
+
+                <% if @object.subjects.present? %>
+                  <li>
+                  <span class="title subject">Subjects</span>
+                  <% @object.subjects.each do |subject| %>
+                    <a href="<%= loopback(lang: @lang).update_filter("subjects_#{@lang}", subject.name.to_s).to_url %>" class="tag">
+                      <%= subject.name %>
+                    </a>
+                  <% end %>
+                  </li>
+                <% end %>
+
+              </ul>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%= partial "footer" %>

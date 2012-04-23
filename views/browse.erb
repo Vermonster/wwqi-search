@@ -1,133 +1,109 @@
-<%= partial :head_content %>
+<%= partial :header %>
+<div id="content">
+  <div class="container clearfix dark">
+    <div class="clearfix shaded-panel has-sidebar main-panel-is-dark">
+      <div class="page-head short">
+      </div>
 
-<body>
-  <div id="nonFooter">
-    <%= partial :body_header %>
+      <div class="clearfix twelve columns">
+        <div class="browse-search">
 
-    <div id="content">
-      <div class="container clearfix dark">
-        <div class="clearfix shaded-panel has-sidebar main-panel-is-dark">
-          <div class="page-head short">
-          </div>
-
-          <div class="clearfix twelve columns">
-            <div class="browse-search">
-
-              <h1> Search </h1>
-              <div class="clearfix searchbox">
-                <div class="clearfix" id="search-form">
-                  <%= partial :search_form_en %>
-                </div>
-              </div>
+          <h1> Search </h1>
+          <div class="clearfix searchbox">
+            <div class="clearfix" id="search-form">
+              <%= partial :search_form_en %>
             </div>
-
-            <div class="browse-by-type">
-              <h1>View By Type</h1>
-              <div class="twelve-columns clearfix">
-                <div class="four columns">
-                  <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "manuscripts & lithographs").to_url  %>">
-                    <!--<span class="icon">N</span>-->
-					<img src="/images/ico-litho.png" alt="" />
-                    <span>Manuscripts &amp; Lithos</span>
-                  </a>
-                </div>
-                <div class="four columns">
-                  <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "objects").to_url  %>">
-                    <!--<span class="icon">b</span>-->
-					<img src="/images/ico-object.png" alt="" />
-                    <span>Objects</span>
-                  </a>
-                </div>
-                <div class="four columns omega">
-                  <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "legal & financial").to_url  %>">
-                    <!--<span class="icon">Y</span>-->
-					<img src="/images/ico-legal.png" alt="" />
-                    <span>Legal &amp; Financial</span>
-                  </a>
-                </div>
-                <div class="four columns">
-                  <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "photographs").to_url  %>">
-                    <!--<span class="icon">v</span>-->
-					<img src="/images/ico-photos.png" alt="" />
-                    <span>Photographs</span>
-                  </a>
-                </div>
-                <div class="four columns">
-                  <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "letters").to_url %>">
-                    <!--<span class="icon">F</span>-->
-					<img src="/images/ico-letters.png" alt="" />
-                    <span>Letters</span>
-                  </a>
-                </div>
-                <div class="four columns omega">
-                  <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "audio files").to_url %>">
-                    <!--<span class="icon"><</span> -->
-					<img src="/images/ico-audio.png" alt="" />
-                    <span>Audio Files</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id="browse-bar" class="four columns">
-            <h1>Browse</h1>
-            <h3 class="has-children active first"><a href="#">Indices</a></h3>
-            <div class="list">
-              <ul class="default">
-                <li>
-                <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/genres.html"><span class="icon">l</span> Genre</a>
-                </li>
-                <li>
-                <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/people"><span class="icon">g</span> People</a>
-                </li>
-                <li>
-                <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/places"><span class="icon">@</span> Place</a>
-                </li>
-                <li>
-                <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/subjects"><span class="icon">n</span> Subject</a>
-                </li>
-              </ul>
-            </div>
-			
-			<h3 class="has-children active"><a href="#">Periods</a></h3>
-            <div class="list">
-              <ul class="default">
-                <% Period.all.each do |period| %>
-                  <%# this is presently toast due to lack of proper modelling %>
-                  <li> 
-                    <a href="<%= loopback(lang: @lang).from(period.start_at).to(period.end_at).to_url %>">
-                      <%= period.send("title_#{@lang}") %>
-                    </a> 
-                  </li>
-                <% end %>
-              </ul>
-            </div>
-            
-
-            <h3 class="last"><a href="/<%= @lang %>/collections/manifest.html" ><span class="icon">P</span> Collections</a></h3>
-
-            <%#<h3><a href="/archive/collections" ><span class="icon">></span> Translations</a></h3>%>
-            <%#<h3 class="last"><a href="/archive/collections" ><span class="icon">'</span> Recent Additions</a></h3>%>
           </div>
         </div>
-        <!-- end rails template content -->
+
+        <div class="browse-by-type">
+          <h1>View By Type</h1>
+          <div class="twelve-columns clearfix">
+            <div class="four columns">
+              <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "manuscripts & lithographs").to_url  %>">
+                <!--<span class="icon">N</span>-->
+                <img src="/images/ico-litho.png" alt="" />
+                <span>Manuscripts &amp; Lithos</span>
+              </a>
+            </div>
+            <div class="four columns">
+              <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "objects").to_url  %>">
+                <!--<span class="icon">b</span>-->
+                <img src="/images/ico-object.png" alt="" />
+                <span>Objects</span>
+              </a>
+            </div>
+            <div class="four columns omega">
+              <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "legal & financial").to_url  %>">
+                <!--<span class="icon">Y</span>-->
+                <img src="/images/ico-legal.png" alt="" />
+                <span>Legal &amp; Financial</span>
+              </a>
+            </div>
+            <div class="four columns">
+              <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "photographs").to_url  %>">
+                <!--<span class="icon">v</span>-->
+                <img src="/images/ico-photos.png" alt="" />
+                <span>Photographs</span>
+              </a>
+            </div>
+            <div class="four columns">
+              <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "letters").to_url %>">
+                <!--<span class="icon">F</span>-->
+                <img src="/images/ico-letters.png" alt="" />
+                <span>Letters</span>
+              </a>
+            </div>
+            <div class="four columns omega">
+              <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "audio files").to_url %>">
+                <!--<span class="icon"><</span> -->
+                <img src="/images/ico-audio.png" alt="" />
+                <span>Audio Files</span>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-    </div><!-- end content -->
-  </div> <!-- end nonFooter -->
-  <%= partial :footer %>
-  <script>
-    $(function () {
+      <div id="browse-bar" class="four columns">
+        <h1>Browse</h1>
+        <h3 class="has-children active first"><a href="#">Indices</a></h3>
+        <div class="list">
+          <ul class="default">
+            <li>
+            <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/genres.html"><span class="icon">l</span> Genre</a>
+            </li>
+            <li>
+            <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/people"><span class="icon">g</span> People</a>
+            </li>
+            <li>
+            <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/places"><span class="icon">@</span> Place</a>
+            </li>
+            <li>
+            <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/subjects"><span class="icon">n</span> Subject</a>
+            </li>
+          </ul>
+        </div>
 
-     
-		$("#browse-bar h3.has-children a").click( function() {
-			$(this).parent().toggleClass("active").next(".list").animate({
-				opacity: 'toggle',
-				height: 'toggle'
-				}, 300);
-			return false;
+        <h3 class="has-children active"><a href="#">Periods</a></h3>
+        <div class="list">
+          <ul class="default">
+            <% Period.all.each do |period| %>
+              <%# this is presently toast due to lack of proper modelling %>
+              <li> 
+              <a href="<%= loopback(lang: @lang).from(period.start_at).to(period.end_at).to_url %>">
+                <%= period.send("title_#{@lang}") %>
+              </a> 
+              </li>
+            <% end %>
+          </ul>
+        </div>
 
-		});
-    });
-  </script>
-</body>
-</html>
+        <h3 class="last"><a href="/<%= @lang %>/collections/manifest.html" ><span class="icon">P</span> Collections</a></h3>
+
+        <%#<h3><a href="/archive/collections" ><span class="icon">></span> Translations</a></h3>%>
+        <%#<h3 class="last"><a href="/archive/collections" ><span class="icon">'</span> Recent Additions</a></h3>%>
+      </div>
+    </div>
+  </div>
+</div>
+<%= partial :footer %>
