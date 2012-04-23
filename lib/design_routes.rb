@@ -16,13 +16,12 @@ module DesignRoutes
     erb :item
   end
 
-
-  get '/pendar/:lang/home' do |lang|
+  get '/pendar/:lang/index.html' do |lang|
     @lang = lang
     erb :home
   end
 
-  get '/pendar/:lang/browse' do |lang|
+  get '/pendar/:lang/browse.html' do |lang|
     @lang = lang
     erb :browse
   end

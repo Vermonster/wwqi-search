@@ -30,6 +30,7 @@ end
 
 class Loopback
   attr_reader :filters
+  delegate :has_filters?, :to => :filters
 
   def initialize(params)
     params = params.with_indifferent_access
