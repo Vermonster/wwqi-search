@@ -25,4 +25,39 @@ module DesignRoutes
     @lang = lang
     erb :browse
   end
+
+  get '/pendar/:lang/contact.html' do |lang|
+    @lang = lang
+    erb :contact
+  end
+
+  get '/pendar/:lang/faq.html' do |lang|
+    @lang = lang
+    erb :faq
+  end
+  
+  get '/pendar/:lang/links.html' do |lang|
+    @lang = lang
+    erb :links
+  end
+  
+  get '/pendar/:lang/about.html' do |lang|
+    @lang = lang
+    erb :about
+  end
+
+  get '/pendar/:lang/donate.html' do |lang|
+    @lang = lang
+    erb :donate
+  end
+
+  get '/pendar/:lang/permissions.html' do |lang|
+    @lang = lang
+    erb :permissions
+  end
+
+  get '/pendar/:lang/credits.html' do |lang|
+    @lang = lang
+    erb :credits
+  end
 end
