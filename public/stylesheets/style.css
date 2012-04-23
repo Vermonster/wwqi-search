@@ -23,50 +23,7 @@
 */
 
 
-.searchform input{
-    border: 0;
-    background: none;
-    margin: 5px 0 0 10px;
-    display: inline;
-    width: 115px;
-    float: left;
-    outline:none
-}
 
-#big_search .searchform input{width:190px; margin:8px 0 0 10px; font-size:12px;}
-
-.searchform button {
-    width: 32px;
-    height: 23px;
-    background: url(../images/searchbutton.gif) no-repeat 0 0;
-    display: block;
-    float: left;
-    border: 0;
-    cursor: pointer;
-    margin: 3px 0 0 10px;
-}
-
-#simple_search .searchform button {margin-top:0}
-
-#browserFilters #simple_search{
-	margin:10px 10px 0 ;
-	float:left;
-	width:360px;
-}
-
-#browserFilters #simple_search input{
-	width:300px
-}
-
-
-
-.searchform button:hover {
-    background: url(../images/searchbutton.gif) no-repeat 0 -22px;
-}
-#big_search .searchform button{background: url(../images/btn_big_search.png) no-repeat 0 0;width: 39px; margin:1px 0 0 12px;height: 34px;}
-#big_search .searchform button:hover {
-	background: url(../images/btn_big_search.png) no-repeat 0 -34px;
-	}
 
 
 

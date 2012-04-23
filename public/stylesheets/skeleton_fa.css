@@ -90,7 +90,8 @@
 
     @media only screen and (max-width: 767px) {
      
-
+		.container .column,
+	    .container .columns { margin: 0; }
         /* Offsets */
         .container .offset-by-one,
         .container .offset-by-two,
@@ -117,7 +118,8 @@
     /* Note: Design for a width of 480px */
 
     @media only screen and (min-width: 480px) and (max-width: 767px) {
-      
+       	.container .column,
+	    .container .columns { margin: 0; }
 
     }
 

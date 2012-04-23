@@ -62,6 +62,31 @@ a:hover{text-decoration:none;}
 	font-family: 'Pictos', sans-serif;
 }
 
+
+.searchform input{
+    border: 0;
+    background: none;
+    margin: 5px 0 0 10px;
+    display: inline;
+    width: 115px;
+    outline:none
+}
+
+.searchform button {
+    width: 32px;
+    height: 23px;
+    background: url(../images/searchbutton.gif) no-repeat 0 0;
+    display: block;
+    float: left;
+    border: 0;
+    cursor: pointer;
+    margin: 3px 0 0 10px;
+}
+
+.searchform button:hover {
+    background: url(../images/searchbutton.gif) no-repeat 0 -22px;
+}
+
 /* AltFooterStick for making the footer stick to the bottom 
 -------------------------------------------------------------- */
 
@@ -71,8 +96,7 @@ body{height: 100%;}
 * html #nonFooter{height: 100%;}
 #content{padding-bottom: 200px}
 #pageFooterWrapper{position: relative;margin-top: -200px}
-
-
+.container.dark{background:url(../images/classy_fabric.png)}
 
 /* Headings
 -------------------------------------------------------------- */
@@ -228,9 +252,7 @@ span.notification{
 #content .item-page,
 #content .shaded-panel{
 	background:#fff;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
+
 	-moz-box-shadow:0px 0px 10px rgba(0,0,0,0.5);
 	-webkit-box-shadow:0px 0px 10px rgba(0,0,0,0.5);
 	box-shadow:0px 0px 10px rgba(0,0,0,0.5);
@@ -242,7 +264,7 @@ span.notification{
 }
 
 #content .shaded-panel.has-sidebar.main-panel-is-dark{
-	background:#555 url(../images/sidebar-panel.png) 720px 0 repeat-y;
+	background:url(../images/sidebar-panel.png) 720px 0 repeat-y;
 }
 
 #content .page-head{
@@ -1200,6 +1222,7 @@ ul.collections li a .items-in-collection strong{
 #browse-bar  h3 .icon{font-size:18px}
 #browse-bar  h3:first-child,
 #browse-bar  h3.first{border-top:none}
+#browse-bar  h3.last{border-bottom:none}
 #browse-bar h3.last{
 	border-bottom:none;
 }
@@ -1217,7 +1240,6 @@ ul.collections li a .items-in-collection strong{
 #browse-bar  .list{
 	margin:0;
 	padding:0;
-  /*display:none;*/
 	border-bottom:1px solid #ccc;
 }
 #browse-bar  .more{
@@ -1312,6 +1334,7 @@ ul.collections li a .items-in-collection strong{
 	-webkit-box-shadow:none!important;
 	border:none!important;
 	margin:2px 0 2px 10px;
+	float:none;
 }
 
 .browse-search .searchbox button{float:right}
@@ -1338,7 +1361,18 @@ ul.collections li a .items-in-collection strong{
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizeLegibility;
 	font-weight:bold;
+	margin-bottom:10px;
 }
+
+
+.browse-by-type a img{
+	width:80%;
+	display:block;
+	margin:0 auto;	
+}
+
+
+.browse-by-type a span{white-space:nowrap; text-overflow:ellipsis; overflow:hidden}
 
 .browse-by-type a:hover .icon{
 	color:#C82D00;
@@ -1374,8 +1408,9 @@ ul.collections li a .items-in-collection strong{
 			background:#fff url(../images/sidebar-panel.png) 576px 0 repeat-y;
 		}
 		#content .shaded-panel.has-sidebar.main-panel-is-dark{
-			background:#555 url(../images/sidebar-panel.png) 576px 0 repeat-y;
+			background: url(../images/sidebar-panel.png) 576px 0 repeat-y;
 		}
+		.browse-search .searchbox input{width:480px}
 		
 	}
 
@@ -1516,6 +1551,7 @@ ul.collections li a .items-in-collection strong{
 		#home-main .side-stuff #about p {max-height:none; margin-bottom:15px;}
 		#home-main .side-stuff #about {padding-left:0; margin-right:10px}
 		.browse-search {margin: 0px 0px 10px}
+		.browse-search .searchbox input{width:320px}
 		#browse-bar h1{margin-left:10px; margin-right:10px}
 		#browse-bar h3{padding-left:10px; padding-right:10px}
 		#browse-bar h3.has-children {
@@ -1527,12 +1563,13 @@ ul.collections li a .items-in-collection strong{
 		.browse-by-type .alpha a{border-top:none}
 		.browse-by-type .omega a{border-bottom:none}
 		.browse-by-type a {
-			text-align:left;
-			overflow:hidden;font-size:14px;
+			text-align:center;
+			overflow:hidden;
 			font-weight:normal;
 			padding:5px 0;
-			border-bottom:1px solid #444;
-			border-top:1px solid #666;
+			font-size:11px;
+			font-weight:bold;
+			text-shadow:0px 1px 0px rgba(0,0,0,0.9);
 		}
 		.browse-by-type a .icon{
 			float:left;
@@ -1542,6 +1579,11 @@ ul.collections li a .items-in-collection strong{
 			color:#fff;
 			width:30px;
 			text-align:center;
+		}
+		.browse-by-type .four.columns{
+			margin:0!important;
+			width:33%;
+			float:left;
 		}
 	}
 
@@ -1580,6 +1622,7 @@ ul.collections li a .items-in-collection strong{
 				float:left;
 				text-align:center;
 			}
+			.browse-search .searchbox input{width:210px}
 	}
 
 

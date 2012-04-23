@@ -5,7 +5,7 @@
     <%= partial :body_header %>
 
     <div id="content">
-      <div class="container clearfix">
+      <div class="container clearfix dark">
         <div class="clearfix shaded-panel has-sidebar main-panel-is-dark">
           <div class="page-head short">
           </div>
@@ -24,40 +24,46 @@
             <div class="browse-by-type">
               <h1>View By Type</h1>
               <div class="twelve-columns clearfix">
-                <div class="two columns alpha">
+                <div class="four columns">
                   <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "manuscripts & lithographs").to_url  %>">
-                    <span class="icon">N</span>
-                    Manuscripts
+                    <!--<span class="icon">N</span>-->
+					<img src="/images/ico-litho.png" alt="" />
+                    <span>Manuscripts &amp; Lithos</span>
                   </a>
                 </div>
-                <div class="two columns">
+                <div class="four columns">
                   <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "objects").to_url  %>">
-                    <span class="icon">b</span>
-                    Objects
+                    <!--<span class="icon">b</span>-->
+					<img src="/images/ico-object.png" alt="" />
+                    <span>Objects</span>
                   </a>
                 </div>
-                <div class="two columns">
+                <div class="four columns omega">
                   <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "legal & financial").to_url  %>">
-                    <span class="icon">Y</span>
-                    Legal &amp; Financial
+                    <!--<span class="icon">Y</span>-->
+					<img src="/images/ico-legal.png" alt="" />
+                    <span>Legal &amp; Financial</span>
                   </a>
                 </div>
-                <div class="two columns">
+                <div class="four columns">
                   <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "photographs").to_url  %>">
-                    <span class="icon">v</span>
-                    Photographs
+                    <!--<span class="icon">v</span>-->
+					<img src="/images/ico-photos.png" alt="" />
+                    <span>Photographs</span>
                   </a>
                 </div>
-                <div class="two columns">
+                <div class="four columns">
                   <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "letters").to_url %>">
-                    <span class="icon">F</span>
-                    Letters
+                    <!--<span class="icon">F</span>-->
+					<img src="/images/ico-letters.png" alt="" />
+                    <span>Letters</span>
                   </a>
                 </div>
-                <div class="two columns omega">
+                <div class="four columns omega">
                   <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "audio files").to_url %>">
-                    <span class="icon"><</span>
-                    Audio Files
+                    <!--<span class="icon"><</span> -->
+					<img src="/images/ico-audio.png" alt="" />
+                    <span>Audio Files</span>
                   </a>
                 </div>
               </div>
@@ -65,20 +71,7 @@
           </div>
           <div id="browse-bar" class="four columns">
             <h1>Browse</h1>
-            <h3 class="first has-children"><a href="#">Periods</a></h3>
-            <div class="list">
-              <ul class="default">
-                <% Period.all.each do |period| %>
-                  <%# this is presently toast due to lack of proper modelling %>
-                  <li> 
-                    <a href="<%= loopback(lang: @lang).from(period.start_at).to(period.end_at).to_url %>">
-                      <%= period.send("title_#{@lang}") %>
-                    </a> 
-                  </li>
-                <% end %>
-              </ul>
-            </div>
-            <h3 class="has-children"><a href="#">Indices</a></h3>
+            <h3 class="has-children active first"><a href="#">Indices</a></h3>
             <div class="list">
               <ul class="default">
                 <li>
@@ -95,8 +88,23 @@
                 </li>
               </ul>
             </div>
+			
+			<h3 class="has-children active"><a href="#">Periods</a></h3>
+            <div class="list">
+              <ul class="default">
+                <% Period.all.each do |period| %>
+                  <%# this is presently toast due to lack of proper modelling %>
+                  <li> 
+                    <a href="<%= loopback(lang: @lang).from(period.start_at).to(period.end_at).to_url %>">
+                      <%= period.send("title_#{@lang}") %>
+                    </a> 
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+            
 
-            <h3><a href="/<%= @lang %>/collections/manifest.html" ><span class="icon">P</span> Collections</a></h3>
+            <h3 class="last"><a href="/<%= @lang %>/collections/manifest.html" ><span class="icon">P</span> Collections</a></h3>
 
             <%#<h3><a href="/archive/collections" ><span class="icon">></span> Translations</a></h3>%>
             <%#<h3 class="last"><a href="/archive/collections" ><span class="icon">'</span> Recent Additions</a></h3>%>
@@ -110,20 +118,15 @@
   <script>
     $(function () {
 
-      // Slideshow 1
-      $("#slides").responsiveSlides({
-        maxwidth : 800,
-        speed    : 800
-      });
+     
+		$("#browse-bar h3.has-children a").click( function() {
+			$(this).parent().toggleClass("active").next(".list").animate({
+				opacity: 'toggle',
+				height: 'toggle'
+				}, 300);
+			return false;
 
-      $('#carousel').elastislide({
-        imageW   : 200,
-        minItems : 3,
-        border   : 0,
-        margin   : 10
-      });
-
-      $(document).ready( function() { });
+		});
     });
   </script>
 </body>
