@@ -24,10 +24,11 @@
             </div>
 
             <div class="six columns  omega last-column">
-
-              <div class="browse-collection">
-                <h1> <a href="<%= ENV["SEARCH_URL"] %>?query=*&lang=<%= @lang %>&filter=collections:<%= @object.accession_number.strip %>">Browse This Collection </a></h1>
-              </div>
+              <a href="<%= loopback(lang: @lang).update_filter(:collections, @object.accession_number).to_url %>">
+                <div class="browse-collection">
+                  <h1> Browse This Collection </h1>
+                </div>
+              </a>
             </div>
 
           </div>
