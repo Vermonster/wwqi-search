@@ -1,114 +1,107 @@
-<%= partial :head_content %>
+<%= partial :header %>
+<div id="content">
+  <div class="container clearfix">
+    <div class="clearfix shaded-panel has-sidebar main-panel-is-dark ">
+      <div class="page-head dark"> 
+      </div>
 
-<body>
-  <div id="nonFooter">
-    <%= partial :body_header %>
-
-
-    <div id="content">
-      <div class="container clearfix">
-        <div class="clearfix shaded-panel has-sidebar main-panel-is-dark ">
-          <div class="page-head dark"> 
+      <div class="clearfix twelve columns">
+        <div class="browse-search">
+          <h1> Search </h1>
+          <div class="clearfix searchbox">
+            <% if @lang == :en %>
+              <%= partial :search_form_en %>
+            <% else %>
+              <%= partial :search_form_fa %>
+            <% end %>
           </div>
-
-          <div class="clearfix twelve columns">
-            <div class="browse-search">
-              <h1> Search </h1>
-              <div class="clearfix searchbox">
-                <% if @lang == :en %>
-                  <%= partial :search_form_en %>
-                <% else %>
-                  <%= partial :search_form_fa %>
-                <% end %>
-              </div>
-              <div class="results-found">
-                Total results found: <%= @total_results %>
-              </div>
-            </div>
-
-
-            <ul class="search-results collections dark-list">
-              <% @results.each do |result| %>
-                <li class="clearfix">
-                <a href="<%= "#{ENV["MAIN_SITE_URL"]}#{result.send("url_#{@lang}")}" %>" class="clearfix">
-                  <div class="collection-thumb ">
-                    <% if result.thumbnail %>
-                      <img alt="<%= result.name %>" src="<%= result.thumbnail %>">
-                      <div class="layer1"></div>
-                      <div class="layer2"></div>
-                    <% else %>
-                      <img alt="<%= result.name %>" src="/images/empty.jpg">
-                      <div class="layer1"></div>
-                      <div class="layer2"></div>
-                    <% end %>
-                  </div>
-                  <div class="collection-meta">
-                    <% if result.type.downcase == "collection" %>
-                      <span class="items-in-collection"><strong><%= result.count %></strong>Items</span>
-                    <% else %>
-                      <span class="items-in-collection"><%= result.type %></span>
-                    <% end %>
-                    <div class="collection-essentials">
-                      <span class="date"><%= result.created_at %></span>
-                      <h3><%= result.send("title_#{@lang}") || result.send("name_#{@lang}")%></h3>
-                      <p><%= result.send("description_#{@lang}") %></p>
-                    </div>
-                  </div>
-                </a>
-                </li>
-              <% end %>
-            </ul>
-            <ul id="pagin" class="search-bottom-list">
-              <li>
-              <% if loopback.prev_page?(@total_results) %>
-                <a href=<%= loopback.decrement_page.to_url %>><< prev</a> 
-              <% end %>
-              </li>
-              <li>
-              <% if loopback.next_page?(@total_results) %>
-                <a href=<%= loopback.increment_page.to_url %>>next >></a> 
-              <% end %>
-              </li>
-            </ul>
-          </div>
-          <div id="browse-bar" class="four columns">
-            <h1>Filter</h1>
-              <% first_last = 'first' %>
-              <% @facets.each.with_index do |(facet, content), i| %>
-                <% first_last = 'last' if i + 1 == @facets.size %>
-                <h3 class='has-children <%= first_last %> active'><a href='#'><%= facet %></a></h3>
-                <div class='list'>
-                  <ul class='default'>
-                    <% if loopback.filters.any? %>
-                      <% content['terms'].delete_if {|term| loopback.filters.any? {|type, value| value != term['term'] && type == facet} } %>
-                    <% end %>
-                    <% content['terms'].each do |term| %>
-                      <li> 
-                      <% current_filter = loopback.filters.any? {|type, value| value == term['term']} %>
-                        <% if current_filter  %>
-                          <a href='<%= loopback.remove_filter(facet).to_url %>'>x</a>
-                          <%= term['term'] %>
-                        <% else %>
-                          <a href="<%= loopback.update_filter(facet, term['term']).to_url %>">
-                            <%= term['term'] %>
-                          </a>
-                      <% end %>
-                        </a>
-                        <span>(<%= term['count'] %>)</span> 
-                      </li>
-                    <% end %>
-                  </ul>
-                </div>
-                <% first_last = '' %>
-              <% end %>
-            </div>
-
-          </div>
-
-
+          <div class="results-found">
+            Total results found: <%= @total_results %>
         </div>
       </div>
+
+
+      <ul class="search-results collections dark-list">
+        <% @results.each do |result| %>
+          <li class="clearfix">
+          <a href="<%= "#{ENV["MAIN_SITE_URL"]}#{result.send("url_#{@lang}")}" %>" class="clearfix">
+            <div class="collection-thumb ">
+              <% if result.thumbnail %>
+                <img alt="<%= result.name %>" src="<%= result.thumbnail %>">
+                <div class="layer1"></div>
+                <div class="layer2"></div>
+              <% else %>
+                <img alt="<%= result.name %>" src="/images/empty.jpg">
+                <div class="layer1"></div>
+                <div class="layer2"></div>
+              <% end %>
+            </div>
+            <div class="collection-meta">
+              <% if result.type.downcase == "collection" %>
+                <span class="items-in-collection"><strong><%= result.count %></strong>Items</span>
+              <% else %>
+                <span class="items-in-collection"><%= result.type %></span>
+              <% end %>
+              <div class="collection-essentials">
+                <span class="date"><%= result.created_at %></span>
+                <h3><%= result.send("title_#{@lang}") || result.send("name_#{@lang}")%></h3>
+                <p><%= result.send("description_#{@lang}") %></p>
+              </div>
+            </div>
+          </a>
+          </li>
+        <% end %>
+      </ul>
+      <ul id="pagin" class="search-bottom-list">
+        <li>
+        <% if loopback.prev_page?(@total_results) %>
+          <a href=<%= loopback.decrement_page.to_url %>><< prev</a> 
+        <% end %>
+        </li>
+        <li>
+        <% if loopback.next_page?(@total_results) %>
+          <a href=<%= loopback.increment_page.to_url %>>next >></a> 
+        <% end %>
+        </li>
+      </ul>
     </div>
-  </div> <!-- end nonFooter -->
-</body>
-</html>
+    <div id="browse-bar" class="four columns">
+      <h1>Filter</h1>
+      <% first_last = 'first' %>
+      <% @facets.each.with_index do |(facet, content), i| %>
+        <% first_last = 'last' if i + 1 == @facets.size %>
+
+        <h3 class='has-children <%= first_last %> active'><a href='#'><%= facet %></a></h3>
+        <div class='list'>
+          <ul class='default'>
+            <% if loopback.has_filters? 
+                 content['terms'].delete_if do |term| 
+                   loopback.filters.any? {|type, value| value != term['term'] && type == facet} 
+                 end 
+              end %>
+
+            <% content['terms'].each do |term| %>
+              <li> 
+              <% current_filter = loopback.filters.any? {|type, value| value == term['term']} %>
+
+              <% if current_filter  %>
+                <a href='<%= loopback.remove_filter(facet).to_url %>'>x</a>
+                <%= term['term'] %>
+              <% else %>
+                <a href="<%= loopback.update_filter(facet, term['term']).to_url %>">
+                  <%= term['term'] %>
+                </a>
+              <% end %>
+
+              <span>(<%= term['count'] %>)</span> 
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <% first_last = '' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= partial :footer %>
