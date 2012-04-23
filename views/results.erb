@@ -15,11 +15,7 @@
             <div class="browse-search">
               <h1> Search </h1>
               <div class="clearfix searchbox">
-                <% if @lang == :en %>
-                  <%= partial :search_form_en %>
-                <% else %>
-                  <%= partial :search_form_fa %>
-                <% end %>
+                <%= partial :search_form %>
               </div>
               <div class="results-found">
                 Total results found: <%= @total_results %>

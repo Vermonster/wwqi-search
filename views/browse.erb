@@ -13,10 +13,10 @@
           <div class="clearfix twelve columns">
             <div class="browse-search">
 
-              <h1> Search </h1>
+              <h1> <%= t('search') %> </h1>
               <div class="clearfix searchbox">
                 <div class="clearfix" id="search-form">
-                  <%= partial :search_form_en %>
+                  <%= partial :search_form %>
                 </div>
               </div>
             </div>
@@ -24,6 +24,9 @@
             <div class="browse-by-type">
               <h1>View By Type</h1>
               <div class="twelve-columns clearfix">
+
+                <!-- TODO: Use a loop over a bunch of genres similar approach to carousel on HOMEPAGE -->
+
                 <div class="two columns alpha">
                   <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "manuscripts & lithographs").to_url  %>">
                     <span class="icon">N</span>
@@ -64,8 +67,8 @@
             </div>
           </div>
           <div id="browse-bar" class="four columns">
-            <h1>Browse</h1>
-            <h3 class="first has-children"><a href="#">Periods</a></h3>
+            <h1><%= t 'browse' %></h1>
+            <h3 class="first has-children"><a href="#"><%=t('periods')%></a></h3>
             <div class="list">
               <ul class="default">
                 <% Period.all.each do |period| %>
@@ -78,25 +81,25 @@
                 <% end %>
               </ul>
             </div>
-            <h3 class="has-children"><a href="#">Indices</a></h3>
+            <h3 class="has-children"><a href="#"><%= t('indexes') %></a></h3>
             <div class="list">
               <ul class="default">
                 <li>
-                <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/genres.html"><span class="icon">l</span> Genre</a>
+                <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/genres.html"><span class="icon">l</span> <%= t('genres') %></a>
                 </li>
                 <li>
-                <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/people"><span class="icon">g</span> People</a>
+                <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/people"><span class="icon">g</span> <%= t('people') %></a>
                 </li>
                 <li>
-                <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/places"><span class="icon">@</span> Place</a>
+                <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/places"><span class="icon">@</span> <%= t('place') %></a>
                 </li>
                 <li>
-                <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/subjects"><span class="icon">n</span> Subject</a>
+                <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/subjects"><span class="icon">n</span> <%= t('subject') %></a>
                 </li>
               </ul>
             </div>
 
-            <h3><a href="/<%= @lang %>/collections/manifest.html" ><span class="icon">P</span> Collections</a></h3>
+            <h3><a href="/<%= @lang %>/collections/manifest.html" ><span class="icon">P</span><%= t('collections') %></a></h3>
 
             <%#<h3><a href="/archive/collections" ><span class="icon">></span> Translations</a></h3>%>
             <%#<h3 class="last"><a href="/archive/collections" ><span class="icon">'</span> Recent Additions</a></h3>%>

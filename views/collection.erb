@@ -39,7 +39,7 @@
             <div class="six columns  omega last-column">
               <a href="<%= loopback(lang: @lang).update_filter(:collections, @object.accession_number).to_url %>">
                 <div class="browse-collection">
-                  <h1> Browse This Collection </h1>
+                  <h1><%= t('browse-this-collection') %> </h1>
                 </div>
               </a>
             </div>
@@ -48,7 +48,7 @@
 
           <% if @object.favorites.present? %>
             <div class="collection-highlights">
-              <h1>Collection Highlights </h1>
+              <h1><%= t('collection_highlights') %></h1>
               <% @object.favorites.sample(6).each do |favorite| %>
                 <div>
                   <%= lang_link_to(%Q|<img src='#{favorite.thumbnail}' alt='#{favorite.name}'/>|, favorite.send("url_#{@lang}").to_s) %>
@@ -63,7 +63,7 @@
 
 
               <div class="item-details">
-                <h1>Collection Details</h1>
+                <h1><%= t('collection-details') %></h1>
                 <ul>
 
                   <li class="description">
@@ -72,25 +72,25 @@
                   </li>
 
                   <li>
-                  <span>Acquisition Notes:</span>
+                  <span><%= t('acquisition_notes') %></span>
                   <%= @object.acquisition_notes %>
                   </li>
 
                   <li>
-                  <span>History:</span>
+                  <span><%= t('history') %></span>
                   <%= @object.history %>
                   </li>
 
                   <li>
-                  <span>Created:</span>
+                  <span><%= t('created_at') %></span>
                   <%= @object.created %>
                   </li>
                   <li>
-                  <span>Last Edited:</span>
+                  <span><%= t('last_edited') %></span>
                   <%= @object.updated %>
                   </li>
 
-                  <li>	<span>Accession Number:</span>
+                  <li>	<span><%= t('accession_num') %></span>
                   <%= @object.accession_number %>	
                   </li>
 
@@ -109,7 +109,7 @@
 
                     <% if @object.genres.present? %>
                       <li>
-                      <span class="title genre">Genres</span>
+                      <span class="title genre"><%= t('genres') %></span>
                       <% @object.genres.each do |genre| %>
                         <a href="<%= loopback(lang: @lang).update_filter("genres_#{@lang}", genre.name.to_s).to_url %>" class="tag">
                           <%= genre.name %>
@@ -120,7 +120,7 @@
 
                     <% if @object.subjects.present? %>
                       <li>
-                      <span class="title subject">Subjects</span>
+                      <span class="title subject"><%= t('subjects') %></span>
                       <% @object.subjects.each do |subject| %>
                         <a href="<%= loopback(lang: @lang).update_filter("subjects_#{@lang}", subject.name.to_s).to_url %>" class="tag">
                           <%= subject.name %>

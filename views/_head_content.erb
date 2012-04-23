@@ -6,14 +6,18 @@
 
 <head>
 	<meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0" /> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />  
+
+  <title><%= t('site_title') %>| <%= @object.title if @object.respond_to?(:title) && @object.try(:title) %></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Women's Worlds in Qajar Iran | <%= @object.title if @object.respond_to?(:title) && @object.try(:title) %></title>
-	<meta name="description" content="The archive contains manuscripts, pictures, sound files relating to the history of women in Qajar Iran." />
-	<meta name="author" content="Women's World in Qajar Iran">
+  <meta name="description" content="<%= t('archive_description') %>" />
+  <meta name="author" content="<%= t('site_author') %>">
 
 	<!-- facebook metatags 
 	================================================== -->
-	<meta property="og:site_name" content="Women's Worlds in Qajar Iran"/>
+  <meta property="og:site_name" content="<%= t('site_title') %>"/>
 
   <% if @object.respond_to?(:title) && @object.try(:title) %> 
     <meta property="og:title" content="<%= @object.title %>" />

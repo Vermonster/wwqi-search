@@ -346,6 +346,11 @@ get '/collection/:lang/list' do |lang|
   erb :collection_manifest
 end
 
+get '/:lang/collection/manifest.html' do |lang|
+  @lang = lang
+  erb :collection_manifest
+end
+
 get '/collection/:lang/:id.html' do |lang, id|
   @lang = lang
   @id = id
