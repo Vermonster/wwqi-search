@@ -108,7 +108,7 @@ class Loopback
   def date_field
     if @from and @to 
       "&date=#{@from}TO#{@to}"
-    else if @date 
+    elsif @date 
       "&date=#{@date}"
     else
       "" 
