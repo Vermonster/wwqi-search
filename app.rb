@@ -77,6 +77,7 @@ class Loopback
     @query = params["query"]
     @page = params["page"].to_i || 1
     @lang = params["lang"].to_sym
+    @date = params["date"]
     @filters = Filter.new(params["filter"])
   end
 
@@ -105,8 +106,13 @@ class Loopback
   end
 
   def date_field
-    return "" unless @from and @to
-    "&#{@from}TO#{@to}"
+    if @from and @to 
+      "&date=#{@from}TO#{@to}"
+    else if @date 
+      "&date=#{@date}"
+    else
+      "" 
+    end
   end
 
   def to_url
