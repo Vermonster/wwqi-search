@@ -1,2 +1,17 @@
 <%= partial :header %>
+<div id="content">
+  <div class="container clearfix">
+    <div class="clearfix shaded-panel">
+      <div class="page-head">
+        <div class="extra-padding">
+          <% if @lang.to_sym == :en %>
+
+          <% else %>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <%= partial :footer %>
