@@ -1,7 +1,7 @@
 <%# encoding: utf-8                                                                    %>
 <% unless $GENERATE # prevent loading the example if we're generating the static pages %>
-  <%   load_example_item! if @lang == "en"                                               %>
-  <%   load_example_item_farsi! if @lang == "fa"                                         %>
+<%   load_example_item! if @lang == "en"                                               %>
+<%   load_example_item_farsi! if @lang == "fa"                                         %>
 <% end                                                                                 %>
 
 <%= partial "header" %>
