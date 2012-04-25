@@ -10,6 +10,7 @@ require 'forwardable'
 require 'cgi'
 
 require './views/view_helpers'
+require './initializers/activerecord'
 
 ENV["MAIN_SITE_URL"] ||= 'http://localhost:4567'
 ENV["ASSET_URL"] ||= 'http://assets.wwqidev.com'
