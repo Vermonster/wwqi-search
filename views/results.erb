@@ -71,7 +71,7 @@
                    content['terms'].delete_if do |term| 
                      loopback.filters.any? {|type, value| value != term['term'] && type == facet} 
                    end 
-              end %>
+                 end %>
 
             <% content['terms'].each do |term| %>
               <li> 
@@ -79,10 +79,10 @@
 
               <% if current_filter  %>
                 <a href='<%= loopback.remove_filter(facet).to_url %>'>x</a>
-                <%= term['term'] %>
+                <%= t(term['term'].split('_').first, @lang) %>
               <% else %>
                 <a href="<%= loopback.update_filter(facet, term['term']).to_url %>">
-                  <%= term['term'] %>
+                  <%= t(term['term'].split('_').first, @lang) %>
                 </a>
               <% end %>
               <span>(<%= term['count'] %>)</span> 
