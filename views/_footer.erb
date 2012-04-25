@@ -1,62 +1,59 @@
-    </div> <!-- end nonFooter -->
-    <script>
-      $(function () {
-        $("#browse-bar h3.has-children a").click( function() {
-          $(this).parent().toggleClass("active").next(".list").animate({
-            opacity: 'toggle',
-            height: 'toggle'
-          }, 300);
-          return false;
+</div> <!-- end nonFooter -->
+<script>
+  $(function () {
+    $("#browse-bar h3.has-children a").click( function() {
+      $(this).parent().toggleClass("active").next(".list").animate({
+        opacity: 'toggle',
+        height: 'toggle'
+      }, 300);
+      return false;
 
-        });
-        // Slideshow 1
-        $("#slides").responsiveSlides({
-          maxwidth : 800,
-          speed    : 800
-        });
+    });
+    // Slideshow 1
+    $("#slides").responsiveSlides({
+      maxwidth : 800,
+      speed    : 800
+    });
 
-        $('#carousel').elastislide({
-          imageW   : 200,
-          minItems : 3,
-          border   : 0,
-          margin   : 10
-        });
+    $('#carousel').elastislide({
+      imageW   : 200,
+      minItems : 3,
+      border   : 0,
+      margin   : 10
+    });
 
-        $(document).ready( function() { });
-      });
-    </script>
-
-    <div id="pageFooterWrapper">
-      <div id="pageFooter" class="container">
-
-        <div class="ten columns">
-          <ul class="footerNav">
-            <li>
-            <%= lang_link_to('About', 'about.html', lang: @lang) %>
-            </li>
-            <li>
-            <%= lang_link_to('Credits', 'credits.html', lang: @lang) %>
-            </li>
-            <li>
-            <%= lang_link_to('Permissions', 'permissions.html', lang: @lang) %>
-            </li>
-            <li>
-            <%= lang_link_to('Related Links', 'links.html', lang: @lang) %>
-            </li>
-            <li>
-            <%= lang_link_to('How to Give', 'donate.html', lang: @lang) %>
-            </li>
-          </ul>
-        </div>
-        <div class="six columns">
-          <a class="noimage" href="http://www.harvard.edu" target="_blank">
-            <img alt="Harvard Logo" src="/images/harvard.gif"></a>
-          <p>
-          Copyright © 2012  WWQI. All rights reserved.
-          </p>
-        </div>
-
-      </div>
+    $(document).ready( function() { });
+  });
+</script>
+<div id="pageFooterWrapper">
+  <div id="pageFooter" class="container">
+    <div class="ten columns">
+      <ul class="footerNav">
+        <li>
+        <%= lang_link_to(t('about'), 'about.html', lang: @lang) %>
+        </li>
+        <li>
+        <%= lang_link_to(t('credits'), 'credits.html', lang: @lang) %>
+        </li>
+        <li>
+        <%= lang_link_to(t('permissions'), 'permissions.html', lang: @lang) %>
+        </li>
+        <li>
+        <%= lang_link_to(t('related_links'), 'links.html', lang: @lang) %>
+        </li>
+        <li>
+        <%= lang_link_to(t('donate'), 'donate.html', lang: @lang) %>
+        </li>
+      </ul>
     </div>
-  </body>
+    <div class="six columns">
+      <a class="noimage" href="http://www.harvard.edu" target="_blank">
+        <img alt="Harvard Logo" src="/images/harvard.gif"></a>
+      <p>
+      Copyright © 2012  WWQI. All rights reserved.
+      </p>
+    </div>
+  </div>
+</div>
+</body>
 </html>

@@ -1,4 +1,6 @@
 module Helpers
+  def t(*_) ; end
+  
   def javascript(name)
     %Q|<script type='text/javascript' src='/javascripts/#{name}.js'></script>|
   end
