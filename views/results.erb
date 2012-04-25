@@ -62,11 +62,9 @@
     </div>
     <div id="browse-bar" class="four columns">
       <h1>Filter</h1>
-      <% first_last = 'first' %>
+      <% first = 'first' %>
       <% @facets.each.with_index do |(facet, content), i| %>
-        <% first_last = 'last' if i + 1 == @facets.size %>
-
-        <h3 class='has-children <%= first_last %> active'><a href='#'><%= facet %></a></h3>
+        <h3 class='has-children <%= first %> active'><a href='#'><%= facet %></a></h3>
         <div class='list'>
           <ul class='default'>
             <% if loopback.has_filters? 
@@ -87,13 +85,28 @@
                 <%= term['term'] %>
               </a>
             <% end %>
-
             <span>(<%= term['count'] %>)</span> 
             </li>
           <% end %>
         </ul>
+          </ul>
+        </div>
+        <% first = '' %>
+        <% end %>
+
+        <h3 class='has-children last active'><a href="#"><%= t("periods") %></a></h3>
+        <div class='list'>
+          <ul class='default'>
+            <% period_filters[@lang.to_s].each do |period| %>
+            <li>
+              <a href="<%= loopback.from(period["start_at"]).to(period["end_at"]).to_url %>">
+                <%= period["name"] %>
+              </a>
+            </li>
+            <% end %>
+          </ul>
+        </div>
       </div>
-      <% first_last = '' %>
     <% end %>
   </div>
 </div>

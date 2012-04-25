@@ -36,6 +36,7 @@ def add_facet(name)
   end
 end
 
+
 get '/search' do
   query_string = params["query"] 
   date = params["date"]
