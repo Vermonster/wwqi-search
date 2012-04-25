@@ -14,7 +14,7 @@
         </div>
       </div>
       <ul class="collections dark-list">
-        <% @object.content.each do |collection| %>
+        <% @object.content(@lang).each do |collection| %>
 
           <% if collection.in_process? %>
           <% end %>
