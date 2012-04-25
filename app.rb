@@ -68,8 +68,7 @@ get '/search' do
     add_facet "genres_#{lang}" 
     add_facet "people_#{lang}" 
     add_facet "places_#{lang}" 
-    add_facet 'type'
-    #add_facet 'has_audio'
+    #add_facet 'type'
 
     size Loopback.results_per_page
     from(page * Loopback.results_per_page)
