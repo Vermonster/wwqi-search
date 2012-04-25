@@ -71,7 +71,7 @@
     <div class="header">
       <div class="toolbar">
         <div class="container clearfix">
-          <%= lang_link_to "Women's Worlds in Qajar Iran", 'index.html', lang: @lang, title: 'back to home', class: 'branding box-transition' %>
+          <%= lang_link_to t('site-title'), 'index.html', lang: @lang, title: t('back to home'), class: 'branding box-transition' %>
           <h1><strong>Women's Worlds</strong> in Qajar Iran</h1>
           <ul>
             <%#<li class="my-selections"> %>
@@ -89,16 +89,16 @@
         <div class="container clearfix">
           <ul class="clearfix">
             <li>
-            <%= lang_link_to('Browse <span>Explore the archives </span>', 'browse.html', lang: @lang) %>
+            <%= lang_link_to("#{t('archive')}<span>#{t('explore_the_archive')}</span>", 'browse.html', lang: @lang) %>
             </li>
             <li>
-            <%= lang_link_to('Collections <span>View our holdings</span>', 'collections/manifest.html', lang: @lang) %>
+            <%= lang_link_to("#{t('collections')}<span>#{t('view-our-holdings')}</span>", 'collections/manifest.html', lang: @lang) %>
             </li>
             <li>
-            <%= lang_link_to('Contact Us<span>Get in touch</span>', 'contact.html', lang: @lang) %>
+            <%= lang_link_to("#{t('contact')}<span>#{t('get-in-touch')}</span>", 'contact.html', lang: @lang) %>
             </li>
             <li>
-            <%= lang_link_to('FAQ<span>Have questions?</span>', 'faq.html', lang: @lang) %>
+            <%= lang_link_to("#{t('faq')}<span>#{t('have-questions')}</span>", 'faq.html', lang: @lang) %>
             </li>
           </ul>
         </div>
