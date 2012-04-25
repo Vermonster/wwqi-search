@@ -51,9 +51,17 @@ get '/search' do
         must { range :date, { from: date_start, to: date_end, boost: 10.0 } } if date
 
         if query_string
-          should { fuzzy "title_#{lang}".to_sym       , query_string , min_similarity: 0.6 , boost: 2   }
-          should { fuzzy "description_#{lang}".to_sym , query_string , min_similarity: 0.4 , boost: 0.5 }
-          should { string query_string                , boost: 5 }
+          if query_string.length > 4
+            sim_adj = 1.0 / 2.0**query_string.length
+            boost_adj = 1 + 1.0 / 2.0**query_string.length
+
+            should { fuzzy "title_#{lang}".to_sym, 
+                     query_string , min_similarity: 0.5 + sim_adj , boost: 2   * boost_adj }
+
+            should { fuzzy "description_#{lang}".to_sym,
+                     query_string , min_similarity: 0.4 + sim_adj , boost: 0.5 * boost_adj }
+          end
+          should { string query_string , boost: 15 }
         else
           should { string '*' } 
         end
