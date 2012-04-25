@@ -7,25 +7,15 @@
 <%= partial "header" %>
 <div id="content">
   <div class="container clearfix">
-    <!-- rails template content -->
-
     <div class="item-page clearfix">
       <%= partial "item_tools" %>
 
-      <!-- end pagination bar -->
-
       <div class="item-essentials container clearfix">
-
         <div class="four columns item-thumbnail">
-          <!-- TODO: Implement subcollections 
-          <span class="image-count">24 images</span>
-          -->
           <div class="item-image-frame">
             <img src="<%= @object.thumbnail %>" alt="<%= @object.title %>">
           </div>
-
         </div>
-
         <div class="six columns">
           <h2><%= @object.title %></h2>
           <p class="description">
@@ -49,9 +39,7 @@
 
       </div>
 
-
       <div class="item-below-fold">
-
         <div class="ten columns alpha">
 
           <% if @object.audio_clip? %>
@@ -63,7 +51,6 @@
               </audio>
             </div>
           <% end %>
-
 
           <% if @object.translation_to_english? %>
             <div class="item-translation">
@@ -78,7 +65,6 @@
               <a href="#"><%= t("transcript") %></a>
             </div>
           <% end %> 
-
 
           <div class="item-details">
             <h1><%= t("detail_description") %></h1>
@@ -147,18 +133,17 @@
 
               <li>	
               <span><%= t("record_number") %></span> <%= @object.accession_number %>		
-            </li>
+              </li>
 
-            <li class="clear">
-            &nbsp;
-            </li>
-          </ul>
+              <li class="clear">
+              &nbsp;
+              </li>
+            </ul>
 
+          </div>
         </div>
-      </div>
-      <div class="six columns omega last-column">
-
-        <% if @object.genres.present? || @object.people.present? || @object.places.present? || @object.subjects.present? %>
+        <div class="six columns omega last-column">
+          <% if @object.genres.present? || @object.people.present? || @object.places.present? || @object.subjects.present? %>
           <div class="item_related">
             <ul>
               <% if @object.genres.present? %>
@@ -207,13 +192,9 @@
             </ul>
           </div>
         <% end %>
+        </div>
       </div>
     </div>
   </div>
-
-  <%= partial "print_popup" %>
-
-  <%= partial "email_popups" %>
 </div>
-  </div>
-  <%= partial "footer" %>
+<%= partial "footer" %>
