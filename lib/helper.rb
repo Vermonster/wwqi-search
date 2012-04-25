@@ -2,7 +2,9 @@ require 'net/http'
 require 'json'
 
 module Helpers
-  def t(*_) ; end
+  def t(key, *_) 
+    key 
+  end
   
   def javascript(name)
     %Q|<script type='text/javascript' src='/javascripts/#{name}.js'></script>|
