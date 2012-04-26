@@ -137,9 +137,17 @@ ul.collections li a .items-in-collection{float:right;}
 
 #home-main .rslides li{margin-bottom:0}
 #home-main .side-stuff{margin-left:-20px; margin-right:0; padding:0 10px 50px 10px}
+#home-main .welcome{right:0;left:5px;}
+#home-main .welcome i{
+	left:0;
+	right:auto;
+	background:url(../images/explore-arrow_fa.png) 50% 50% no-repeat;
+}
+
+
 #home-main #search-wrapper{right:auto;left:0;}
 #home-main #search-wrapper #search-form input{margin: 0px 10px 0 0px;float: right;}
-#home-main #search-wrapper #search-form button{margin: 3px 10px 0 0px;}
+#home-main #search-wrapper #search-form button{margin: 3px 10px 0 0px; float:left}
 #indexList{clear:right;	}
 
 
@@ -368,9 +376,9 @@ ul.collections li a .items-in-collection{float:right;}
 			}
 			#home-main .side-stuff{margin:0}
 			#home-main #search-wrapper{left:0}
+			#home-main #search-wrapper h4{margin-right:20px}
 			#content .item-page, #content .shaded-panel{margin-top:5px}
 			#pageFooter li { font-size:11px; margin-left:5px} 
-			#home-main #search-wrapper #search-form{margin-left:20px}
 			#home-main .side-stuff #about p {max-height:none; margin-bottom:15px;}
 			#home-main .side-stuff #about {padding-right:0; margin-left:10px}
 			.browse-search {margin: 0px 0px 10px}

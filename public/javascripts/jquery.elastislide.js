@@ -10,7 +10,7 @@
 			wipeRight: function() { },
 			wipeUp: function() { },
 			wipeDown: function() { },
-			preventDefaultEvents: true
+			preventDefaultEvents: false
 		};
      
 		if (settings) $.extend(config, settings);
@@ -87,9 +87,9 @@
 		minItems	: 1,	// the minimum number of items to show. 
 							// when we resize the window, this will make sure minItems are always shown 
 							// (unless of course minItems is higher than the total number of elements)
-		current		: 0,	// index of the current item
+		current		: 0	// index of the current item
 							// when we resize the window, the carousel will make sure this item is visible 
-		onClick		: function() { return false; } // click item callback
+
     };
 	
 	$.elastislide.prototype 	= {
@@ -262,11 +262,7 @@
 				instance._slide('left');
 			});
 			
-			// item click event
-			this.$items.bind('click.elastislide', function( event ) {
-				instance.options.onClick( $(this) );
-				return false;
-			});
+		
 			
 			// touch events
 			instance.$slider.touchwipe({
