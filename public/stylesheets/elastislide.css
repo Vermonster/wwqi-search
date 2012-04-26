@@ -42,6 +42,7 @@
 	text-indent:-9000px;
 	cursor:pointer;
 	opacity:0.8;
+	z-index:10000;
 	overflow:hidden;
 }
 .es-nav span.es-nav-next{

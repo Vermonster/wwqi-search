@@ -1141,7 +1141,6 @@ ul.collections li a .items-in-collection strong{
 }
 
 #carousel h2{ 
-    padding-left:0px;
     text-transform:uppercase;
     font-size:15px;
     color:#888;
@@ -1152,8 +1151,8 @@ ul.collections li a .items-in-collection strong{
 	padding-bottom:5px;
 	width:100%!important;
 	display:block;
-	margin:-10px -37px 0;
-	padding:10px 37px;
+	margin:-10px -35px 0;
+	padding:10px 35px;
 	border-bottom:1px solid #fff;
 }
 
@@ -1163,6 +1162,17 @@ ul.collections li a .items-in-collection strong{
 	width:90%;
 	margin:0 auto;
 	
+}
+
+#carousel .swipe{
+	width:82px;
+	height:56px;
+	position:absolute;
+	bottom:10px;
+	left:10px;
+	opacity:0.2;
+	display:none;
+	background:url(../images/swipe.png) 0 0 no-repeat;
 }
 
 #carousel .collection-thumb img{
@@ -1782,9 +1792,10 @@ ul.collections li a .items-in-collection strong{
 		#home-main .welcome i{
 			display:none;
 		}
-		#carousel h2{margin-left:0; margin-right:0; padding-left:0; padding-right:0; text-indent:10px;}
-		.es-nav span{display:none!important;}
-		.es-carousel-wrapper{padding-left:0!important;; padding-right:0!important;}
+		#carousel h2{margin-left:-35px; margin-right:0; padding-left:35px; padding-right:0; text-indent:10px;}
+		.es-nav span{height:70px!important; top:190px!important;}
+		.es-carousel-wrapper{padding-right:0px!important; }
+		#carousel .swipe{display:block}
 
 	}
 

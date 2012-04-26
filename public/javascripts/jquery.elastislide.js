@@ -58,6 +58,7 @@
 		 
 			function onTouchStart(e)
 			{
+				
 				if (e.touches.length == 1) {
 					startX = e.touches[0].pageX;
 					startY = e.touches[0].pageY;
@@ -255,10 +256,12 @@
 			
 			// navigation buttons events
 			this.$navNext.bind('click.elastislide', function( event ) {
+				$(".swipe").hide();
 				instance._slide('right');
 			});
 			
 			this.$navPrev.bind('click.elastislide', function( event ) {
+				$(".swipe").hide();
 				instance._slide('left');
 			});
 			
@@ -267,9 +270,11 @@
 			// touch events
 			instance.$slider.touchwipe({
 				wipeLeft			: function() {
+					$(".swipe").hide();
 					instance._slide('right');
 				},
 				wipeRight			: function() {
+					$(".swipe").hide();
 					instance._slide('left');
 				}
 			});
