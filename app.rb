@@ -50,7 +50,7 @@ get '/search' do
       boolean do
         must { range :date, { from: date_start, to: date_end, boost: 10.0 } } if date
 
-        if query_string
+        if query_string.present?
           if query_string.length > 4
             sim_adj = 1.0 / 2.0**query_string.length
             boost_adj = 1 + 1.0 / 2.0**query_string.length
