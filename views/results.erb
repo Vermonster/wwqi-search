@@ -64,7 +64,7 @@
         <h1><%= t("filter") %></h1>
         <% first = 'first' %>
         <% @facets.each.with_index do |(facet, content), i| %>
-          <h3 class='has-children <%= first %> active'><a href='#'><%= facet %></a></h3>
+          <h3 class='has-children <%= first %> active'><a href='#'><%= t(*facet.split('_')) %></a></h3>
           <div class='list'>
             <ul class='default'>
               <% if loopback.has_filters? 
@@ -79,10 +79,10 @@
 
               <% if current_filter  %>
                 <a href='<%= loopback.remove_filter(facet).to_url %>'>x</a>
-                <%= t(term['term'].split('_').first, @lang) %>
+                <%= term['term'] %>
               <% else %>
                 <a href="<%= loopback.update_filter(facet, term['term']).to_url %>">
-                  <%= t(term['term'].split('_').first, @lang) %>
+                  <%= term['term'] %>
                 </a>
               <% end %>
               <span>(<%= term['count'] %>)</span> 
