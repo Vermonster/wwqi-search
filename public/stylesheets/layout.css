@@ -919,7 +919,7 @@ ul.collections li .collection-thumb .layer2,
 	background: -webkit-linear-gradient(bottom, #ffffff 0%, #fefefe 40%, #fefefe 100%);
 	border: 1px solid rgba(34, 25, 25, 0.25);
 }
-.item1 .plurals{display:none}
+.item1 .plural{display:none}
 li.collection .collection-thumb{
 	background:url(../bg-folder.png) 0 0 no-repeat;
 	background-size:100% 100%;
