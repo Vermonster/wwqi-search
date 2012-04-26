@@ -27,85 +27,85 @@
           </a>
         </div>
       </div>
-    <% if @object.favorites.present? %>
-      <div class="collection-highlights">
-        <h1><%= t('collection_highlights') %></h1>
-        <% @object.favorites.sample(6).each do |favorite| %>
-          <div>
-            <%= lang_link_to(%Q|<img src='#{favorite.thumbnail}' alt='#{favorite.name}'/>|, favorite.send("url_#{@lang}").to_s) %>
+      <% if @object.favorites.present? %>
+        <div class="collection-highlights">
+          <h1><%= t('collection_highlights') %></h1>
+          <% @object.favorites.sample(6).each do |favorite| %>
+            <div>
+              <%= lang_link_to(%Q|<img src='#{favorite.thumbnail}' alt='#{favorite.name}'/>|, favorite.send("url_#{@lang}").to_s) %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class="item-below-fold">
+        <div class="ten columns alpha">
+          <div class="item-details">
+            <h1><%= t('collection-details') %></h1>
+            <ul>
+              <li>
+              <span><%= t('acquisition_notes') %></span>
+              <%= @object.acquisition_notes %>
+              </li>
+
+              <li>
+              <span><%= t('history') %></span>
+              <%= @object.history %>
+              </li>
+
+              <li>
+              <span><%= t('created_at') %></span>
+              <%= @object.created %>
+              </li>
+              <li>
+              <span><%= t('last_edited') %></span>
+              <%= @object.updated %>
+              </li>
+
+              <li>	<span><%= t('accession_num') %></span>
+              <%= @object.accession_number %>	
+              </li>
+
+              <li class="clear">
+              &nbsp;
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="six columns omega last-column">
+
+        <% if @object.genres.present? || @object.subjects.present? %>
+          <div class="item_related">
+            <ul>
+
+              <% if @object.genres.present? %>
+                <li>
+                <span class="title genre"><%= t('genres') %></span>
+                <% @object.genres.each do |genre| %>
+                  <a href="<%= loopback(lang: @lang).update_filter("genres_#{@lang}", genre.name.to_s).to_url %>" class="tag">
+                    <%= genre.name %>
+                  </a>
+                <% end %>
+                </li>
+              <% end %>
+
+              <% if @object.subjects.present? %>
+                <li>
+                <span class="title subject"><%= t('subjects') %></span>
+                <% @object.subjects.each do |subject| %>
+                  <a href="<%= loopback(lang: @lang).update_filter("subjects_#{@lang}", subject.name.to_s).to_url %>" class="tag">
+                    <%= subject.name %>
+                  </a>
+                <% end %>
+                </li>
+              <% end %>
+
+            </ul>
           </div>
         <% end %>
       </div>
-    <% end %>
-
-    <div class="item-below-fold">
-      <div class="ten columns alpha">
-        <div class="item-details">
-          <h1><%= t('collection-details') %></h1>
-          <ul>
-            <li>
-            <span><%= t('acquisition_notes') %></span>
-            <%= @object.acquisition_notes %>
-            </li>
-
-            <li>
-            <span><%= t('history') %></span>
-            <%= @object.history %>
-            </li>
-
-            <li>
-            <span><%= t('created_at') %></span>
-            <%= @object.created %>
-            </li>
-            <li>
-            <span><%= t('last_edited') %></span>
-            <%= @object.updated %>
-            </li>
-
-            <li>	<span><%= t('accession_num') %></span>
-            <%= @object.accession_number %>	
-            </li>
-
-            <li class="clear">
-            &nbsp;
-            </li>
-          </ul>
-        </div>
-      </ul>
-
     </div>
-  </div>
-  <div class="six columns omega last-column">
-
-    <% if @object.genres.present? || @object.subjects.present? %>
-      <div class="item_related">
-        <ul>
-
-          <% if @object.genres.present? %>
-            <li>
-            <span class="title genre"><%= t('genres') %></span>
-            <% @object.genres.each do |genre| %>
-              <a href="<%= loopback(lang: @lang).update_filter("genres_#{@lang}", genre.name.to_s).to_url %>" class="tag">
-                <%= genre.name %>
-              </a>
-            <% end %>
-            </li>
-          <% end %>
-
-          <% if @object.subjects.present? %>
-            <li>
-            <span class="title subject"><%= t('subjects') %></span>
-            <% @object.subjects.each do |subject| %>
-              <a href="<%= loopback(lang: @lang).update_filter("subjects_#{@lang}", subject.name.to_s).to_url %>" class="tag">
-                <%= subject.name %>
-              </a>
-            <% end %>
-            </li>
-          <% end %>
-
-        </ul>
-      </div>
-    <% end %>
   </div>
 </div>
 <%= partial "footer" %>
