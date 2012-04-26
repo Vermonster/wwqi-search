@@ -6,13 +6,12 @@
       </div>
       <div id="home-main">
         <div class="eleven columns">
-          <a href="/<% @lang %>/browse.html">
-			<span class="welcome">Welcome to Women's Worlds in Qajar Iran Digital Archives <i></i> </span>
+          <%= lang_link_to "<span class='welcome'>#{t('welcome_message')}</span>", 'browse.html', lang: @lang, title: t('site_title') %>
             <ul id="slides">
               <li><img src="/images/newslide1.jpg" alt="" /></li>
               <li><img src="/images/newslide2.jpg" alt="" /></li>
               <li><img src="/images/newslide3.jpg" alt="" /></li>
-			  <li><img src="/images/newslide4.jpg" alt="" /></li>
+              <li><img src="/images/newslide4.jpg" alt="" /></li>
             </ul>
           </a>
         </div>
