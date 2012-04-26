@@ -1,4 +1,11 @@
+require 'net/http'
+require 'json'
+
 module Helpers
+  def t(key, *_) 
+    key 
+  end
+  
   def javascript(name)
     %Q|<script type='text/javascript' src='/javascripts/#{name}.js'></script>|
   end
@@ -79,5 +86,9 @@ module Helpers
         </div>
        
       </li>|
+  end
+
+  def period_filters
+    JSON.parse Net::HTTP.get(URI("http://wwqi-static-site.s3.amazonaws.com/period_manifest.json"))
   end
 end

@@ -19,16 +19,17 @@
         <div class="five columns side-stuff">
           <div id="about">
             <p>
-            Explore the lives of women during the Qajar era (1796-1925) through a wide array of materials from private family holdings and participating institutions. Women’s Worlds in Qajar Iran provides bilingual access to thousands of personal papers, manuscripts, photographs, publications, everyday objects, works of art and audio materials, making it a unique online resource for social and cultural histories of the Qajar world. <a href="http://www.qajarwomen.org/about">More...</a>
+            <%= t("home_welcome_message") %> <a href="http://www.qajarwomen.org/about"><%= t("learn_more") %><a>
             </p>
           </div>
 
-          <div id="search-wrapper" class="five columns">
-            <h4>Search our archives</h4>
-            <div class="clearfix" id="search-form">
-              <%= partial :search_form_en %>
-            </div>
-          </div>	
+              <div id="search-wrapper" class="five columns">
+                <h4><%= t("search-our-collection") %></h4>
+                <div class="clearfix" id="search-form">
+                  <%= partial :search_form %>
+                </div>
+              </div>	
+
 
         </div>
       </div>
@@ -38,7 +39,7 @@
       </div>
       <!-- Elastislide Carousel -->
       <div id="carousel" class="es-carousel-wrapper">
-        <h2>featured collections</h2>
+        <h2><%= t("featured_collections") %></h2>
         <div class="es-carousel">
           <ul>
             <% carousel.each do |entry| %>

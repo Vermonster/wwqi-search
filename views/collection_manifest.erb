@@ -14,7 +14,7 @@
         </div>
       </div>
       <ul class="collections dark-list">
-        <% @object.content.each do |collection| %>
+        <% @object.content(@lang).each do |collection| %>
 
           <% if collection.in_process? %>
           <% end %>
@@ -33,7 +33,6 @@
             <div class="collection-meta">
               <span class="items-in-collection"><strong><%= collection.item_count %></strong>Items</span>
               <div class="collection-essentials">
-                <span class="date"><%= collection.updated %></span>
                 <h3><%= collection.title %></h3>
                 <p><%= collection.description %></p>
               </div>
@@ -44,7 +43,5 @@
       </ul>
     </div>
   </div>
-  <!-- end rails template content -->
-</div> <!-- end container -->
-  </div><!-- end content -->
-  <%= partial "footer" %>
+</div><!-- end content -->
+<%= partial "footer" %>

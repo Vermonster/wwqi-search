@@ -7,25 +7,15 @@
 <%= partial "header" %>
 <div id="content">
   <div class="container clearfix">
-    <!-- rails template content -->
-
     <div class="item-page clearfix">
       <%= partial "item_tools" %>
 
-      <!-- end pagination bar -->
-
       <div class="item-essentials container clearfix">
-
         <div class="four columns item-thumbnail">
-          <!-- TODO: Implement subcollections 
-          <span class="image-count">24 images</span>
-          -->
           <div class="item-image-frame">
             <img src="<%= @object.thumbnail %>" alt="<%= @object.title %>">
           </div>
-
         </div>
-
         <div class="six columns">
           <h2><%= @object.title %></h2>
           <p class="description">
@@ -36,11 +26,11 @@
         <% if @object.harvard_link? %>
           <div class="six columns  omega last-column">
             <div class="item-links">
-              <h1> Images </h1>
-              <a href="<%= @object.harvard_urls[:preferred] %>" rel="shadowbox[gallery]" title="<%= @object.title %>">View This Item</a>
+              <h1><%= t("images") %></h1>
+              <a href="<%= @object.harvard_urls[:preferred] %>" rel="shadowbox[gallery]" title="<%= @object.title %>"><%= t("view-this-item") %></a>
               <% if @object.secondary_urns? %>
                 <% @object.harvard_urls[:secondary].each do |url| %>
-                  <a href="<%= url %>" title="View Additional Image">View Additional Image</a>
+                  <a href="<%= url %>" title="View Additional Image"><%= t("view-additional-image") %></a>
                 <% end %>
               <% end %>
             </div>
@@ -49,9 +39,7 @@
 
       </div>
 
-
       <div class="item-below-fold">
-
         <div class="ten columns alpha">
 
           <% if @object.audio_clip? %>
@@ -64,57 +52,55 @@
             </div>
           <% end %>
 
-
           <% if @object.translation_to_english? %>
             <div class="item-translation">
               <h1><%= t('translation') %></h1>
-              <a href="#">View Item Translation</a>
+              <a href="#"><%= t("translation") %></a>
             </div>
           <% end %>
 
           <% if @object.transcription_of_farsi? %>
             <div class="item-transcript">
               <h1><%= t('transcription') %></h1>
-              <a href="#">View Item Transcript</a>
+              <a href="#"><%= t("transcript") %></a>
             </div>
           <% end %> 
 
-
           <div class="item-details">
-            <h1>Item Details</h1>
+            <h1><%= t("detail_description") %></h1>
             <ul>
 
               <% if @object.has_creator? %>
                 <li class="description">
-                <span>Creator:</span>
+                <span><%= t("creator") %></span>
                 <%= @object.creator.name %>
                 </li>
               <% end %>
 
               <% if @object.date.present? %>
                 <li class="description">
-                <span>Date:</span>
+                <span><%= t("date") %></span>
                 <%= @object.date.try(:representation) || "Undated" %>
                 </li>
               <% end %>
 
               <% if @object.remarks.present? %>
                 <li>
-                <span>Notes:</span>
+                <span><%= t("notes") %></span>
                 <%= @object.remarks %>
                 </li>
               <% end %>
 
               <% if @object.dimensions.present? %>
                 <li>
-                <span>Dimensions:</span>
+                <span><%= t("dimensions") %></span>
                 <%= @object.dimensions %>
                 </li>
               <% end %>
 
               <% unless @object.collections.empty? %>
                 <li>
-                <span>Collections:</span>
+                <span><%= t("collections") %></span>
                 <% @object.collections.each do |coll| %>
                   <a href="<%= coll.url %>" class="tag" title="more"><%= coll.title %></a>
                 <% end %>
@@ -123,47 +109,46 @@
 
               <% if @object.repository.present? %>
                 <li>
-                <span>Repository:</span>
+                <span><%= t("repository") %></span>
                 <%= @object.repository %>
                 </li>
               <% end %>
 
               <% if @object.restrictions.present? %>
                 <li>
-                <span>Restrictions:</span>
+                <span><%= t("restrictions") %></span>
                 <%= @object.restrictions %>
                 </li>
               <% end %>
 
               <li>
-              <span>Accessed:</span>
+              <span><%= t("accessed_on") %></span>
               <%= @object.created %>
               </li>
 
               <li>
-              <span>Last Edited:</span>
+              <span><%= t("last_edited") %></span>
               <%= @object.updated %>
               </li>
 
               <li>	
-              <span>Record no.:</span> <%= @object.accession_number %>		
-            </li>
+              <span><%= t("record_number") %></span> <%= @object.accession_number %>		
+              </li>
 
-            <li class="clear">
-            &nbsp;
-            </li>
-          </ul>
+              <li class="clear">
+              &nbsp;
+              </li>
+            </ul>
 
+          </div>
         </div>
-      </div>
-      <div class="six columns omega last-column">
-
-        <% if @object.genres.present? || @object.people.present? || @object.places.present? || @object.subjects.present? %>
+        <div class="six columns omega last-column">
+          <% if @object.genres.present? || @object.people.present? || @object.places.present? || @object.subjects.present? %>
           <div class="item_related">
             <ul>
               <% if @object.genres.present? %>
                 <li>
-                <span class="title genre">Genres</span>
+                <span class="title genre"><%= t("genres") %></span>
                 <% @object.genres.each do |genre| %>
                   <a href="<%= loopback(lang: @lang).update_filter("genres_#{@lang}", genre.name.to_s).to_url %>" class="tag">
                     <%= genre.name %>
@@ -174,7 +159,7 @@
 
               <% if @object.people.present? %>
                 <li>
-                <span class="title people">People</span>
+                <span class="title people"><%= t("people") %></span>
                 <% @object.people.each do |person| %>
                   <a href="<%= loopback(lang: @lang).update_filter("people_#{@lang}", person.name.to_s).to_url %>" class="tag">
                     <%= person.name %>
@@ -185,7 +170,7 @@
 
               <% if @object.subjects.present? %>
                 <li>
-                <span class="title subject">Subjects</span>
+                <span class="title subject"><%= t("subjects") %></span>
                 <% @object.subjects.each do |subject| %>
                   <a href="<%= loopback(lang: @lang).update_filter("subjects_#{@lang}", subject.name.to_s).to_url %>" class="tag">
                     <%= subject.name %>
@@ -196,7 +181,7 @@
 
               <% if @object.places.present? %>
                 <li>
-                <span class="title place">Places</span>
+                <span class="title place"><%= t("places") %></span>
                 <% @object.places.each do |place| %>
                   <a href="<%= loopback(lang: @lang).update_filter("places_#{@lang}", place.name.to_s).to_url %>" class="tag">
                     <%= place.name %>
@@ -207,13 +192,9 @@
             </ul>
           </div>
         <% end %>
+        </div>
       </div>
     </div>
   </div>
-
-  <%= partial "print_popup" %>
-
-  <%= partial "email_popups" %>
 </div>
-  </div>
-  <%= partial "footer" %>
+<%= partial "footer" %>

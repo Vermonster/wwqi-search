@@ -96,6 +96,10 @@ NOTES
     os = OpenStruct.new
     os.name = 'THE Facet'
     os.instance_eval do
+      def name 
+        "facet name" 
+      end
+
       def url_to_facet(*args)
         '#'
       end

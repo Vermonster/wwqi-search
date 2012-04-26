@@ -36,23 +36,32 @@ def add_facet(name)
   end
 end
 
+
 get '/search' do
   query_string = params["query"] 
   date = params["date"]
   date_start, date_end = params["date"] && params["date"].split('TO')
   filters  = Filter.new(params["filter"])
   lang = (params["lang"] || :en).to_sym
-  page = (params["page"] || 0)
+  page = (params["page"] || 0).to_i
 
   query = Tire.search(ROOT_INDEX) do
     query do
       boolean do
         must { range :date, { from: date_start, to: date_end, boost: 10.0 } } if date
 
-        if query_string
-          should { fuzzy "title_#{lang}".to_sym       , query_string , min_similarity: 0.6 , boost: 2   }
-          should { fuzzy "description_#{lang}".to_sym , query_string , min_similarity: 0.4 , boost: 0.5 }
-          should { string query_string                , boost: 5 }
+        if query_string.present?
+          if query_string.length > 4
+            sim_adj = 1.0 / 2.0**query_string.length
+            boost_adj = 1 + 1.0 / 2.0**query_string.length
+
+            should { fuzzy "title_#{lang}".to_sym, 
+                     query_string , min_similarity: 0.5 + sim_adj , boost: 2   * boost_adj }
+
+            should { fuzzy "description_#{lang}".to_sym,
+                     query_string , min_similarity: 0.4 + sim_adj , boost: 0.5 * boost_adj }
+          end
+          should { string query_string , boost: 15 }
         else
           should { string '*' } 
         end
@@ -67,11 +76,10 @@ get '/search' do
     add_facet "genres_#{lang}" 
     add_facet "people_#{lang}" 
     add_facet "places_#{lang}" 
-    add_facet 'type'
-    #add_facet 'has_audio'
+    #add_facet 'type'
 
     size Loopback.results_per_page
-    from(page)
+    from(page * Loopback.results_per_page)
   end
 
   # paging -- only display some of the results
