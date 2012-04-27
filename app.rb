@@ -1,3 +1,4 @@
+#encoding: utf-8
 require 'sinatra'
 require 'date'
 require 'tire'
