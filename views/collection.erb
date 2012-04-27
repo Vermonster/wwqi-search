@@ -55,11 +55,11 @@
 
               <li>
               <span><%= t('created_at') %></span>
-              <%= @object.created %>
+              <%= with_farsi_numbers @object.created %>
               </li>
               <li>
               <span><%= t('last_edited') %></span>
-              <%= @object.updated %>
+              <%= with_farsi_numbers @object.updated %>
               </li>
 
               <li>	<span><%= t('accession_num') %></span>

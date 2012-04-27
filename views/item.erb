@@ -80,12 +80,12 @@
               <% if @object.date.present? %>
                 <li class="description">
                 <span><%= t("date") %></span>
-                <%= @object.local_date || t("undated") %>
+                <%= with_farsi_numbers @object.local_date || t("undated") %>
                 </li>
               <% else %> 
                 <li class="description">
                 <span><%= t("date") %></span>
-                <%= @object.local_date || t("undated") %>
+                <%= with_farsi_numbers @object.local_date || t("undated") %>
                 </li>
               <% end %>
 
@@ -128,12 +128,12 @@
 
               <li>
               <span><%= t("accessed_on") %></span>
-              <%= @object.created %>
+              <%= with_farsi_numbers @object.created %>
               </li>
 
               <li>
               <span><%= t("last_edited") %></span>
-              <%= @object.updated %>
+              <%= with_farsi_numbers @object.updated %>
               </li>
 
               <li>	
