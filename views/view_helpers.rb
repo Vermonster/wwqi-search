@@ -259,6 +259,10 @@ NOTES
     end
     string
   end
+
+  def t(key)
+    Translation.t(key, @lang)
+  end
 end
 
 class Array
