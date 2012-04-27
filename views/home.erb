@@ -2,54 +2,56 @@
 <div id="content">
   <div class="container clearfix">
     <div class="clearfix shaded-panel">
-      <div class="page-head dark">
-      </div>
+
+      <div class="page-head dark"></div>
+
       <div id="home-main">
         <div class="eleven columns">
-          <%= lang_link_to "<span class='welcome'>#{t('welcome_message')}</span>", 'browse.html', lang: @lang, title: t('site_title') %>
+            <%= lang_link_to "<span class='welcome'>#{t('welcome_message')}</span>", 'browse.html', lang: @lang, title: t('site_title') %>
             <ul id="slides">
               <li><img src="/images/newslide1.jpg" alt="" /></li>
               <li><img src="/images/newslide2.jpg" alt="" /></li>
               <li><img src="/images/newslide3.jpg" alt="" /></li>
               <li><img src="/images/newslide4.jpg" alt="" /></li>
             </ul>
-          </a>
-        </div>
-        <div class="five columns side-stuff">
-          <div id="about">
-            <p>
-            <%= t("home_welcome_message") %> <a href="http://www.qajarwomen.org/about"><%= t("learn_more") %><a>
-            </p>
           </div>
+          <div class="five columns side-stuff">
+            <div id="about">
+              <p>
+              <%= t("home_welcome_message") %> 
+              <a href="http://www.qajarwomen.org/about"><%= t("learn_more") %><a>
+              </p>
+            </div>
 
-              <div id="search-wrapper" class="five columns">
-                <h4><%= t("search-our-collection") %></h4>
-                <div class="clearfix" id="search-form">
-                  <%= partial :search_form %>
-                </div>
-              </div>	
+            <div id="search-wrapper" class="five columns">
+              <h4><%= t("search-our-collection") %></h4>
+              <div class="clearfix" id="search-form">
+                <%= partial :search_form %>
+              </div>
+            </div>	
 
 
+          </div>
         </div>
       </div>
-	</div>
-	<div class="clearfix shaded-panel top-margin-10">
-      <div class="page-head short">
-      </div>
-      <!-- Elastislide Carousel -->
-      <div id="carousel" class="es-carousel-wrapper">
-        <h2><%= t("featured_collections") %></h2>
-        <div class="es-carousel">
-		<span class="swipe"></span>
-          <ul>
-            <% carousel.each do |entry| %>
-              <%= carousel_entry entry %>
-            <% end %>
-          </ul>
+
+      <div class="clearfix shaded-panel top-margin-10">
+        <div class="page-head short"></div>
+
+        <div id="carousel" class="es-carousel-wrapper">
+          <h2><%= t("featured_collections") %></h2>
+          <div class="es-carousel">
+            <span class="swipe"></span>
+            <ul>
+              <% carousel.each do |entry| %>
+                <%= carousel_entry @lang, entry %>
+              <% end %>
+            </ul>
+          </div>
         </div>
       </div>
-      <!-- End Elastislide Carousel -->
+
     </div>
   </div>
 </div>
-<%= partial :footer %>
+  <%= partial :footer %>
