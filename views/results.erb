@@ -1,3 +1,4 @@
+<%#encoding: utf-8%>
 <%= partial :header %>
 <div id="content">
   <div class="container clearfix">
@@ -12,13 +13,13 @@
             <%= partial :search_form %>
           </div>
           <div class="results-found">
-            <%= t("total-results-found") %> <%= @total_results %>
+            <%= t("total-results-found") %> <%= with_farsi_numbers @total_results %>
           </div>
         </div>
 
         <ul class="search-results collections dark-list">
           <% @results.each do |result| %>
-            <li class="clearfix <%= result.type %><% if result.type.downcase == "item" %><%= result.image_count %><% end %>">
+            <li class="clearfix <%= result.type %><% if result.type.downcase == "item" %><%= with_farsi_numbers result.image_count %><% end %>">
             <a href="<%= "#{ENV["MAIN_SITE_URL"]}#{result.send("url_#{@lang}")}" %>" class="clearfix">
               	<div class="collection-thumb stack rotated">
 	                <% if result.thumbnail %>
@@ -31,9 +32,9 @@
 	              </div>
               <div class="collection-meta">
                 <% if result.type.downcase == "collection" %>
-                  <span class="items-in-collection"><strong><%= result.count %></strong><%= t("items") %></span>
+                  <span class="items-in-collection"><strong><%= with_farsi_numbers result.count %></strong><%= t("items") %></span>
                 <% else %>
-                  <span class="items-in-collection"><strong><%= result.image_count %></strong> Image<span class="plural">s</span></span>
+                  <span class="items-in-collection"><strong><%= with_farsi_numbers result.image_count %></strong> Image<span class="plural">s</span></span>
                 <% end %>
                 <div class="collection-essentials">
                   <span class="date"><%= result.created_at %></span>
@@ -84,7 +85,7 @@
                   <%= term['term'] %>
                 </a>
               <% end %>
-              <span>(<%= term['count'] %>)</span> 
+              <span>(<%= with_farsi_numbers term['count'].to_i %>)</span> 
               </li>
             <% end %>
           </ul>

@@ -1,3 +1,4 @@
+#encoding: utf-8
 require 'net/http'
 require 'json'
 
@@ -91,4 +92,5 @@ module Helpers
   def period_filters
     JSON.parse Net::HTTP.get(URI("http://wwqi-static-site.s3.amazonaws.com/period_manifest.json"))
   end
+
 end

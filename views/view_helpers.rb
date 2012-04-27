@@ -1,6 +1,12 @@
 #encoding: utf-8
 require 'ostruct'
 
+class String
+  def name
+    self
+  end
+end
+
 module ViewHelpers
   def load_example_item! 
     @object = OpenStruct.new
@@ -178,8 +184,11 @@ NOTES
     @object = OpenStruct.new.tap do |o|
       o.title = "Named Holdings"
       o.description = "Women's Worlds in Qajar Iran includes a growing number of digital collections from private family holdings and participating archival institutions. Click on each holding to see the full details."
-      o.content = []
-      10.times.with_object(o.content) { |_, acc| acc << create_collection! }
+      o.instance_eval do
+        def content(*_) 
+          10.times.with_object([]) { |_, acc| acc << ViewHelpers.create_collection! }
+        end
+      end
     end
   end
 
@@ -188,9 +197,18 @@ NOTES
   end
 
   def create_collection!
+    ViewHelpers.create_collection!
+  end
+
+  def self.create_collection!
     @coll_number ||= 0
     @coll_number += 1
     OpenStruct.new.tap do |o|
+      o.instance_eval do
+        def in_process?
+          rand(1) == 1
+        end
+      end
       o.title = "Collection Title #{@coll_number}"
       o.created = "1786-2010 [1201 AH - 1388 SH]"
       o.updated = "1786-2010 [1201 AH - 1388 SH]"
@@ -208,17 +226,38 @@ NOTES
       6.times.with_object(o.favorites) { |_, acc| acc << create_item! }
       o.count = rand(125)
 
+
       if rand(2) == 1
         o.thumbnail = "http://d19ob2c2hogwg9.cloudfront.net/collection_thumbs/collection_#{(1..28).to_a.sample}.jpg"
       end
     end
   end
-  
+
+
+
   def create_item!
+    ViewHelpers.create_item!
+  end
+
+  def self.create_item!
     OpenStruct.new.tap do |o|
       o.title = "an item"
       o.thumbnail = "http://d19ob2c2hogwg9.cloudfront.net/thumbs/it_#{rand(2000)+1}.jpg"
     end
+  end
+
+  FARSI_NUMBERS = "۰۱۲۳۴۵۶۷۸۹"
+
+  def with_farsi_numbers(string)
+    string ||= ""
+    string = string.to_s
+
+    if @lang == :fa 
+      FARSI_NUMBERS.chars.each.with_index do |e, i|
+        string.gsub!(i.to_s, e)
+      end
+    end
+    string
   end
 end
 
@@ -242,4 +281,5 @@ class NilClass
   def try(_)
     self
   end
+
 end
