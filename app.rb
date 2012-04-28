@@ -1,3 +1,4 @@
+#encoding: utf-8
 require 'sinatra'
 require 'date'
 require 'tire'
@@ -76,6 +77,7 @@ get '/search' do
     add_facet "genres_#{lang}" 
     add_facet "people_#{lang}" 
     add_facet "places_#{lang}" 
+    add_facet "collections_#{lang}" 
     #add_facet 'type'
 
     size Loopback.results_per_page

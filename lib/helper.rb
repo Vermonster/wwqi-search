@@ -1,3 +1,4 @@
+#encoding: utf-8
 require 'net/http'
 require 'json'
 
@@ -44,7 +45,7 @@ module Helpers
     ["1131-1141","1134","1016-1139","1131-1142","1019","1025","911","1021A","907-1023","1014","1018","905-906-1017"]
   end
 
-  def carousel_entry(acc)
+  def carousel_entry(lang, acc)
     entries = { 
       "1131-1141"    => { lang: @lang, img: "collection_33.jpg", text: "Shirin Dukht Sultani Nuri"                 , acc: "1131-1141"    , desc: "A collection of family letters, a sales settlement, and a marriage contract."                           },
       "1134"         => { lang: @lang, img: "collection_35.jpg", text: "Moezzi Family"                             , acc: "1134"         , desc: "A collection of family letters and papers, photographs, and objects, featuring several marriage contracts and household items."},
@@ -91,4 +92,5 @@ module Helpers
   def period_filters
     JSON.parse Net::HTTP.get(URI("http://wwqi-static-site.s3.amazonaws.com/period_manifest.json"))
   end
+
 end
