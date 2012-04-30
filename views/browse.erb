@@ -19,48 +19,16 @@
         <div class="browse-by-type">
           <%#<h1>View By Type</h1>%>
           <div class="twelve-columns clearfix">
-            <div class="four columns">
-              <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "manuscripts & lithographs").to_url  %>">
-                <!--<span class="icon">N</span>-->
-                <img src="/images/ico-litho.png" alt="" />
-                <span>Manuscripts &amp; Lithos</span>
-              </a>
-            </div>
-            <div class="four columns">
-              <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "objects").to_url  %>">
-                <!--<span class="icon">b</span>-->
-                <img src="/images/ico-object.png" alt="" />
-                <span>Objects</span>
-              </a>
-            </div>
-            <div class="four columns omega">
-              <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "legal & financial").to_url  %>">
-                <!--<span class="icon">Y</span>-->
-                <img src="/images/ico-legal.png" alt="" />
-                <span>Legal &amp; Financial</span>
-              </a>
-            </div>
-            <div class="four columns">
-              <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "photographs").to_url  %>">
-                <!--<span class="icon">v</span>-->
-                <img src="/images/ico-photos.png" alt="" />
-                <span>Photographs</span>
-              </a>
-            </div>
-            <div class="four columns">
-              <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "letters").to_url %>">
-                <!--<span class="icon">F</span>-->
-                <img src="/images/ico-letters.png" alt="" />
-                <span>Letters</span>
-              </a>
-            </div>
-            <div class="four columns omega">
-              <a href="<%= loopback(lang: @lang).update_filter("genres_en".to_sym, "audio files").to_url %>">
-                <!--<span class="icon"><</span> -->
-                <img src="/images/ico-audio.png" alt="" />
-                <span>Audio Files</span>
-              </a>
-            </div>
+            <% @object.browse_entries.each_slice(3) do |slice| %>
+              <% slice.each_with_index do |(genre, image), idx| %>
+                <div class="four columns <%= 'omega' if idx == 2 %>">
+                  <a href="<%= loopback(lang: @lang).update_filter("genres_#{@lang}".to_sym, genre.name).to_url %>">
+                    <img src="<%= image %>" alt="<%= genre.name %>" />
+                    <span><%= genre.name %></span>
+                  </a>
+                </div>
+              <% end %>
+            <% end %>
           </div>
         </div>
       </div>
