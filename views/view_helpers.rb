@@ -233,8 +233,6 @@ NOTES
     end
   end
 
-
-
   def create_item!
     ViewHelpers.create_item!
   end
@@ -260,9 +258,6 @@ NOTES
     string
   end
 
-  def t(key)
-    Translation.t(key, @lang)
-  end
 end
 
 class Array
