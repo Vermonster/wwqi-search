@@ -13,6 +13,8 @@ require './views/view_helpers'
 require './initializers/activerecord'
 require './lib/translation'
 
+
+
 ENV["MAIN_SITE_URL"] ||= 'http://localhost:4567'
 ENV["ASSET_URL"] ||= 'http://assets.wwqidev.com'
 ENV["SEARCH_URL"] ||= 'http://localhost:4567/search'
@@ -43,6 +45,7 @@ end
 get '/search' do
   query_string = params["query"] 
   date = params["date"]
+  sorter = params["sort"]
   date_start, date_end = params["date"] && params["date"].split('TO')
   filters  = Filter.new(params["filter"])
   lang = (params["lang"] || :en).to_sym
@@ -72,8 +75,11 @@ get '/search' do
         filters.each do |facet, item|
           must { term facet, item }
         end
+
       end
     end
+
+    sort { by "sortable_#{sorter}_#{lang}" } if sorter
 
     add_facet "subjects_#{lang}"
     add_facet "genres_#{lang}" 
@@ -123,4 +129,6 @@ get '/:lang/genres.html'   do |lang| item_index(lang, :genres,   params["letter"
 get '/:lang/subjects.html' do |lang| item_index(lang, :subjects, params["letter"]) end
 get '/:lang/people.html'   do |lang| item_index(lang, :people,   params["letter"]) end
 get '/:lang/places.html'   do |lang| item_index(lang, :places,   params["letter"]) end
+
+
 

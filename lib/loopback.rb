@@ -37,6 +37,7 @@ class Loopback
     @query = params["query"]
     @page = params["page"].to_i || 1
     @lang = params["lang"].to_sym
+    @sorter = params["sort"]
     @date = params["date"]
     @filters = Filter.new(params["filter"])
   end
@@ -48,6 +49,11 @@ class Loopback
   def query_field
     return "" unless @query
     "&query=#{@query}" 
+  end
+
+  def sort_field 
+    return "" unless @sorter
+    "&sort=#{@sorter}"
   end
 
   def lang_field
@@ -76,7 +82,7 @@ class Loopback
   end
 
   def to_url
-    "#{ENV["SEARCH_URL"]}?" + lang_field + query_field + filter_field + page_field + date_field
+    "#{ENV["SEARCH_URL"]}?" + lang_field + query_field + filter_field + page_field + date_field + sort_field
   end
 
   def increment_page
@@ -91,6 +97,11 @@ class Loopback
 
   def to(date)
     @to = date
+    self
+  end
+
+  def sort!
+    @sorter = "title"
     self
   end
 
