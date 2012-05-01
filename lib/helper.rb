@@ -3,10 +3,6 @@ require 'net/http'
 require 'json'
 
 module Helpers
-  def t(key, *_) 
-    key 
-  end
-  
   def javascript(name)
     %Q|<script type='text/javascript' src='/javascripts/#{name}.js'></script>|
   end
@@ -62,6 +58,20 @@ module Helpers
     }
     collection_entry(entries[acc])
   end
+
+  def t(key, lang = nil)
+    lang ||= @lang
+    case t = Translation.t(key, lang.to_s)
+    when Translation
+      t.value
+    when NilClass
+      STDERR.puts "MISSING KEY: #{key}"
+      key
+    when String
+      t
+    end
+  end
+
 
   def collection_entry(opts = {})
     raise "must provide img" unless opts.has_key? :img

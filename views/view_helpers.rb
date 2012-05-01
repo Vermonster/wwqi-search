@@ -233,8 +233,6 @@ NOTES
     end
   end
 
-
-
   def create_item!
     ViewHelpers.create_item!
   end
@@ -259,6 +257,7 @@ NOTES
     end
     string
   end
+
 end
 
 class Array
