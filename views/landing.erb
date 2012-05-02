@@ -54,8 +54,8 @@
             <h1>Please choose your language</h1>
 
             <div id="language-selector">
-              <a href="#">Set language to English</a>
-              <a href="#">Set language to Farsi</a>
+              <a href="/en/index.html" class="lang-selector">Set language to English</a>
+              <a href="/fa/index.html" class="lang-selector">Set language to Farsi</a>
             </div>
 
           </div>
@@ -67,8 +67,10 @@
   
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 
+  <%= javascript "jquery.cookie" %>
+  <%= javascript "languagePreference" %>
   <script type="text/javascript">
-    var languagePref = $.cookie("language");
+    var languagePref = $.cookie("languagePref");
 
     if (languagePref == 'fa') {
       window.location.replace("/fa/index.html");

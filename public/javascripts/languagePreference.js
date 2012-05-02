@@ -4,7 +4,7 @@ $(function () {
     var langRegex = /\/(fa|en)\//;
     var matches = langRegex.exec($(this).attr('href'));
 
-    if (matches[1]) { $.cookie("languagePref", matches[1]); }
+    if (matches[1]) { $.cookie("languagePref", matches[1], {path: "/"}); }
   });
 
 });
