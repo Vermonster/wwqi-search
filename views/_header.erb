@@ -45,6 +45,7 @@
 
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 
+  <%= javascript "jquery.cookie" %>
   <%= javascript "languagePreference" %>
   <%= javascript "jquery.ui.widget.min" %>
   <%= javascript "AudioPlayerV1" %>
@@ -81,7 +82,8 @@
             <li>
             <% target_lang = @lang == :en ? :fa : :en %>
             <% text_lang = @lang == :en ? 'فارسی' : 'English' %>
-            <%= lang_link_to(text_lang, 'index.html', lang: target_lang, class: 'lang lang-selector', dir: 'rtl') %> 
+            <%= lang_link_to(text_lang, 'index.html', lang: target_lang, class: 'lang lang-selector', dir: 'rtl') %>
+            test
             </li>
           </ul>
         </div>
