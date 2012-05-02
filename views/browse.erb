@@ -17,7 +17,7 @@
         </div>
 
         <div class="browse-by-type">
-          <%#<h1>View By Type</h1>%>
+          <h1><%= t("browse") %></h1>
           <div class="twelve-columns clearfix">
             <% @object.browse_entries.each_slice(3) do |slice| %>
               <% slice.each_with_index do |(genre, image), idx| %>
@@ -41,13 +41,13 @@
             <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/genres.html"><span class="icon">l</span><%= t('genre') %></a>
             </li>
             <li>
-            <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/people"><span class="icon">g</span><%= t('people') %></a>
+            <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/people.html"><span class="icon">g</span><%= t('people') %></a>
             </li>
             <li>
-            <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/places"><span class="icon">@</span><%= t('place') %></a>
+            <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/places.html"><span class="icon">@</span><%= t('place') %></a>
             </li>
             <li>
-            <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/subjects"><span class="icon">n</span><%= t('subject') %></a>
+            <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/subjects.html"><span class="icon">n</span><%= t('subject') %></a>
             </li>
           </ul>
         </div>
