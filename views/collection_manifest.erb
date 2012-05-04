@@ -9,7 +9,7 @@
         <div class="extra-padding">
           <h1><%= @object.title %></h1>
           <p>	
-          <%= @object.description %>
+          <%= markdown @object.description %>
           </p>
         </div>
       </div>
@@ -34,7 +34,7 @@
               <span class="items-in-collection"><strong><%= with_farsi_numbers collection.item_count %></strong>Items</span>
               <div class="collection-essentials">
                 <h3><%= collection.title %></h3>
-                <p><%= collection.description %></p>
+                <p><%= markdown collection.description %></p>
               </div>
             </div>
           </a>
