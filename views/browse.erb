@@ -1,3 +1,6 @@
+<%# encoding: utf-8 %>
+<% load_example_browse_page_object! unless $GENERATE %>
+
 <%= partial :header %>
 <div id="content">
   <div class="container clearfix dark">
@@ -17,7 +20,7 @@
         </div>
 
         <div class="browse-by-type">
-          <%#<h1>View By Type</h1>%>
+          <h1><%= t("browse") %></h1>
           <div class="twelve-columns clearfix">
             <% @object.browse_entries.each_slice(3) do |slice| %>
               <% slice.each_with_index do |(genre, image), idx| %>
@@ -41,18 +44,18 @@
             <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/genres.html"><span class="icon">l</span><%= t('genre') %></a>
             </li>
             <li>
-            <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/people"><span class="icon">g</span><%= t('people') %></a>
+            <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/people.html"><span class="icon">g</span><%= t('people') %></a>
             </li>
             <li>
-            <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/places"><span class="icon">@</span><%= t('place') %></a>
+            <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/places.html"><span class="icon">@</span><%= t('place') %></a>
             </li>
             <li>
-            <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/subjects"><span class="icon">n</span><%= t('subject') %></a>
+            <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/subjects.html"><span class="icon">n</span><%= t('subject') %></a>
             </li>
           </ul>
         </div>
 
-        <h3 class="has-children active"><a href="#"><%= t('periods') %></a></h3>
+        <h3 class="has-children active last"><a href="#"><%= t('periods') %></a></h3>
         <div class="list">
           <ul class="default">
             <% Period.all.each do |period| %>
@@ -66,12 +69,15 @@
           </ul>
         </div>
 
+
+        <!--
         <h3 class="last">
           <a href="/<%= @lang %>/collections/manifest.html">
             <span class="icon">P</span>
             <%= t('collections') %>
           </a>
         </h3>
+        -->
 
         <%#<h3><a href="/archive/collections" ><span class="icon">></span> Translations</a></h3>%>
         <%#<h3 class="last"><a href="/archive/collections" ><span class="icon">'</span> Recent Additions</a></h3>%>

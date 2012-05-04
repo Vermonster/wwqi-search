@@ -1,4 +1,8 @@
 module DesignRoutes
+  get '/pendar/index.html' do 
+    erb :landing
+  end
+
   get '/pendar/:lang/collections/manifest.html' do |lang|
     @lang = lang
     erb :collection_manifest

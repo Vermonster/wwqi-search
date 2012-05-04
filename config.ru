@@ -2,12 +2,17 @@ require 'rubygems'
 require 'sinatra'
 require 'active_record'
 
-set :environment, :production
-set :port, 8000
+set :port, ENV['PORT'] || 8000
 
 use ActiveRecord::ConnectionAdapters::ConnectionManagement
 
-disable(:run, :reload) if ENV["PRODUCTION"] 
+if ENV['APP_ENV'] == 'DEVELOPMENT'
+  set :environment, :development
+  enable(:run, :reload)
+else
+  set :environment, :production
+  disable(:run, :reload)
+end  
 
 require './app'
 
