@@ -69,7 +69,6 @@ module Helpers
     when Translation
       t.value
     when NilClass
-      STDERR.puts "MISSING KEY: #{key}"
       key
     when String
       t
