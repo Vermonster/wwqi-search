@@ -1177,7 +1177,7 @@ ul.collections li a .items-in-collection strong{
 
 #carousel .collection-thumb img{
 }
-
+.es-carousel{direction:ltr}
 .es-carousel ul li{
 	overflow:visible;
 	background:url(../images/carousel-border.png) 100% 0 repeat-y;
