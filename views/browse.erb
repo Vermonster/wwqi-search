@@ -1,3 +1,6 @@
+<%# encoding: utf-8 %>
+<% load_example_browse_page_object! unless $GENERATE %>
+
 <%= partial :header %>
 <div id="content">
   <div class="container clearfix dark">
@@ -52,7 +55,7 @@
           </ul>
         </div>
 
-        <h3 class="has-children active"><a href="#"><%= t('periods') %></a></h3>
+        <h3 class="has-children active last"><a href="#"><%= t('periods') %></a></h3>
         <div class="list">
           <ul class="default">
             <% Period.all.each do |period| %>
@@ -66,12 +69,15 @@
           </ul>
         </div>
 
+
+        <!--
         <h3 class="last">
           <a href="/<%= @lang %>/collections/manifest.html">
             <span class="icon">P</span>
             <%= t('collections') %>
           </a>
         </h3>
+        -->
 
         <%#<h3><a href="/archive/collections" ><span class="icon">></span> Translations</a></h3>%>
         <%#<h3 class="last"><a href="/archive/collections" ><span class="icon">'</span> Recent Additions</a></h3>%>

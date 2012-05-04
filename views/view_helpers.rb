@@ -196,6 +196,15 @@ NOTES
     @object = create_collection!
   end
 
+  def load_example_browse_page_object!
+    @object = OpenStruct.new.tap do |o|
+      o.title = 'Browse'
+      o.browse_entries = 6.times.with_object([]) do |i, bes|
+        bes <<  OpenStruct.new(:name => 'Genre Name ' + i.to_s)
+      end
+    end
+  end
+
   def create_collection!
     ViewHelpers.create_collection!
   end
