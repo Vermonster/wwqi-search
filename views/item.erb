@@ -27,10 +27,10 @@
           <div class="six columns  omega last-column">
             <div class="item-links">
               <h1><%= t("images") %></h1>
-              <a href="<%= @object.harvard_urls[:preferred] %>" rel="shadowbox[gallery]" title="<%= @object.title %>"><%= t("view-this-item") %></a>
+              <a target="_blank" href="<%= @object.harvard_urls[:preferred] %>" rel="shadowbox[gallery]" title="<%= @object.title %>"><%= t("view-this-item") %></a>
               <% if @object.secondary_urns? %>
                 <% @object.harvard_urls[:secondary].each do |url| %>
-                  <a href="<%= url %>" title="View Additional Image"><%= t("view-additional-image") %></a>
+                  <a target="_blank" href="<%= url %>" title="View Additional Image"><%= t("view-additional-image") %></a>
                 <% end %>
               <% end %>
             </div>

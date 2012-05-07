@@ -7,6 +7,10 @@ module Helpers
     %Q|<script type='text/javascript' src='/javascripts/#{name}.js'></script>|
   end
 
+  def markdown(str)
+    str
+  end
+
   def lang_link_to(text, link, opts={})
     lang = opts.delete(:lang) 
     url = URI.join(ENV["MAIN_SITE_URL"], "#{lang}/", "#{link}")
@@ -65,7 +69,6 @@ module Helpers
     when Translation
       t.value
     when NilClass
-      STDERR.puts "MISSING KEY: #{key}"
       key
     when String
       t

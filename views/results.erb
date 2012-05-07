@@ -82,7 +82,7 @@
                 <%= term['term'] %>
               <% else %>
                 <a href="<%= loopback.update_filter(facet, term['term']).to_url %>">
-                  <%= term['term'] %>
+                  <%= t(term['term']) %>
                 </a>
               <% end %>
               <span>(<%= with_farsi_numbers term['count'].to_i %>)</span> 
