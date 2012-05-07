@@ -1797,6 +1797,19 @@ ul.collections li a .items-in-collection strong{
 		.es-nav span{height:70px!important; top:190px!important;}
 		.es-carousel-wrapper{padding-right:0px!important; }
 		#carousel .swipe{display:block}
+		#pageFooter {height:auto; padding-top:10px;padding-bottom:10px;}
+		#pageFooter .noimage img{
+			width:290px;
+			margin-top:10px;
+		}
+		#pageFooter .footerNav li{
+			display:block;
+			padding:6px 0;
+			float:none;
+			margin:0;
+			border-bottom:1px solid #333;
+		}
+		#pageFooter p {margin:3px 0; text-align:center;}
 
 	}
 
