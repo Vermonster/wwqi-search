@@ -34,10 +34,10 @@
         </div>
         <div class="clearfix special-searches">
           <div class="six columns alpha">
-            <h3><a href="<%= loopback.update_filter('translations', 'has-translation') %>"><span class="icon">></span> <%= t("view_all_items_with_translations") %></a></h3>
+            <h3><a href="<%= loopback.update_filter('translations', 'has-translation').to_url %>"><span class="icon">></span> <%= t("view_all_items_with_translations") %></a></h3>
           </div>
           <div class="six columns omega">
-            <h3><a href="<%= loopback.update_filter('transcriptions', 'has-transcription') %>"><span class="icon">p</span> <%= t("view_all_items_with_transcriptions") %></a></h3>
+            <h3><a href="<%= loopback.update_filter('transcriptions', 'has-transcription').to_url %>"><span class="icon">p</span> <%= t("view_all_items_with_transcriptions") %></a></h3>
           </div>
         </div>
 
@@ -89,9 +89,9 @@
           <ul>
             <% @object.period_list.each do |period| %>
               <li class="<%= period.slug %>">
-              <a href="<%= loopback.from(period.start_time).to(period.end_time).to_url %>">
+              <a href="<%= loopback.from(period.start_at).to(period.end_at).to_url %>">
                 <em><img src="/images/blank.gif"></em>
-                <span><%= period.name%></span>
+                <span><%= period.title %></span>
               </a>
               </li>
             <% end %>
