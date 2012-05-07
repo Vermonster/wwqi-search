@@ -1664,7 +1664,7 @@ ul.collections li a .items-in-collection strong{
 .view-all{
 	float:right;
 	font-size:12px;
-	color:#aaa;
+	color:#333;
 }
 #browse-bar .browse-by-period h1{
 	background:url(../images/icon-period.png) 0 0 no-repeat;
