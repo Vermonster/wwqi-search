@@ -34,10 +34,14 @@
 	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
 
 </head>
-<body>
+<body id="landing">
   <div id="nonFooter">
     <div class="header">
       <div class="toolbar">
+        <div class="container clearfix">
+          <h1 class="title-en"><%= t('site_title', :en) %></h1>
+          <h1 class="title-fa" dir="rtl"><%= t('site_title', :fa) %></h1>
+        </div>
       </div>
       <div class="menu">
       </div>
@@ -51,17 +55,43 @@
           <div class="page-head dark"></div>
 
           <div id="home-main">
-            <h1>Please choose your language</h1>
 
-            <div id="language-selector">
-              <a href="/en/index.html" class="lang-selector">Set language to English</a>
-              <a href="/fa/index.html" class="lang-selector">Set language to Farsi</a>
+            <div id="language-selector" class="clearfix">
+              <div id="language-selector-en">
+                <div class="language-selector-text">
+                  <h1><%= t('welcome_message', :en) %></h1>
+                  <h2><%= t('home_welcome_message', :en) %></h2>
+                </div>
+                
+                <h1><%= t('choose-language-option', :en) %></h1>
+                <a href="/en/index.html" class="lang-selector"><%= t('language_option', :fa) %></a>
+              </div>
+              
+              <div id="language-selector-fa">
+                <div class="language-selector-text">
+                  <h1><%= t('welcome_message', :fa) %></h1>
+                  <h2><%= t('home_welcome_message', :fa) %></h2>
+                </div>
+                
+                <h1><%= t('choose-language-option', :fa) %></h1>
+                <a href="/fa/index.html" class="lang-selector"><%= t('language_option', :en) %></a>
+              </div>
             </div>
 
           </div>
 
         </div>
       </div>
+    </div>
+  </div>
+  
+  <div id="pageFooterWrapper">
+    <div id="pageFooter" class="container">
+      <a class="noimage" href="http://www.harvard.edu" target="_blank">
+        <img alt="Harvard Logo" src="/images/harvard.gif"></a>
+      <p>
+      Copyright &copy; 2012  WWQI. All rights reserved.
+      </p>
     </div>
   </div>
   

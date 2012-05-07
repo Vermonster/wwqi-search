@@ -863,7 +863,7 @@ ul.search-results {
 	margin-right: 10px;
 }
 
-#pagin li a {
+#pagin li a, #language-selector a {
 	display: block;
 	text-decoration: none;
 	color: #717171;
@@ -905,7 +905,7 @@ ul.search-results {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7cb9e5', endColorstr='#57a1d8',GradientType=0 );
 }
 
-#pagin li a:hover {
+#pagin li a:hover, #language-selector a:hover {
 	-webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.55);
 	-moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.55);
 	box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.55);
@@ -939,7 +939,61 @@ ul.search-results {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99cefc', endColorstr='#57a1d8',GradientType=0 );
 }
 
+#language-selector {
+  width: 80%;
+  margin: 4em auto 10em auto;
+  clear: both;
+}
+#language-selector:after {
 
+}
+#language-selector a {
+  font-size: 200%;
+  padding: .25em 1em;
+}
+
+#language-selector #language-selector-en,
+#language-selector #language-selector-fa {
+  width: 45%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  float: left;
+}
+
+#language-selector #language-selector-fa {
+  float: right;
+  text-align: right;
+}
+
+.language-selector-text {
+  height: 25em;
+}
+
+#landing .header h1 {
+  margin: 0 1em;
+  font-size: 200%;
+} 
+
+#landing .header h1.title-en {
+  float: left;
+}
+
+#landing .header h1.title-fa {
+  float: right;
+}
+
+#landing #pageFooter {
+  text-align: center;
+}
+
+#landing .header {
+  height: 100px;
+}
+
+#landing .header .menu {
+  height: 40px;
+}
 .results-found {
   color: #FFF;
   font-size: 1.5em;
