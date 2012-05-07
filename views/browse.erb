@@ -4,248 +4,255 @@
 <%= partial :header %>
 <div id="content">
 	<div class="container clearfix white-paper-stack top-of-page"><div class="stacks"></div></div>
-  <div class="container clearfix dark">
-    <div class="clearfix shaded-panel has-sidebar browse-page">
-  
+	<div class="container clearfix dark">
+		<div class="clearfix shaded-panel has-sidebar browse-page">
 
-      <div class="clearfix twelve columns">
-        <div class="browse-search">
 
-              <h1> <%= t('search') %> </h1>
-              <div class="clearfix searchbox">
-                <div class="clearfix" id="search-form">
-                  <%= partial :search_form %>
-              </div>
-            </div>
-        </div>
-        <div class="browse-by-type">
-          <h1><%= t("genres") %><a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/genres.html" class="view-all"><%= t("view_all") %></a></h1>
-          <div class="twelve-columns clearfix">
-            <% @object.browse_entries.each_slice(3) do |slice| %>
-              <% slice.each_with_index do |(genre, image), idx| %>
-                <div class="two columns <%= 'omega' if idx == 2 %>">
-                  <a href="<%= loopback(lang: @lang).update_filter("genres_#{@lang}".to_sym, genre.name).to_url %>">
-                    <img src="<%= image %>" alt="<%= genre.name %>" />
-                    <span><%= genre.name %></span>
-                  </a>
-                </div>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-		<div class="clearfix secondary-browse-facets">
-		
-				<div class="four columns alpha people">
-					 <h3><span class="icon">g</span> <%= t("people") %><a class="view-all" href="<%= SEARCH_BASE_URL %>/<%= @lang %>/people.html"><%= t("view_all") %></a></h3>
-					<ul class="default">
-					        <li>
-					            <a href="/archive/browser?person_filter[]=95" class="">Nusrat al-Saltanah<span>(170)</span></a>
-					            
-					        </li>
-					        <li>
-					            <a href="/archive/browser?person_filter[]=179" class="">Aqa Mirza Hasan Shaykh al-Islam <span>(158)</span></a>
-					           
-					        </li>
-					        <li>
-					            <a href="/archive/browser?person_filter[]=107" class="">Sadiqah Dawlatabadi<span>(128)</span></a>
-					            
-					        </li>
-					        <li>
-					            <a href="/archive/browser?person_filter[]=82" class="">Mahin al-Saltanah<span>(78)</span></a>
-					            
-					        </li>
-					        <li>
-					            <a href="/archive/browser?person_filter[]=523" class="">Mahdiquli Mirza <span>(72)</span></a>
-					           
-					        </li>
-					        <li>
-					            <a href="/archive/browser?person_filter[]=443" class="">Marzieh Khanum Nosrat Mozaffari Sabeti <span>(61)</span></a>
-					            
-					        </li>
-					        <li>
-					            <a href="/archive/browser?person_filter[]=109" class="">Qamar Taj Dawlatabadi <span>(53)</span></a>
-					            
-					        </li>
-					        <li>
-					            <a href="/archive/browser?person_filter[]=544" class="">Muʻin al-Din Mirza <span>(49)</span></a>
-					            
-					        </li>
-					    </ul>
+			<div class="clearfix twelve columns">
+				<div class="browse-search">
+
+					<h1> <%= t('search') %> </h1>
+					<div class="clearfix searchbox">
+						<div class="clearfix" id="search-form">
+							<%= partial :search_form %>
+						</div>
+					</div>
 				</div>
-				<div class="four columns places">
-					 <h3><span class="icon">@</span> <%= t("places") %> <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/places.html" class="view-all"><%= t("view_all") %></a></h3>
-					<ul class="default">
-					        <li>
-					            <a href="/archive/browser?place_filter[]=1" class="">Tehran <span>(422)</span></a>
-					            
-					        </li>
-					        <li>
-					            <a href="/archive/browser?place_filter[]=9" class="">Paris <span>(90)</span></a>
-					            
-					        </li>
-					        <li>
-					            <a href="/archive/browser?place_filter[]=2" class="">Qazvin <span>(73)</span></a>
-					            
-					        </li>
-					        <li>
-					            <a href="/archive/browser?place_filter[]=28" class="">Hamadan <span>(44)</span></a>
-					            
-					        </li>
-					        <li>
-					            <a href="/archive/browser?place_filter[]=16" class="">France <span>(40)</span></a>
-					            
-					        </li>
-					        <li>
-					            <a href="/archive/browser?place_filter[]=11" class=""> Isfahan <span>(40)</span></a>
-					            
-					        </li>
-					        <li>
-					            <a href="/archive/browser?place_filter[]=30" class=""> Mashhad <span>(30)</span></a>
-					            
-					        </li>
-					        <li>
-					            <a href="/archive/browser?place_filter[]=106" class="">Sumi‘ah (Azerbaijan) <span>(29)</span></a>
-					            
-					        </li>
-					    </ul>
+				<div class="browse-by-type">
+					<h1><%= t("genres") %><a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/genres.html" class="view-all"><%= t("view_all") %></a></h1>
+					<div class="twelve-columns clearfix">
+						<% @object.browse_entries.each_slice(3) do |slice| %>
+						<% slice.each_with_index do |(genre, image), idx| %>
+						<div class="two columns <%= 'omega' if idx == 2 %>">
+							<a href="<%= loopback(lang: @lang).update_filter("genres_#{@lang}".to_sym, genre.name).to_url %>">
+								<img src="<%= image %>" alt="<%= genre.name %>" />
+								<span><%= genre.name %></span>
+							</a>
+						</div>
+						<% end %>
+						<% end %>
+					</div>
 				</div>
-				<div class="four columns omega subjects">
-					 <h3><span class="icon">n</span> <%= t("subjects") %><a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/subjects.html" class="view-all"><%= t("view_all") %></a></h3>
-					<ul class="default">
-					        <li>
-					            <a href="/archive/browser?subject_filter[]=27" class="">clothing and dress <span>(216)</span></a>
-					            
-					        </li>
-					        <li>
-					            <a href="/archive/browser?subject_filter[]=60" class="">group portraits <span>(210)</span></a>
-					           
-					        </li>
-					        <li>
-					            <a href="/archive/browser?subject_filter[]=510" class="">Jews <span>(154)</span></a>
-					            
-					        </li>
-					        <li>
-					            <a href="/archive/browser?subject_filter[]=25" class="">children <span>(133)</span></a>
-					            
-					        </li>
-					        <li>
-					            <a href="/archive/browser?subject_filter[]=325" class="">marriage <span>(79)</span></a>
-					            
-					        </li>
-					        <li>
-					            <a href="/archive/browser?subject_filter[]=70" class="">illness <span>(78)</span></a>
-					            
-					        </li>
-					        <li>
-					            <a href="/archive/browser?subject_filter[]=66" class="">husband and wife <span>(76)</span></a>
-					            
-					        </li>
-					        <li>
-					            <a href="/archive/browser?subject_filter[]=449" class="">travel <span>(74)</span></a>
-					            
-					        </li>
-					    </ul>
+				<div class="clearfix special-searches">
+					<div class="six columns alpha">
+						<h3><a href="#"><span class="icon">></span> <%= t("view_all_items_with_translations") %></a></h3>
+					</div>
+					<div class="six columns omega">
+						<h3><a href="#"><span class="icon">p</span> <%= t("view_all_items_with_transcriptions") %></a></h3>
+					</div>
 				</div>
-		
+				<div class="clearfix secondary-browse-facets">
+
+					<div class="four columns alpha people">
+						<h3><span class="icon">g</span> <%= t("people") %><a class="view-all" href="<%= SEARCH_BASE_URL %>/<%= @lang %>/people.html"><%= t("view_all") %></a></h3>
+						<ul class="default">
+							<li>
+								<a href="/archive/browser?person_filter[]=95" class="">Nusrat al-Saltanah<span>(170)</span></a>
+
+							</li>
+							<li>
+								<a href="/archive/browser?person_filter[]=179" class="">Aqa Mirza Hasan Shaykh al-Islam <span>(158)</span></a>
+
+							</li>
+							<li>
+								<a href="/archive/browser?person_filter[]=107" class="">Sadiqah Dawlatabadi<span>(128)</span></a>
+
+							</li>
+							<li>
+								<a href="/archive/browser?person_filter[]=82" class="">Mahin al-Saltanah<span>(78)</span></a>
+
+							</li>
+							<li>
+								<a href="/archive/browser?person_filter[]=523" class="">Mahdiquli Mirza <span>(72)</span></a>
+
+							</li>
+							<li>
+								<a href="/archive/browser?person_filter[]=443" class="">Marzieh Khanum Nosrat Mozaffari Sabeti <span>(61)</span></a>
+
+							</li>
+							<li>
+								<a href="/archive/browser?person_filter[]=109" class="">Qamar Taj Dawlatabadi <span>(53)</span></a>
+
+							</li>
+							<li>
+								<a href="/archive/browser?person_filter[]=544" class="">Muʻin al-Din Mirza <span>(49)</span></a>
+
+							</li>
+						</ul>
+					</div>
+					<div class="four columns places">
+						<h3><span class="icon">@</span> <%= t("places") %> <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/places.html" class="view-all"><%= t("view_all") %></a></h3>
+						<ul class="default">
+							<li>
+								<a href="/archive/browser?place_filter[]=1" class="">Tehran <span>(422)</span></a>
+
+							</li>
+							<li>
+								<a href="/archive/browser?place_filter[]=9" class="">Paris <span>(90)</span></a>
+
+							</li>
+							<li>
+								<a href="/archive/browser?place_filter[]=2" class="">Qazvin <span>(73)</span></a>
+
+							</li>
+							<li>
+								<a href="/archive/browser?place_filter[]=28" class="">Hamadan <span>(44)</span></a>
+
+							</li>
+							<li>
+								<a href="/archive/browser?place_filter[]=16" class="">France <span>(40)</span></a>
+
+							</li>
+							<li>
+								<a href="/archive/browser?place_filter[]=11" class=""> Isfahan <span>(40)</span></a>
+
+							</li>
+							<li>
+								<a href="/archive/browser?place_filter[]=30" class=""> Mashhad <span>(30)</span></a>
+
+							</li>
+							<li>
+								<a href="/archive/browser?place_filter[]=106" class="">Sumi‘ah (Azerbaijan) <span>(29)</span></a>
+
+							</li>
+						</ul>
+					</div>
+					<div class="four columns omega subjects">
+						<h3><span class="icon">n</span> <%= t("subjects") %><a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/subjects.html" class="view-all"><%= t("view_all") %></a></h3>
+						<ul class="default">
+							<li>
+								<a href="/archive/browser?subject_filter[]=27" class="">clothing and dress <span>(216)</span></a>
+
+							</li>
+							<li>
+								<a href="/archive/browser?subject_filter[]=60" class="">group portraits <span>(210)</span></a>
+
+							</li>
+							<li>
+								<a href="/archive/browser?subject_filter[]=510" class="">Jews <span>(154)</span></a>
+
+							</li>
+							<li>
+								<a href="/archive/browser?subject_filter[]=25" class="">children <span>(133)</span></a>
+
+							</li>
+							<li>
+								<a href="/archive/browser?subject_filter[]=325" class="">marriage <span>(79)</span></a>
+
+							</li>
+							<li>
+								<a href="/archive/browser?subject_filter[]=70" class="">illness <span>(78)</span></a>
+
+							</li>
+							<li>
+								<a href="/archive/browser?subject_filter[]=66" class="">husband and wife <span>(76)</span></a>
+
+							</li>
+							<li>
+								<a href="/archive/browser?subject_filter[]=449" class="">travel <span>(74)</span></a>
+
+							</li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+			<div id="browse-bar" class="four columns" style="background:transparent">
+
+				<div class="browse-by-period">
+					<h1><%= t('periods') %></h1>
+					<ul>
+						<li class="pre-qajar"> 
+
+							<a href="http://search.wwqidev.com/search?lang=en&amp;date=12-31-1749TO12-30-1793">
+								<em><img src="/images/blank.gif"></em>
+								<span>Pre-Qajar Period</span>
+							</a> 
+						</li>
+						<li class="aqa-muhammad-khan"> 
+							<a href="http://search.wwqidev.com/search?lang=en&amp;date=12-31-1793TO12-30-1796">
+								<em><img src="/images/blank.gif"></em>
+								<span>Aqa Muhammad Khan Period</span>
+							</a> 
+						</li>
+						<li class="fath-ali-shah"> 
+							<a href="http://search.wwqidev.com/search?lang=en&amp;date=12-31-1796TO12-30-1833">
+								<em><img src="/images/blank.gif"></em>
+								<span>Fath 'Ali Shah Period</span>
+							</a> 
+						</li>
+						<li class="muhammad-shah"> 
+							<a href="http://search.wwqidev.com/search?lang=en&amp;date=12-31-1833TO12-30-1847">
+								<em><img src="/images/blank.gif"></em>
+								<span>Muhammad Shah Period</span>
+							</a> 
+						</li>
+						<li class="nasir-al-din-shah"> 
+							<a href="http://search.wwqidev.com/search?lang=en&amp;date=12-31-1847TO12-31-1895">
+								<em><img src="/images/blank.gif"></em>
+								<span>Nasir al-Din Shah Period</span>
+							</a> 
+						</li>
+						<li class="muzaffar-al-din-shah"> 
+							<a href="http://search.wwqidev.com/search?lang=en&amp;date=01-01-1896TO12-31-1906">
+								<em><img src="/images/blank.gif"></em>
+								<span>Muzaffar al-Din Shah Period</span>
+							</a> 
+						</li>
+						<li class="muhammad-ali-shah"> 
+							<a href="http://search.wwqidev.com/search?lang=en&amp;date=01-01-1907TO12-31-1908">
+								<em><img src="/images/blank.gif"></em>
+								<span>Muhammad 'Ali Shah Period</span>
+							</a> 
+						</li>
+						<li class="ahmad-shah"> 
+							<a href="http://search.wwqidev.com/search?lang=en&amp;date=01-01-1909TO12-31-1924">
+								<em><img src="/images/blank.gif"></em>
+								<span>Ahmad Shah Period</span>
+							</a> 
+						</li>
+						<li class="pahlavi"> 
+							<a href="http://search.wwqidev.com/search?lang=en&amp;date=01-01-1925TO12-31-1935">
+								<em><img src="/images/blank.gif"></em>
+								<span>Early Pahlavi Period</span>
+							</a> 
+						</li>
+						<li class="undated"> 
+							<a href="http://search.wwqidev.com/search?lang=en&amp;date=02-10-2025TO02-10-2075">	
+								<em><img src="/images/blank.gif"></em>
+								<span>Undated</span>
+							</a> 
+						</li>
+					</ul>
+				</div>
+				<!--
+				<h3 class="has-children active last"><a href="#"><%= t('periods') %></a></h3>
+				<div class="list">
+				<ul class="default">
+				<% Period.all.each do |period| %>
+				<%# this is presently toast due to lack of proper modelling %>
+				<li> 
+				<a href="<%= loopback(lang: @lang).from(period.start_at).to(period.end_at).to_url %>">
+				
+				<%= period.send("title_#{@lang}") %>
+				</a> 
+				</li>
+				<% end %>
+				</ul>
+				</div>
+				-->
+
+				<!--
+				<h3 class="last">
+				<a href="/<%= @lang %>/collections/manifest.html">
+				<span class="icon">P</span>
+				<%= t('collections') %>
+				</a>
+				</h3>
+				-->
+
+			</div>
 		</div>
-      </div>
-      <div id="browse-bar" class="four columns" style="background:transparent">
-	
-		<div class="browse-by-period">
-        <h1><%= t('periods') %></h1>
-		<ul>
-		              <li class="pre-qajar"> 
-					  
-		              <a href="http://search.wwqidev.com/search?lang=en&amp;date=12-31-1749TO12-30-1793">
-						<em><img src="/images/blank.gif"></em>
-		                <span>Pre-Qajar Period</span>
-		              </a> 
-		              </li>
-		              <li class="aqa-muhammad-khan"> 
-		              <a href="http://search.wwqidev.com/search?lang=en&amp;date=12-31-1793TO12-30-1796">
-						<em><img src="/images/blank.gif"></em>
-		                <span>Aqa Muhammad Khan Period</span>
-		              </a> 
-		              </li>
-		              <li class="fath-ali-shah"> 
-		              <a href="http://search.wwqidev.com/search?lang=en&amp;date=12-31-1796TO12-30-1833">
-						<em><img src="/images/blank.gif"></em>
-		                <span>Fath 'Ali Shah Period</span>
-		              </a> 
-		              </li>
-		              <li class="muhammad-shah"> 
-		              <a href="http://search.wwqidev.com/search?lang=en&amp;date=12-31-1833TO12-30-1847">
-						<em><img src="/images/blank.gif"></em>
-		                <span>Muhammad Shah Period</span>
-		              </a> 
-		              </li>
-		              <li class="nasir-al-din-shah"> 
-		              <a href="http://search.wwqidev.com/search?lang=en&amp;date=12-31-1847TO12-31-1895">
-						<em><img src="/images/blank.gif"></em>
-		                <span>Nasir al-Din Shah Period</span>
-		              </a> 
-		              </li>
-		              <li class="muzaffar-al-din-shah"> 
-		              <a href="http://search.wwqidev.com/search?lang=en&amp;date=01-01-1896TO12-31-1906">
-						<em><img src="/images/blank.gif"></em>
-		                <span>Muzaffar al-Din Shah Period</span>
-		              </a> 
-		              </li>
-		              <li class="muhammad-ali-shah"> 
-		              <a href="http://search.wwqidev.com/search?lang=en&amp;date=01-01-1907TO12-31-1908">
-						<em><img src="/images/blank.gif"></em>
-		                <span>Muhammad 'Ali Shah Period</span>
-		              </a> 
-		              </li>
-		              <li class="ahmad-shah"> 
-		              <a href="http://search.wwqidev.com/search?lang=en&amp;date=01-01-1909TO12-31-1924">
-						<em><img src="/images/blank.gif"></em>
-		                <span>Ahmad Shah Period</span>
-		              </a> 
-		              </li>
-		              <li class="pahlavi"> 
-		              <a href="http://search.wwqidev.com/search?lang=en&amp;date=01-01-1925TO12-31-1935">
-						<em><img src="/images/blank.gif"></em>
-		                <span>Early Pahlavi Period</span>
-		              </a> 
-		              </li>
-		              <li class="undated"> 
-		              <a href="http://search.wwqidev.com/search?lang=en&amp;date=02-10-2025TO02-10-2075">	
-						<em><img src="/images/blank.gif"></em>
-		                <span>Undated</span>
-		              </a> 
-		              </li>
-		          </ul>
-		</div>
-       <!--
-        <h3 class="has-children active last"><a href="#"><%= t('periods') %></a></h3>
-        <div class="list">
-          <ul class="default">
-            <% Period.all.each do |period| %>
-              <%# this is presently toast due to lack of proper modelling %>
-              <li> 
-              <a href="<%= loopback(lang: @lang).from(period.start_at).to(period.end_at).to_url %>">
-                <%= period.send("title_#{@lang}") %>
-              </a> 
-              </li>
-            <% end %>
-          </ul>
-        </div>
-		-->
-
-        <!--
-        <h3 class="last">
-          <a href="/<%= @lang %>/collections/manifest.html">
-            <span class="icon">P</span>
-            <%= t('collections') %>
-          </a>
-        </h3>
-        -->
-
-        <%#<h3><a href="/archive/collections" ><span class="icon">></span> Translations</a></h3>%>
-        <%#<h3 class="last"><a href="/archive/collections" ><span class="icon">'</span> Recent Additions</a></h3>%>
-      </div>
-    </div>
-  </div>
+	</div>
 </div>
 <%= partial :footer %>

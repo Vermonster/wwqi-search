@@ -1814,9 +1814,13 @@ ul.collections li a .items-in-collection strong{
 	padding:0 10px;
 }
 .special-searches{
-	background:url(../images/paper.png);
+	background:url(../images/lghtmesh.png);
 	margin:0 -10px;
 	padding:10px 10px;
+	border-bottom:1px solid #ccc;
+}
+.special-searches h3 a{
+	color:#555;
 }
 
 /* #Page Styles
@@ -2079,6 +2083,9 @@ ul.collections li a .items-in-collection strong{
 		.browse-page #browse-bar{padding-top:0;}
 		.browse-by-period ul{
 			margin:0 10px;
+		}
+		.special-searches{
+			margin:0;
 		}
 
 	}
