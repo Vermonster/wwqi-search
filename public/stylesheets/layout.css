@@ -406,6 +406,9 @@ span.notification{
 #content .shaded-panel.has-sidebar.main-panel-is-dark{
 	background:url(../images/sidebar-panel.png) 720px 0 repeat-y;
 }
+#content .shaded-panel.has-sidebar.browse-page{
+	background:#fff url(../images/dark-side.png) 720px 0 repeat-y;
+}
 
 #content .page-head{
 	background:url(../images/bg-stack.png) 0 0 repeat-x;
@@ -1456,7 +1459,6 @@ ul.collections li a .items-in-collection strong{
 
 #browse-bar h1{
 	padding-left:40px;
-	background:url(../images/icon-browse.png) 0 0 no-repeat;
 	color:#666;
 	min-height:32px;
 	line-height:32px;
@@ -1554,12 +1556,12 @@ ul.collections li a .items-in-collection strong{
 .browse-by-type h1{
 	padding-left:40px;
 	background:url(../images/icon-types.png) 0 0 no-repeat;
-	color:#fff;
+	color:#444;
 	min-height:32px;
 	line-height:32px;
-	border-bottom:1px dotted #fff;
+	border-bottom:1px dotted #444;
 	padding-bottom:10px;
-	margin:10px;
+	margin:0 10px 10px;
 }
 
 
@@ -1609,11 +1611,22 @@ ul.collections li a .items-in-collection strong{
 }
 .browse-by-type{
 	padding-bottom:20px;
+	padding-top:10px;
 	margin: 0px -10px;
+	background:url(../images/paper.png);
+	border-bottom:1px solid #ccc;
+	background: #DDD;
+	background: -moz-linear-gradient(top, #efefef 0%, #dddddd 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#efefef), color-stop(100%,#dddddd));
+	background: -webkit-linear-gradient(top, #efefef 0%,#dddddd 100%);
+	background: -o-linear-gradient(top, #efefef 0%,#dddddd 100%);
+	background: -ms-linear-gradient(top, #efefef 0%,#dddddd 100%);
+	background: linear-gradient(top, #efefef 0%,#dddddd 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efefef', endColorstr='#dddddd',GradientType=0 );
 }
 .browse-by-type a {
 	text-align:center;
-	color:#fff;
+	color:#555;
 	display:block;
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizeLegibility;
@@ -1648,6 +1661,164 @@ ul.collections li a .items-in-collection strong{
 	
 }
 
+.view-all{
+	float:right;
+	font-size:12px;
+	color:#aaa;
+}
+#browse-bar .browse-by-period h1{
+	background:url(../images/icon-period.png) 0 0 no-repeat;
+	color:#fff;
+	margin-bottom:0;
+}
+.browse-by-period ul{margin:0; padding:0}
+.browse-by-period ul li{
+	display:block;
+	padding:0;
+	overflow:hidden;
+	border-bottom:1px solid #111;
+	border-top:1px solid #444;
+	margin:0;
+}
+.browse-by-period ul li:first-child{
+	border-top:none;
+}
+.browse-by-period ul li:last-child{
+	border-bottom:none;
+}
+.browse-by-period ul li a{
+	color:#ccc;
+	text-shadow:0px 1px 0px #000;
+	padding:15px 0 0;
+	overflow:hidden;
+	cursor:pointer;
+	display:block;
+}
+.browse-by-period ul li a span{
+	padding:6px 0 0;
+	position:relative;
+}
+.browse-by-period ul li a:hover{
+	color:#fff;
+}
+.browse-by-period ul li a:hover em{
+	background:#C5112C;
+}
+.browse-by-period a em{
+	width:30px;
+	height:30px;
+	padding:2px;
+	-moz-border-radius:17px;
+	-webkit-border-radius:17px;
+	border-radius:17px;
+	background:#fff;
+	-moz-box-shadow:0px 0px 3px rgba(0,0,0,0.4);
+	-webkit-box-shadow:0px 0px 3px rgba(0,0,0,0.4);
+	box-shadow:0px 0px 3px rgba(0,0,0,0.4);
+	float:left;
+	margin:0 5px -3px 0;
+	top:-10px;
+	position:relative;
+}
+
+.browse-by-period a em img{
+	background-image:url(../images/sprite-periods.png);
+	height:30px;
+	width:30px;
+	-moz-border-radius:15px;
+	-webkit-border-radius:15px;
+	border-radius:15px;
+	background-repeat:no-repeat;
+}
+
+.browse-by-period .aqa-muhammad-khan a em img{
+	background-position:-180px 0;
+}
+.browse-by-period .fath-ali-shah a em img{
+	background-position:0px 0;
+}
+.browse-by-period .muhammad-shah a em img{
+	background-position:-30px 0;
+}
+.browse-by-period .nasir-al-din-shah a em img{
+	background-position:-60px 0;
+}
+.browse-by-period .muzaffar-al-din-shah a em img{
+	background-position:-90px 0;
+}
+.browse-by-period .muhammad-ali-shah a em img{
+	background-position:-120px 0;
+}
+.browse-by-period .ahmad-shah a em img{
+	background-position:-150px 0;
+}
+.browse-by-period .pahlavi a em img{
+	background-position:-210px 0;
+}
+.browse-by-period .pre-qajar a em img{
+	background-position:-240px 0;
+}
+.browse-by-period .undated a em img{
+	background-position:-270px 0;
+}
+
+.secondary-browse-facets{
+	overflow:hidden;
+	margin:0 -10px;
+	background:url(../images/paper.png);
+}
+.secondary-browse-facets h3{
+	padding:8px 0 8px 0;
+	color:#444;
+	text-shadow:0px 1px 0px #fff;
+	font-size:21px;
+	border-bottom:1px solid #ddd;
+	margin:0;
+}
+.secondary-browse-facets .four.columns{
+	min-height:320px;
+	background:url(../images/2px-divider.png) 100% 0 repeat-y;
+	
+}
+.secondary-browse-facets .four.columns ul{border-top:1px solid #fff}
+.secondary-browse-facets .four.columns ul li{
+	margin:0;
+}
+.secondary-browse-facets .four.columns ul li a{
+	color:#555;
+	text-shadow:0px 1px 0px #fff;
+	display:block;
+	padding:5px 0;
+}
+.secondary-browse-facets .four.columns ul li a:hover{
+	color:#000;
+}
+.secondary-browse-facets .four.columns ul li a:hover span{
+	color:#C5112C;
+}
+.secondary-browse-facets .four.columns ul li span{
+	color:#aaa;
+	float:right;
+}
+.secondary-browse-facets .people{
+	margin-right:-10px;
+	padding:0 10px;
+}
+.secondary-browse-facets .places{
+	margin-right:-10px;
+	padding:0 10px;
+	
+}
+.secondary-browse-facets .subjects{
+	margin-right:-10px;
+	padding:0 10px;
+}
+.special-searches{
+	background:url(../images/paper.png);
+	margin:0 -10px;
+	padding:10px 10px;
+}
+
 /* #Page Styles
 ================================================== */
 
@@ -1661,12 +1832,17 @@ ul.collections li a .items-in-collection strong{
 	@media only screen and (min-width: 768px) and (max-width: 959px) {
 		#home-main .side-stuff #about p {max-height:100px; overflow:hidden; text-overflow:ellipsis}
 		#home-main #search-wrapper #search-form input{width:160px}
-		#content .shaded-panel.has-sidebar{
+		#content .shaded-panel.has
+		-sidebar{
 			background:#fff url(../images/sidebar-panel.png) 576px 0 repeat-y;
 		}
 		#content .shaded-panel.has-sidebar.main-panel-is-dark{
 			background: url(../images/sidebar-panel.png) 576px 0 repeat-y;
 		}
+		#content .shaded-panel.has-sidebar.browse-page{
+			background:#fff url(../images/dark-side.png) 576px 0 repeat-y;
+		}
+		
 		.browse-search .searchbox input{width:480px}
 		#home-main .welcome{font-size:13px}
 
@@ -1810,7 +1986,7 @@ ul.collections li a .items-in-collection strong{
 		#home-main #search-wrapper #search-form input{width:340px}
 		#home-main .side-stuff #about p {max-height:none; margin-bottom:15px;}
 		#home-main .side-stuff #about {padding-left:0; margin-right:10px}
-		.browse-search {margin: 0px 0px 10px}
+		.browse-search {margin: 0px 0px 0px}
 		.browse-search .searchbox input{width:320px}
 		#browse-bar h1{margin-left:10px; margin-right:10px}
 		#browse-bar h3{padding-left:10px; padding-right:10px}
@@ -1818,8 +1994,7 @@ ul.collections li a .items-in-collection strong{
 			background: url("../images/arrow_collapsed.png") 14px 12px no-repeat;
 			padding-left:30px;
 		}
-		.browse-by-type{padding:0 10px}
-		
+		.browse-by-type{padding:10px 0px; margin:0}
 		.browse-by-type .alpha a{border-top:none}
 		.browse-by-type .omega a{border-bottom:none}
 		.browse-by-type a {
@@ -1840,7 +2015,7 @@ ul.collections li a .items-in-collection strong{
 			width:30px;
 			text-align:center;
 		}
-		.browse-by-type .four.columns{
+		.browse-by-type .two.columns{
 			margin:0!important;
 			width:33%;
 			float:left;
@@ -1878,6 +2053,32 @@ ul.collections li a .items-in-collection strong{
 		.white-paper-stack.top-of-page,
 		.dark-paper-stack.top-of-page{
 			margin-top:10px;
+		}
+		.secondary-browse-facets{padding:0px; margin:0}
+		.secondary-browse-facets .people,
+		.secondary-browse-facets .places,
+		.secondary-browse-facets .subjects,
+		.secondary-browse-facets .four.columns{
+			margin:0px;
+			padding:0px;
+			background:none;
+			min-height:10px;
+		}
+		.secondary-browse-facets h3,
+		.secondary-browse-facets ul{
+			margin:0 10px;
+		}
+		.secondary-browse-facets ul li a {
+			padding:10px 0;
+			border-bottom:1px solid #ddd;
+		}
+		.browse-by-period{
+			background:url(../images/darkdenim4.png);
+			padding-top:10px;
+		}
+		.browse-page #browse-bar{padding-top:0;}
+		.browse-by-period ul{
+			margin:0 10px;
 		}
 
 	}
