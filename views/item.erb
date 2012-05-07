@@ -1,7 +1,7 @@
 <%# encoding: utf-8                                                                    %>
 <% unless $GENERATE # prevent loading the example if we're generating the static pages %>
-<%   load_example_item! if @lang == "en"                                               %>
-<%   load_example_item_farsi! if @lang == "fa"                                         %>
+<%   load_example_item! if @lang == :en                                                %>
+<%   load_example_item_farsi! if @lang == :fa                                          %>
 <% end                                                                                 %>
 
 <%= partial "header" %>
@@ -14,7 +14,7 @@
       <div class="item-essentials container clearfix">
         <div class="four columns item-thumbnail">
           <div class="item-image-frame">
-            <img src="<%= @object.thumbnail %>" alt="<%= @object.title %>">
+            <img src="<%= @object.try(:thumbnail) %>" alt="<%= @object.try(:title) %>">
           </div>
         </div>
         <div class="six columns">
