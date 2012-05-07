@@ -2,17 +2,17 @@
 <% load_example_collection_index! unless $GENERATE # prevent loading the example if we're generating the static pages %>
 <%= partial "header" %>
 <div id="content">
+  <div class="container clearfix white-paper-stack top-of-page"><div class="stacks"></div></div>
   <div class="container clearfix">
     <!-- rails template content -->
     <div class="clearfix shaded-panel">
-      <div class="page-head">
+    
         <div class="extra-padding">
           <h1><%= @object.title %></h1>
           <p>	
           <%= markdown @object.description %>
           </p>
         </div>
-      </div>
       <ul class="collections dark-list">
         <% @object.content(@lang).each do |collection| %>
 
