@@ -207,7 +207,27 @@ NOTES
       o.browse_entries = 6.times.with_object([]) do |i, bes|
         bes <<  OpenStruct.new(:name => 'Genre Name ' + i.to_s)
       end
+
+      o.period_list = [
+        OpenStruct.new(slug: "pre-qajar", name: "Pre-Qajar", start_time: Time.now, end_time: Time.now),
+        OpenStruct.new(slug: "aqa-muhammed-khan", name: "Aqa Muhammed Khan", start_time: Time.now, end_time: Time.now),
+        OpenStruct.new(slug: "early-pahlavi", name: "Early Pahlavi", start_time: Time.now, end_time: Time.now)
+      ]
+      
     end
+
+    @object.instance_eval do
+      def tags_for(name)
+        [ ["Tag 1", '100'], 
+          ["Tag 2", '200'], 
+          ["Tag 3", '400'], 
+          ["Tag 4", '800'], 
+          ["Tag 5", '1600'], 
+          ["Tag 6", '3200'] ]
+      end
+    end
+
+    @object
   end
 
   def create_collection!
