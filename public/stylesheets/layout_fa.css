@@ -6,9 +6,23 @@
 /* #Site Styles
 ================================================== */
 
+
+@font-face {
+  font-family: 'BNazanin';
+  src: url('fonts/BNazanin.eot?#') format('eot'),  /* IE6–8 */
+       url('fonts/BNazanin.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+       url('fonts/BNazanin.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+
+}
+
+
+
+
 body{
     direction:rtl;
 	text-align:right;
+	font-family:'BNazanin',Tahoma, sans-serif;
+	font-size:18px;
 
 }
 .right{float:left}
