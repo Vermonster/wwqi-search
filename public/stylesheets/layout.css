@@ -457,6 +457,8 @@ span.notification{
 .item-page .item-head .add_this_tools{
 	float:right;
 	width:255px;
+	overflow:hidden;
+	position:relative;
 }
 
 .item-page .item-head .item-tools a{
