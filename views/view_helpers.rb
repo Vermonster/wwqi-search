@@ -30,6 +30,7 @@ DESC
     @object.audio_clip_caption = 'Lorem Ipsum Dolor Sit Amet'
 
     @object.instance_eval do
+      def audio_clip? ; true ; end
       def harvard_link? ; true ; end
     end
     @object.harvard_urls = {
