@@ -10,6 +10,7 @@ end
 module ViewHelpers
   def load_example_item! 
     @object = OpenStruct.new
+    @object.image_count = rand(10) + 1
     @object.thumbnail = "http://d19ob2c2hogwg9.cloudfront.net/thumbs/it_1527.jpg"
     @object.description =<<DESC
 A satirical anthology of poetry that uses Iranian foods to make fun of
