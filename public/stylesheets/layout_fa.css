@@ -361,6 +361,7 @@ ul.collections li a p{
 			background: url(../images/sidebar-panel.png) -309px 0 repeat-y;
 		}
 		#browse-bar h3.active{background:  url("../images/arrow_expanded.png") 100% 12px no-repeat;}
+		#pageFooter .noimage img{width:250px}
 	}
 
 	/* All Mobile Sizes (devices and browser) */
