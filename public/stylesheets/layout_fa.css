@@ -1,4 +1,8 @@
-/* @override http://wwqi-static-site.s3.amazonaws.com/stylesheets/layout_fa.css */
+/* @override 
+	http://wwqi-static-site.s3.amazonaws.com/stylesheets/layout_fa.css
+	http://search.wwqidev.com/stylesheets/layout_fa.css
+	http://wwqi-static-site.s3-website-us-east-1.amazonaws.com/stylesheets/layout_fa.css
+*/
 
 /*
 * farsi overrides for the general layout stylesheet
@@ -28,7 +32,9 @@
        url('fonts/BDavat.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
 }
 
-
+h1{
+	font-family: 'BNazaninBold';
+}
 
 body{
     direction:rtl;
@@ -58,7 +64,7 @@ body{
 #content .shaded-panel.has-sidebar.browse-page{background: url(../images/dark-side.png) -260px 0 repeat-y;}
 
 .item-page .item-head .add_this_tools{float:left;}
-.item-essentials h2{padding-right:25px; padding-left:0}
+.item-essentials h2{padding-right:25px; padding-left:0;font-family: 'BNazaninBold'; font-size: 28px;}
 .item-essentials p.description{padding-right:25px;	padding-left:0px;}
 
 .item-essentials.collection-details h2,
@@ -86,6 +92,8 @@ body{
 	padding-right:40px;
 	padding-left:0;
 	background:url(../images/icon-image.png) 100% 0 no-repeat;
+	font-family: 'BNazaninBold';
+	
 }
 
 .browse-collection h1{
@@ -104,19 +112,27 @@ body{
 .last-column{float:left!important;}
 .item_related .title{padding: 10px 25px 10px 0px; background-position:100% 50%!important}
 .item-details ul li,
-.item_related ul li{clear:left;}
-
+.item_related ul li{clear:left; font-size: 16px;}
+.item-details ul li span, .item_related ul li span{
+	font-family:'BNazaninBold';
+}
+.item-details ul li a {
+	font-size: 16px};
+}
 
 .item-details ul li ul li{	padding:4px 10px 4px 0px;}
 img.icon{float:right;margin:0 0px 0 3px;}
 .clear{
 	clear:right!important;
 }
-.item-links a{background-position:0 50%}
+.item-links a{background-position:0 50%; font-size: 18px; font-family: 'BNazaninBold';}
 
 .tag {
 	background: url(../images/bullet_fa.gif) 100% 5px no-repeat;
-
+	font-size: 16px;
+}
+.item-details ul li.description{
+	font-size: 16px;
 }
 
 /* Collections List
@@ -246,8 +262,8 @@ ul.collections li a p{
 ================================================== */
 
 #pageFooterWrapper { clear:right;}
-#pageFooter li { float:right;margin: 0 0px 3px 15px;}
-#pageFooter a:link { color: #aaa;padding: 0 10px 0 0px;  font-size: 20px;}
+#pageFooter li { float:right;margin: 0 0px 3px 15px; font-family: 'BNazaninBold';}
+#pageFooter a:link { color: #aaa;padding: 0 10px 0 0px;  font-size: 17px;}
 #pageFooter p{margin-left: 44px; text-align: left;}
 #pageFooter  a:visited {padding: 0 10px 0 0px; }
 
