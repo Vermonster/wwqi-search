@@ -1590,6 +1590,59 @@ ul.collections li a .items-in-collection strong{
 	margin: 4px 0 4px 5px;
 }
 
+#browse-bar  .list li.current{
+	display: block;
+	float: none;
+	padding: 0 10px;
+	color: white;
+	height: 27px;
+	line-height: 27px;
+	font-size: 12px;
+	font-weight: bold;
+	text-shadow: 0 1px 0 RGBA(0,0,0,0.2);
+	background: #C5112C;
+	border:1px solid #89071b;
+	background: -moz-linear-gradient(top, #C5112C 0%, #9a0a20 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C5112C), color-stop(100%,#9a0a20));
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	text-transform: capitalize;
+	-moz-border-radius:15px;
+	-webkit-border-radius:15px;
+	border-radius:15px;
+	-webkit-box-shadow: 2px 1px 4px RGBA(0,0,0,0.1),inset 0 1px 0 RGBA(255,255,255,0.6);
+	-moz-box-shadow: 2px 1px 4px RGBA(0,0,0,0.1),inset 0 1px 0 RGBA(255,255,255,0.6);
+	-o-box-shadow: 2px 1px 4px RGBA(0,0,0,0.1),inset 0 1px 0 RGBA(255,255,255,0.6);
+	box-shadow: 2px 1px 4px RGBA(0,0,0,0.1),inset 0 1px 0 RGBA(255,255,255,0.6);
+	
+}
+#browse-bar  .list li.current a {
+	cursor: pointer;
+	font-weight: normal;
+	font-family: Pictos;
+	font-size: 14px;
+	background:#000;
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	line-height: 32px;
+	position: relative;
+	float:right;
+	right:-11px;
+	top:-3px;
+	text-align: center;
+	-webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.4);
+	-moz-box-shadow: 0px 0px 3px rgba(0,0,0,0.4);
+	-o-box-shadow:0px 0px 3px rgba(0,0,0,0.4);
+	box-shadow: 0px 0px 3px rgba(0,0,0,0.4);
+	-moz-border-radius:17px;
+	-webkit-border-radius:17px;
+	border-radius:17px;
+	color:#fff;
+	border:2px solid #fff;
+}
+
+#browse-bar  .list li.current span{color:#eba9b3}
 #browse-bar  .list li span{
 	font-size:10px;
 	color:#999;
