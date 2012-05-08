@@ -972,6 +972,9 @@ ul.search-results {
   height: 25em;
 }
 
+#landing #home-main {
+  margin-bottom: 30px;
+}
 #landing .header h1 {
   margin: 0 1em;
   font-size: 200%;

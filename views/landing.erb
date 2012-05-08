@@ -10,10 +10,9 @@
   <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0" /> 
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />  
 
-  <title><%= t('site_title') %>| <%= @object.title if @object.respond_to?(:title) && @object.try(:title) %></title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="<%= t('archive_description') %>" />
-  <meta name="author" content="<%= t('site_author') %>">
+  <title><%= t('site_title', :en) %> | <%= t('site_title', :fa) %></title> 
+  <meta name="description" content="<%= t('archive_description', :en) %>" />
+  <meta name="author" content="<%= t('site_author', :en) %>">
 
   <!-- CSS 
   ================================================== -->
@@ -46,13 +45,12 @@
       <div class="menu">
       </div>
     </div>
+    
+    <div class="container clearfix dark-paper-stack top-of-page"><div class="stacks"></div></div>
 
     <!-- content section -->
     <div id="content">
       <div class="container clearfix">
-        <div class="clearfix shaded-panel">
-
-          <div class="page-head dark"></div>
 
           <div id="home-main">
 
