@@ -1,3 +1,4 @@
+/* @override http://wwqi-static-site.s3.amazonaws.com/stylesheets/layout_fa.css */
 
 /*
 * farsi overrides for the general layout stylesheet
@@ -198,7 +199,7 @@ ul.collections li a p{
 
 #home-main .rslides li{margin-bottom:0}
 #home-main .side-stuff{margin-left:-20px; margin-right:0; padding:0 10px 50px 10px}
-#home-main .welcome{right:0;left:5px;font-size: 23px;}
+#home-main .welcome{right:0;left:5px;font-size: 23px;font-family: 'BNazaninBold';}
 #home-main .welcome i{
 	left:0;
 	right:auto;
@@ -228,13 +229,14 @@ ul.collections li a p{
 .otherIndexes{float:left;}
 .otherIndexes a{margin-right:10px;	margin-left:0;}
 #carousel h2{
-	font-size: 25px;
+	font-size: 24px;
 	height: 38px; padding: 0 35px;line-height: 38px;
-	font-family:'BNazanin',Tahoma, sans-serif;
+	font-family:'BNazaninBold',Tahoma, sans-serif;
 }
 #carousel .collection-data .title{
-	font-size: 24px;
+	font-size: 22px;
 	margin-bottom: 10px;
+	font-family:'BNazaninBold';
 }
 #carousel .collection-data .description{
 	font-size: 18px;
