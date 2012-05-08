@@ -23,8 +23,10 @@
         });
 
 		$('audio,video').mediaelementplayer({audioWidth: 260});
-    $(document).ready( function() { });
+
+    $('a[rel*=leanModal]').leanModal({ closeButton: ".modal-close", overlay: 0.7});
   });
+
 </script>
 <div id="pageFooterWrapper">
   <div id="pageFooter" class="container">

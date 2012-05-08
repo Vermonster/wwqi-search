@@ -1,7 +1,7 @@
 <%# encoding: utf-8                                                                    %>
 <% unless $GENERATE # prevent loading the example if we're generating the static pages %>
-<%   load_example_item! if @lang == :en                                                %>
-<%   load_example_item_farsi! if @lang == :fa                                          %>
+  <%   load_example_item! if @lang == :en                                                %>
+  <%   load_example_item_farsi! if @lang == :fa                                          %>
 <% end                                                                                 %>
 
 <%= partial "header" %>
@@ -45,33 +45,52 @@
 
           <% if @object.audio_clip? %>
             <div class="item-audio">
-				<div class="clearfix">
-              		<h1>Audio</h1>
-			  		<audio id="player2" src="<%= @object.audio_clip %>" type="audio/mp3" controls="controls">
-						<object width="260" height="30" type="application/x-shockwave-flash" data="/stylesheets/flashmediaelement.swf">
-							<param name="movie" value="/stylesheets/flashmediaelement.swf" /> 
-							<param name="flashvars" value="controls=true&amp;file=<%= @object.audio_clip %>" /> 		
-						</object>
-				    </audio>
-					
-				</div>
-				<hr>
+              <div class="clearfix">
+                <h1>Audio</h1>
+                <audio id="player2" src="<%= @object.audio_clip %>" type="audio/mp3" controls="controls">
+                <object width="260" height="30" type="application/x-shockwave-flash" data="/stylesheets/flashmediaelement.swf">
+                  <param name="movie" value="/stylesheets/flashmediaelement.swf" /> 
+                  <param name="flashvars" value="controls=true&amp;file=<%= @object.audio_clip %>" /> 		
+                </object>
+                </audio>
+
+              </div>
+              <hr>
               <h5><%= @object.audio_clip_caption %></h5>
-			  
+
             </div>
           <% end %>
 
           <% if @object.translation_to_english? %>
             <div class="item-translation">
               <h1><%= t('translation') %></h1>
-              <a href="#"><%= t("translation") %></a>
+              <a href="#translation-to-english" rel='leanModal' name='translation-to-english'><%= t("translation") %></a>
+              <div id="translation-to-english" class='modal-dialog'>
+                <div class="modal-dialog-header">
+                  <h2><%= t('translation')%></h2>
+                  <a href="#" class="modal-close"></a>
+                </div>
+                <div class="modal-dialog-content">
+                <%= @object.translation_to_english %>
+                </div>
+              </div>
             </div>
           <% end %>
 
           <% if @object.transcription_of_farsi? %>
             <div class="item-transcript">
               <h1><%= t('transcription') %></h1>
-              <a href="#"><%= t("transcript") %></a>
+              <a href="#transcription-of-farsi" rel='leanModal' name='transcription-of-farsi'><%= t("translation") %></a>
+              <div id="transcription-of-farsi" class='modal-dialog'>
+                <div class="modal-dialog-header">
+                  <h2><%= t('transcription')%></h2>
+                  <a href="#" class="modal-close"></a>
+                </div>
+
+                <div class="modal-dialog-content">
+                <%= @object.transcription_of_farsi %>
+                </div>
+              </div>
             </div>
           <% end %> 
 
@@ -147,17 +166,17 @@
 
               <li>	
               <span><%= t("record_number") %></span> <%= @object.accession_number %>		
-              </li>
+            </li>
 
-              <li class="clear">
-              &nbsp;
-              </li>
-            </ul>
+            <li class="clear">
+            &nbsp;
+            </li>
+          </ul>
 
-          </div>
         </div>
-        <div class="six columns omega last-column">
-          <% if @object.genres.present? || @object.people.present? || @object.places.present? || @object.subjects.present? %>
+      </div>
+      <div class="six columns omega last-column">
+        <% if @object.genres.present? || @object.people.present? || @object.places.present? || @object.subjects.present? %>
           <div class="item_related">
             <ul>
               <% if @object.genres.present? %>
@@ -206,9 +225,9 @@
             </ul>
           </div>
         <% end %>
-        </div>
       </div>
     </div>
   </div>
+</div>
 </div>
 <%= partial "footer" %>
