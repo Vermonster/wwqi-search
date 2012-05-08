@@ -559,8 +559,12 @@ span.notification{
 	color:#fff;
 	min-height:32px;
 	line-height:32px;
-	border-bottom:1px dotted #fff;
 	padding-bottom:10px;
+	float:left;
+}
+.item-audio hr{
+	border-bottom:1px dotted #fff;
+	background:transparent;
 }
 
 .item-audio h5{
@@ -1336,6 +1340,9 @@ ul.collections li a .items-in-collection strong{
 
 /* Home featured collections
 ================================================== */
+.ie7 .es-carousel{
+	position:relative;
+}
 .es-carousel-wrapper{
 	background: #ddd; /* Old browsers */
 	background: -moz-linear-gradient(top, #ddd 0%, #f5f5f5 100%); /* FF3.6+ */
@@ -2032,6 +2039,11 @@ ul.collections li a .items-in-collection strong{
 	color:#555;
 }
 
+/* #over-riding audio player defaults
+================================================== */
+.mejs-container{
+	float:right;
+}
 /* #Page Styles
 ================================================== */
 
@@ -2065,6 +2077,8 @@ ul.collections li a .items-in-collection strong{
 		#home-main #search-wrapper #search-form input{
 			width:300px;
 		}
+		#pageFooter a{font-size:11px}
+		#pageFooter .noimage img{width:250px}
 
 	}
 

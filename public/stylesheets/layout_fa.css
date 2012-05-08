@@ -10,21 +10,21 @@
 
 @font-face {
   font-family: 'BNazanin';
-  src: url('BNazanin.eot?#') format('eot'),  /* IE6–8 */
-       url('BNazanin.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-       url('BNazanin.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+  src: url('fonts/BNazanin.eot?#') format('eot'),  /* IE6–8 */
+       url('fonts/BNazanin.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+       url('fonts/BNazanin.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
 }
 @font-face {
   font-family: 'BNazaninBold';
-  src: url('B_Nazanin_Bold.eot?#') format('eot'),  /* IE6–8 */
-       url('B_Nazanin_Bold.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-       url('B_Nazanin_Bold.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+  src: url('fonts/B_Nazanin_Bold.eot?#') format('eot'),  /* IE6–8 */
+       url('fonts/B_Nazanin_Bold.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+       url('fonts/B_Nazanin_Bold.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
 }
 @font-face {
   font-family: 'BDavat';
-  src: url('BDavat.eot?#') format('eot'),  /* IE6–8 */
-       url('BDavat.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-       url('BDavat.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+  src: url('fonts/BDavat.eot?#') format('eot'),  /* IE6–8 */
+       url('fonts/BDavat.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+       url('fonts/BDavat.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
 }
 
 

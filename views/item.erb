@@ -45,11 +45,13 @@
 
           <% if @object.audio_clip? %>
             <div class="item-audio">
-              <h1>Audio</h1>
+				<div class="clearfix">
+              		<h1>Audio</h1>
+			  		<audio id="player2" src="<%= @object.audio_clip %>" type="audio/mp3" controls="controls"></audio>
+				</div>
+				<hr>
               <h5><%= @object.audio_clip_caption %></h5>
-              <audio class="AudioPlayerV1" preload="none" data-fallback="/AudioPlayerV1.swf">
-              <source type="audio/mpeg" src="<%= @object.audio_clip %>" />
-              </audio>
+			  
             </div>
           <% end %>
 
