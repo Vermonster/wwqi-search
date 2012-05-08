@@ -1035,8 +1035,8 @@ ul.search-results {
 
 }
 #language-selector a {
-  font-size: 200%;
-  padding: .25em 1em;
+  font-size: 150%;
+  padding: .5em 1em;
 }
 
 #language-selector #language-selector-en,
@@ -1054,7 +1054,16 @@ ul.search-results {
 }
 
 .language-selector-text {
-  height: 25em;
+  color: #ccc;
+  min-height: 35em;
+}
+
+.language-selector-text h1 {
+  color: #decc90;
+  height: 3em;
+}
+.language-selector-text h2 {
+  color: #ccc;
 }
 
 #landing #home-main {
@@ -2084,6 +2093,8 @@ ul.collections li a .items-in-collection strong{
 		#pageFooter a{font-size:11px}
 		#pageFooter .noimage img{width:250px}
 
+    
+
 	}
 
 	/* All Mobile Sizes (devices and browser) */
@@ -2323,7 +2334,18 @@ ul.collections li a .items-in-collection strong{
 		.special-searches{
 			margin:0;
 		}
+    
+    #landing h2.welcome-message {
+      display: none;
+    }
+    #landing .language-selector-text  {
+      min-height: 0;
+    }
 
+    #landing .language-selector-text h1 {
+      height: 5em;
+
+    }
 	}
 
 	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
@@ -2369,24 +2391,79 @@ ul.collections li a .items-in-collection strong{
 			
 			#content.static-content  .extra-padding{padding:10px}
 
-			
+	  		
 	}
+
+
+.modal-dialog {
+  display: none;
+  width: 75%;  
+  background: #fff;
+  padding: 0;
+
+  box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
+  -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7);
+  -moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7);                                                             
+
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;  
+}
+
+.modal-dialog-content {
+  padding: 2em;
+}
+
+.modal-dialog-header { 
+  background: #dfdfdf;
+  padding: 2em;
+  border-radius-top-right: 5px;
+  -moz-border-radius-topright: 5px;
+  -webkit-border-top-right-radius: 5px;  
+
+  border-radius-top-left: 5px;
+  -moz-border-radius-topleft: 5px;
+  -webkit-border-top-left-radius: 5px;  
+}
+
+.modal-dialog-header .modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: block;
+  width: 14px;
+  height: 14px;
+  padding: 0px;
+  background: url(../images/modal_close.png);
+  z-index: 2; 
+}
+
+#lean_overlay {
+  position: fixed;
+  z-index:100;
+  top: 0px;
+  left: 0px;
+  height:100%;
+  width:100%;
+  background: #000;
+  display: none;
+}
 
 
 /* #Font-Face
 ================================================== */
 /* 	This is the proper syntax for an @font-face file
-		Just create a "fonts" folder at the root,
-		copy your FontName into code below and remove
-		comment brackets */
+Just create a "fonts" folder at the root,
+copy your FontName into code below and remove
+comment brackets */
 
 /*	@font-face {
-	    font-family: 'FontName';
-	    src: url('../fonts/FontName.eot');
-	    src: url('../fonts/FontName.eot?iefix') format('eot'),
-	         url('../fonts/FontName.woff') format('woff'),
-	         url('../fonts/FontName.ttf') format('truetype'),
-	         url('../fonts/FontName.svg#webfontZam02nTh') format('svg');
-	    font-weight: normal;
-	    font-style: normal; }
-*/
+font-family: 'FontName';
+src: url('../fonts/FontName.eot');
+src: url('../fonts/FontName.eot?iefix') format('eot'),
+url('../fonts/FontName.woff') format('woff'),
+url('../fonts/FontName.ttf') format('truetype'),
+url('../fonts/FontName.svg#webfontZam02nTh') format('svg');
+font-weight: normal;
+font-style: normal; }
+ */

@@ -33,7 +33,13 @@ DESC
     @object.instance_eval do
       def audio_clip? ; true ; end
       def harvard_link? ; true ; end
+      def translation_to_english? ; true ; end
+      def transcription_of_farsi? ; true ; end
     end
+
+    @object.translation_to_english = "Lorem ipsum oh my god it's filler text. " * 50
+    @object.transcription_of_farsi = "Lorem ipsum oh my god it's filler text. " * 50
+
     @object.harvard_urls = {
       preferred: "http://nrs.harvard.edu/urn-3:FHCL:7984115",
       secondary: [
