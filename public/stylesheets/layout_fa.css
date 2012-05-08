@@ -15,6 +15,12 @@
        url('BNazanin.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
 }
 @font-face {
+  font-family: 'BNazaninBold';
+  src: url('B_Nazanin_Bold.eot?#') format('eot'),  /* IE6–8 */
+       url('B_Nazanin_Bold.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+       url('B_Nazanin_Bold.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+}
+@font-face {
   font-family: 'BDavat';
   src: url('BDavat.eot?#') format('eot'),  /* IE6–8 */
        url('BDavat.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
@@ -150,12 +156,30 @@ ul.collections li a .collection-essentials{
 ul.collections li a .items-in-collection{float:left;}
 ul.collections li a h3{
 	font-family: 'Bnazanin';
-	font-size: 28px;
+	font-size: 25px;
 }
 ul.collections li a p{
-	font-size: 18px;
+	font-size: 17px;
 	color: #ccc;
 }
+
+/* #Static Pages
+================================================== */
+.static-content li {
+	
+	padding-right: 20px;
+	background: url(../images/list_bullet_fa.gif) 100% 5px no-repeat;
+	line-height:20px;
+}
+.static-content h2,
+.static-content h1,
+.static-content h3{font-family:'BNazaninBold'}
+.static-content h1{font-size:28px; color:#000}
+.static-content a{color:#C5112C}
+.static-content h2{font-size:22px}
+.static-content h3{color:#333; font-size:18px}
+.faq p{line-height:20px}
+.faq h3{background:#f5f5f5; padding:10px 5px}
 
 /* #Collection Details
 ================================================== */
@@ -287,6 +311,7 @@ ul.collections li a p{
 .secondary-browse-facets .subjects{	margin-left:-10px;}
 .secondary-browse-facets ul li a{font-size: 18px;}
 .secondary-browse-facets h3{font-family: 'BNazanin';font-size: 24px;}
+#browse-bar .list li.current{font-size:18px}
 
 
 /* #Pagination Styles

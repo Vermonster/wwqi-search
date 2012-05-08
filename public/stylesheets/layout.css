@@ -203,7 +203,7 @@ h1, h2 { font-weight:200; }
 h3, h4, h5, h6 { font-weight:400; }
 
 h1 { font-size: 22px; line-height: 1em; margin-bottom: 0.5em;color:#decc9d; color:#666; border-bottom:1px dotted #000; padding-bottom:15px; }
-h2 { font-size: 18px; margin-bottom:0.761em; line-height:1.167em; color:#decc9d; }
+h2 { font-size: 18px; margin-bottom:0.761em; line-height:1.167em; color:#C5112C; }
 h3 { font-size: 1.50em; line-height: 1.25em; margin-bottom:.5em; color:#decc9d; margin-top:.5em }
 h4 { font-size: 1.167em; line-height: 1.25;color:#990000; }
 h5 { font-size: 1.167em; margin-bottom:10px; font-weight:bold; text-transform:uppercase; color:#A3A798 }
@@ -1587,6 +1587,22 @@ ul.collections li a .items-in-collection strong{
 }
 
 
+/* #Static Pages
+================================================== */
+.static-content li {
+	
+	padding-left: 20px;
+	background: url(../images/list_bullet.gif) 0 5px no-repeat;
+	line-height:20px;
+}
+.static-content h1{font-size:28px; color:#000;}
+.static-content a{color:#C5112C}
+.static-content h2{font-size:22px}
+.static-content h3{color:#333; font-size:15px}
+.faq p{line-height:20px}
+.faq h3{background:#f5f5f5; padding:10px 5px; font-weight:bold}
+
+
 /* #Brwose Page
 ================================================== */
 
@@ -2333,6 +2349,7 @@ ul.collections li a .items-in-collection strong{
 				text-indent:0px;
 			}
 			
+			#content.static-content  .extra-padding{padding:10px}
 
 			
 	}
