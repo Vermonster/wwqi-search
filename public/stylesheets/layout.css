@@ -1263,6 +1263,7 @@ ul.collections li a .items-in-collection strong{
 	font-size:1em;
 	line-height:1.4em;
 	margin:0;
+	max-height:179px;
 }
 
 
@@ -1316,7 +1317,7 @@ ul.collections li a .items-in-collection strong{
 	-moz-box-shadow:none!important;
 	box-shadow:none!important;
 	width:auto;
-	width:225px;
+	width:400px;
 	line-height:1;
 	
 }
@@ -2044,6 +2045,9 @@ ul.collections li a .items-in-collection strong{
 		.item-thumbnail .item-image-frame{
 			width:150px;
 			height:150px;
+		}
+		#home-main #search-wrapper #search-form input{
+			width:300px;
 		}
 
 	}

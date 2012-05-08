@@ -11,10 +11,15 @@
 
 @font-face {
   font-family: 'BNazanin';
-  src: url('http://localhost.com:5000/stylesheets/B.eot?#') format('eot'),  /* IE6–8 */
-       url('http://localhost.com:5000/stylesheets/BNazanin.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-       url('http://localhost.com:5000/stylesheets/BNazanin.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
-
+  src: url('BNazanin.eot?#') format('eot'),  /* IE6–8 */
+       url('BNazanin.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+       url('BNazanin.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+}
+@font-face {
+  font-family: 'BDavat';
+  src: url('http://localhost.com:5000/stylesheets/BDavat.eot?#') format('eot'),  /* IE6–8 */
+       url('http://localhost.com:5000/stylesheets/BDavat.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+       url('http://localhost.com:5000/stylesheets/BDavat.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
 }
 
 
@@ -29,17 +34,18 @@ body{
 .left{float:right}
 
 
-.header .toolbar h1{margin:0 140px 0 0px;float:right;}
+.header .toolbar h1{margin:0 140px 0 0px;float:right;font-family:'BDavat',Tahoma, sans-serif; font-size: 26px;}
 .header .toolbar ul{float:left;}
 .header .menu ul{margin:0px 120px 0px 0px;}
 .header .menu ul li{float:right;}
 .header .menu ul li a{float:right;padding:12px 25px 0 25px;border-left:1px solid #444; border-right:none; font-size: 21px; font-weight: bold;}
 .header .menu ul li a span{
-	font-size:15px;
+	font-size:16px;
 	font-weight:bold;
+	font-family:'BDavat',Tahoma, sans-serif;
+	margin-top: 5px;
 }
-.header .toolbar .branding{right:0;left:auto; background-position:-5px 0}
-
+.header .toolbar .branding{right:0;left:auto; background-position:-5px 0;}
 #content .shaded-panel.has-sidebar{background:#fff url(../images/sidebar-panel.png) -260px 0 repeat-y;}
 #content .shaded-panel.has-sidebar.main-panel-is-dark{background: url(../images/sidebar-panel.png) -260px 0 repeat-y;}
 #content .shaded-panel.has-sidebar.browse-page{background: url(../images/dark-side.png) -260px 0 repeat-y;}
@@ -159,16 +165,16 @@ ul.collections li a .items-in-collection{float:left;}
 
 #home-main .rslides li{margin-bottom:0}
 #home-main .side-stuff{margin-left:-20px; margin-right:0; padding:0 10px 50px 10px}
-#home-main .welcome{right:0;left:5px;}
+#home-main .welcome{right:0;left:5px;font-size: 23px;}
 #home-main .welcome i{
 	left:0;
 	right:auto;
 	background:url(../images/explore-arrow_fa.png) 50% 50% no-repeat;
 }
 
-
+#home-main .side-stuff #about p {font-size: 14px;color: #fff;}
 #home-main #search-wrapper{right:auto;left:0;}
-#home-main #search-wrapper #search-form input{margin: 0px 10px 0 0px;float: right;}
+#home-main #search-wrapper #search-form input{margin: 0px 10px 0 0px;float: right;line-height: 1;}
 #home-main #search-wrapper #search-form button{margin: 3px 10px 0 0px; float:left}
 #indexList{clear:right;	}
 
@@ -188,16 +194,28 @@ ul.collections li a .items-in-collection{float:left;}
 #indexList ul li ul{margin-right:20px;margin-left:0;}
 .otherIndexes{float:left;}
 .otherIndexes a{margin-right:10px;	margin-left:0;}
-
-
+#carousel h2{
+	font-size: 25px;
+	height: 38px; padding: 0 35px;line-height: 38px;
+	font-family:'BNazanin',Tahoma, sans-serif;
+}
+#carousel .collection-data .title{
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+#carousel .collection-data .description{
+	font-size: 18px;
+}
 
 /* #Footer
 ================================================== */
 
 #pageFooterWrapper { clear:right;}
 #pageFooter li { float:right;margin: 0 0px 3px 15px;}
-#pageFooter a:link { color: #aaa;padding: 0 10px 0 0px; }
-
+#pageFooter a:link { color: #aaa;padding: 0 10px 0 0px;  font-size: 20px;}
+#pageFooter p{
+	margin-left: 44px; text-align: left;
+}
 #pageFooter  a:visited {padding: 0 10px 0 0px; }
 
 #pageFooter a:hover {padding: 0 10px 0 0px; }
