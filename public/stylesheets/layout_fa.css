@@ -76,6 +76,7 @@ body{
 	padding-right:40px;
 	background:url(../images/icon-audio.png) 100% 0 no-repeat;
 	padding-left:0;
+	float:right;
 }
 
 .item-links h1,
@@ -334,6 +335,12 @@ ul.collections li a p{
 	-moz-border-radius:15px 0 0 15px;
 	-webkit-border-radius:15px 0 0 15px;
 	border-radius:15px 0 0 15px;
+}
+
+/* #over-riding audio player defaults
+================================================== */
+.mejs-container{
+	float:left;
 }
 
 /* #Page Styles

@@ -472,7 +472,7 @@ span.notification{
 
 .item-essentials{
 	position:relative;
-	background:#222;
+	background:url(../images/darkdenim3.png);
 	padding:15px 0;
 	border-top:1px dotted #000;
 	border-bottom:1px dotted #000;
@@ -515,7 +515,7 @@ span.notification{
 }
 
 .item-essentials p.description{
-	color:#aaa;
+	color:#ccc;
 	font-size:15px;
 	line-height:22px;
 	padding-right:25px;
@@ -559,12 +559,14 @@ span.notification{
 	color:#fff;
 	min-height:32px;
 	line-height:32px;
-	padding-bottom:10px;
+	padding-bottom:0px;
 	float:left;
 }
 .item-audio hr{
+	border-top:none;
 	border-bottom:1px dotted #fff;
 	background:transparent;
+	margin:0 0 5px;
 }
 
 .item-audio h5{
@@ -2043,6 +2045,9 @@ ul.collections li a .items-in-collection strong{
 ================================================== */
 .mejs-container{
 	float:right;
+}
+.mejs-container .mejs-controls{
+	background:#000!important;
 }
 /* #Page Styles
 ================================================== */
