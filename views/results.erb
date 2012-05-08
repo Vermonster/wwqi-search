@@ -32,7 +32,7 @@
                 <% if result.type.downcase == "collection" %>
                   <span class="items-in-collection"><strong><%= with_farsi_numbers result.count %></strong><%= t("items") %></span>
                 <% else %>
-                  <span class="items-in-collection"><strong><%= with_farsi_numbers result.image_count %></strong> Image<span class="plural">s</span></span>
+                  <span class="items-in-collection"><strong><%= with_farsi_numbers result.image_count %></strong> <%= t('images') %></span>
                 <% end %>
                 <div class="collection-essentials">
                   <span class="date"><%= result.created_at %></span>
