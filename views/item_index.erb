@@ -5,10 +5,10 @@
 
       <div class="page-head">
         <div class="otherIndexes">
-          <%= lang_link_to('» Genres Index', 'genres.html', lang: @lang) %>
-          <%= lang_link_to('» People Index', 'people.html', lang: @lang) %>
-          <%= lang_link_to('» Places Index', 'places.html', lang: @lang) %>
-          <%= lang_link_to('» Subject Index', 'subjects.html', lang: @lang) %>
+          <a href="<%= "/#{@lang}/genres.html" %>">  <%= t('genres') %>  </a>
+          <a href="<%= "/#{@lang}/people.html" %>">  <%= t('people') %>  </a>
+          <a href="<%= "/#{@lang}/places.html" %>">  <%= t('places') %>  </a>
+          <a href="<%= "/#{@lang}/subjects.html" %>"><%= t('subjects') %></a>
         </div>
         <h2><%= @type.capitalize %> Index</h2>
         <ul class="alphabet">
@@ -46,4 +46,5 @@
       </div>
     </div>
   </div>
-  <%= partial "footer" %>
+</div>
+<%= partial "footer" %>
