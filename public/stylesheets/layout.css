@@ -1859,7 +1859,7 @@ ul.collections li a .items-in-collection strong{
 }
 
 
-.browse-by-type a span{white-space:nowrap; text-overflow:ellipsis; overflow:hidden}
+.browse-by-type a span{}
 
 .browse-by-type a:hover .icon{
 	color:#C82D00;

@@ -314,7 +314,7 @@ ul.collections li a p{
 	font-family: 'BNazanin';font-size: 28px;
 }
 
-.browse-search .searchbox input{margin:2px 10px 2px 0px; float:none}
+.browse-search .searchbox input{margin:2px 10px 2px 0px; float:none; line-height:1}
 .browse-search .searchbox button{float:left}
 .browse-search span.examples{clear:right;}
 
