@@ -472,7 +472,7 @@ span.notification{
 
 .item-essentials{
 	position:relative;
-	background:#efefef;
+	background:#222;
 	padding:15px 0;
 	border-top:1px dotted #000;
 	border-bottom:1px dotted #000;
@@ -504,18 +504,18 @@ span.notification{
 
 .item-essentials h2{
 	
-	color: #333;
+	color: #fff;
 	font-size: 20px;
 	font-weight: bold;
 	margin: 0px 0 0;
 	padding-bottom: 10px;
-	text-shadow: 1px 1px 0 #EEE;
+	text-shadow: 1px 1px 0 #000;
 	margin-bottom: 0px;
 	padding-right:25px;
 }
 
 .item-essentials p.description{
-	color:#555;
+	color:#aaa;
 	font-size:15px;
 	line-height:22px;
 	padding-right:25px;
