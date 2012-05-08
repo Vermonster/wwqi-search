@@ -514,14 +514,13 @@ span.notification{
 	padding-right:25px;
 }
 
-.item-essentials p.description{
+.item-essentials div.description{
 	color:#ccc;
 	font-size:15px;
 	line-height:22px;
 	padding-right:25px;
 	margin-top:0;
 	padding-top:10px;
-
 }
 
 .item-essentials.collection-details h2,

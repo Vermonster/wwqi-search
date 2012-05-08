@@ -157,7 +157,7 @@ ul.collections li a .collection-essentials{
 }
 ul.collections li a .items-in-collection{float:left;}
 ul.collections li a h3{
-	font-family: 'Bnazanin';
+	font-family: 'BNazaninBold';
 	font-size: 25px;
 }
 ul.collections li a p{
@@ -266,11 +266,11 @@ ul.collections li a p{
 	padding-right:40px;
 	padding-lefT:0;
 	background:url(../images/icon-browse.png) 100% 0 no-repeat;
-	font-family: 'Bnazanin';font-size: 28px;
+	font-family: 'BNazaninBold';font-size: 28px;
 }
 
 #browse-bar h3 a{
-	font-family: 'Bnazanin';font-size: 25px;
+	font-family: 'BNazaninBold';font-size: 25px;
 }
 #browse-bar  h3.has-children{background: url("../images/arrow_collapsed_fa.png") 100% 18px no-repeat; padding-right: 15px; padding-left:5px;}
 #browse-bar h3.active{background:  url("../images/arrow_expanded.png") 100% 18px no-repeat;}
@@ -283,7 +283,7 @@ ul.collections li a p{
 .browse-search h1{
 	padding-right:40px;
 	padding-left:0;
-	background:url(../images/icon-search.png) 100% 0 no-repeat;font-family: 'Bnazanin';font-size: 28px;
+	background:url(../images/icon-search.png) 100% 0 no-repeat;font-family: 'BNazanin';font-size: 28px;
 }
 .browse-by-type h1{
 	padding-right:40px;
@@ -295,7 +295,7 @@ ul.collections li a p{
 	padding-right:40px;
 	padding-left:0;
 	background:url(../images/icon-browse.png) 100% 0 no-repeat; 
-	font-family: 'Bnazanin';font-size: 28px;
+	font-family: 'BNazanin';font-size: 28px;
 }
 
 .browse-search .searchbox input{margin:2px 10px 2px 0px; float:none}
