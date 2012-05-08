@@ -45,14 +45,14 @@
           <% end %>
         </ul>
         <ul id="pagin" class="search-bottom-list">
-          <li>
+          <li class="prev">
           <% if loopback.prev_page?(@total_results) %>
-            <a href=<%= loopback.decrement_page.to_url %>><< <%= t("previous") %></a> 
+            <a  href=<%= loopback.decrement_page.to_url %>><span>&laquo;</span> <%= t("previous") %></a> 
           <% end %>
           </li>
-          <li>
+          <li class="next">
           <% if loopback.next_page?(@total_results) %>
-            <a href=<%= loopback.increment_page.to_url %>><%= t("next") %> >></a> 
+            <a  href=<%= loopback.increment_page.to_url %>><%= t("next") %> <span>&raquo;</span></a> 
           <% end %>
           </li>
         </ul>
