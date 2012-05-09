@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0" /> 
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />  
 
-  <title><%= t('site_title') %><%= "|#{@object.title}" if @object.respond_to?(:title) && @object.try(:title) %></title>
+  <title><%= t('site_title') %><%= " | #{@object.title}" if @object.respond_to?(:title) && @object.try(:title) %></title>
   <meta name="description" content="<%= t('archive_description') %>" />
   <meta name="author" content="<%= t('site_author') %>">
 
@@ -81,9 +81,14 @@
             <%#<a href="/archive/my_selections.html" class="module-link">My Selections <span class="notification">12</span></a>%>
             <%#</li>%>
             <li>
-            <% target_lang = @lang == :en ? :fa : :en %>
-            <% text_lang = @lang == :en ? 'فارسی' : 'English' %>
-            <%= lang_link_to(text_lang, 'index.html', lang: target_lang, class: 'lang lang-selector', dir: 'rtl') %>
+              <% target_lang = @lang == :en ? :fa : :en %>
+              <% text_lang = @lang == :en ? 'فارسی' : 'English' %>
+
+              <% if on_search_page? %>
+                <a href='<%= loopback(lang: target_lang).to_url %>' class='lang lang-selector', dir='rtl'><%= text_lang %></a>
+              <% else %>
+                <%= lang_link_to(text_lang, @object.key(target_lang), class: 'lang lang-selector', dir: 'rtl') %>
+              <% end %>
             </li>
           </ul>
         </div>
