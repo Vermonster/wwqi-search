@@ -41,6 +41,9 @@ def add_facet(name)
   end
 end
 
+def on_search_page? 
+  $on_search_page #this is terrible.
+end
 
 get '/search' do
   query_string = params["query"] 
@@ -103,8 +106,9 @@ get '/search' do
   @lang = lang
   @query = query_string
 
-  erb :results
+  $on_search_page = true
 
+  erb :results
 end
 
 def item_index(lang, type, letter)
@@ -119,6 +123,7 @@ def item_index(lang, type, letter)
   @type = type
   @content = query.results.facets[facet_name]["terms"].map(&:values).delete_if{|item| !item[0].downcase.starts_with?(letter.downcase) if letter }
 
+  $on_search_page = false
   erb :item_index 
 end
 
