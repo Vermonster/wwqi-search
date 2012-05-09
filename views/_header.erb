@@ -87,7 +87,7 @@
               <% if on_search_page? %>
                 <a href='<%= loopback(lang: target_lang).to_url %>' class='lang lang-selector', dir='rtl'><%= text_lang %></a>
               <% else %>
-                <%= lang_link_to(text_lang, @object.__key(target_lang), class: 'lang lang-selector', dir: 'rtl') %>
+                <%= lang_link_to(text_lang, @object.key(target_lang), class: 'lang lang-selector', dir: 'rtl') %>
               <% end %>
             </li>
           </ul>
