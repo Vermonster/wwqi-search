@@ -15,7 +15,7 @@ Period = [period(1), period(2), period(3), period(4)]
 
 require 'ostruct'
 class OpenStruct
-  def __key(_)
+  def key(_)
     "#test"
   end
 end
