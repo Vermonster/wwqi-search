@@ -1,3 +1,5 @@
+/* @override http://wwqi-static-site.s3.amazonaws.com/stylesheets/layout.css */
+
 /*
 * Skeleton V1.1
 * Copyright 2011, Dave Gamache
@@ -1574,7 +1576,6 @@ ul.collections li a .items-in-collection strong{
     margin: 0 15px 3px 0;
     line-height: 1.8em;
     font-size: 1.167em;
-    font-weight:bold;
     text-transform:uppercase;
     color:#A3A798 }
 
@@ -1856,7 +1857,7 @@ ul.collections li a .items-in-collection strong{
 	display:block;
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizeLegibility;
-	font-weight:bold;
+
 	margin-bottom:10px;
 }
 
@@ -1994,12 +1995,13 @@ ul.collections li a .items-in-collection strong{
 	background:url(../images/paper.png);
 }
 .secondary-browse-facets h3{
-	padding:8px 0 8px 0;
+	padding:8px 10px;
 	color:#444;
 	text-shadow:0px 1px 0px #fff;
 	font-size:21px;
 	border-bottom:1px solid #ddd;
-	margin:0;
+	margin:0 -10px;
+	background:rgba(0,0,0,0.1);
 }
 .secondary-browse-facets .four.columns{
 	min-height:320px;
