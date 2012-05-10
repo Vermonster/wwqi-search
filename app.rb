@@ -119,7 +119,7 @@ def item_index(lang, type, letter)
       terms facet_name, :size => 100
     end
   end
-  @lang = lang
+  @lang = lang.to_sym
   @type = type
   @content = query.results.facets[facet_name]["terms"].map(&:values).delete_if{|item| !item[0].downcase.starts_with?(letter.downcase) if letter }
 
