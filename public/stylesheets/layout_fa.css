@@ -2,6 +2,7 @@
 	http://wwqi-static-site.s3.amazonaws.com/stylesheets/layout_fa.css
 	http://search.wwqidev.com/stylesheets/layout_fa.css
 	http://wwqi-static-site.s3-website-us-east-1.amazonaws.com/stylesheets/layout_fa.css
+	http://localhost:5000/stylesheets/layout_fa.css
 */
 
 /*
@@ -15,11 +16,9 @@
 
 @font-face {
   font-family: 'BNazanin';
-  src: url('fonts/BNazanin.eot?#') format('eot'),  /* IE6–8 */
-       url('fonts/BNazanin.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-       url('fonts/BNazanin.ttf') format('truetype'), /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
-	   url('fonts/BNazanin.svg') format('svg'); 
-	   font-weight: bold;
+	src: url('fonts/BNazanin.eot');
+	src: local('☺'), url('fonts/BNazanin.woff') format('woff'), url('fonts/BNazanin.ttf') format('truetype'), url('fonts/BNazanin.svg') format('svg');
+    font-weight: bold;
 
 }
 @font-face {
@@ -183,6 +182,7 @@ ul.collections li a .items-in-collection{float:left;}
 ul.collections li a h3{
 	font-family: 'BNazaninBold';
 	font-size: 25px;
+	font-weight: normal;
 }
 ul.collections li a p{
 	font-size: 17px;
@@ -294,7 +294,7 @@ ul.collections li a p{
 }
 
 #browse-bar h3 a{
-	font-family: 'BNazaninBold';font-size: 25px;
+	font-family: 'BNazaninBold';font-size: 25px;font-weight: normal;
 }
 #browse-bar  h3.has-children{background: url("../images/arrow_collapsed_fa.png") 100% 18px no-repeat; padding-right: 15px; padding-left:5px;}
 #browse-bar h3.active{background:  url("../images/arrow_expanded.png") 100% 18px no-repeat;}

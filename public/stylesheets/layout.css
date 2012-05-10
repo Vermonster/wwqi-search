@@ -1,4 +1,7 @@
-/* @override http://wwqi-static-site.s3.amazonaws.com/stylesheets/layout.css */
+/* @override 
+	http://wwqi-static-site.s3.amazonaws.com/stylesheets/layout.css
+	http://localhost:5000/stylesheets/layout.css
+*/
 
 /*
 * Skeleton V1.1
@@ -927,7 +930,6 @@ ul.search-results {
 	background: -moz-linear-gradient(top, #C5112C 0%, #9a0a20 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C5112C), color-stop(100%,#9a0a20));
 	text-overflow:ellipsis;
-	white-space:nowrap;
 	text-transform: capitalize;
 	-moz-border-radius:15px;
 	-webkit-border-radius:15px;
@@ -1711,7 +1713,6 @@ ul.collections li a .items-in-collection strong{
 	float: none;
 	padding: 0 10px;
 	color: white;
-	height: 27px;
 	line-height: 27px;
 	font-size: 12px;
 	font-weight: bold;
@@ -1721,7 +1722,6 @@ ul.collections li a .items-in-collection strong{
 	background: -moz-linear-gradient(top, #C5112C 0%, #9a0a20 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C5112C), color-stop(100%,#9a0a20));
 	text-overflow:ellipsis;
-	white-space:nowrap;
 	text-transform: capitalize;
 	-moz-border-radius:15px;
 	-webkit-border-radius:15px;
