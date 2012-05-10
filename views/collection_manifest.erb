@@ -31,7 +31,7 @@
               <div class="layer2"></div>
             </div>
             <div class="collection-meta">
-              <span class="items-in-collection"><strong><%= with_farsi_numbers collection.item_count %></strong>Items</span>
+              <span class="items-in-collection"><strong><%= with_farsi_numbers collection.item_count %></strong><%= t("items") %></span>
               <div class="collection-essentials">
                 <h3><%= collection.title %></h3>
                 <p><%= markdown collection.description %></p>

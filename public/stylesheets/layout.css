@@ -1641,6 +1641,7 @@ ul.collections li a .items-in-collection strong{
 	line-height:32px;
 	border-bottom:1px dotted #aaa;
 	padding-bottom:10px;	
+	background:url(../images/icon-browse.png) 0 0 no-repeat;
 }
 
 #browse-bar  h3{
