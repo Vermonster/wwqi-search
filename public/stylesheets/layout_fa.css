@@ -206,7 +206,7 @@ ul.collections li a p{
 .static-content h2{font-size:22px}
 .static-content h3{color:#333; font-size:18px}
 .faq p{line-height:20px}
-.faq h3{background:#f5f5f5; padding:10px 5px}
+.faq h3{background:#f5f5f5; padding:10px 5px; font-weight:normal}
 
 /* #Collection Details
 ================================================== */
