@@ -256,6 +256,10 @@ ul.collections li a p{
 #carousel h2{
 	font-size: 24px;
 	height: 38px; padding: 0 35px;line-height: 38px;
+	margin-left: 0;
+	margin-right: 0;
+	padding-left:0;
+	padding-right: 0;
 	font-family:'BNazaninBold',Tahoma, sans-serif; font-weight: normal;
 }
 #carousel .collection-data .title{
@@ -265,6 +269,10 @@ ul.collections li a p{
 }
 #carousel .collection-data .description{
 	font-size: 18px;
+}
+
+.es-carousel-wrapper{
+	padding-left: 0!important;
 }
 
 /* #Footer
