@@ -281,7 +281,7 @@ ul.collections li a p{
 #pageFooterWrapper { clear:right;}
 #pageFooter li { float:right;margin: 0 0px 3px 15px; font-family: 'BNazaninBold';}
 #pageFooter a:link { color: #aaa;padding: 0 10px 0 0px;  font-size: 17px; font-weight: normal;}
-#pageFooter p{margin-left: 44px; text-align: left;}
+#pageFooter p{margin-left: 44px; text-align: left;direction:ltr; font-family:helvetia, sans-serif}
 #pageFooter  a:visited {padding: 0 10px 0 0px; }
 
 #pageFooter a:hover {padding: 0 10px 0 0px; }
