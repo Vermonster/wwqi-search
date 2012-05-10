@@ -320,6 +320,7 @@ span.notification{
 	font-weight:normal;
 	color:#fff;
 	margin:0;
+	font-weight:bold;
 }
 .header .menu ul li a:hover{
 	background:#C5112C;
@@ -1581,7 +1582,7 @@ ul.collections li a .items-in-collection strong{
 
 #pageFooter a:link { 
     color: #aaa;
-    padding: 0 0 0 10px; }
+    padding: 0 0 0 10px; font-weight: bold;}
 
 #pageFooter  a:visited { 
     color: #aaa;
@@ -2050,6 +2051,20 @@ ul.collections li a .items-in-collection strong{
 .special-searches h3 a{
 	color:#555;
 }
+.special-searches h3.has-translation{
+	background:url(../images/icon-translation-black.png) 0 0 no-repeat;
+	margin:0;
+	padding:0px 0 0 40px;
+	height:32px;
+	line-height:32px;
+}
+.special-searches h3.has-transcription{
+	background:url(../images/icon-transcript-black.png) 0 0 no-repeat;
+	margin:0;
+	padding:0px 0 0 40px;
+	height:32px;
+	line-height:32px;
+}
 
 /* #over-riding audio player defaults
 ================================================== */
@@ -2092,7 +2107,7 @@ ul.collections li a .items-in-collection strong{
 		#home-main #search-wrapper #search-form input{
 			width:300px;
 		}
-		#pageFooter a{font-size:11px}
+		#pageFooter a{font-size:11px; font-weight: bold;}
 		#pageFooter .noimage img{width:250px}
 
     
@@ -2319,7 +2334,8 @@ ul.collections li a .items-in-collection strong{
 		}
 		.secondary-browse-facets h3,
 		.secondary-browse-facets ul{
-			margin:0 10px;
+			margin:0 0px;
+			padding: 0 10px;
 		}
 		.secondary-browse-facets ul li a {
 			padding:10px 0;

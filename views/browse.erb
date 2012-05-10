@@ -34,10 +34,10 @@
         </div>
         <div class="clearfix special-searches">
           <div class="six columns alpha">
-            <h3><a href="<%= loopback.update_filter('translation', 'has-translation').to_url %>"><span class="icon">></span> <%= t("view_all_items_with_translations") %></a></h3>
+            <h3 class="has-translation"><a href="<%= loopback.update_filter('translation', 'has-translation').to_url %>"><%= t("view_all_items_with_translations") %></a></h3>
           </div>
           <div class="six columns omega">
-            <h3><a href="<%= loopback.update_filter('transcription', 'has-transcription').to_url %>"><span class="icon">p</span> <%= t("view_all_items_with_transcriptions") %></a></h3>
+            <h3 class="has-transcription"><a href="<%= loopback.update_filter('transcription', 'has-transcription').to_url %>"> <%= t("view_all_items_with_transcriptions") %></a></h3>
           </div>
         </div>
 
