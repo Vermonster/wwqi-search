@@ -3,6 +3,7 @@
 	http://search.wwqidev.com/stylesheets/layout_fa.css
 	http://wwqi-static-site.s3-website-us-east-1.amazonaws.com/stylesheets/layout_fa.css
 	http://localhost:5000/stylesheets/layout_fa.css
+	http://www.wwqidev.com/stylesheets/layout_fa.css
 */
 
 /*
@@ -223,7 +224,7 @@ ul.collections li a p{
 
 #home-main .rslides li{margin-bottom:0}
 #home-main .side-stuff{margin-left:-20px; margin-right:0; padding:0 10px 50px 10px}
-#home-main .welcome{right:0;left:5px;font-size: 23px;font-family: 'BNazaninBold';}
+#home-main .welcome{right:0;left:5px;font-size: 23px;font-family: 'BNazaninBold';font-weight: normal;}
 #home-main .welcome i{
 	left:0;
 	right:auto;
@@ -255,12 +256,12 @@ ul.collections li a p{
 #carousel h2{
 	font-size: 24px;
 	height: 38px; padding: 0 35px;line-height: 38px;
-	font-family:'BNazaninBold',Tahoma, sans-serif;
+	font-family:'BNazaninBold',Tahoma, sans-serif; font-weight: normal;
 }
 #carousel .collection-data .title{
 	font-size: 22px;
 	margin-bottom: 10px;
-	font-family:'BNazaninBold';
+	font-family:'BNazaninBold';font-weight: normal;
 }
 #carousel .collection-data .description{
 	font-size: 18px;
