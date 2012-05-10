@@ -19,3 +19,8 @@ class OpenStruct
     "#test"
   end
 end
+class NilClass 
+  def key(_)
+    "#test"
+  end
+end
