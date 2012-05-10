@@ -323,6 +323,7 @@ ul.collections li a p{
 	padding-left:0;
 	background:url(../images/icon-types.png) 100% 0 no-repeat;font-family: 'BNazanin';font-size: 28px;
 }
+.browse-by-type span{font-weight:normal;}
 
 .browse  h1{
 	padding-right:40px;
@@ -335,7 +336,7 @@ ul.collections li a p{
 .browse-search .searchbox button{float:left}
 .browse-search span.examples{clear:right;}
 
-.view-all{float:left;}
+.view-all{float:left;font-weight:normal}
 #browse-bar .browse-by-period h1{background:url(../images/icon-period.png) 100% 0 no-repeat;font-family: 'BNazanin';font-size: 28px;}
 .browse-by-period a em{float:right;margin:0 0px 0 10px;	}
 .browse-by-period ul li a span{font-size: 17px;}
