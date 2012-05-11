@@ -116,7 +116,7 @@ def item_index(lang, type, letter)
   query = Tire.search ROOT_INDEX do
     query { string "*" } 
     facet facet_name, :global => true do
-      terms facet_name, :size => 100
+      terms facet_name, :size => 100000
     end
   end
   @lang = lang.to_sym
