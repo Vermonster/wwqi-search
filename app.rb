@@ -36,7 +36,7 @@ helpers Helpers
 
 def add_facet(name)
   facet name do
-    terms name, size: 20
+    terms name, size: 1000000
     yield if block_given?
   end
 end

@@ -11,15 +11,34 @@ module Helpers
     str
   end
 
+  def facet_link(facet, term)
+    has_current = "current" if loopback.filters.any? {|type, value| value == term['term']}
+    count = with_farsi_numbers term["count"].to_i
+    term_name = t(term['term'])
+    return_link = if has_current
+                    loopback.remove_filter(facet).page(1).to_url
+                  else
+                    loopback.update_filter(facet, term['term']).page(1).to_url
+                  end
+
+    link_html = if has_current
+                  %Q|<a href='#{return_link}'>D</a>#{term_name}|
+                else
+                  %Q|<a href='#{return_link}'>#{term_name}</a>|
+                  end
+
+    %Q|<li class="#{has_current}"> #{link_html} <span>(#{count})</span> </li>|
+  end
+
   def lang_link_to(text, link, opts={})
     lang = opts.delete(:lang) 
     url = URI.join(ENV["MAIN_SITE_URL"], "#{lang}/", "#{link}")
-    
+
     attributes = ""
     opts.each { |key,value| attributes << key.to_s << "=\"" << value << "\" "}
     "<a href=\"#{url}\" #{attributes}>#{text}</a>"
   end
-  
+
   def return_link(*_)
     Loopback.new(params).to_url
   end
@@ -98,7 +117,7 @@ module Helpers
             <span class="description">#{opts[:desc]}</span>
          </a>
         </div>
-       
+
       </li>|
   end
 

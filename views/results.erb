@@ -1,7 +1,7 @@
 <%#encoding: utf-8%>
 <%= partial :header %>
 <div id="content">
-<div class="container clearfix white-paper-stack top-of-page"><div class="stacks"></div></div>
+  <div class="container clearfix white-paper-stack top-of-page"><div class="stacks"></div></div>
   <div class="container clearfix">
     <div class="clearfix shaded-panel has-sidebar main-panel-is-dark " style="background-color:#222">
       <div class="clearfix twelve columns">
@@ -19,15 +19,15 @@
           <% @results.each do |result| %>
             <li class="clearfix <%= result.type %><% if result.type.downcase == "item" %><%= with_farsi_numbers result.image_count %><% end %>">
             <a href="<%= "#{ENV["MAIN_SITE_URL"]}#{result.send("url_#{@lang}")}" %>" class="clearfix">
-              	<div class="collection-thumb stack rotated">
-	                <% if result.thumbnail %>
-	                  <img alt="<%= result.name %>" src="<%= result.thumbnail %>">
+              <div class="collection-thumb stack rotated">
+                <% if result.thumbnail %>
+                  <img alt="<%= result.name %>" src="<%= result.thumbnail %>">
 
-	                <% else %>
-	                  <img alt="<%= result.name %>" src="/images/empty.jpg">
+                <% else %>
+                  <img alt="<%= result.name %>" src="/images/empty.jpg">
 
-	                <% end %>
-	              </div>
+                <% end %>
+              </div>
               <div class="collection-meta">
                 <% if result.type.downcase == "collection" %>
                   <span class="items-in-collection"><strong><%= with_farsi_numbers result.count %></strong><%= t("items") %></span>
@@ -58,55 +58,48 @@
         </ul>
       </div>
       <div id="browse-bar" class="four columns">
-		<div class="current-filters">
-        <h1><%= t("filter") %></h1>
-        <% first = 'first' %>
-		</div>
+        <div class="current-filters">
+          <h1><%= t("filter") %></h1>
+          <% first = 'first' %>
+        </div>
         <% @facets.each.with_index do |(facet, content), i| %>
           <h3 class='has-children <%= first %> active'><a href='#'><%= t(*facet.split('_')) %></a></h3>
           <div class='list'>
-            <ul class='default'>
+            <ul class='default facets <%= facet.split('_').first %>'>
               <% if loopback.has_filters? 
                    content['terms'].delete_if do |term| 
                      loopback.filters.any? {|type, value| value != term['term'] && type == facet} 
                    end 
-                 end %>
+              end %>
 
 
-            <% content['terms'].each do |term| %>
-              <% current_filter = loopback.filters.any? {|type, value| value == term['term']} %>
-			  <li class="<% if current_filter  %>current<% end %>"> 
-              <% if current_filter  %>
-                <a href='<%= loopback.remove_filter(facet).to_url %>'>D</a>
-                <%= term['term'] %>
-              <% else %>
-                <a href="<%= loopback.update_filter(facet, term['term']).to_url %>">
-                  <%= t(term['term']) %>
-                </a>
-              <% end %>
-              <span>(<%= with_farsi_numbers term['count'].to_i %>)</span> 
-              </li>
+            <% content['terms'].take(20).each do |term| %>
+              <%= facet_link(facet, term) %>
             <% end %>
+            <div class='more'>
+              <% content['terms'].drop(20).each do |term| %>
+                <%= facet_link(facet, term) %>
+              <% end %>
+            </div>
           </ul>
+        </div>
+        <% first = '' %>
+      <% end %>
+
+      <h3 class='has-children last active'><a href="#"><%= t("periods") %></a></h3>
+      <div class='list'>
+        <ul class='default'>
+          <% period_filters[@lang.to_s].each do |period| %>
+            <li>
+            <a href="<%= loopback.from(period["start_at"]).to(period["end_at"]).to_url %>">
+              <%= period["name"] %>
+            </a>
+            </li>
+          <% end %>
         </ul>
       </div>
-      <% first = '' %>
-    <% end %>
-
-    <h3 class='has-children last active'><a href="#"><%= t("periods") %></a></h3>
-    <div class='list'>
-      <ul class='default'>
-        <% period_filters[@lang.to_s].each do |period| %>
-          <li>
-          <a href="<%= loopback.from(period["start_at"]).to(period["end_at"]).to_url %>">
-            <%= period["name"] %>
-          </a>
-          </li>
-        <% end %>
-      </ul>
     </div>
   </div>
-</div>
 </div>
 <%= partial :footer %>
 
