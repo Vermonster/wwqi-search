@@ -947,9 +947,7 @@ ul.search-results {
 	font-weight: normal;
 	font-family: Pictos;
 	font-size: 14px;
-	background:#111;
 	display: inline-block;
-	width: 68px;
 	height: 30px;
 	line-height: 32px;
 	position: relative;
@@ -957,18 +955,7 @@ ul.search-results {
 	top:-1px;
 	right:-11px;
 	text-align: center;
-	-webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.4);
-	-moz-box-shadow: 0px 0px 3px rgba(0,0,0,0.4);
-	-o-box-shadow:0px 0px 3px rgba(0,0,0,0.4);
-	box-shadow: 0px 0px 3px rgba(0,0,0,0.4);
-	-moz-border-radius:0 15px 15px 0;
-	-webkit-border-radius:0 15px 15px 0;
-	border-radius:0 15px 15px 0;
 	font-size:25px;
-	-webkit-box-shadow: 2px 1px 4px RGBA(0,0,0,0.1),inset 0 1px 0 RGBA(255,255,255,0.6);
-	-moz-box-shadow: 2px 1px 4px RGBA(0,0,0,0.1),inset 0 1px 0 RGBA(255,255,255,0.6);
-	-o-box-shadow: 2px 1px 4px RGBA(0,0,0,0.1),inset 0 1px 0 RGBA(255,255,255,0.6);
-	box-shadow: 2px 1px 4px RGBA(0,0,0,0.1),inset 0 1px 0 RGBA(255,255,255,0.6);
 	color:#fff;
 }
 

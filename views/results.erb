@@ -17,7 +17,7 @@
 
         <ul class="search-results collections dark-list">
           <% @results.each do |result| %>
-            <li class="clearfix <%= result.type %><% if result.type.downcase == "item" %><%= with_farsi_numbers result.image_count %><% end %>">
+            <li class="clearfix <%= result.draft? ? "draft" : "" %> <%= result.type %><% if result.type.downcase == "item" %><%= result.image_count %><% end %>">
             <a href="<%= "#{ENV["MAIN_SITE_URL"]}#{result.send("url_#{@lang}")}" %>" class="clearfix">
               	<div class="collection-thumb stack rotated">
 	                <% if result.thumbnail %>
@@ -47,12 +47,12 @@
         <ul id="pagin" class="search-bottom-list">
           <li class="prev">
           <% if loopback.prev_page?(@total_results) %>
-            <a  href=<%= loopback.decrement_page.to_url %>><span>&laquo;</span> <%= t("previous") %></a> 
+            <a  href=<%= loopback.decrement_page.to_url %>>&laquo; <%= t("previous") %></a> 
           <% end %>
           </li>
           <li class="next">
           <% if loopback.next_page?(@total_results) %>
-            <a  href=<%= loopback.increment_page.to_url %>><%= t("next") %> <span>&raquo;</span></a> 
+            <a  href=<%= loopback.increment_page.to_url %>><%= t("next") %> &raquo;</a> 
           <% end %>
           </li>
         </ul>

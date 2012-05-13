@@ -8,7 +8,7 @@
 <div id="content">
   <div class="container clearfix white-paper-stack top-of-page"><div class="stacks"></div></div>
   <div class="container clearfix">
-    <div class="item-page clearfix  item<%= @object.image_count %>">
+    <div class="item-page clearfix  item<%= @object.image_count %> <%= @object.draft? ? "draft" : "" %>">
       <%= partial "item_tools" %>
 
       <div class="item-essentials container clearfix">
