@@ -36,7 +36,7 @@ helpers Helpers
 
 def add_facet(name)
   facet name do
-    terms name, size: 20
+    terms name, size: 1000000
     yield if block_given?
   end
 end
@@ -116,10 +116,10 @@ def item_index(lang, type, letter)
   query = Tire.search ROOT_INDEX do
     query { string "*" } 
     facet facet_name, :global => true do
-      terms facet_name, :size => 100
+      terms facet_name, :size => 100000
     end
   end
-  @lang = lang
+  @lang = lang.to_sym
   @type = type
   @content = query.results.facets[facet_name]["terms"].map(&:values).delete_if{|item| !item[0].downcase.starts_with?(letter.downcase) if letter }
 

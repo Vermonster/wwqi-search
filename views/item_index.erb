@@ -1,9 +1,12 @@
+<%# encoding: utf-8                                                                    %>
 <%= partial "header" %>
 <div id="content">
-  <div class="container clearfix">
-    <div class="clearfix shaded-panel" id="indexList">
+  <div class="container clearfix white-paper-stack top-of-page"><div class="stacks"></div>
 
-      <div class="page-head">
+    <div class="clearfix" id="indexList">
+
+      <div class="extra-padding">
+
         <div class="otherIndexes">
           <a href="<%= "/#{@lang}/genres.html" %>">  <%= t('genres') %>  </a>
           <a href="<%= "/#{@lang}/people.html" %>">  <%= t('people') %>  </a>
@@ -11,19 +14,6 @@
           <a href="<%= "/#{@lang}/subjects.html" %>"><%= t('subjects') %></a>
         </div>
         <h2><%= @type.capitalize %> Index</h2>
-        <ul class="alphabet">
-          <% ('A'..'Z').each do |letter| %>
-            <li>
-            <%= lang_link_to(letter, "#{@type}.html?letter=#{letter}", lang: @lang) %>
-            </li>
-          <% end %>
-          <li>
-          <%= lang_link_to("ʻ", "#{@type}.html?letter=%CA%BB", lang: @lang) %>
-          </li>
-          <li>
-          <%= lang_link_to("ALL", "#{@type}.html", lang: @lang) %>
-          </li>
-        </ul>
       </div>
       <%
           column_2 = @content.slice!((@content.size/2.0).round..@content.size)

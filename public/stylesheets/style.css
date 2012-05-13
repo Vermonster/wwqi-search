@@ -2385,3 +2385,8 @@ select#repository_filter{
   position:relative;
   top:-2px;
 }
+
+.facets .more { 
+  display: none;
+}
+

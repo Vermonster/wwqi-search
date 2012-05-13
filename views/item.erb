@@ -140,10 +140,10 @@
                 </li>
               <% end %>
 
-              <% if @object.repository.present? %>
+              <% if @object.repository_credit.present? %>
                 <li>
                 <span><%= t("repository") %></span>
-                <%= @object.repository %>
+                <%= @object.repository_credit %>
                 </li>
               <% end %>
 

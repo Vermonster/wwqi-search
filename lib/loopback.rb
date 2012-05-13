@@ -123,6 +123,11 @@ class Loopback
     self
   end
 
+  def page(n)
+    @page = n
+    self
+  end
+
   def remove_filter(type)
     @filters.delete(type)
     self

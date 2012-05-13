@@ -13,6 +13,20 @@
   <title><%= t('site_title', :en) %> | <%= t('site_title', :fa) %></title> 
   <meta name="description" content="<%= t('archive_description', :en) %>" />
   <meta name="author" content="<%= t('site_author', :en) %>">
+  
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+
+  <%= javascript "jquery.cookie" %>
+  <%= javascript "languagePreference" %>
+  <script type="text/javascript">
+    var languagePref = $.cookie("languagePref");
+
+    if (languagePref == 'fa') {
+      window.location.replace("/fa/index.html");
+    } else if (languagePref == 'en') {
+      window.location.replace("/en/index.html");
+    }
+  </script>
 
   <!-- CSS 
   ================================================== -->
@@ -90,19 +104,5 @@
     </div>
   </div>
   
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-
-  <%= javascript "jquery.cookie" %>
-  <%= javascript "languagePreference" %>
-  <script type="text/javascript">
-    var languagePref = $.cookie("languagePref");
-
-    if (languagePref == 'fa') {
-      window.location.replace("/fa/index.html");
-    } else if (languagePref == 'en') {
-      window.location.replace("/en/index.html");
-    }
-
-  </script>
 </body>
 </html>
