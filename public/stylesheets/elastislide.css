@@ -36,7 +36,7 @@
 	position:absolute;
 	top:38px;
 	left:0px;
-	background:#777 url(../images/nav.png) no-repeat 0% 50%;
+	background:#777 url(../images/nav-prev.png) no-repeat 50% 50%;
 	width:35px;
 	height:372px;
 	text-indent:-9000px;
@@ -49,6 +49,7 @@
 	right:0px;
 	left:auto;
 	background-position:100% 50%;
+	background:#777 url(../images/nav-next.png) no-repeat 50% 50%;
 }
 .es-nav span:hover{
 	opacity:1.0;

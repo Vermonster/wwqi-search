@@ -2154,7 +2154,7 @@ ul.collections li a .items-in-collection strong{
 			display:block;
 			background:#000;
 			float:right;
-			margin-top:-14px;
+			margin-top:0px;
 		}
 		.header .toolbar h1{
 			margin-left:60px;
@@ -2182,7 +2182,7 @@ ul.collections li a .items-in-collection strong{
 			float:none;
 			padding:10px 6px;
 		}
-		.header .menu ul li:last-chil a{
+		.header .menu ul li:last-child a{
 			border:none;
 		}
 		.header .menu ul li span{display:none}
@@ -2318,13 +2318,23 @@ ul.collections li a .items-in-collection strong{
 			width:100%;
 			text-align:center;
 			text-indent:0;
+			background:url(../images/30black.png);
 		}
 		#home-main .welcome i{
 			display:none;
 		}
 		#carousel h2{margin-left:-35px; margin-right:0; padding-left:35px; padding-right:0; text-indent:10px;}
-		.es-nav span{height:70px!important; top:190px!important;}
-		.es-carousel-wrapper{padding-right:0px!important; }
+		.es-nav span{height:40px!important; top:100%!important; 
+			width:206px!important;
+			-moz-box-shadow:inset 0px 1px 3px rgba(0,0,0,0.5);
+			-webkit-box-shadow:inset 0px 1px 3px rgba(0,0,0,0.5);
+			box-shadow:inset 0px 1px 3px rgba(0,0,0,0.5);
+			padding-left:0!important;
+			padding-right:0!important;
+		}
+		.es-nav span.es-nav-next{right:4px!important;}
+		.es-nav span.es-nav-prev{left:4px!important}
+		.es-carousel-wrapper{padding-right:0px!important; margin-bottom:60px!important; padding-left:0!important;}
 		#carousel .swipe{display:block}
 		#pageFooter {height:auto; padding-top:10px;padding-bottom:10px;}
 		#pageFooter .noimage img{
@@ -2430,7 +2440,9 @@ ul.collections li a .items-in-collection strong{
 			}
 			
 			#content.static-content  .extra-padding{padding:10px}
-
+			.es-nav span{ 
+				width:146px!important;
+			}
 	  		
 	}
 

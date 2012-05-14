@@ -443,7 +443,6 @@ ul.collections li a p{
 				display:block;
 				background:#000;
 				float:left;
-				margin-top:-14px;
 			}
 			.header .toolbar h1{
 				margin-right:60px;
@@ -473,7 +472,7 @@ ul.collections li a p{
 				padding:10px 6px;
 				font-weight: normal;
 			}
-			.header .menu ul li:last-chil a{
+			.header .menu ul li:last-child a{
 				border:none;
 			}
 			.header .menu ul li span{display:none}
@@ -600,6 +599,7 @@ ul.collections li a p{
 			#browse-bar h3.active{background:  url("../images/arrow_expanded.png") 97% 12px no-repeat;}
 			#content .shaded-panel.has-sidebar.main-panel-is-dark{background: none}
 			#pageFooter p{text-align: center; margin:0;}
+			#home-main .welcome{background:url(../images/30black.png);}
 	}
 
 	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
