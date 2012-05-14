@@ -2471,6 +2471,9 @@ ul.collections.facets li a {
   -webkit-border-radius: 5px;  
 }
 
+#translation-to-english {
+  direction:ltr;
+}
 #transcription-of-farsi { 
   direction:rtl;
 }

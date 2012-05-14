@@ -68,7 +68,7 @@
                 <h1><%= t('translation') %></h1>
               </a>
 
-              <div id="translation-to-english" class='modal-dialog'>
+              <div id="translation-to-english" class='modal-dialog' dir='rtl'>
                 <div class="modal-dialog-header">
                   <h2><%= t('translation')%></h2>
                   <a href="#" class="modal-close"></a>
@@ -88,11 +88,11 @@
 
               <div id="transcription-of-farsi" class='modal-dialog' dir='rtl'>
                 <div class="modal-dialog-header">
-                  <h2 dir='rtl'><%= t('transcription')%></h2>
-                  <a dir='rtl' href="#" class="modal-close"></a>
+                  <h2><%= t('transcription')%></h2>
+                  <a href="#" class="modal-close"></a>
                 </div>
 
-                <div dir='rtl' class="modal-dialog-content">
+                <div class="modal-dialog-content">
                 <%= @object.transcription_of_farsi %>
                 </div>
               </div>
