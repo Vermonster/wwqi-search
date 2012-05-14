@@ -564,15 +564,15 @@ span.notification{
 
 .item-audio{
 	background:#000;
-	padding:20px 20px 10px;
+	padding:20px 15px 10px;
 }
 .item-translation{
 	background:#333;
-	padding:10px 20px;
+  padding:10px 0;
 }
 .item-transcript{
 	background:#555;
-	padding:10px 20px;
+	padding:10px 0;
 }
 .item-audio h1{
 	padding-left:40px;
@@ -2458,7 +2458,7 @@ ul.collections.facets li a {
 
 .modal-dialog {
   display: none;
-  width: 75%;  
+  width: 960px;  
   background: #fff;
   padding: 0;
 
@@ -2469,6 +2469,10 @@ ul.collections.facets li a {
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;  
+}
+
+#transcription-of-farsi { 
+  direction:rtl;
 }
 
 .modal-dialog-content {
