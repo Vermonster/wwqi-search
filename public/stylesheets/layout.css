@@ -2374,6 +2374,7 @@ ul.collections.facets li a {
 			margin:0 0px;
 			padding: 0 10px;
 		}
+		.secondary-browse-facets h3{padding:10px}
 		.secondary-browse-facets ul li a {
 			padding:10px 0;
 			border-bottom:1px solid #ddd;
@@ -2402,7 +2403,9 @@ ul.collections.facets li a {
 
     }
 	ul.search-results,#pagin {margin:0}
-	}
+	.browse-by-type a span{padding:0 10px; text-shadow:none;white-space:nowrap; text-overflow:ellipsis; overflow:hidden; display:block}
+	.special-searches h3.has-translation{margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid #ccc; margin-right:15px;}
+}
 
 	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
 	@media only screen and (min-width: 480px) and (max-width: 767px) {
