@@ -8,10 +8,11 @@
 <div id="content">
   <div class="container clearfix white-paper-stack top-of-page"><div class="stacks"></div></div>
   <div class="container clearfix">
-    <div class="item-page clearfix  item<%= @object.image_count %> <%= @object.draft? ? "draft" : "" %>">
+    <div class="item-page clearfix item<%= @object.image_count %> <%= @object.draft? ? "draft" : "" %>">
       <%= partial "item_tools" %>
-
+	<span class="draft-badge"></span>
       <div class="item-essentials container clearfix">
+		
         <div class="four columns item-thumbnail">
           <div class="item-image-frame stack rotated">
             <img src="<%= @object.try(:thumbnail) %>" alt="<%= @object.try(:title) %>">

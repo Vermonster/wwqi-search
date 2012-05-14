@@ -456,8 +456,24 @@ span.notification{
 /* item details
 -------------------------------------------------------------- */
 .item-page .item-head{
-
 	padding:24px 15px 15px;
+}
+
+.item-page.draft .item-head{
+	background:#C82D00;
+	-moz-box-shadow:inset 0px -1px 3px rgba(0,0,0,0.5);
+	-webkit-box-shadow:inset 0px -1px 3px rgba(0,0,0,0.5);
+	box-shadow:inset 0px -1px 3px rgba(0,0,0,0.5);
+}
+
+.item-page.draft .draft-badge{
+	background:url(../images/draft-stamp.png) 0 0 no-repeat;
+	width:85px;
+	height:85px;
+	top:5px;
+	left:15px;
+	right:auto;
+	display:block;
 }
 
 .item-page .item-head .add_this_tools{
@@ -854,6 +870,24 @@ ul.collections li{
 	margin:0;
 	padding:0;
 }
+
+ul.collections li.draft{
+	position:relative;
+}
+
+.draft-badge{
+	display:none;
+}
+.draft .draft-badge{
+	width:54px;
+	height:54px;
+	background:url(../images/draft-badge.png) 0 0 no-repeat;
+	position:absolute;
+	top:0;
+	right:0;
+	display:block;
+	z-index:100;
+}
 ul.collections li a{
 	display:block;
 	padding:25px 0;
@@ -1233,7 +1267,7 @@ ul.collections li a .items-in-collection strong{
 	display:block;
 	bottom:0;
 	left:0;
-	background:url(../images/30black.png);
+	background:url(../images/home-search-arrow.png) 100% 0 no-repeat;
 	width:50%;
 	height:65px;
 	line-height:65px;

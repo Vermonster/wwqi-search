@@ -72,6 +72,12 @@ body{
 #content .shaded-panel.has-sidebar.browse-page{background: url(../images/dark-side.png) -260px 0 repeat-y;}
 
 .item-page .item-head .add_this_tools{float:left;}
+.item-page.draft .draft-badge{
+	background:url(../images/draft-stamp-fa.png) 0 0 no-repeat;
+	top:5px;
+	right:15px;
+	left:auto;
+}
 .item-essentials h2{padding-right:25px; padding-left:0;font-family: 'BNazaninBold'; font-size: 28px;}
 .item-essentials p.description{padding-right:25px;	padding-left:0px;}
 
@@ -190,6 +196,13 @@ ul.collections li a p{
 	color: #ccc;
 }
 
+.draft .draft-badge{
+	background:url(../images/draft-badge-fa.png) 0 0 no-repeat;
+	left:0;
+	right:auto;
+}
+
+
 /* #Static Pages
 ================================================== */
 .static-content li {
@@ -225,6 +238,7 @@ ul.collections li a p{
 #home-main .rslides li{margin-bottom:0}
 #home-main .side-stuff{margin-left:-20px; margin-right:0; padding:0 10px 50px 10px}
 #home-main .welcome{right:0;left:5px;font-size: 23px;font-family: 'BNazaninBold';font-weight: normal;}
+#home-main .welcome{background:url(../images/home-search-arrow-fa.png) 0% 0 no-repeat;}
 #home-main .welcome i{
 	left:0;
 	right:auto;
@@ -274,6 +288,7 @@ ul.collections li a p{
 .es-carousel-wrapper{
 	padding-left: 0!important;
 }
+#carousel .collection-data{direction:rtl;}
 
 /* #Footer
 ================================================== */
@@ -506,6 +521,7 @@ ul.collections li a p{
 				margin-right:30px;
 				position:relative;
 			}
+			
 			ul.collections li .collection-meta{
 				margin-right:120px;
 				margin-left:30px;

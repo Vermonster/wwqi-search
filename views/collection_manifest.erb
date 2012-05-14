@@ -19,8 +19,9 @@
           <% if collection.in_process? %>
           <% end %>
 
-          <li class="clearfix">
+          <li class="clearfix <%= collection.draft? ? "draft" : "" %>">
           <a href="<%= collection.url %>" class="clearfix">
+			<span class="draft-badge"></span>
             <div class="collection-thumb ">
               <% if collection.thumbnail %>
                 <img alt="<%= collection.title %>" src="<%= collection.thumbnail %>">

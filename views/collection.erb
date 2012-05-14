@@ -9,9 +9,9 @@
 <div id="content">
   <div class="container clearfix white-paper-stack top-of-page"><div class="stacks"></div></div>
   <div class="container clearfix">
-    <div class="item-page clearfix">
+    <div class="item-page clearfix <%= @object.draft? ? "draft" : "" %>">
       <%= partial "item_tools" %>
-
+	 <span class="draft-badge"></span>
       <div class="item-essentials collection-details container clearfix">
         <div class="ten columns">
           <h2><%= @object.title %></h2>
