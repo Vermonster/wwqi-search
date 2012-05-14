@@ -2087,6 +2087,11 @@ ul.collections li a .items-in-collection strong{
 	height:32px;
 	line-height:32px;
 }
+ul.collections.facets li a {
+	display: inline;
+	padding: 0;
+	border-bottom: none;
+}
 
 /* #over-riding audio player defaults
 ================================================== */
@@ -2396,6 +2401,7 @@ ul.collections li a .items-in-collection strong{
       height: 5em;
 
     }
+	ul.search-results,#pagin {margin:0}
 	}
 
 	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
