@@ -2390,3 +2390,6 @@ select#repository_filter{
   display: none;
 }
 
+.english-digits {
+  font-family: arial, sans-serif !important
+}
