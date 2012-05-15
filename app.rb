@@ -131,7 +131,7 @@ def item_index(lang, type, letter)
     end
 
     def __url(target_lang)
-      "#{target_lang}/#{@type}.html"
+      "/#{target_lang}/#{@type}.html"
     end
   end.new(type)
   
