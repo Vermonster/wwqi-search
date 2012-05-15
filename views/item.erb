@@ -74,7 +74,7 @@
                   <a href="#" class="modal-close"></a>
                 </div>
                 <div class="modal-dialog-content">
-                <%= @object.translation_to_english %>
+                <%= markdown @object.translation_to_english %>
                 </div>
               </div>
             </div>
@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="modal-dialog-content">
-                <%= @object.transcription_of_farsi %>
+                <%= markdown @object.transcription_of_farsi %>
                 </div>
               </div>
             </div>
