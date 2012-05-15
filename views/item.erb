@@ -63,7 +63,7 @@
           <% end %>
 
           <% if @object.translation_to_english? %>
-            <div class="item-translation">
+            <div class="item-translation" dir='ltr'>
               <a href="#translation-to-english" rel='leanModal' name='translation-to-english'>
                 <h1><%= t('translation') %></h1>
               </a>
@@ -71,9 +71,9 @@
               <div id="translation-to-english" class='modal-dialog' dir='rtl'>
                 <div class="modal-dialog-header">
                   <h2><%= t('translation')%></h2>
-                  <a href="#" class="modal-close"></a>
+                  <a href="#" class="modal-close english-numbers"></a>
                 </div>
-                <div class="modal-dialog-content">
+                <div class="modal-dialog-content english-numbers">
                 <%= markdown @object.translation_to_english %>
                 </div>
               </div>
