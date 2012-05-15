@@ -135,6 +135,7 @@ def item_index(lang, type, letter)
     end
   end.new(type)
   
+  $deliberate_hack = true
   $on_search_page = false
   erb :item_index 
 end
