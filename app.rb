@@ -124,7 +124,17 @@ def item_index(lang, type, letter)
   @lang = lang.to_sym
   @type = type
   @content = query.results.facets[facet_name]["terms"].map(&:values).delete_if{|item| !item[0].downcase.starts_with?(letter.downcase) if letter }
+  
+  @object = Class.new do
+    def initialize(type)
+      @type = type
+    end
 
+    def __url(target_lang)
+      "#{target_lang}/#{@type}.html"
+    end
+  end.new(type)
+  
   $on_search_page = false
   erb :item_index 
 end
