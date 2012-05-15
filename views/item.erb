@@ -64,9 +64,11 @@
 
           <% if @object.translation_to_english? %>
             <div class="item-translation">
-              <h1><%= t('translation') %></h1>
-              <a href="#translation-to-english" rel='leanModal' name='translation-to-english'><%= t("translation") %></a>
-              <div id="translation-to-english" class='modal-dialog'>
+              <a href="#translation-to-english" rel='leanModal' name='translation-to-english'>
+                <h1><%= t('translation') %></h1>
+              </a>
+
+              <div id="translation-to-english" class='modal-dialog' dir='rtl'>
                 <div class="modal-dialog-header">
                   <h2><%= t('translation')%></h2>
                   <a href="#" class="modal-close"></a>
@@ -80,9 +82,11 @@
 
           <% if @object.transcription_of_farsi? %>
             <div class="item-transcript">
-              <h1><%= t('transcription') %></h1>
-              <a href="#transcription-of-farsi" rel='leanModal' name='transcription-of-farsi'><%= t("translation") %></a>
-              <div id="transcription-of-farsi" class='modal-dialog'>
+              <a href="#transcription-of-farsi" rel='leanModal' name='transcription-of-farsi'>
+                <h1><%= t('transcription') %></h1>
+              </a>
+
+              <div id="transcription-of-farsi" class='modal-dialog' dir='rtl'>
                 <div class="modal-dialog-header">
                   <h2><%= t('transcription')%></h2>
                   <a href="#" class="modal-close"></a>

@@ -16,9 +16,9 @@ module Helpers
     count = with_farsi_numbers term["count"].to_i
     term_name = t(term['term'])
     return_link = if has_current
-                    loopback.remove_filter(facet).page(1).to_url
+                    loopback.remove_filter(facet).page(0).to_url
                   else
-                    loopback.update_filter(facet, term['term']).page(1).to_url
+                    loopback.update_filter(facet, term['term']).page(0).to_url
                   end
 
     link_html = if has_current

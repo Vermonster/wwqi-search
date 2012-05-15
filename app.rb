@@ -70,9 +70,11 @@ get '/search' do
             should { fuzzy "description_#{lang}".to_sym,
                      query_string , min_similarity: 0.4 + sim_adj , boost: 0.5 * boost_adj }
           end
-          should { string query_string , boost: 15 }
-        else
-          should { string '*' } 
+
+          must { string query_string , boost: 15 }
+          should { string "#{query_string}*" , boost: 1 } 
+        else 
+          should { string "*" } 
         end
 
         filters.each do |facet, item|

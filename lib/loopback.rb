@@ -47,17 +47,17 @@ class Loopback
   end
 
   def query_field
-    return "" unless @query
+    return "" unless @query.present?
     "&query=#{@query}" 
   end
 
   def sort_field 
-    return "" unless @sorter
+    return "" unless @sorter.present?
     "&sort=#{@sorter}"
   end
 
   def lang_field
-    return "" unless @lang
+    return "" unless @lang.present?
     "lang=#{@lang}" 
   end
 
@@ -72,7 +72,7 @@ class Loopback
   end
 
   def date_field
-    if @from and @to 
+    if @from.present? and @to.present?
       "&date=#{@from}TO#{@to}"
     elsif @date 
       "&date=#{@date}"

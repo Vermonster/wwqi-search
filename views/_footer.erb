@@ -24,7 +24,11 @@
 
 		$('audio,video').mediaelementplayer({audioWidth: 260});
 
-    $('a[rel*=leanModal]').leanModal({ closeButton: ".modal-close", overlay: 0.7});
+    $('a[rel*=leanModal]').leanModal({ 
+      closeButton: ".modal-close",
+      top: -80,
+      overlay: 0.7
+    });
   });
 
 </script>
