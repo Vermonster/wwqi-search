@@ -2390,21 +2390,22 @@ ul.collections.facets li a {
 		.special-searches{
 			margin:0;
 		}
-    
-    #landing h2.welcome-message {
-      display: none;
-    }
-    #landing .language-selector-text  {
-      min-height: 0;
-    }
+    	
+    	#landing h2.welcome-message {
+      		display: none;
+    	}
+    	#landing .language-selector-text  {
+      		min-height: 0;
+    	}
 
-    #landing .language-selector-text h1 {
-      height: 5em;
+    	#landing .language-selector-text h1 {
+      		height: 5em;
 
-    }
-	ul.search-results,#pagin {margin:0}
-	.browse-by-type a span{padding:0 10px; text-shadow:none;white-space:nowrap; text-overflow:ellipsis; overflow:hidden; display:block}
-	.special-searches h3.has-translation{margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid #ccc; margin-right:15px;}
+    	}
+		#landing #pageFooter{height: 150px;padding-top: 50px;}
+		ul.search-results,#pagin {margin:0}
+		.browse-by-type a span{padding:0 10px; text-shadow:none;white-space:nowrap; text-overflow:ellipsis; overflow:hidden; display:block}
+		.special-searches h3.has-translation{margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid #ccc; margin-right:15px;}
 }
 
 	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
@@ -2452,6 +2453,25 @@ ul.collections.facets li a {
 			.es-nav span{ 
 				width:146px!important;
 			}
+			#landing .header h1.title-en{
+				font-size:20px;
+			}
+			#landing .header h1.title-fa{
+				float:none;
+				text-align:center;
+			}
+			#language-selector-en .language-selector-text h1{
+				font-size: 20px;
+				margin: 0;
+				height: 120px;
+			}
+			#language-selector-fa .language-selector-text h1{
+				font-size: 22px;
+				margin: 0;
+				height: 120px;
+			}
+			#language-selector-en a{font-size:17px}
+			#language-selector-fa a{font-size:17px; line-height:19px}
 	  		
 	}
 
