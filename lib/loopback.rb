@@ -18,19 +18,23 @@ class Filter
     !keys.empty? 
   end
 
+  def filter_for(facet)
+    @filter[facet] 
+  end
+
   private
   def parse_filters(str)
     return {} if str.blank?
     str.split('|').each_with_object({}) do |pair, acc| 
       type, value = pair.split(":") 
-      acc[type] = CGI::unescape(value)
+      acc[type] = CGI::unescape(value.to_s)
     end
   end
 end
 
 class Loopback
   attr_reader :filters
-  delegate :has_filters?, :to => :filters
+  delegate :filter_for, :has_filters?, :to => :filters
 
   def initialize(params)
     params = params.with_indifferent_access
@@ -119,7 +123,7 @@ class Loopback
   end
 
   def update_filter(type, value)
-    @filters[type] = CGI.escape(value)
+    @filters[type] = CGI.escape(value.to_s)
     self
   end
 

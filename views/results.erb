@@ -40,7 +40,7 @@
                   <p><%= result.send("description_#{@lang}") %></p>
                 </div>
               </div>
-				<span class="draft-badge"></span>
+              <span class="draft-badge"></span>
             </a>
             </li>
           <% end %>
@@ -64,55 +64,53 @@
           <% first = 'first' %>
         </div>
         <% @facets.each.with_index do |(facet, content), i| %>
+          <% next if content['terms'].size == 0 %>
+          <% next if facet =~ /(transcription|translation)/ and content['terms'].size <= 1 %>
+
           <h3 class='has-children <%= first %> active'><a href='#'><%= t(*facet.split('_')) %></a></h3>
           <div class='list'>
             <ul class='default facets <%= facet.split('_').first %>'>
-              <% if loopback.has_filters? 
-                   content['terms'].delete_if do |term| 
-                     loopback.filters.any? {|type, value| value != term['term'] && type == facet} 
-                   end 
-              end %>
+              <% if loopback.has_filters? and loopback.filter_for(facet).present? %>
+                <%= facet_link(facet, loopback.filter_for(facet)) %>
+              <% else %>
 
+                <% content['terms'].take(20).each do |term| %>
+                  <%= facet_link(facet, term) %>
+                <% end %>
 
-            <% content['terms'].take(20).each do |term| %>
-              <%= facet_link(facet, term) %>
+                <% if content['terms'].size > 20 %>
+                  <li><a href="#<%= facet.split('_').first %>-modal" data-toggle="modal" data-dynamic="true"> <%= t("see_more") %> </a></li>
+                  <div class="modal hide fade facet-modal" style="display:none" id="<%= facet.split('_').first %>-modal">
+                    <div class="modal-header">
+                      <a class="close" data-dismiss="modal" >&times;</a>
+                      <h2><%= t(*facet.split('_')) %></h2>
+                    </div>
+                    <div class="modal-body">
+                      <% content['terms'].each do |term| %>
+                        <%= facet_link(facet, term) %>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
+          <% first = '' %>
+        <% end %>
+
+        <h3 class='has-children last active'><a href="#"><%= t("periods") %></a></h3>
+        <div class='list'>
+          <ul class='default'>
+            <% period_filters[@lang.to_s].each do |period| %>
+              <li>
+              <a href="<%= loopback.from(period["start_at"]).to(period["end_at"]).to_url %>">
+                <%= period["name"] %>
+              </a>
+              </li>
             <% end %>
-			<% if content['terms'].size > 20 %>
-			<li><a href="#<%= facet.split('_').first %>-modal" data-toggle="modal" data-dynamic="true" class="more"> <%= t("more") %> </a></li>
-            <div class="modal hide fade facet-modal" style="display:none" id="<%= facet.split('_').first %>-modal">
-				<div class="modal-header">
-					 <a class="close" data-dismiss="modal" >&times;</a>
-					<h2><%= t(*facet.split('_')) %></h2>
-				</div>
-				<div class="modal-body">
-					<% content['terms'].each do |term| %>
-		                <%= facet_link(facet, term) %>
-		              <% end %>
-				</div>
-            </div>
-			<% end %>
           </ul>
         </div>
-        <% first = '' %>
-      <% end %>
-
-      <h3 class='has-children last active'><a href="#"><%= t("periods") %></a></h3>
-      <div class='list'>
-        <ul class='default'>
-          <% period_filters[@lang.to_s].each do |period| %>
-            <li>
-            <a href="<%= loopback.from(period["start_at"]).to(period["end_at"]).to_url %>">
-              <%= period["name"] %>
-            </a>
-            </li>
-          <% end %>
-        </ul>
       </div>
     </div>
   </div>
-</div>
-<%= partial :footer %>
-
-
-
-
+  <%= partial :footer %>
