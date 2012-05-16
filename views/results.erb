@@ -77,11 +77,20 @@
             <% content['terms'].take(20).each do |term| %>
               <%= facet_link(facet, term) %>
             <% end %>
-            <div class='more'>
-              <% content['terms'].drop(20).each do |term| %>
-                <%= facet_link(facet, term) %>
-              <% end %>
+			<% if content['terms'].size > 20 %>
+			<li><a href="#<%= facet.split('_').first %>-modal" data-toggle="modal" data-dynamic="true"> <%= t("more") %> </a></li>
+            <div class="modal hide fade facet-modal" style="display:none" id="<%= facet.split('_').first %>-modal">
+				<div class="modal-header">
+					 <a class="close" data-dismiss="modal" >&times;</a>
+					<h2><%= t(*facet.split('_')) %></h2>
+				</div>
+				<div class="modal-body">
+					<% content['terms'].each do |term| %>
+		                <%= facet_link(facet, term) %>
+		              <% end %>
+				</div>
             </div>
+			<% end %>
           </ul>
         </div>
         <% first = '' %>

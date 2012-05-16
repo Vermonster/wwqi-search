@@ -23,12 +23,13 @@
         });
 
 		$('audio,video').mediaelementplayer({audioWidth: 260});
-
-    $('a[rel*=leanModal]').leanModal({ 
-      closeButton: ".modal-close",
-      top: -80,
-      overlay: 0.7
-    });
+		
+		$('.facet-modal').on('shown', function () {
+		  // do something…
+			console.log("I am shown");
+			$('.modal-body',this).columnize({columns:4});
+		})
+   
   });
 
 </script>

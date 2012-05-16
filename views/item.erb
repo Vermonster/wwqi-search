@@ -64,39 +64,37 @@
 
           <% if @object.translation_to_english? %>
             <div class="item-translation" dir='ltr'>
-              <a href="#translation-to-english" rel='leanModal' name='translation-to-english'>
+              <a href="#translation-to-english"  data-toggle="modal" data-dynamic="true"  name='translation-to-english'>
                 <h1><%= t('translation') %></h1>
               </a>
-
-              <div id="translation-to-english" class='modal-dialog' dir='rtl'>
-                <div class="modal-dialog-header">
-                  <h2><%= t('translation')%></h2>
-                  <a href="#" class="modal-close english-numbers"></a>
-                </div>
-                <div class="modal-dialog-content english-numbers">
-                <%= markdown @object.translation_to_english %>
-                </div>
-              </div>
-            </div>
+			</div>
+		      <div id="translation-to-english" class="modal hide fade" style="display:none">
+			        <div class="modal-header">
+						 <a class="close" data-dismiss="modal" >&times;</a>
+						<h2><%= t('translation')%></h2>	
+					</div>
+					<div class="modal-body">
+						<%= markdown @object.translation_to_english %>
+					</div>
+             </div>
+            
           <% end %>
 
           <% if @object.transcription_of_farsi? %>
             <div class="item-transcript">
-              <a href="#transcription-of-farsi" rel='leanModal' name='transcription-of-farsi'>
+              <a href="#transcription-of-farsi"  data-toggle="modal" data-dynamic="true" name='transcription-of-farsi'>
                 <h1><%= t('transcription') %></h1>
               </a>
-
-              <div id="transcription-of-farsi" class='modal-dialog' dir='rtl'>
-                <div class="modal-dialog-header">
-                  <h2><%= t('transcription')%></h2>
-                  <a href="#" class="modal-close"></a>
-                </div>
-
-                <div class="modal-dialog-content">
-                <%= markdown @object.transcription_of_farsi %>
-                </div>
-              </div>
-            </div>
+			</div>
+			<div id="transcription-of-farsi" class="modal hide fade" style="display:none">
+			        <div class="modal-header">
+						 <a class="close" data-dismiss="modal" >&times;</a>
+						<h2><%= t('transcription')%></h2>
+					</div>
+					<div class="modal-body">
+						<%= markdown @object.transcription_of_farsi %>
+					</div>
+             </div>
           <% end %> 
 
           <div class="item-details">

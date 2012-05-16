@@ -53,7 +53,9 @@ body{
 }
 .right{float:left}
 .left{float:right}
-
+.modal .close {
+    float: left;
+}
 
 .header .toolbar h1{margin:0 140px 0 0px;float:right;font-family:'BDavat',Tahoma, sans-serif; font-size: 26px;}
 .header .toolbar ul{float:left;}
@@ -78,7 +80,7 @@ body{
 	right:15px;
 	left:auto;
 }
-.item-essentials h2{padding-right:25px; padding-left:0;font-family: 'BNazaninBold'; font-size: 28px;}
+.item-essentials h2{padding-right:25px; padding-left:0;font-family: 'BNazaninBold'; font-size: 28px; font-weight:normal}
 .item-essentials p.description{padding-right:25px;	padding-left:0px;}
 
 .item-essentials.collection-details h2,
@@ -323,11 +325,24 @@ ul.collections li a p{
 #browse-bar  h3.has-children{background: url("../images/arrow_collapsed_fa.png") 100% 18px no-repeat; padding-right: 15px; padding-left:5px;}
 #browse-bar h3.active{background:  url("../images/arrow_expanded.png") 100% 18px no-repeat;}
 #browse-bar  .list li{
-	padding:0 10px 0 4px;
-	margin: 6px 5px 6px 0px;
+	padding:0;
+	margin: 0px;
 	font-size: 16px;
 }
 
+#browse-bar .list a{
+	color:#333;
+	padding-right:22px;
+	background:url(../images/bullet_fa.gif) 95% 8px no-repeat;
+	padding-left:28px;
+	padding-top:2px;
+	padding-bottom:2px;
+}
+#browse-bar .list a > span{
+	left:13px;
+	top:1px;
+	right:auto;
+}
 .browse-search h1{
 	padding-right:40px;
 	padding-left:0;
@@ -346,6 +361,7 @@ ul.collections li a p{
 	background:url(../images/icon-browse.png) 100% 0 no-repeat; 
 	font-family: 'BNazanin';font-size: 28px;
 }
+.modal-body .column{float:right!important; margin:0 1%!important}
 
 .browse-search .searchbox input{margin:2px 10px 2px 0px; float:none; line-height:1}
 .browse-search .searchbox button{float:left}

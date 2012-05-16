@@ -24,10 +24,10 @@ module Helpers
     link_html = if has_current
                   %Q|<a href='#{return_link}'>D</a>#{term_name}|
                 else
-                  %Q|<a href='#{return_link}'>#{term_name}</a>|
+                  %Q|<a href='#{return_link}'>#{term_name}<span>(#{count})</span></a>|
                   end
 
-    %Q|<li class="#{has_current}"> #{link_html} <span>(#{count})</span> </li>|
+    %Q|<li class="#{has_current}"> #{link_html}  </li>|
   end
 
   def lang_link_to(text, link, opts={})
