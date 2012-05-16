@@ -56,6 +56,7 @@ body{
 .modal .close {
     float: left;
 }
+.english-numbers{font-family:Helvetica, sans-serif!important}
 
 .header .toolbar h1{margin:0 140px 0 0px;float:right;font-family:'BDavat',Tahoma, sans-serif; font-size: 26px;}
 .header .toolbar ul{float:left;}
@@ -64,7 +65,7 @@ body{
 .header .menu ul li a{float:right;padding:12px 25px 0 25px;border-left:1px solid #444; border-right:none; font-size: 22px; font-weight: bold;}
 .header .menu ul li a span{
 	font-size:16px;
-	font-weight:bold;
+	font-weight:normal;
 	font-family:'BDavat',Tahoma, sans-serif;
 	margin-top: 5px;
 }
@@ -131,6 +132,7 @@ body{
 .item_related ul li{clear:left; font-size: 16px;}
 .item-details ul li span, .item_related ul li span{
 	font-family:'BNazaninBold';
+	font-weight:normal;
 }
 .item-details ul li a {
 	font-size: 16px};
@@ -141,7 +143,7 @@ img.icon{float:right;margin:0 0px 0 3px;}
 .clear{
 	clear:right!important;
 }
-.item-links a{background-position:0 50%; font-size: 18px; font-family: 'BNazaninBold';}
+.item-links a{background-position:0 50%; font-size: 18px; font-family: 'BNazaninBold'; font-weight:normal}
 
 .tag {
 	background: url(../images/bullet_fa.gif) 100% 5px no-repeat;
@@ -381,16 +383,18 @@ ul.collections li a p{
 .secondary-browse-facets .places{margin-left:-10px;}
 .secondary-browse-facets .subjects{	margin-left:-10px;}
 .secondary-browse-facets ul li a{font-size: 18px;}
-.secondary-browse-facets h3{font-family: 'BNazanin';font-size: 24px;}
+.secondary-browse-facets h3{font-family: 'BNazanin';font-size: 18px;}
 #browse-bar .list li.current{font-size:18px}
 .special-searches h3 a{font-family:'BNazaninBold'; font-size:22px;}
 .special-searches h3.has-translation{
 	background:url(../images/icon-translation-black.png) 100% 0 no-repeat;
 	padding:0px 40px 0 0px;
+	line-height:20px;
 }
 .special-searches h3.has-transcription{
 	background:url(../images/icon-transcript-black.png) 100% 0 no-repeat;
 	padding:0px 40px 0 0px;
+	line-height:20px;
 }
 
 

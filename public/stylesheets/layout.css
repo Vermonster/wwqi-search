@@ -1957,7 +1957,7 @@ ul.collections li a .items-in-collection strong{
 	color:#444;
 	min-height:32px;
 	line-height:32px;
-	border-bottom:1px dotted #444;
+	border-bottom:none;
 	padding-bottom:10px;
 	margin:0 10px 10px;
 }
@@ -2226,6 +2226,7 @@ ul.collections li a .items-in-collection strong{
 	padding:0px 0 0 40px;
 	height:32px;
 	line-height:32px;
+	font-size:14px;
 }
 .special-searches h3.has-transcription{
 	background:url(../images/icon-transcript-black.png) 0 0 no-repeat;
@@ -2233,6 +2234,7 @@ ul.collections li a .items-in-collection strong{
 	padding:0px 0 0 40px;
 	height:32px;
 	line-height:32px;
+	font-size:14px;
 }
 ul.collections.facets li a {
 	display: inline;
