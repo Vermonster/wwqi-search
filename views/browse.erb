@@ -48,7 +48,7 @@
               <% @object.tags_for('people').each do |name, count| %>
                 <li>
                 <a href="<%= loopback.update_filter("people_#{@lang}", name).to_url %>" class="">
-                  <%= name %> <span>(<%= count %>)</span>
+                  <span>(<%= count %>)</span> <%= name %> 
                 </a>
                 </li>
               <% end %> 
@@ -61,7 +61,7 @@
               <% @object.tags_for('places').each do |name, count| %>
                 <li>
                 <a href="<%= loopback.update_filter("places_#{@lang}", name).to_url %>" class="">
-                  <%= name %> <span>(<%= count %>)</span>
+                  <span>(<%= count %>)</span> <%= name %> 
                 </a>
                 </li>
               <% end %> 
@@ -74,7 +74,7 @@
               <% @object.tags_for('subjects').each do |name, count| %>
                 <li>
                 <a href="<%= loopback.update_filter("subjects_#{@lang}", name).to_url %>" class="">
-                  <%= name %> <span>(<%= count %>)</span>
+                  <span>(<%= count %>)</span> <%= name %> 
                 </a>
                 </li>
               <% end %> 
