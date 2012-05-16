@@ -26,8 +26,11 @@
 		
 		$('.facet-modal').on('shown', function () {
 		  // do something…
-			console.log("I am shown");
-			$('.modal-body',this).columnize({columns:4});
+			if (!$('.modal-body',this).attr("data-columnized")){
+				$('.modal-body',this).columnize({columns:4});
+				$('.modal-body',this).attr("data-columnized","true");
+			}
+			
 		})
    
   });
