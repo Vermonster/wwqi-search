@@ -78,7 +78,7 @@
               <%= facet_link(facet, term) %>
             <% end %>
 			<% if content['terms'].size > 20 %>
-			<li><a href="#<%= facet.split('_').first %>-modal" data-toggle="modal" data-dynamic="true"> <%= t("more") %> </a></li>
+			<li><a href="#<%= facet.split('_').first %>-modal" data-toggle="modal" data-dynamic="true" class="more"> <%= t("more") %> </a></li>
             <div class="modal hide fade facet-modal" style="display:none" id="<%= facet.split('_').first %>-modal">
 				<div class="modal-header">
 					 <a class="close" data-dismiss="modal" >&times;</a>

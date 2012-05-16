@@ -333,10 +333,13 @@ ul.collections li a p{
 #browse-bar .list a{
 	color:#333;
 	padding-right:22px;
-	background:url(../images/bullet_fa.gif) 95% 8px no-repeat;
+	background:url(../images/bullet-grey_fa.gif) 95% 6px no-repeat;
 	padding-left:28px;
 	padding-top:2px;
 	padding-bottom:2px;
+}
+#browse-bar .list a.more{
+	background:url(../images/bullet_fa.gif) 95% 6px no-repeat;
 }
 #browse-bar .list a > span{
 	left:13px;
