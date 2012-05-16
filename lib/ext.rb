@@ -15,12 +15,12 @@ Period = [period(1), period(2), period(3), period(4)]
 
 require 'ostruct'
 class OpenStruct
-  def key(_)
+  def __url(_)
     "#test"
   end
 end
 class NilClass 
-  def key(_)
+  def __url(_)
     "#test"
   end
 end

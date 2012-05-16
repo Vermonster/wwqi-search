@@ -87,7 +87,15 @@
               <% if on_search_page? %>
                 <a href='<%= loopback(lang: target_lang).to_url %>' class='lang lang-selector', dir='rtl'><%= text_lang %></a>
               <% else %>
-                <%= lang_link_to(text_lang, @object.key(target_lang), lang: @lang, class: 'lang lang-selector', dir: 'rtl') %>
+                <% if $deliberate_hack %>
+                  <a href='<%= ENV["SEARCH_BASE_URL"] + @object.__url(target_lang) %>' class='lang lang-selector' dir='rtl'>
+                    <%= text_lang %>
+                  </a>
+                <% else %>
+                  <a href='<%= ENV["MAIN_SITE_URL"] + @object.__url(target_lang) %>' class='lang lang-selector' dir='rtl'>
+                    <%= text_lang %>
+                  </a>
+                <% end %>
               <% end %>
             </li>
           </ul>
