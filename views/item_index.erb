@@ -20,14 +20,14 @@
         %>
       <div class="sixteen columns clearfix offset-by-one">
         <ul class="subjects_list seven columns alpha">
-          <% @content.sort_by{|name, count| name}.each do |name, count| %>
+          <% @content.sort_by{|name, count| name.downcase}.each do |name, count| %>
             <li class="person_item">
             <a href="<%= loopback(lang: @lang).update_filter("#{@type.downcase}_#{@lang}".to_sym, name).to_url %>"><%= name %> <span>(<%= count %>)</span></a>
             </li>
           <% end %>
         </ul>
         <ul class="subjects_list seven columns alpha">
-          <% column_2.sort_by{|name, count| name}.each do |name, count| %>
+          <% column_2.sort_by{|name, count| name.downcase}.each do |name, count| %>
             <li class="person_item">
             <a href="<%= loopback(lang: @lang).update_filter("#{@type}_#{@lang}".to_sym, name).to_url %>"><%= name %> <span>(<%= count %>)</span></a>
             </li>
