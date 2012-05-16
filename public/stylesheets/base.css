@@ -283,8 +283,7 @@
 /* #Forms
 ================================================== */
 
-	form {
-		margin-bottom: 20px; }
+	form { }
 	fieldset {
 		margin-bottom: 20px; }
 	input[type="text"],
