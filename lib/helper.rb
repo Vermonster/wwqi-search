@@ -12,22 +12,33 @@ module Helpers
   end
 
   def facet_link(facet, term)
-    has_current = "current" if loopback.filters.any? {|type, value| value == term['term']}
-    count = with_farsi_numbers term["count"].to_i
-    term_name = t(term['term'])
-    return_link = if has_current
-                    loopback.remove_filter(facet).page(0).to_url
+    term_name = if term.is_a? Hash
+                  t(term['term']).to_s
+                else 
+                  has_current = 'current' 
+                  t(term).to_s
+                end
+
+    if term_name.present?
+      has_current ||= "current" if loopback.filters.any? {|type, value| value == term['term']}
+      count = with_farsi_numbers term["count"].to_i
+
+      return_link = if has_current
+                      loopback.remove_filter(facet).page(0).to_url
+                    else
+                      loopback.update_filter(facet, term['term']).page(0).to_url
+                    end
+
+      link_html = if has_current 
+                    %Q|<a href='#{return_link}'>D</a>#{term_name}|
                   else
-                    loopback.update_filter(facet, term['term']).page(0).to_url
-                  end
+                    %Q|<a href='#{return_link}'>#{term_name}<span>(#{count})</span></a>|
+                    end
 
-    link_html = if has_current
-                  %Q|<a href='#{return_link}'>D</a>#{term_name}|
-                else
-                  %Q|<a href='#{return_link}'>#{term_name}<span>(#{count})</span></a>|
-                  end
-
-    %Q|<li class="#{has_current}"> #{link_html}  </li>|
+      %Q|<li class="#{has_current}"> #{link_html}  </li>|
+    else
+      ""
+    end
   end
 
   def lang_link_to(text, link, opts={})
