@@ -16,20 +16,25 @@
         <h2><%= @type.capitalize %> Index</h2>
       </div>
       <%
-          column_2 = @content.slice!((@content.size/2.0).round..@content.size)
+          column_1 = @content.sort_by { |name, count| name.downcase.strip }
+          column_2 = column_1.slice!((@content.size/2.0).round..@content.size)
         %>
       <div class="sixteen columns clearfix offset-by-one">
         <ul class="subjects_list seven columns alpha">
-          <% @content.sort_by{|name, count| name.downcase}.each do |name, count| %>
+          <% column_1.each do |name, count| %>
             <li class="person_item">
-            <a href="<%= loopback(lang: @lang).update_filter("#{@type.downcase}_#{@lang}".to_sym, name).to_url %>"><%= name %> <span>(<%= count %>)</span></a>
+              <a href="<%= loopback(lang: @lang).update_filter("#{@type.downcase}_#{@lang}".to_sym, name).to_url %>">
+                <%= name.strip %> <span>(<%= count %>)</span>
+              </a>
             </li>
           <% end %>
         </ul>
         <ul class="subjects_list seven columns alpha">
-          <% column_2.sort_by{|name, count| name.downcase}.each do |name, count| %>
+          <% column_2.each do |name, count| %>
             <li class="person_item">
-            <a href="<%= loopback(lang: @lang).update_filter("#{@type}_#{@lang}".to_sym, name).to_url %>"><%= name %> <span>(<%= count %>)</span></a>
+              <a href="<%= loopback(lang: @lang).update_filter("#{@type}_#{@lang}".to_sym, name).to_url %>">
+                <%= name.strip %> <span>(<%= count %>)</span>
+              </a>
             </li>
           <% end %>
         </ul>
