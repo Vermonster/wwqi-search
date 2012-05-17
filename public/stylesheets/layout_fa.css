@@ -241,7 +241,7 @@ ul.collections li a p{
 
 #home-main .rslides li{margin-bottom:0}
 #home-main .side-stuff{margin-left:-20px; margin-right:0; padding:0 10px 50px 10px}
-#home-main .welcome{right:0;left:5px;font-size: 23px;font-family: 'BNazaninBold';font-weight: normal;}
+#home-main .welcome{right:0;left:5px;font-size: 22px;font-family: 'BNazaninBold';font-weight: normal;}
 #home-main .welcome{background:url(../images/home-search-arrow-fa.png) 0% 0 no-repeat;}
 #home-main .welcome i{
 	left:0;
@@ -383,18 +383,25 @@ ul.collections li a p{
 .secondary-browse-facets .places{margin-left:-10px;}
 .secondary-browse-facets .subjects{	margin-left:-10px;}
 .secondary-browse-facets ul li a{font-size: 18px;}
-.secondary-browse-facets h3{font-family: 'BNazanin';font-size: 18px;}
-#browse-bar .list li.current{font-size:18px}
-.special-searches h3 a{font-family:'BNazaninBold'; font-size:22px;}
+.secondary-browse-facets h3{font-family: 'BNazaninBold';font-size: 20px; font-weight:normal}
+#browse-bar .list li.current{font-size:18px; font-weight:normal; font-family:'BNazaninBold'; margin-left:0px; margin-right:10px;-moz-border-radius:0 5px 5px 0;
+-webkit-border-radius:0 5px 5px 0;
+border-radius:0 5px 5px 0;
+padding: 0 35px 0 10px;}
+#browse-bar .list li.current a{float:right; 
+	-moz-border-radius:0 5px 5px 0;
+	-webkit-border-radius:0 5px 5px 0;
+	border-radius:0 5px 5px 0;left:0; right:0px; left:auto}
+.special-searches h3 a{font-family:'BNazanin'; font-size:20px;}
 .special-searches h3.has-translation{
 	background:url(../images/icon-translation-black.png) 100% 0 no-repeat;
 	padding:0px 40px 0 0px;
-	line-height:20px;
+	line-height:26px;
 }
 .special-searches h3.has-transcription{
 	background:url(../images/icon-transcript-black.png) 100% 0 no-repeat;
 	padding:0px 40px 0 0px;
-	line-height:20px;
+	line-height:26px;
 }
 
 

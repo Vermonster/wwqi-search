@@ -1879,26 +1879,20 @@ ul.collections li a .items-in-collection strong{
 #browse-bar  .list li.current{
 	display: block;
 	float: none;
-	padding: 0 10px;
+	padding: 0 10px 0 35px;
 	color: white;
 	line-height: 27px;
 	font-size: 12px;
 	font-weight: bold;
-	text-shadow: 0 1px 0 RGBA(0,0,0,0.2);
+	text-shadow: 0 1px 0 rgba(0,0,0,0.2);
 	background: #C5112C;
-	border:1px solid #89071b;
-	background: -moz-linear-gradient(top, #C5112C 0%, #9a0a20 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C5112C), color-stop(100%,#9a0a20));
 	text-overflow:ellipsis;
 	text-transform: capitalize;
-	-moz-border-radius:15px;
-	-webkit-border-radius:15px;
-	border-radius:15px;
-	-webkit-box-shadow: 2px 1px 4px RGBA(0,0,0,0.1),inset 0 1px 0 RGBA(255,255,255,0.6);
-	-moz-box-shadow: 2px 1px 4px RGBA(0,0,0,0.1),inset 0 1px 0 RGBA(255,255,255,0.6);
-	-o-box-shadow: 2px 1px 4px RGBA(0,0,0,0.1),inset 0 1px 0 RGBA(255,255,255,0.6);
-	box-shadow: 2px 1px 4px RGBA(0,0,0,0.1),inset 0 1px 0 RGBA(255,255,255,0.6);
-	margin:0 10px;
+	-moz-border-radius:5px 0 0 5px;
+	-webkit-border-radius:5px 0 0 5px;
+	border-radius:5px 0 0 5px;
+	margin:0 0px 0 10px;
+	position:relative;
 	
 }
 #browse-bar  .list li.current a {
@@ -1909,22 +1903,15 @@ ul.collections li a .items-in-collection strong{
 	background:#000;
 	display: inline-block;
 	width: 30px;
-	height: 30px;
-	line-height: 32px;
-	position: relative;
-	float:right;
-	right:-11px;
-	top:-3px;
+	height: 100%;
+	left:0;
+	top:0;
+	position: absolute;
 	text-align: center;
-	-webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.4);
-	-moz-box-shadow: 0px 0px 3px rgba(0,0,0,0.4);
-	-o-box-shadow:0px 0px 3px rgba(0,0,0,0.4);
-	box-shadow: 0px 0px 3px rgba(0,0,0,0.4);
-	-moz-border-radius:17px;
-	-webkit-border-radius:17px;
-	border-radius:17px;
+	-moz-border-radius:5px 0 0 5px;
+	-webkit-border-radius:5px 0 0 5px;
+	border-radius:5px 0 0 5px;
 	color:#fff;
-	border:2px solid #fff;
 	padding:0;
 }
 
