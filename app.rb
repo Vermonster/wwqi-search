@@ -108,6 +108,7 @@ get '/search' do
   @lang = lang
   @query = query_string
 
+  $deliberate_hack = false
   $on_search_page = true
 
   erb :results

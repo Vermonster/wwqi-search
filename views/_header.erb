@@ -86,7 +86,7 @@
               <% text_lang = @lang == :en ? 'فارسی' : 'English' %>
 
               <% if on_search_page? %>
-                <a href='<%= loopback(lang: target_lang).to_url %>' class='lang lang-selector', dir='rtl'><%= text_lang %></a>
+                <a href='<%= loopback(params.merge(lang: target_lang)).to_url %>' class='lang lang-selector', dir='rtl'><%= text_lang %></a>
               <% else %>
                 <% if $deliberate_hack %>
                   <a href='<%= ENV["SEARCH_BASE_URL"] + @object.__url(target_lang) %>' class='lang lang-selector' dir='rtl'>
