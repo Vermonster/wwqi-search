@@ -18,7 +18,7 @@
         <ul class="search-results collections dark-list">
           <% @results.each do |result| %>
             <li class="clearfix <%= result.draft? ? "draft" : "" %> <%= result.type %><% if result.type.downcase == "item" %><%= result.image_count %><% end %>">
-            <a href="<%= "#{ENV["MAIN_SITE_URL"]}#{result.send("url_#{@lang}")}" %>" class="clearfix">
+            <a href="<%= "#{Environment.main_site_url}#{result.send("url_#{@lang}")}" %>" class="clearfix">
               <div class="collection-thumb stack rotated">
                 <% if result.thumbnail %>
                   <img alt="<%= result.name %>" src="<%= result.thumbnail %>">

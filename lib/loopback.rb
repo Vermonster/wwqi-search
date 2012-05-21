@@ -86,7 +86,7 @@ class Loopback
   end
 
   def to_url
-    "#{ENV["SEARCH_URL"]}?" + lang_field + query_field + filter_field + page_field + date_field + sort_field
+    "#{Environment.search_url}?" + lang_field + query_field + filter_field + page_field + date_field + sort_field
   end
 
   def increment_page

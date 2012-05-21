@@ -1,8 +1,8 @@
 require 'active_record'
 require 'uri'
 
-unless ENV["SKIP_DATABASE"]
-  db = URI.parse(URI.encode((ENV['DATABASE_URL'] || 'postgres://localhost/mydb').strip))
+unless Environment.skip_database
+  db = URI.parse(URI.encode((Environment.database_url || 'postgres://localhost/mydb').strip))
 
   ActiveRecord::Base.establish_connection(
     :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,

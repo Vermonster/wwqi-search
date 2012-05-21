@@ -43,7 +43,7 @@ module Helpers
 
   def lang_link_to(text, link, opts={})
     lang = opts.delete(:lang) 
-    url = URI.join(ENV["MAIN_SITE_URL"], "#{lang}/", "#{link}")
+    url = URI.join(Environment.main_site_url, "#{lang}/", "#{link}")
 
     attributes = ""
     opts.each { |key,value| attributes << key.to_s << "=\"" << value << "\" "}
@@ -68,7 +68,7 @@ module Helpers
   end
 
   def search_url
-    ENV["SEARCH_URL"]
+    Environment.search_url
   end
 
   def carousel
@@ -111,7 +111,7 @@ module Helpers
     raise "must provide acc" unless opts.has_key? :acc
     raise "must provide alt or text options" unless opts.has_key? :alt or opts.has_key? :text
 
-    img_url = "#{ENV["ASSET_URL"]}/collection_thumbs/#{opts[:img]}"
+    img_url = "#{Environment.asset_url}/collection_thumbs/#{opts[:img]}"
 
     opts[:text] ||= opts[:alt]  # must provide one or the other
     opts[:alt]  ||= opts[:text]
