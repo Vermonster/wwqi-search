@@ -133,7 +133,7 @@ module Helpers
   end
 
   def period_filters
-    JSON.parse Net::HTTP.get(URI("http://wwqi-static-site.s3.amazonaws.com/period_manifest.json"))
+    JSON.parse Net::HTTP.get(URI("http://www.qajarwomen.org.s3.amazonaws.com/period_manifest.json"))
   end
 
 end
