@@ -8,18 +8,18 @@ require 'active_support'
 require 'active_support/core_ext'
 require 'forwardable'
 require 'cgi'
+require 'enviable'
 
 require './views/view_helpers'
 require './initializers/activerecord'
 require './lib/translation'
 
 
-
-ENV["MAIN_SITE_URL"] ||= 'http://localhost:4567'
-ENV["ASSET_URL"] ||= 'http://assets.wwqidev.com'
-ENV["SEARCH_URL"] ||= 'http://localhost:4567/search'
-SEARCH_BASE_URL = "http://#{URI.parse(ENV["SEARCH_URL"]).host}"
-ROOT_INDEX = URI.parse(ENV['BONSAI_INDEX_URL']).path[1..-1]
+Environment.main_site_url ||= 'http://localhost:4567'
+Environment.asset_url ||= 'http://assets.wwqidev.com'
+Environment.search_url ||= 'http://localhost:4567/search'
+SEARCH_BASE_URL = "http://#{URI.parse(Environment.search_url).host}"
+ROOT_INDEX = URI.parse(Environment.bonsai_index_url).path[1..-1]
 Tire.configure do 
   url               'http://index.bonsai.io'
   global_index_name ROOT_INDEX
@@ -142,7 +142,7 @@ def item_index(lang, type, letter)
 end
 
 get '/' do
-  redirect ENV["MAIN_SITE_URL"], 301
+  redirect Environment.main_site_url, 301
 end
 
 get '/:lang/genres.html'   do |lang| item_index(lang, :genres,   params["letter"]) end

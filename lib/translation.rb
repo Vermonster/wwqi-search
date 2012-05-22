@@ -1,6 +1,6 @@
 class Translation < ActiveRecord::Base                                      
   class << self
-    if ENV["SKIP_DATABASE"]
+    if Environment.skip_database
       def lookup(*args) ; args.first ; end
     else
       def lookup(*args) ; find_by_key_and_locale(*args) ; end

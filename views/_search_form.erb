@@ -1,4 +1,4 @@
-<form class='searchform' method='GET' action='<%= ENV["SEARCH_URL"] %>'>
+<form class='searchform' method='GET' action='<%= Environment.search_url %>'>
   <input type="text" value="<%= respond_to?(:params) ? params["query"] : "" %>" placeholder="<%= t('search_prompt') %>" name="query" class="swap_value" id="s" />
   <input type='hidden' name='lang' value='<%= @lang %>' />
   <button id="search" type="submit"></button>
