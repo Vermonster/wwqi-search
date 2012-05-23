@@ -1,6 +1,7 @@
 /* @override 
 	http://wwqi-static-site.s3.amazonaws.com/stylesheets/layout.css
 	http://localhost:5000/stylesheets/layout.css
+	http://www.wwqidev.com/stylesheets/layout.css
 */
 
 /*
@@ -1204,7 +1205,9 @@ ul.search-results {
 }
 #language-selector a {
   font-size: 150%;
-  padding: .5em 1em;
+  padding: 0 10px;
+  height:40px;
+  line-height:40px;
 }
 
 #language-selector #language-selector-en,
@@ -1233,6 +1236,7 @@ ul.search-results {
 .language-selector-text h2 {
   color: #ccc;
 }
+#language-selector-fa h2{direction:rtl}
 
 #landing #home-main {
   margin-bottom: 30px;
@@ -2542,6 +2546,7 @@ ul.collections.facets li a {
 		ul.search-results,#pagin {margin:0}
 		.browse-by-type a span{padding:0 10px; text-shadow:none;white-space:nowrap; text-overflow:ellipsis; overflow:hidden; display:block}
 		.special-searches h3.has-translation{margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid #ccc; margin-right:15px;}
+		#language-selector a{height:auto; padding:11px;}
 }
 
 	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
@@ -2606,8 +2611,8 @@ ul.collections.facets li a {
 				margin: 0;
 				height: 120px;
 			}
-			#language-selector-en a{font-size:17px}
-			#language-selector-fa a{font-size:17px; line-height:19px}
+			#language-selector-en a{font-size:13px; line-height:inherit}
+			#language-selector-fa a{font-size:17px; line-height:19px; }
 	  		
 	}
 
