@@ -101,12 +101,21 @@
         <h3 class='has-children last active'><a href="#"><%= t("periods") %></a></h3>
         <div class='list'>
           <ul class='default'>
-            <% period_filters[@lang.to_s].each do |period| %>
-              <li>
-              <a href="<%= loopback.from(period["start_at"]).to(period["end_at"]).to_url %>">
+            <% if params["date"] && (period = period_filters[@lang.to_s].select{|v| params["date"] == "#{v["start_at"]}TO#{v["end_at"]}"}.first) %>
+              <li class='current'>
+                <a href="<%= loopback.remove_date.to_url %>">
+                  D
+                </a>
                 <%= period["name"] %>
-              </a>
               </li>
+            <% else %>
+              <% period_filters[@lang.to_s].each do |period| %>
+                <li>
+                  <a href="<%= loopback.from(period["start_at"]).to(period["end_at"]).to_url %>">
+                    <%= period["name"] %>
+                  </a>
+                </li>
+              <% end %>
             <% end %>
           </ul>
         </div>

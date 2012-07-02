@@ -136,6 +136,11 @@ class Loopback
     @filters.delete(type)
     self
   end
+
+  def remove_date
+    @date = nil
+    self
+  end
 end
 
 
