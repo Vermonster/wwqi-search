@@ -20,7 +20,7 @@ module Helpers
                 end
 
     if term_name.present?
-      has_current ||= "current" if loopback.filters.any? {|type, value| value == term['term']}
+      has_current ||= "current" if loopback.filters.any? {|type, value| type == facet && value == term['term']}
       count = with_farsi_numbers term["count"].to_i
 
       return_link = if has_current
