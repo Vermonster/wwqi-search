@@ -85,12 +85,12 @@ get '/search' do
     end
 
     sort { by "sortable_#{sorter}_#{lang}" } if sorter
-
-    add_facet "subjects_#{lang}"
+    
     add_facet "genres_#{lang}" 
+    add_facet "subjects_#{lang}"
+    add_facet "collections_#{lang}" 
     add_facet "people_#{lang}" 
     add_facet "places_#{lang}" 
-    add_facet "collections_#{lang}" 
     add_facet "translation"
     add_facet "transcription"
 
