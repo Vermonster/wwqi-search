@@ -141,6 +141,11 @@ class Loopback
     @date = nil
     self
   end
+  
+  def remove_all
+    @filters = Filter.new(nil)
+    self
+  end
 end
 
 

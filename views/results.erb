@@ -63,6 +63,18 @@
           <h1><%= t("filter") %></h1>
           <% first = 'first' %>
         </div>
+        <% if loopback.has_filters? %>
+        <div class='list'>
+        <ul class='default'>
+            <li class='current'>  
+              <a href="<%= loopback.remove_all.remove_date.to_url %>">
+                D
+              </a>
+              <%= t('Reset') %>
+            </li>
+          </ul>
+          </div>
+        <% end %>
         <% @facets.each.with_index do |(facet, content), i| %>
           <% next if content['terms'].size == 0 %>
           <% next if facet =~ /(transcription|translation)/ and content['terms'].size <= 1 %>
