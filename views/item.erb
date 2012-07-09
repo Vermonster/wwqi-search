@@ -146,7 +146,7 @@
               <% if @object.repository_credit.present? %>
                 <li>
                 <span><%= t("repository") %></span>
-                <%= @object.repository_credit %>
+                <%= "#{@object.repository_credit} #{@object.owner_tag}" %>
                 </li>
               <% end %>
 
