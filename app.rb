@@ -15,9 +15,9 @@ require './initializers/activerecord'
 require './lib/translation'
 
 
-Environment.main_site_url ||= 'http://localhost:4567'
+Environment.main_site_url ||= 'http://localhost:5000'
 Environment.asset_url ||= 'http://assets.wwqidev.com'
-Environment.search_url ||= 'http://localhost:4567/search'
+Environment.search_url ||= 'http://localhost:5000/search'
 SEARCH_BASE_URL = "http://#{URI.parse(Environment.search_url).host}"
 ROOT_INDEX = URI.parse(Environment.bonsai_index_url).path[1..-1]
 Tire.configure do 
