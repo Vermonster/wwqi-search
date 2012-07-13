@@ -229,6 +229,16 @@
                 <% end %>
                 </li>
               <% end %>
+
+              <% if @object.related_items.present? %>
+                <li>
+                <span class="title related_item"><%= t("related_items") %></span>
+                <% @object.related_items.each do |related_item| %>
+                  <a href="<%= related_item.url%>" class="tag">
+                    <%= related_item.name %>
+                  </a>
+                <% end %>
+              <% end %>
             </ul>
           </div>
         <% end %>

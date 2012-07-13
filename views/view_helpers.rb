@@ -109,6 +109,14 @@ NOTES
     @object.places = [
       fake_facet
     ]
+
+    @object.related_items = [
+      OpenStruct.new(name: "Unidentified to Rukhsarah Khanum", url: '#'),
+      OpenStruct.new(name: "First page of marriage contract of Sitarah Buhlul and Mirza Masʻud Shaykh al-Islam", url: '#'),
+      OpenStruct.new(name: "Sadiqah Dawlatabadi to [Zayn al-ʻAbidin] Shafa, 20 January 1952", url: '#'),
+      OpenStruct.new(name: "Nusrat al-Saltanah to A‘zam al-Saltanah, [ca. 1927-32]", url: '#'),
+      OpenStruct.new(name: "Korsi cover", url: '#')
+    ]
   end
 
   def fake_facet
@@ -196,6 +204,14 @@ NOTES
 
     @object.places = [
       OpenStruct.new(name: "Bushihr", url: "#")
+    ]
+
+    @object.related_items = [
+      OpenStruct.new(name: "خانواده نهورايف‌، تهران، ۱۲۹۲ ش", url: '#'),
+      OpenStruct.new(name: "زن های درویش در ساوجبلاغ", url: '#'),
+      OpenStruct.new(name: "[صبح ازل] به صفوه الحاجیه", url: '#'),
+      OpenStruct.new(name: "شمس الملوک عضدی", url: '#'),
+      OpenStruct.new(name: "گل پیراهن اعتضادی و دخترش قدرت ملک", url: '#')
     ]
   end
 
