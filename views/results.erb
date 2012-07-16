@@ -48,12 +48,12 @@
         <ul id="pagin" class="search-bottom-list">
           <li class="prev">
           <% if loopback.prev_page?(@total_results) %>
-            <a  href=<%= loopback.decrement_page.to_url %>>&laquo; <%= t("previous") %></a> 
+            <a  href=<%= loopback.decrement_page(@total_results).to_url %>>&laquo; <%= t("previous") %></a> 
           <% end %>
           </li>
           <li class="next">
           <% if loopback.next_page?(@total_results) %>
-            <a  href=<%= loopback.increment_page.to_url %>><%= t("next") %> &raquo;</a> 
+            <a href=<%= loopback.increment_page(@total_results).to_url %>><%= t("next") %> &raquo;</a> 
           <% end %>
           </li>
         </ul>
@@ -116,7 +116,7 @@
             <% p_filters = period_filters[@lang.to_s] %>
             <% if params["date"] && (period = p_filters.select{|v| params["date"] == "#{v["start_at"]}TO#{v["end_at"]}"}.first) %>
               <li class='current'>
-                <a href="<%= loopback.remove_date.to_url %>">
+                <a href="<%= loopback.remove_date.remove_page.to_url %>">
                   D
                 </a>
                 <%= period["name"] %>
@@ -124,7 +124,7 @@
             <% else %>
               <% p_filters.each do |period| %>
                 <li>
-                  <a href="<%= loopback.from(period["start_at"]).to(period["end_at"]).to_url %>">
+                  <a href="<%= loopback.from(period["start_at"]).to(period["end_at"]).remove_page.to_url %>">
                     <%= period["name"] %>
                   </a>
                 </li>

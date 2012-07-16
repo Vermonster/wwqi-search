@@ -52,7 +52,12 @@ get '/search' do
   date_start, date_end = params["date"] && params["date"].split('TO')
   filters  = Filter.new(params["filter"])
   lang = (params["lang"] || :en).to_sym
-  page = (params["page"] || 0).to_i
+  
+  if params["page"].to_i < 0 || params["page"].nil?
+    page = 0
+  else
+    page = params["page"].to_i
+  end
 
   query = Tire.search(ROOT_INDEX) do
     query do
