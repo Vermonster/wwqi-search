@@ -47,6 +47,7 @@ end
 
 get '/search' do
   query_string = params["query"] 
+  query_string += 's' if query_string.try(:downcase) == 'will'
   date = params["date"]
   sorter = params["sort"]
   date_start, date_end = params["date"] && params["date"].split('TO')
