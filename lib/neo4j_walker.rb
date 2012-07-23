@@ -4,6 +4,7 @@ require 'enviable'
 module Neo4jWalker
 
   # your search feature shouldn't have to stop at red lights.
+
   def self.neo
     @neo ||= Neography::Rest.new(case Environment.app_env.downcase
                                   when 'development'
