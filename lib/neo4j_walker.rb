@@ -36,17 +36,42 @@ module Neo4jWalker
 
   def self.calculate_and_cache_centrality!
     all_nodes.each do |n|
-      incoming_nodes = neo.execute_query (<<-CYPHER)
-        start n=node(#{id_of(n)}), m=node(*) 
-        match p = m-[1]-n 
-        return p
+      incoming = neo.execute_query (<<-CYPHER)
+        start n=node(#{id_of(n)}) 
+        match (n)--(x) 
+        return count(*)
       CYPHER
-      neo.set_node_properties(n, {"centrality" => incoming_nodes['data'].length}) 
+      neo.set_node_properties(n, {"centrality" => incoming['data'].flatten.first}) 
     end
   end
 
   def self.nodes_near(a, opts={})
-    raise
+    radius = opts[:max_length] || 4
+    results = neo.execute_query (<<-CYPHER)
+      start a=node(#{id_of(a)}), x=node(*) 
+      match p = a-[*..#{radius}]->x 
+      return x, extract(xi in nodes(p) : xi.centrality);
+    CYPHER
+    # finds paths from a --> other nodes
+    # returns array of [X, [centralities of each node in path from A to X]]
+
+    nodes_with_relevances = []
+
+    results['data'].group_by{|r| r[0]}.each do |node, results_for_node|
+      relevance = 0.0
+      results_for_node.map(&:last).each do |path_centralities|
+        path_score = 1.0 / path_centralities.inject(0){|sum, centrality| sum + centrality}
+        relevance += path_score
+      end
+      relevance = relevance / node['data']['centrality']
+      nodes_with_relevances << [node, relevance]
+    end
+
+    print "\n\n"
+    print nodes_with_relevances.map{|n| [n[0]['data']['name'], n[1]]}
+    print "\n\n"
+
+    nodes_with_relevances.sort{|a, b| b[1] <=> a[1]}.map(&:first)
   end
 
   def self.genealogy_of(p)
