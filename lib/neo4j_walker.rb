@@ -16,21 +16,36 @@ module Neo4jWalker
                                   end)
   end
 
+  def self.all_nodes
+    neo.execute_query("start n=node(*) return n")['data'].map(&:first)
+  end
+
+  def self.id_of(n)
+    URI.parse(n["self"]).path.split("/").last
+  end
+
   def self.paths_between(a, b, opts={})
     max_length = opts[:max_length] || 5
-    aid = URI.parse(a["self"]).path.split("/").last
-    bid = URI.parse(b["self"]).path.split("/").last
-
     result = neo.execute_query (<<-CYPHER)
-      start a=node(#{aid}), b=node(#{bid}) 
+      start a=node(#{id_of(a)}), b=node(#{id_of(b)}) 
       match p = a-[*..#{max_length}]->b
       return p
     CYPHER
-
-    result['data']
+    result['data'].map(&:first)
   end
 
-  def self.nodes_near(a)
+  def self.calculate_and_cache_centrality!
+    all_nodes.each do |n|
+      incoming_nodes = neo.execute_query (<<-CYPHER)
+        start n=node(#{id_of(n)}), m=node(*) 
+        match p = m-[1]-n 
+        return p
+      CYPHER
+      neo.set_node_properties(n, {"centrality" => incoming_nodes['data'].length}) 
+    end
+  end
+
+  def self.nodes_near(a, opts={})
     raise
   end
 

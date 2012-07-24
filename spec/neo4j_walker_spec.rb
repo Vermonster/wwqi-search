@@ -29,12 +29,28 @@ describe 'neo4j_walker' do
 
         paths = Neo4jWalker.paths_between(a, d)
         paths.size.should == 3
+        @neo.get_node_properties(paths[0]['nodes'][0])['name'].should == 'A'
+        @neo.get_node_properties(paths[0]['nodes'][1])['name'].should == 'D'
+        @neo.get_node_properties(paths[1]['nodes'][0])['name'].should == 'A'
+        @neo.get_node_properties(paths[1]['nodes'][1])['name'].should == 'B'
+        @neo.get_node_properties(paths[1]['nodes'][2])['name'].should == 'D'
+        @neo.get_node_properties(paths[2]['nodes'][0])['name'].should == 'A'
+        @neo.get_node_properties(paths[2]['nodes'][1])['name'].should == 'C'
+        @neo.get_node_properties(paths[2]['nodes'][2])['name'].should == 'E'
+        @neo.get_node_properties(paths[2]['nodes'][3])['name'].should == 'D'
 
         short_paths = Neo4jWalker.paths_between(a, d, :max_length => 2)
         short_paths.size.should == 2
+        @neo.get_node_properties(short_paths[0]['nodes'][0])['name'].should == 'A'
+        @neo.get_node_properties(short_paths[0]['nodes'][1])['name'].should == 'D'
+        @neo.get_node_properties(short_paths[1]['nodes'][0])['name'].should == 'A'
+        @neo.get_node_properties(short_paths[1]['nodes'][1])['name'].should == 'B'
+        @neo.get_node_properties(short_paths[1]['nodes'][2])['name'].should == 'D'
         
         shortest_paths = Neo4jWalker.paths_between(a, d, :max_length => 1)
         shortest_paths.size.should == 1
+        @neo.get_node_properties(shortest_paths[0]['nodes'][0])['name'].should == 'A'
+        @neo.get_node_properties(shortest_paths[0]['nodes'][1])['name'].should == 'D'
       end
     end
     
@@ -58,6 +74,60 @@ describe 'neo4j_walker' do
     end
   end
 
+  context '#all_nodes' do
+    context 'when nodes exist' do
+      it 'should return all the nodes' do
+        HTTParty.delete("http://localhost:7475/db/data/cleandb/xyzzy")
+        a = @neo.create_node('name' => 'A')
+        b = @neo.create_node('name' => 'B')
+        c = @neo.create_node('name' => 'C')
+        all = Neo4jWalker.all_nodes
+        all.size.should == 4
+        all.map{|n| n['data']['name']}.compact.sort.should == %w(A B C)
+      end
+    end
+
+    context 'when none exist' do
+      it 'should return just the root node' do
+        HTTParty.delete("http://localhost:7475/db/data/cleandb/xyzzy")
+        all = Neo4jWalker.all_nodes
+        all.size.should == 1
+        Neo4jWalker.id_of(all.first).should == "0"
+      end
+    end
+  end
+
+  context '#calculate_and_cache_centrality!' do
+    it 'should count the incoming/outgoing connections on each node and store it' do
+      a = @neo.create_node('name' => 'A')
+      b = @neo.create_node('name' => 'B')
+      c = @neo.create_node('name' => 'C')
+      d = @neo.create_node('name' => 'D')
+      e = @neo.create_node('name' => 'E')
+      @neo.create_relationship("related_to", a, b) 
+      @neo.create_relationship("related_to", a, d) 
+      @neo.create_relationship("related_to", b, d) 
+      @neo.create_relationship("related_to", d, c) 
+      # A --- B
+      #  `.  /
+      #    `D
+      #    /    
+      #   C    E   
+
+      [a, b, c, d, e].each do |n|
+        @neo.get_node_properties(n)['centrality'].should be_nil
+      end
+
+      Neo4jWalker.calculate_and_cache_centrality!
+      @neo.get_node_properties(a)['centrality'].should == 2
+      @neo.get_node_properties(b)['centrality'].should == 2
+      @neo.get_node_properties(c)['centrality'].should == 1
+      @neo.get_node_properties(d)['centrality'].should == 3
+      @neo.get_node_properties(e)['centrality'].should == 0
+    end
+
+  end
+
   context '#nodes_near' do
     context 'in its basic functionality' do
       before do
@@ -77,6 +147,7 @@ describe 'neo4j_walker' do
       end
 
       it 'should return closely related nodes' do
+        binding.pry
         Neo4jWalker.nodes_near(a).size.should == 3
       end
 

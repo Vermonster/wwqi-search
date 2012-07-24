@@ -5,6 +5,10 @@
   * Find all paths of length <= L from node A
   * define relevance of node X = (sum over A->X paths { path_score(path) }) / centrality of X
     * where path_score = 1 / path length * max centrality in path
+
+
+    relevance of X = sum{|path| path_score(path)}/centrality_of(X)
+    path_score     = 1/sum{|node| (centrality_of(node))}
   * return objects with highest relevance
 
 
