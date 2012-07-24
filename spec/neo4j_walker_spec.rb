@@ -7,6 +7,10 @@ describe 'neo4j_walker' do
     @neo = Neo4jWalker.neo
   end
 
+  after do
+    HTTParty.delete("http://localhost:7475/db/data/cleandb/xyzzy")
+  end
+
   context '#paths_between' do
     context 'when paths exist' do
       it 'should return them' do
@@ -158,11 +162,47 @@ describe 'neo4j_walker' do
       end
 
       it 'should find equal relatedness for perfectly symmetrical nodes' do
-        pending
-        r = Neo4jWalker.nodes_near(a) 
-        c_result = r.select{|n| n['properties']['name'] == 'C'}
-        d_result = r.select{|n| n['properties']['name'] == 'D'}
-        c_result['relatedness'].should == d_result['relatedness']
+        nrs = Neo4jWalker.nodes_with_relevances_near(@a) 
+        c_result = nrs.select{|nr| @neo.get_node_properties(nr[0])['name'] == 'C'}
+        d_result = nrs.select{|nr| @neo.get_node_properties(nr[0])['name'] == 'D'}
+        c_result[1].should == d_result[1]
+      end
+    end
+
+    context 'in more advanced use cases' do
+      before do
+        a = @neo.create_node('name' => 'A')
+        b = @neo.create_node('name' => 'B')
+        c = @neo.create_node('name' => 'C')
+        d = @neo.create_node('name' => 'D')
+        e = @neo.create_node('name' => 'E')
+        f = @neo.create_node('name' => 'F')
+        g = @neo.create_node('name' => 'G')
+        @neo.create_relationship("related_to", a, b) 
+        @neo.create_relationship("related_to", a, f) 
+        @neo.create_relationship("related_to", b, c) 
+        @neo.create_relationship("related_to", b, d) 
+        @neo.create_relationship("related_to", b, e) 
+        @neo.create_relationship("related_to", f, g) 
+        Neo4jWalker.calculate_and_cache_centrality!
+        @a = a
+        #  A -- F -- G
+        #   `.  
+        #     `B -- C
+        #     / `.   
+        #    D    E   
+      end
+
+      it 'should rank lower-centrality nodes higher than otherwise identical high-centrality nodes' do
+        named_results = Neo4jWalker.nodes_near(@a).map{|r| @neo.get_node_properties(r)['name']}
+        named_results.index('F').should < named_results.index('B')
+      end
+
+      it 'should rank nodes higher if accessed through low-centrality paths' do
+        named_results = Neo4jWalker.nodes_near(@a).map{|r| @neo.get_node_properties(r)['name']}
+        named_results.index('G').should < named_results.index('C')
+        named_results.index('G').should < named_results.index('D')
+        named_results.index('G').should < named_results.index('E')
       end
     end
   end
