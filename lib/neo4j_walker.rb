@@ -7,8 +7,6 @@ module Neo4jWalker
 
   def self.neo
     @neo ||= Neography::Rest.new(case Environment.app_env.downcase
-                                  when 'development'
-                                    "http://localhost:7474"
                                   when 'test'
                                     "http://localhost:7475"
                                   else
@@ -17,21 +15,44 @@ module Neo4jWalker
   end
 
   def self.all_nodes
-    neo.execute_query("start n=node(*) return n")['data'].map(&:first)
+    @all_nodes ||= neo.execute_query("start n=node(*) return n")['data'].map(&:first)
+  end
+
+  def self.clear_node_cache!
+    @all_nodes = nil
   end
 
   def self.id_of(n)
     URI.parse(n["self"]).path.split("/").last
   end
 
+  def self.label_for(n)
+    props = neo.get_node_properties(n) 
+    result = ''
+    result += "#{props['accession_num']} -- " if props['type'] == 'Item'
+    result += props['name'] || props['name_en'] || props['title_en'] || id_of(n)
+  end
+
   def self.paths_between(a, b, opts={})
-    max_length = opts[:max_length] || 5
+    max_length = opts[:max_length] || 4
     result = neo.execute_query (<<-CYPHER)
       start a=node(#{id_of(a)}), b=node(#{id_of(b)}) 
       match p = a-[*..#{max_length}]->b
       return p
+      limit 25;
     CYPHER
-    result['data'].map(&:first)
+    result && result['data'].map(&:first)
+  end
+
+  def self.shortest_paths_between(a, b, opts={})
+    max_length = opts[:max_length] || 10
+    result = neo.execute_query (<<-CYPHER)
+      start a=node(#{id_of(a)}), b=node(#{id_of(b)}) 
+      match p = allShortestPaths( a-[*..#{max_length}]->b )
+      return p
+      limit 25;
+    CYPHER
+    result && result['data'].map(&:first)
   end
 
   def self.nodes_near(a, opts={})
@@ -48,21 +69,25 @@ module Neo4jWalker
     #   where relevance of X wrt A is defined to be
     #     1/centrality_of(X) * sum(paths_from_A_to_X){ 1/sum(nodes_in_path){ centrality_of(node) } }
     #
-    radius = opts[:max_length] || 4
+    radius = opts[:max_length] || 2
     results = neo.execute_query (<<-CYPHER)
       start a=node(#{id_of(a)}), x=node(*) 
       match p = a-[*..#{radius}]->x 
-      return x, extract(xi in nodes(p) : xi.centrality);
+      where (x.id? <> a.id)
+      return x, extract(xi in nodes(p) : xi.centrality)
+      limit 5000;
     CYPHER
     nodes_with_relevances = []
-    results['data'].group_by{|r| r[0]}.each do |node, results_for_node|
-      relevance = 0.0
-      results_for_node.map(&:last).each do |path_centralities|
-        path_score = 1.0 / path_centralities.inject(0){|sum, centrality| sum + centrality }
-        relevance += path_score
+    if results
+      results['data'].group_by{|r| r[0]}.each do |node, results_for_node|
+        relevance = 0.0
+        results_for_node.map(&:last).each do |path_centralities|
+          path_score = 1.0 / path_centralities.inject(0){|sum, centrality| sum + centrality }
+          relevance += path_score
+        end
+        relevance = relevance / node['data']['centrality']
+        nodes_with_relevances << [node, relevance]
       end
-      relevance = relevance / node['data']['centrality']
-      nodes_with_relevances << [node, relevance]
     end
     nodes_with_relevances.sort{|x1, x2| x2[1] <=> x1[1]}
   end

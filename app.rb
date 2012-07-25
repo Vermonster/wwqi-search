@@ -29,6 +29,7 @@ require './lib/ext'
 require './lib/design_routes'
 require './lib/helper'
 require './lib/loopback'
+require './lib/neo4j_walker'
 
 include DesignRoutes
 helpers ViewHelpers
@@ -155,6 +156,38 @@ get '/:lang/genres.html'   do |lang| item_index(lang, :genres,   params["letter"
 get '/:lang/subjects.html' do |lang| item_index(lang, :subjects, params["letter"]) end
 get '/:lang/people.html'   do |lang| item_index(lang, :people,   params["letter"]) end
 get '/:lang/places.html'   do |lang| item_index(lang, :places,   params["letter"]) end
+
+
+get '/advanced_search' do
+
+  # if there are params, do some ruby
+  #
+  
+  @lang = params['lang']
+  # bloody hack
+  @nodes ||= []
+  if @nodes.size == 0
+    n_nodes = Neo4jWalker.neo.execute_query("start n=node(*) return count(n)-1")['data'].first.first.to_i
+    1.upto(n_nodes) do |i|
+      node = Neo4jWalker.neo.get_node(i)
+      @nodes << [i, Neo4jWalker.label_for(node)]
+    end
+  end
+
+  #@nodes = Neo4jWalker.all_nodes.map{|n| [Neo4jWalker.id_of(n), Neo4jWalker.label_for(n)]}.reject{|n| n[0].to_s == '0'}
+  
+  case params['search_type']
+  when 'between'
+    @source = Neo4jWalker.neo.get_node(params['source'])
+    @target = Neo4jWalker.neo.get_node(params['target'])
+    @paths = Neo4jWalker.shortest_paths_between(@source, @target, {:max_length => params['max_length']}) if @source && @target
+  when 'related'
+    @node = Neo4jWalker.neo.get_node(params['node'])
+    @related_nodes = Neo4jWalker.nodes_with_relevances_near(@node) if @node
+  end
+
+  erb :advanced_search
+end
 
 
 

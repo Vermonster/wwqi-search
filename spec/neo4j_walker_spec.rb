@@ -7,6 +7,8 @@ describe 'neo4j_walker' do
     @neo = Neo4jWalker.neo
   end
 
+  before(:each) { Neo4jWalker.clear_node_cache! }
+
   after do
     HTTParty.delete("http://localhost:7475/db/data/cleandb/xyzzy")
   end

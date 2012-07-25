@@ -1,0 +1,142 @@
+<%#encoding: utf-8%>
+<%= partial :header %>
+<%= stylesheet "advanced_search" %>
+<div id="content">
+  <div class="container clearfix white-paper-stack top-of-page"><div class="stacks"></div></div>
+  <div class="container clearfix">
+    <div class="clearfix shaded-panel has-sidebar main-panel-is-dark " style="background-color:#FFF">
+      <div class="clearfix twelve columns">
+        <br>
+
+        <form method='GET' action='<%= Environment.advanced_search_url %>'>
+          <select name='source'>
+            <option></option>
+            <% @nodes.each do |node| %>
+              <% if params['source'] == node[0] %>
+                <option value=<%=node[0]%> selected='selected'><%=node[1]%></option>
+              <% else %>
+                <option value=<%=node[0]%>><%=node[1]%></option>
+              <% end %>
+            <% end %>
+          </select>
+          <select name='target'>
+            <option></option>
+            <% @nodes.each do |node| %>
+              <% if params['target'] == node[0] %>
+                <option value=<%=node[0]%> selected='selected'><%=node[1]%></option>
+              <% else %>
+                <option value=<%=node[0]%>><%=node[1]%></option>
+              <% end %>
+            <% end %>
+          </select>
+          <input type='hidden' name='lang' value='<%= @lang %>' />
+          <input type='hidden' name='search_type' value='between' />
+          <button type="submit"> Find paths between objects </button>
+        </form>
+
+        <form method='GET' action='<%= Environment.advanced_search_url %>'>
+          <select name='node'>
+            <option></option>
+            <% @nodes.each do |node| %>
+              <% if params['node'] == node[0] %>
+                <option value=<%=node[0]%> selected='selected'><%=node[1]%></option>
+              <% else %>
+                <option value=<%=node[0]%>><%=node[1]%></option>
+              <% end %>
+            <% end %>
+          </select>
+          <input type='hidden' name='lang' value='<%= @lang %>' />
+          <input type='hidden' name='search_type' value='related' />
+          <button type="submit"> Find related objects </button>
+        </form>
+
+        <% if @paths %>
+          <p> Results for paths: </p>
+          <% if @paths.any? %>
+            <% @paths.each do |p| %>
+              <table>
+                <tr>
+                  <td class='node_label'>
+                    <% start = Neo4jWalker.neo.get_node(p['start']) %>
+                    <%= Neo4jWalker.label_for(start) %>
+                  </td>
+                  <% p['nodes'][1..-1].zip(p['relationships']).each do |pr| %>
+                    <% node = Neo4jWalker.neo.get_node(pr[0]) %>
+                    <% rltn = Neo4jWalker.neo.get_relationship(pr[1]) %>
+                    <td class='relationship_label'> &nbsp;&mdash;<%= rltn['type'] %>&mdash;&gt;&nbsp; </td>
+                    <td class='node_label'> <%= Neo4jWalker.label_for(node) %> </td>
+                  <% end %>
+                </tr>
+              </table>
+            <% end %>
+          <% else %> 
+            <p> No results found. </p>
+          <% end %>
+        <% end %>
+
+        <% if @node %>
+          <p> Input: </p>
+          <table class='advanced_search_results'>
+            <tbody>
+              <tr>
+                <td>
+                  <%= Neo4jWalker.id_of(@node) %>
+                </td>
+                <td>
+                  <% props = Neo4jWalker.neo.get_node_properties(@node) %>
+                  <% if props['type'] == 'Item' %>
+                    <a href=<%="#{Environment.main_site_url}/en/items/#{props['accession_num']}.html"%>>
+                      <%= Neo4jWalker.label_for(@node) %>
+                    </a>
+                  <% else %>
+                    <%= Neo4jWalker.label_for(@node) %>
+                  <% end %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        <% end %>
+
+        <p></p>
+
+        <% if @related_nodes %>
+          <p> Objects related to input: </p>
+          <% if @related_nodes.any? %>
+            <table class='advanced_search_results'>
+              <thead>
+                <tr>
+                  <th> Id </th>
+                  <th> Name </th>
+                  <th> Closeness </th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @related_nodes.each do |rn| %>
+                  <% props = Neo4jWalker.neo.get_node_properties(rn[0]) %>
+                  <tr>
+                    <td> <%= Neo4jWalker.id_of(rn[0]).strip %> </td>
+                    <td>
+                      <% if props['type'] == 'Item' %>
+                        <a href=<%="#{Environment.main_site_url}/en/items/#{props['accession_num']}.html"%>>
+                          <%= Neo4jWalker.label_for(rn[0]) %>
+                        </a>
+                      <% else %>
+                        <%= Neo4jWalker.label_for(rn[0]) %>
+                      <% end %>
+                    </td>
+                    <td>
+                      <%= rn[1].round(5) %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %> 
+            <p> No results found. </p>
+          <% end %>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+  <%= partial :footer %>

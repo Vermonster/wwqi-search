@@ -1,0 +1,20 @@
+table.advanced_search_results tr td, th {
+  padding: 0.5em;
+}
+
+table.advanced_search_results tr td a {
+  color: #333; 
+  text-decoration: underline;
+}
+
+table tr td.node_label, td.relationship_label {
+  white-space: nowrap;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 1em;
+}
+
+table tr td.relationship_label {
+  font-style: italic;
+}
