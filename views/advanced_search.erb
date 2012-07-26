@@ -50,8 +50,33 @@
           <button type="submit"> Find related objects </button>
         </form>
 
+        <% if @source && @target %>
+          <p> Inputs: </p>
+          <table class='advanced_search_results'>
+            <tbody>
+              <% [@source, @target].each do |node| %>
+                <tr>
+                  <td>
+                    <%= Neo4jWalker.id_of(node) %>
+                  </td>
+                  <td>
+                    <% props = Neo4jWalker.neo.get_node_properties(node) %>
+                    <% if props['type'] == 'Item' %>
+                      <a href=<%="#{Environment.main_site_url}/en/items/#{props['accession_num']}.html"%>>
+                        <%= Neo4jWalker.label_for(node) %>
+                      </a>
+                    <% else %>
+                      <%= Neo4jWalker.label_for(node) %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
+
         <% if @paths %>
-          <p> Results for paths: </p>
+          <p> Paths between inputs: </p>
           <% if @paths.any? %>
             <% @paths.each do |p| %>
               <table>

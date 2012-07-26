@@ -165,14 +165,18 @@ get '/advanced_search' do
   
   @lang = params['lang']
   # bloody hack
-  @nodes ||= []
-  if @nodes.size == 0
-    n_nodes = Neo4jWalker.neo.execute_query("start n=node(*) return count(n)-1")['data'].first.first.to_i
-    1.upto(n_nodes) do |i|
-      node = Neo4jWalker.neo.get_node(i)
-      @nodes << [i, Neo4jWalker.label_for(node)]
-    end
-  end
+
+  #@nodes ||= []
+  @n_nodes ||= Neo4jWalker.neo.execute_query("start n=node(*) return count(n)")['data'].flatten.first.to_i
+  @nodes = 1.upto(@n_nodes-1).map{|i| [i,i]}
+    
+  #if @nodes.size == 0
+    #n_nodes = Neo4jWalker.neo.execute_query("start n=node(*) return count(n)-1")['data'].first.first.to_i
+    #1.upto(n_nodes) do |i|
+      #node = Neo4jWalker.neo.get_node(i)
+      #@nodes << [i, Neo4jWalker.label_for(node)]
+    #end
+  #end
 
   #@nodes = Neo4jWalker.all_nodes.map{|n| [Neo4jWalker.id_of(n), Neo4jWalker.label_for(n)]}.reject{|n| n[0].to_s == '0'}
   
