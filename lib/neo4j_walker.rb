@@ -82,10 +82,9 @@ module Neo4jWalker
       results['data'].group_by{|r| r[0]}.each do |node, results_for_node|
         relevance = 0.0
         results_for_node.map(&:last).each do |path_centralities|
-          path_score = 1.0 / path_centralities.inject(0){|sum, centrality| sum + centrality }
-          relevance += path_score
+          path_resistance =  path_centralities.inject(0){|sum, centrality| sum + centrality }
+          relevance += 1.0 / path_resistance
         end
-        relevance = relevance / node['data']['centrality']
         nodes_with_relevances << [node, relevance]
       end
     end
