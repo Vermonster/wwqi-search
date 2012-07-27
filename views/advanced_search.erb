@@ -85,33 +85,7 @@
               <% end %>
             </tbody>
           </table>
-        <% end %>
-
-        <% if @paths %>
-          <p> Paths between inputs: </p>
-          <% if @paths.any? %>
-            <% @paths.each do |p| %>
-              <table>
-                <tr>
-                  <td class='node_label'>
-                    <% start = Neo4jWalker.neo.get_node(p['start']) %>
-                    <%= Neo4jWalker.label_for(start) %>
-                  </td>
-                  <% p['nodes'][1..-1].zip(p['relationships']).each do |pr| %>
-                    <% node = Neo4jWalker.neo.get_node(pr[0]) %>
-                    <% rltn = Neo4jWalker.neo.get_relationship(pr[1]) %>
-                    <td class='relationship_label'> &nbsp;&mdash;<%= rltn['type'] %>&mdash;&gt;&nbsp; </td>
-                    <td class='node_label'> <%= Neo4jWalker.label_for(node) %> </td>
-                  <% end %>
-                </tr>
-              </table>
-            <% end %>
-          <% else %> 
-            <p> No results found. </p>
-          <% end %>
-        <% end %>
-
-        <% if @node %>
+        <% elsif @node %>
           <p> Input: </p>
           <table class='advanced_search_results'>
             <tbody>
@@ -136,7 +110,30 @@
 
         <p></p>
 
-        <% if @related_nodes %>
+        <% if @paths %>
+          <p> Paths between inputs: </p>
+          <% if @paths.any? %>
+            <% @paths.each do |p| %>
+              <table>
+                <tr>
+                  <td class='node_label'>
+                    <% start = Neo4jWalker.neo.get_node(p['start']) %>
+                    <%= Neo4jWalker.label_for(start) %>
+                  </td>
+                  <% p['nodes'][1..-1].zip(p['relationships']).each do |pr| %>
+                    <% node = Neo4jWalker.neo.get_node(pr[0]) %>
+                    <% rltn = Neo4jWalker.neo.get_relationship(pr[1]) %>
+                    <td class='relationship_label'> &nbsp;&mdash;<%= rltn['type'] %>&mdash;&gt;&nbsp; </td>
+                    <td class='node_label'> <%= Neo4jWalker.label_for(node) %> </td>
+                  <% end %>
+                </tr>
+              </table>
+            <% end %>
+            <p></p>
+          <% else %> 
+            <p> No results found. </p>
+          <% end %>
+        <% elsif @related_nodes %>
           <p> Objects related to input: </p>
           <% if @related_nodes.any? %>
             <table class='advanced_search_results'>
@@ -168,12 +165,11 @@
                 <% end %>
               </tbody>
             </table>
+            <p></p>
           <% else %> 
             <p> No results found. </p>
           <% end %>
-        <% end %>
-
-        <% if @related_nodes.nil? && @paths.nil? && params['search_type'] %>
+        <% elsif params['search_type'] %>
           <p> No results found. </p>
         <% end %>
 
