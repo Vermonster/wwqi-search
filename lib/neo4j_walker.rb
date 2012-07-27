@@ -38,7 +38,7 @@ module Neo4jWalker
       start a=node(#{id_of(a)}), b=node(#{id_of(b)}) 
       match p = a-[*..#{max_length}]->b
       return p
-      limit 25;
+      limit 25
     CYPHER
     result && result['data'].map(&:first)
   end
@@ -49,7 +49,7 @@ module Neo4jWalker
       start a=node(#{id_of(a)}), b=node(#{id_of(b)}) 
       match p = allShortestPaths( a-[*..#{max_length}]->b )
       return p
-      limit 25;
+      limit 25
     CYPHER
     result && result['data'].map(&:first)
   end
@@ -74,7 +74,7 @@ module Neo4jWalker
       match p = a-[*..#{radius}]->x 
       where (x.id? <> a.id)
       return x, extract(xi in nodes(p) : xi.centrality)
-      limit 5000;
+      limit 5000
     CYPHER
     nodes_with_relevances = []
     if results
