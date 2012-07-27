@@ -6,7 +6,7 @@ module Neo4jWalker
   # because your search is too cool to wait for red lights.
 
   def self.neo
-    @neo ||= Neography::Rest.new(if Environment.app_env.try(:downcase) == 'test'
+    @neo ||= Neography::Rest.new(if Environment.app_env && Environment.app_env.downcase == 'test'
                                    'http://localhost:7475'
                                  else
                                    Environment.neo4j_url

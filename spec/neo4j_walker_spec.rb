@@ -12,6 +12,10 @@ describe 'neo4j_walker' do
   after do
     HTTParty.delete("http://localhost:7475/db/data/cleandb/xyzzy")
   end
+  
+  #it 'debugs' do 
+    #binding.pry
+  #end
 
   context '#paths_between' do
     context 'when paths exist' do

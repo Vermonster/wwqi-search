@@ -9,42 +9,54 @@
         <br>
 
         <form method='GET' action='<%= Environment.advanced_search_url %>'>
-          <select name='source'>
-            <option></option>
-            <% @nodes.each do |node| %>
-              <% if params['source'] == node[0] %>
-                <option value=<%=node[0]%> selected='selected'><%=node[1]%></option>
-              <% else %>
-                <option value=<%=node[0]%>><%=node[1]%></option>
+          <div class='neo4j-input-selector'>
+            <select name='source'>
+              <option value=''> select neo4j id </option>
+              <% @nodes.each do |node| %>
+                <% if params['source'] == node[0].to_s %>
+                  <option value=<%=node[0]%> selected='selected'><%=node[1]%></option>
+                <% else %>
+                  <option value=<%=node[0]%>><%=node[1]%></option>
+                <% end %>
               <% end %>
-            <% end %>
-          </select>
-          <select name='target'>
-            <option></option>
-            <% @nodes.each do |node| %>
-              <% if params['target'] == node[0] %>
-                <option value=<%=node[0]%> selected='selected'><%=node[1]%></option>
-              <% else %>
-                <option value=<%=node[0]%>><%=node[1]%></option>
+            </select>
+            <span> or </span>
+            <input name='source_accession' placeholder='enter accession number' type='text' value='<%= params['source_accession']%>' />
+          </div>
+          <div class='neo4j-input-selector'>
+            <select name='target'>
+              <option value=''> select neo4j id </option>
+              <% @nodes.each do |node| %>
+                <% if params['target'] == node[0].to_s %>
+                  <option value=<%=node[0]%> selected='selected'><%=node[1]%></option>
+                <% else %>
+                  <option value=<%=node[0]%>><%=node[1]%></option>
+                <% end %>
               <% end %>
-            <% end %>
-          </select>
+            </select>
+            <span> or </span>
+            <input name='target_accession' placeholder='enter accession number' type='text' value='<%= params['target_accession']%>' />
+          </div>
           <input type='hidden' name='lang' value='<%= @lang %>' />
           <input type='hidden' name='search_type' value='between' />
           <button type="submit"> Find paths between objects </button>
         </form>
 
         <form method='GET' action='<%= Environment.advanced_search_url %>'>
-          <select name='node'>
-            <option></option>
-            <% @nodes.each do |node| %>
-              <% if params['node'] == node[0] %>
-                <option value=<%=node[0]%> selected='selected'><%=node[1]%></option>
-              <% else %>
-                <option value=<%=node[0]%>><%=node[1]%></option>
+          <div class='neo4j-input-selector'>
+            <select name='node'>
+              <option value=''> select neo4j id </option>
+              <% @nodes.each do |node| %>
+                <% if params['node'] == node[0].to_s %>
+                  <option value=<%=node[0]%> selected='selected'><%=node[1]%></option>
+                <% else %>
+                  <option value=<%=node[0]%>><%=node[1]%></option>
+                <% end %>
               <% end %>
-            <% end %>
-          </select>
+            </select>
+            <span> or </span>
+            <input name='node_accession' placeholder='enter accession number' type='text' value='<%= params['node_accession']%>' />
+          </div>
           <input type='hidden' name='lang' value='<%= @lang %>' />
           <input type='hidden' name='search_type' value='related' />
           <button type="submit"> Find related objects </button>
@@ -159,6 +171,10 @@
           <% else %> 
             <p> No results found. </p>
           <% end %>
+        <% end %>
+
+        <% if @related_nodes.nil? && @paths.nil? && params['search_type'] %>
+          <p> No results found. </p>
         <% end %>
 
       </div>

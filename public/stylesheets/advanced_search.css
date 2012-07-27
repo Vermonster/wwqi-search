@@ -18,3 +18,12 @@ table tr td.node_label, td.relationship_label {
 table tr td.relationship_label {
   font-style: italic;
 }
+
+.neo4j-input-selector select, span {
+  float: left;
+  margin-right: 1em;
+}
+
+.neo4j-input-selector select {
+  height: 2em;
+}
