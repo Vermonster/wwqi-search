@@ -6,12 +6,11 @@ module Neo4jWalker
   # because your search is too cool to wait for red lights.
 
   def self.neo
-    @neo ||= Neography::Rest.new(case Environment.app_env.downcase
-                                  when 'test'
-                                    "http://localhost:7475"
-                                  else
-                                    Environment.neo4j_url || "http://localhost:7474"
-                                  end)
+    @neo ||= Neography::Rest.new(if Environment.app_env.try(:downcase) == 'test'
+                                   'http://localhost:7475'
+                                 else
+                                   Environment.neo4j_url
+                                 end)
   end
 
   def self.all_nodes
