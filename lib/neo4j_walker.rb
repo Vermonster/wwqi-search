@@ -58,8 +58,9 @@ module Neo4jWalker
     nodes_with_relevances_near(a, opts).map(&:first)
   end
 
-  def self.gremlin_centrality_dijkstra(a, opts={})
+  def self.gremlin_relevance_dijkstra(a, opts={})
     #com.tinkerpop.blueprints.pgm.impls.neo4j.Neo4jVertex
+    aid = id_of(a)
     script = (<<-GREMLIN)
       closest = []
 
@@ -70,22 +71,45 @@ module Neo4jWalker
       }
 
       queue = new PriorityQueue(5000, comparator)
-      current = g.v(#{id_of(a)})
-      current.path_score = 0
+      start = g.v(#{aid})
+      start.path_score = 0
+      queue.add(start)
 
-      while ( closest.size < 50 && current ) {
-        closest << current
-        current.out.each() { v ->                 /* could filter here. */
-          v.path_score = current.path_score + v.centrality
-          queue.add(v) 
-        };  
+      while ( closest.size < 25 && queue.size > 0 ) {
         current = queue.poll()
+        closest << current
+        current.out.each() { v -> 
+          if (!(v in queue || v in closest)) {
+            v.path_score = current.path_score + v.centrality
+            queue.add(v) 
+          } 
+        };  
       }
 
       closest
     GREMLIN
 
-    neo.execute_script(script)
+    #Neo4jWalker.nodes_with_relevances_near(@neo.get_node(100)).map{|r| [r[0]['data']['id'], r[1]]}
+    #Neo4jWalker.gremlin_relevance_dijkstra(@neo.get_node(100)).map{|r| [r[0]['data']['id'], r[1]]}
+
+
+    closest = neo.execute_script(script)
+    nodes_with_relevance = []
+    closest.each do |node|
+      next if node['data']['id'].to_s == aid.to_s
+      paths = neo.execute_query (<<-CYPHER)
+        start a=node(#{aid}), b=node(#{node['data']['id']})
+        match p = a-[*..2]->b
+        return extract(xi in nodes(p) : xi.centrality)
+      CYPHER
+      relevance = 0.0
+      paths['data'].map(&:first).each do |path_weights|
+        resistance = path_weights.inject(0){|sum, cent| sum + cent}
+        relevance += 1.0 / resistance
+      end
+      nodes_with_relevance << [node, relevance]
+    end
+    nodes_with_relevance.sort{|x1, x2| x2[1] <=> x1[1]}
   end
 
   def self.nodes_with_relevances_near(a, opts={})
