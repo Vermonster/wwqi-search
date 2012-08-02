@@ -7,7 +7,7 @@ module Neo4jWalker
 
   def self.neo
     @neo ||= Neography::Rest.new(if Environment.app_env && Environment.app_env.downcase == 'test'
-                                   'http://localhost:7475'
+                                   'http://localhost:7474'
                                  else
                                    Environment.neo4j_url
                                  end)
@@ -56,6 +56,36 @@ module Neo4jWalker
 
   def self.nodes_near(a, opts={})
     nodes_with_relevances_near(a, opts).map(&:first)
+  end
+
+  def self.gremlin_centrality_dijkstra(a, opts={})
+    #com.tinkerpop.blueprints.pgm.impls.neo4j.Neo4jVertex
+    script = (<<-GREMLIN)
+      closest = []
+
+      comparator = new Comparator() {
+        public int compare(v1, v2) {
+          v1.path_score <=> v2.path_score
+        }
+      }
+
+      queue = new PriorityQueue(5000, comparator)
+      current = g.v(#{id_of(a)})
+      current.path_score = 0
+
+      while ( closest.size < 50 && current ) {
+        closest << current
+        current.out.each() { v ->                 /* could filter here. */
+          v.path_score = current.path_score + v.centrality
+          queue.add(v) 
+        };  
+        current = queue.poll()
+      }
+
+      closest
+    GREMLIN
+
+    neo.execute_script(script)
   end
 
   def self.nodes_with_relevances_near(a, opts={})
