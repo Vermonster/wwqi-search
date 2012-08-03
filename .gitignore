@@ -2,3 +2,5 @@
 server
 .sass-cache/
 *.swp
+neo4j
+neo4j/*
