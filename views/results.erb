@@ -48,7 +48,7 @@
         <ul id="pagin" class="search-bottom-list">
           <li class="prev">
           <% if loopback.prev_page?(@total_results) %>
-            <a  href=<%= loopback.decrement_page(@total_results).to_url %>>&laquo; <%= t("previous") %></a> 
+            <a href=<%= loopback.decrement_page(@total_results).to_url %>>&laquo; <%= t("previous") %></a> 
           <% end %>
           </li>
           <li class="next">
@@ -63,7 +63,7 @@
           <h1><%= t("filter") %></h1>
           <% first = 'first' %>
         </div>
-        <% if loopback.has_filters? %>
+        <% if loopback.has_filters? || loopback.date_field.present? %>
         <div class='list'>
         <ul class='default'>
             <li class='current'>  
