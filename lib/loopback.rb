@@ -49,6 +49,26 @@ class Loopback
   def self.results_per_page
     10
   end
+  
+  def retain
+    return self unless @filters.has_filters?
+    str = ""
+    @filters.to_s.split("|").each do |f|
+      current = (f.split(":")[1]).gsub("+", " ")
+      str << f.split(":")[0].split("_")[0]<< "_" << @lang.to_s << ":"
+      file = JSON.parse File.open("filters.json", "r").read.strip
+
+      str << file[@lang.to_s]["photographs"] unless file.nil?
+            
+      str << if f == @filters.to_s.split("|").last 
+        ""
+      else
+        "|"
+      end
+    end
+    @filters = Filter.new(str)
+    self
+  end
 
   def query_field
     return "" unless @query.present?
