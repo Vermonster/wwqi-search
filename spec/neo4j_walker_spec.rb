@@ -265,35 +265,6 @@ describe 'neo4j_walker' do
         @neo.get_node_properties(results[9])['name'].should == 'J'
       end
     end
-
-    #context '#gremlin_nodes_relevant_to' do
-      ##    .I --- K 
-      ##  .`  `. .`
-      ## B ---- D -- H -- J
-      ## |`.  .`
-      ## |  `A -- C 
-      ## E   |    |
-      ##     G    F
-      #it 'should find the nodes most relevant to A' do
-        #results = Neo4jWalker.gremlin_nodes_relevant_to(@a)
-        #@neo.get_node_properties(results[0])['name'].should == 'G'
-        #@neo.get_node_properties(results[1])['name'].should == 'C'
-        #@neo.get_node_properties(results[2])['name'].should == 'D'
-        #@neo.get_node_properties(results[3])['name'].should == 'B'
-        #@neo.get_node_properties(results[4])['name'].should == 'I'
-        #@neo.get_node_properties(results[5])['name'].should == 'K'
-        #@neo.get_node_properties(results[6])['name'].should == 'F'
-        #@neo.get_node_properties(results[7])['name'].should == 'H'
-        #@neo.get_node_properties(results[8])['name'].should == 'E'
-        #@neo.get_node_properties(results[9])['name'].should == 'J'
-      #end
-
-      #it 'should find the nodes most relevant to F' do
-        #results = Neo4jWalker.gremlin_nodes_relevant_to(@f)
-        #puts results.map{|r| [@neo.get_node_properties(r)['name'], @neo.get_node_properties(r)['path_score']]}
-      #end
-
-    #end
   end
 
   context '#genealogy_of'

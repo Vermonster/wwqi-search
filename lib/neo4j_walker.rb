@@ -90,46 +90,6 @@ module Neo4jWalker
     result[1..-1] # first is always the start node
   end
 
-  #def self.gremlin_nodes_relevant_to(a, opts={})
-    ## Again traverse outward from the start node, going to the "closest" (lowest-scored) node, but continuously update that score,
-    ## even after the node has been queued/visited, using the resistance formula.
-    #result = neo.execute_script (<<-GREMLIN)
-      #comparator = new Comparator() {
-        #public int compare(v1, v2) {
-          #v1.path_score <=> v2.path_score
-        #}
-      #}
-      #queue = new PriorityQueue(5000, comparator)  // create a priority queue for the traversal, which compares on the 'path score' attribute
-      #a = g.v(#{id_of(a)})                         // add the start node to the priority queue with path score defined as 0
-      #a.path_score = 0
-      #queue.add(a)
-
-      #closest = []                                 // initialize the list of nearby nodes
-
-      #while ( closest.size < #{opts[:max] || 25} && queue.size > 0 ) {
-        #current = queue.poll()                     // grab the top node off the queue
-        #closest << current                         // add it to the closest node list
-        #current.out.each() { v ->                  // then, for each of its neighbors,
-          #if (!(v in queue || v in closest)) {     // if they aren't already queued / visited,
-            #v.path_score = new Float(1.05 * current.path_score + v.centrality) // set their path score
-            #queue.add(v)                           // and queue them up.
-          #} else if (v in queue) {                 // But if they _are_ visited, update their path score, because it should be lower.
-            #queue.remove(v)
-            #v.path_score = new Float(1.0 / ((1.0 / v.path_score) + (1.0 / (1.05 * current.path_score + v.centrality))))
-            #queue.add(v)
-          #} else if (v in closest && v.path_score > 0) {
-            #closest.remove(v)
-            #v.path_score = new Float(1.0 / ((1.0 / v.path_score) + (1.0 / (1.05 * current.path_score + v.centrality))))
-            #closest << v
-          #}
-        #};  
-      #}
-
-      #closest.sort(comparator)
-    #GREMLIN
-    #result[1..-1] # first is always the start node
-  #end
-
   def self.nodes_with_relevances_near(a, opts={})
     #
     # Cypher:
