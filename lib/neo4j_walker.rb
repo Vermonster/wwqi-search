@@ -7,7 +7,7 @@ module Neo4jWalker
 
   def self.neo
     @neo ||= Neography::Rest.new(if Environment.app_env && Environment.app_env.downcase == 'test'
-                                   'http://localhost:7474'
+                                   'http://localhost:7475'
                                  else
                                    Environment.neo4j_url
                                  end)
@@ -56,6 +56,36 @@ module Neo4jWalker
 
   def self.nodes_near(a, opts={})
     nodes_with_relevances_near(a, opts).map(&:first)
+  end
+
+  def self.gremlin_nodes_near(a, opts={})
+    result = neo.execute_script (<<-GREMLIN)
+      closest = []
+
+      comparator = new Comparator() {
+        public int compare(v1, v2) {
+          v1.path_score <=> v2.path_score
+        }
+      }
+
+      queue = new PriorityQueue(5000, comparator)
+      g.v(#{id_of(a)}).path_score = 0
+      queue.add(g.v(#{id_of(a)}))
+
+      while ( closest.size < #{opts[:max] || 25} && queue.size > 0 ) {
+        current = queue.poll()
+        closest << current
+        current.out.each() { v -> 
+          if (!(v in queue || v in closest)) {
+            v.path_score = new Float(1.05 * current.path_score + v.centrality)
+            queue.add(v) 
+          } 
+        };  
+      }
+
+      closest
+    GREMLIN
+    result[1..-1] # first is always the start node
   end
 
   def self.gremlin_relevance_dijkstra(a, opts={})
