@@ -213,7 +213,7 @@ describe 'neo4j_walker' do
     end
   end
 
-  context '#gremlin_nodes_near' do
+  context 'gremlin methods' do
     before do
       'a'.upto('k').each do |char| 
         eval "@#{char} = @neo.create_node('name' => '#{char.upcase}')" # :)
@@ -236,33 +236,64 @@ describe 'neo4j_walker' do
       # from A, expect: G(1) C(2) F(3) B(4) D(5) E(5) H(7) I(7) K(7) J(8) 
     end
 
-    it 'should find nodes in the correct order from A' do
-      results = Neo4jWalker.gremlin_nodes_near(@a)
-      @neo.get_node_properties(results[0])['name'].should == 'G'
-      @neo.get_node_properties(results[1])['name'].should == 'C'
-      @neo.get_node_properties(results[2])['name'].should == 'F'
-      @neo.get_node_properties(results[3])['name'].should == 'B'
-      @neo.get_node_properties(results[4])['name'].should == 'D'
-      @neo.get_node_properties(results[5])['name'].should == 'E'
-      ['H', 'I', 'K'].should include @neo.get_node_properties(results[6])['name']
-      ['H', 'I', 'K'].should include @neo.get_node_properties(results[7])['name']
-      ['H', 'I', 'K'].should include @neo.get_node_properties(results[8])['name']
-      @neo.get_node_properties(results[9])['name'].should == 'J'
+    context '#gremlin_nodes_near' do
+      it 'should find nodes in the correct order from A' do
+        results = Neo4jWalker.gremlin_nodes_near(@a)
+        @neo.get_node_properties(results[0])['name'].should == 'G'
+        @neo.get_node_properties(results[1])['name'].should == 'C'
+        @neo.get_node_properties(results[2])['name'].should == 'F'
+        @neo.get_node_properties(results[3])['name'].should == 'B'
+        @neo.get_node_properties(results[4])['name'].should == 'D'
+        @neo.get_node_properties(results[5])['name'].should == 'E'
+        ['H', 'I', 'K'].should include @neo.get_node_properties(results[6])['name']
+        ['H', 'I', 'K'].should include @neo.get_node_properties(results[7])['name']
+        ['H', 'I', 'K'].should include @neo.get_node_properties(results[8])['name']
+        @neo.get_node_properties(results[9])['name'].should == 'J'
+      end
+
+      it 'should find nodes in the correct order from F' do
+        results = Neo4jWalker.gremlin_nodes_near(@f)
+        @neo.get_node_properties(results[0])['name'].should == 'C'
+        @neo.get_node_properties(results[1])['name'].should == 'A'
+        @neo.get_node_properties(results[2])['name'].should == 'G'
+        @neo.get_node_properties(results[3])['name'].should == 'B'
+        @neo.get_node_properties(results[4])['name'].should == 'D'
+        @neo.get_node_properties(results[5])['name'].should == 'E'
+        ['H', 'I', 'K'].should include @neo.get_node_properties(results[6])['name']
+        ['H', 'I', 'K'].should include @neo.get_node_properties(results[7])['name']
+        ['H', 'I', 'K'].should include @neo.get_node_properties(results[8])['name']
+        @neo.get_node_properties(results[9])['name'].should == 'J'
+      end
     end
 
-    it 'should find nodes in the correct order from F' do
-      results = Neo4jWalker.gremlin_nodes_near(@f)
-      @neo.get_node_properties(results[0])['name'].should == 'C'
-      @neo.get_node_properties(results[1])['name'].should == 'A'
-      @neo.get_node_properties(results[2])['name'].should == 'G'
-      @neo.get_node_properties(results[3])['name'].should == 'B'
-      @neo.get_node_properties(results[4])['name'].should == 'D'
-      @neo.get_node_properties(results[5])['name'].should == 'E'
-      ['H', 'I', 'K'].should include @neo.get_node_properties(results[6])['name']
-      ['H', 'I', 'K'].should include @neo.get_node_properties(results[7])['name']
-      ['H', 'I', 'K'].should include @neo.get_node_properties(results[8])['name']
-      @neo.get_node_properties(results[9])['name'].should == 'J'
-    end
+    #context '#gremlin_nodes_relevant_to' do
+      ##    .I --- K 
+      ##  .`  `. .`
+      ## B ---- D -- H -- J
+      ## |`.  .`
+      ## |  `A -- C 
+      ## E   |    |
+      ##     G    F
+      #it 'should find the nodes most relevant to A' do
+        #results = Neo4jWalker.gremlin_nodes_relevant_to(@a)
+        #@neo.get_node_properties(results[0])['name'].should == 'G'
+        #@neo.get_node_properties(results[1])['name'].should == 'C'
+        #@neo.get_node_properties(results[2])['name'].should == 'D'
+        #@neo.get_node_properties(results[3])['name'].should == 'B'
+        #@neo.get_node_properties(results[4])['name'].should == 'I'
+        #@neo.get_node_properties(results[5])['name'].should == 'K'
+        #@neo.get_node_properties(results[6])['name'].should == 'F'
+        #@neo.get_node_properties(results[7])['name'].should == 'H'
+        #@neo.get_node_properties(results[8])['name'].should == 'E'
+        #@neo.get_node_properties(results[9])['name'].should == 'J'
+      #end
+
+      #it 'should find the nodes most relevant to F' do
+        #results = Neo4jWalker.gremlin_nodes_relevant_to(@f)
+        #puts results.map{|r| [@neo.get_node_properties(r)['name'], @neo.get_node_properties(r)['path_score']]}
+      #end
+
+    #end
   end
 
   context '#genealogy_of'

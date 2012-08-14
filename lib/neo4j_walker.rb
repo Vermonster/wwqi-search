@@ -59,6 +59,8 @@ module Neo4jWalker
   end
 
   def self.gremlin_nodes_near(a, opts={})
+    # Traverse outward from the start node, following the lowest centrality path (with a very slight attenuation -- 1.05 -- based on path length)
+    # grab nodes in the order they are visited.
     result = neo.execute_script (<<-GREMLIN)
       comparator = new Comparator() {
         public int compare(v1, v2) {
@@ -79,7 +81,7 @@ module Neo4jWalker
           if (!(v in queue || v in closest)) {     // if they aren't already queued / visited,
             v.path_score = new Float(1.05 * current.path_score + v.centrality) // set their path score
             queue.add(v)                           // and queue them up
-          }                                        // then, restart the process 
+          }                                        // then restart the process 
         };  
       }
 
@@ -88,59 +90,45 @@ module Neo4jWalker
     result[1..-1] # first is always the start node
   end
 
-  def self.gremlin_relevance_dijkstra(a, opts={})
-    #com.tinkerpop.blueprints.pgm.impls.neo4j.Neo4jVertex
-    aid = id_of(a)
-    script = (<<-GREMLIN)
-      closest = []
+  #def self.gremlin_nodes_relevant_to(a, opts={})
+    ## Again traverse outward from the start node, going to the "closest" (lowest-scored) node, but continuously update that score,
+    ## even after the node has been queued/visited, using the resistance formula.
+    #result = neo.execute_script (<<-GREMLIN)
+      #comparator = new Comparator() {
+        #public int compare(v1, v2) {
+          #v1.path_score <=> v2.path_score
+        #}
+      #}
+      #queue = new PriorityQueue(5000, comparator)  // create a priority queue for the traversal, which compares on the 'path score' attribute
+      #a = g.v(#{id_of(a)})                         // add the start node to the priority queue with path score defined as 0
+      #a.path_score = 0
+      #queue.add(a)
 
-      comparator = new Comparator() {
-        public int compare(v1, v2) {
-          v1.path_score <=> v2.path_score
-        }
-      }
+      #closest = []                                 // initialize the list of nearby nodes
 
-      queue = new PriorityQueue(5000, comparator)
-      start = g.v(#{aid})
-      start.path_score = 0
-      queue.add(start)
+      #while ( closest.size < #{opts[:max] || 25} && queue.size > 0 ) {
+        #current = queue.poll()                     // grab the top node off the queue
+        #closest << current                         // add it to the closest node list
+        #current.out.each() { v ->                  // then, for each of its neighbors,
+          #if (!(v in queue || v in closest)) {     // if they aren't already queued / visited,
+            #v.path_score = new Float(1.05 * current.path_score + v.centrality) // set their path score
+            #queue.add(v)                           // and queue them up.
+          #} else if (v in queue) {                 // But if they _are_ visited, update their path score, because it should be lower.
+            #queue.remove(v)
+            #v.path_score = new Float(1.0 / ((1.0 / v.path_score) + (1.0 / (1.05 * current.path_score + v.centrality))))
+            #queue.add(v)
+          #} else if (v in closest && v.path_score > 0) {
+            #closest.remove(v)
+            #v.path_score = new Float(1.0 / ((1.0 / v.path_score) + (1.0 / (1.05 * current.path_score + v.centrality))))
+            #closest << v
+          #}
+        #};  
+      #}
 
-      while ( closest.size < 25 && queue.size > 0 ) {
-        current = queue.poll()
-        closest << current
-        current.out.each() { v -> 
-          if (!(v in queue || v in closest)) {
-            v.path_score = current.path_score + v.centrality
-            queue.add(v) 
-          } 
-        };  
-      }
-
-      closest
-    GREMLIN
-
-    #Neo4jWalker.nodes_with_relevances_near(@neo.get_node(100)).map{|r| [r[0]['data']['id'], r[1]]}
-    #Neo4jWalker.gremlin_relevance_dijkstra(@neo.get_node(100)).map{|r| [r[0]['data']['id'], r[1]]}
-
-
-    closest = neo.execute_script(script)
-    nodes_with_relevance = []
-    closest.each do |node|
-      next if node['data']['id'].to_s == aid.to_s
-      paths = neo.execute_query (<<-CYPHER)
-        start a=node(#{aid}), b=node(#{node['data']['id']})
-        match p = a-[*..2]->b
-        return extract(xi in nodes(p) : xi.centrality)
-      CYPHER
-      relevance = 0.0
-      paths['data'].map(&:first).each do |path_weights|
-        resistance = path_weights.inject(0){|sum, cent| sum + cent}
-        relevance += 1.0 / resistance
-      end
-      nodes_with_relevance << [node, relevance]
-    end
-    nodes_with_relevance.sort{|x1, x2| x2[1] <=> x1[1]}
-  end
+      #closest.sort(comparator)
+    #GREMLIN
+    #result[1..-1] # first is always the start node
+  #end
 
   def self.nodes_with_relevances_near(a, opts={})
     #
