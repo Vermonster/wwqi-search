@@ -60,26 +60,26 @@ module Neo4jWalker
 
   def self.gremlin_nodes_near(a, opts={})
     result = neo.execute_script (<<-GREMLIN)
-      closest = []
-
       comparator = new Comparator() {
         public int compare(v1, v2) {
           v1.path_score <=> v2.path_score
         }
       }
+      queue = new PriorityQueue(5000, comparator)  // create a priority queue for the traversal, which compares on the 'path score' attribute
+      a = g.v(#{id_of(a)})                         // add the start node to the priority queue with path score defined as 0
+      a.path_score = 0
+      queue.add(a)
 
-      queue = new PriorityQueue(5000, comparator)
-      g.v(#{id_of(a)}).path_score = 0
-      queue.add(g.v(#{id_of(a)}))
+      closest = []                                 // initialize the list of nearby nodes
 
       while ( closest.size < #{opts[:max] || 25} && queue.size > 0 ) {
-        current = queue.poll()
-        closest << current
-        current.out.each() { v -> 
-          if (!(v in queue || v in closest)) {
-            v.path_score = new Float(1.05 * current.path_score + v.centrality)
-            queue.add(v) 
-          } 
+        current = queue.poll()                     // grab the top node off the queue
+        closest << current                         // add it to the closest node list
+        current.out.each() { v ->                  // then, for each of its neighbors,
+          if (!(v in queue || v in closest)) {     // if they aren't already queued / visited,
+            v.path_score = new Float(1.05 * current.path_score + v.centrality) // set their path score
+            queue.add(v)                           // and queue them up
+          }                                        // then, restart the process 
         };  
       }
 
