@@ -164,8 +164,8 @@ get '/advanced_search' do
   #
   
   @lang = params['lang']
-  @n_nodes ||= Neo4jWalker.neo.execute_query("start n=node(*) return count(n)")['data'].flatten.first.to_i
-  @nodes = 1.upto(@n_nodes-1).map{|i| [i,i]}
+  @node_data ||= Neo4jWalker.neo.execute_query("start n=node(*) return n.type?, n.name_en?, n.accession_num?, ID(n)")['data']
+  @nodes ||= @node_data.map{|arr| [arr.last, arr[0..-2].compact.join(' ')]}
   
   case params['search_type']
   when 'between'
@@ -179,7 +179,6 @@ get '/advanced_search' do
     @node ||= Neo4jWalker.neo.get_node_index('items_index', 'accession_num', params['node_accession']).try(:first)
 
     #@related_nodes = Neo4jWalker.nodes_with_relevances_near(@node) if @node
-    #@related_nodes = Neo4jWalker.gremlin_relevance_dijkstra(@node) if @node
     @related_nodes = Neo4jWalker.gremlin_nodes_near(@node).map{|node| [node, 1.0/node['data']['path_score']] } if @node
   end
 
