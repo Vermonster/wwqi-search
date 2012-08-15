@@ -87,7 +87,7 @@ module Neo4jWalker
 
       closest
     GREMLIN
-    result[1..-1] # first is always the start node
+    result ? result[1..-1] : [] # first is always the start node
   end
 
   def self.nodes_with_relevances_near(a, opts={})

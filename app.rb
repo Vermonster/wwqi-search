@@ -180,7 +180,7 @@ get '/advanced_search' do
 
     #@related_nodes = Neo4jWalker.nodes_with_relevances_near(@node) if @node
     #@related_nodes = Neo4jWalker.gremlin_relevance_dijkstra(@node) if @node
-    @related_nodes = Neo4jWalker.gremlin_nodes_near(@node).map{|node| [node, 1.0/Neo4jWalker.neo.get_node_properties(node)['path_score']] }
+    @related_nodes = Neo4jWalker.gremlin_nodes_near(@node).map{|node| [node, 1.0/node['data']['path_score']] } if @node
   end
 
   erb :advanced_search
