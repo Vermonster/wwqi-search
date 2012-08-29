@@ -41,6 +41,23 @@
 
       <div class="item-below-fold">
         <div class="ten columns alpha">
+
+          <% if @object.audio_clip? %>
+            <div class="item-audio">
+              <div class="clearfix">
+                <h1>Audio</h1>
+                <audio id="player2" src="<%= @object.audio_clip %>" type="audio/mp3" controls="controls">
+                <object width="260" height="30" type="application/x-shockwave-flash" data="/stylesheets/flashmediaelement.swf">
+                  <param name="movie" value="/stylesheets/flashmediaelement.swf" /> 
+                  <param name="flashvars" value="controls=true&amp;file=<%= @object.audio_clip %>" /> 		
+                </object>
+                </audio>
+              </div>
+              <hr>
+              <h5><%= @object.audio_clip_caption %></h5>
+            </div>
+          <% end %>
+
           <div class="item-details">
             <h1><%= t('collection-details') %></h1>
             <ul>
