@@ -71,7 +71,7 @@ class Loopback
   end
 
   def page_field
-    return "" if @page.nil? or @page == 0
+    return "" if @page.nil? or @page <= 0
     "&page=#{@page}" 
   end
 
@@ -89,13 +89,21 @@ class Loopback
     "#{Environment.search_url}?" + lang_field + query_field + filter_field + page_field + date_field + sort_field
   end
 
-  def increment_page
-    @page += 1
+  def increment_page(total)
+    if @page + 1 < 0
+      @page = 1
+    else
+      @page += 1
+    end
     self
   end
 
-  def decrement_page
-    @page -= 1
+  def decrement_page(total)
+    if @page - 1 > last_page(total)
+      @page = last_page(total) - 1
+    else
+      @page -= 1
+    end
     self
   end
 
@@ -119,7 +127,11 @@ class Loopback
   end
 
   def next_page?(total)
-    @page + 1 < (1.0 * total / Loopback.results_per_page).ceil 
+    @page + 1 < last_page(total) 
+  end
+
+  def last_page(total)
+    (1.0 * total / Loopback.results_per_page).ceil
   end
 
   def update_filter(type, value)
@@ -134,6 +146,21 @@ class Loopback
 
   def remove_filter(type)
     @filters.delete(type)
+    self
+  end
+
+  def remove_date
+    @date = nil
+    self
+  end
+  
+  def remove_page
+    @page = nil
+    self
+  end
+  
+  def remove_all
+    @filters = Filter.new(nil)
     self
   end
 end

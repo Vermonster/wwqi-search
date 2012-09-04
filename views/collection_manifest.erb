@@ -35,7 +35,7 @@
               <span class="items-in-collection"><strong><%= with_farsi_numbers collection.item_count %></strong><%= t("items") %></span>
               <div class="collection-essentials">
                 <h3><%= collection.title %></h3>
-                <p><%= markdown collection.description %></p>
+                <p><%= strip_a_tags(markdown(collection.description)) %></p>
               </div>
             </div>
           </a>

@@ -15,9 +15,9 @@ require './initializers/activerecord'
 require './lib/translation'
 
 
-Environment.main_site_url ||= 'http://localhost:4567'
+Environment.main_site_url ||= 'http://localhost:5000'
 Environment.asset_url ||= 'http://assets.wwqidev.com'
-Environment.search_url ||= 'http://localhost:4567/search'
+Environment.search_url ||= 'http://localhost:5000/search'
 SEARCH_BASE_URL = "http://#{URI.parse(Environment.search_url).host}"
 ROOT_INDEX = URI.parse(Environment.bonsai_index_url).path[1..-1]
 Tire.configure do 
@@ -47,12 +47,18 @@ end
 
 get '/search' do
   query_string = params["query"] 
+  query_string += 's' if query_string.try(:downcase) == 'will'
   date = params["date"]
   sorter = params["sort"]
   date_start, date_end = params["date"] && params["date"].split('TO')
   filters  = Filter.new(params["filter"])
   lang = (params["lang"] || :en).to_sym
-  page = (params["page"] || 0).to_i
+  
+  if params["page"].to_i < 0 || params["page"].nil?
+    page = 0
+  else
+    page = params["page"].to_i
+  end
 
   query = Tire.search(ROOT_INDEX) do
     query do
@@ -85,12 +91,12 @@ get '/search' do
     end
 
     sort { by "sortable_#{sorter}_#{lang}" } if sorter
-
-    add_facet "subjects_#{lang}"
+    
     add_facet "genres_#{lang}" 
+    add_facet "subjects_#{lang}"
+    add_facet "collections_#{lang}" 
     add_facet "people_#{lang}" 
     add_facet "places_#{lang}" 
-    add_facet "collections_#{lang}" 
     add_facet "translation"
     add_facet "transcription"
 

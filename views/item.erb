@@ -29,7 +29,7 @@
           <div class="six columns  omega last-column">
             <div class="item-links">
               <h1><%= t("images") %></h1>
-              <a target="_blank" href="<%= @object.harvard_urls[:preferred] %>?buttons=y" rel="shadowbox[gallery]" title="<%= @object.title %>"><%= t("view-this-item") %></a>
+              <a target="_blank" href="<%= @object.harvard_urls[:preferred] %>" rel="shadowbox[gallery]" title="<%= @object.title %>"><%= t("view-this-item") %></a>
               <% if @object.secondary_urns? %>
                 <% @object.harvard_urls[:secondary].each do |url| %>
                   <a target="_blank" href="<%= url %>?buttons=y" title="View Additional Image"><%= t("view-additional-image") %></a>
@@ -147,6 +147,9 @@
                 <li>
                 <span><%= t("repository") %></span>
                 <%= @object.repository_credit %>
+                <% if @object.owner_tag.present? %>
+                  <%= "(#{@object.owner_tag})" %>
+                <% end %>
                 </li>
               <% end %>
 
@@ -225,6 +228,16 @@
                   </a>
                 <% end %>
                 </li>
+              <% end %>
+
+              <% if @object.related_items.present? %>
+                <li>
+                <span class="title related_item"><%= t("related_items") %></span>
+                <% @object.related_items.each do |related_item| %>
+                  <a href="<%= related_item.url%>" class="tag">
+                    <%= related_item.title %>
+                  </a>
+                <% end %>
               <% end %>
             </ul>
           </div>

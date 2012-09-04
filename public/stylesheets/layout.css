@@ -408,7 +408,7 @@ h6 { font-size: 1em; }
 
 .header .toolbar ul{float:right; margin:0; padding:0}
 .header .toolbar ul li{display:inline;padding:0 10px;}
-.header .toolbar li a{color: #DECC9D; font-weight:bold;}
+.header .toolbar li a{color: #DECC9D; font-weight:bold; font-size: 16px;}
 .header .toolbar li a:hover{text-decoration:underline}
 
 span.notification{

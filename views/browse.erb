@@ -18,7 +18,7 @@
           </div>
         </div>
         <div class="browse-by-type">
-          <h1><%= t("genres") %><a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/genres.html" class="view-all"><%= t("view_all") %></a></h1>
+          <h1><%= t("genres") %><a href="<%= search_base_url %>/<%= @lang %>/genres.html" class="view-all"><%= t("view_all") %></a></h1>
           <div class="twelve-columns clearfix">
             <% @object.browse_entries.each_slice(3) do |slice| %>
               <% slice.each_with_index do |(genre, image), idx| %>
@@ -43,7 +43,7 @@
 
         <div class="clearfix secondary-browse-facets">
           <div class="four columns alpha people">
-            <h3><span class="icon">g</span> <%= t("people") %><a class="view-all" href="<%= SEARCH_BASE_URL %>/<%= @lang %>/people.html"><%= t("view_all") %></a></h3>
+            <h3><span class="icon">g</span> <%= t("people") %><a class="view-all" href="<%= search_base_url %>/<%= @lang %>/people.html"><%= t("view_all") %></a></h3>
             <ul class="default">
               <% @object.tags_for('people').each do |name, count| %>
                 <li>
@@ -56,7 +56,7 @@
           </div>
 
           <div class="four columns places">
-            <h3><span class="icon">@</span> <%= t("places") %> <a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/places.html" class="view-all"><%= t("view_all") %></a></h3>
+            <h3><span class="icon">@</span> <%= t("places") %> <a href="<%= search_base_url %>/<%= @lang %>/places.html" class="view-all"><%= t("view_all") %></a></h3>
             <ul class="default">
               <% @object.tags_for('places').each do |name, count| %>
                 <li>
@@ -69,7 +69,7 @@
           </div>
 
           <div class="four columns omega subjects">
-            <h3><span class="icon">n</span> <%= t("subjects") %><a href="<%= SEARCH_BASE_URL %>/<%= @lang %>/subjects.html" class="view-all"><%= t("view_all") %></a></h3>
+            <h3><span class="icon">n</span> <%= t("subjects") %><a href="<%= search_base_url %>/<%= @lang %>/subjects.html" class="view-all"><%= t("view_all") %></a></h3>
             <ul class="default">
               <% @object.tags_for('subjects').each do |name, count| %>
                 <li>
