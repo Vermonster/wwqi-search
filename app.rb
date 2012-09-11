@@ -107,7 +107,6 @@ get '/search' do
   # paging -- only display some of the results
   results = (query && query.results) || []
   @total_results = results.total
-  @total_pages = (1.0 * results.total / Loopback.results_per_page).ceil
   @results = results
   @facets = results.facets
   #set up environment for the template to render

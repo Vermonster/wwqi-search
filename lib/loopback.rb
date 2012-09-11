@@ -40,7 +40,7 @@ class Loopback
     params = params.with_indifferent_access
     @query = params["query"]
     @page = params["page"].to_i || 1
-    @lang = params["lang"].to_sym
+    @lang = (params["lang"] || :en).to_sym
     @sorter = params["sort"]
     @date = params["date"]
     @filters = Filter.new(params["filter"])
