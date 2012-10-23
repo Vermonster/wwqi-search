@@ -10,7 +10,7 @@ gem 'activerecord'
 gem 'foreman'
 gem 'enviable'
 
-gem 'tire', :git => "git://github.com/jfredett/tire.git", :ref => "5bce2b5294b6356c39e939f1203da1f7c71279b3"
+gem 'tire', :git => "git://github.com/jfredett/tire.git", :ref => "65ee2cc198bec"
 
 gem 'heroku'
 
