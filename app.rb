@@ -14,14 +14,15 @@ require './views/view_helpers'
 require './initializers/activerecord'
 require './lib/translation'
 
-
 Environment.main_site_url ||= 'http://localhost:5000'
 Environment.asset_url ||= 'http://assets.wwqidev.com'
 Environment.search_url ||= 'http://localhost:5000/search'
 SEARCH_BASE_URL = "http://#{URI.parse(Environment.search_url).host}"
+ELASTICSEARCH_URL = Environment.searchbox_url
+ELASTICSEARCH_INDEX = Environment.searchbox_index
 Tire.configure do 
-  url               Environment.bonsai_root_url 
-  global_index_name Environment.bonsai_index
+  url               ELASTICSEARCH_URL
+  global_index_name ELASTICSEARCH_INDEX
 end
 
 require './lib/ext'
@@ -59,7 +60,7 @@ get '/search' do
     page = params["page"].to_i
   end
 
-  query = Tire.search(Environment.bonsai_index) do
+  query = Tire.search(ELASTICSEARCH_INDEX) do
     query do
       boolean do
         must { range :date, { from: date_start, to: date_end, boost: 10.0 } } if date
@@ -120,7 +121,7 @@ end
 
 def item_index(lang, type, letter)
   facet_name = "#{type}_#{lang}" 
-  query = Tire.search Environment.bonsai_index do
+  query = Tire.search(ELASTICSEARCH_INDEX) do
     query { string "*" } 
     facet facet_name, :global => true do
       terms facet_name, :size => 100000
