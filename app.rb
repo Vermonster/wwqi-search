@@ -19,10 +19,9 @@ Environment.main_site_url ||= 'http://localhost:5000'
 Environment.asset_url ||= 'http://assets.wwqidev.com'
 Environment.search_url ||= 'http://localhost:5000/search'
 SEARCH_BASE_URL = "http://#{URI.parse(Environment.search_url).host}"
-ROOT_INDEX = URI.parse(Environment.bonsai_index_url).path[1..-1]
 Tire.configure do 
-  url               'http://index.bonsai.io'
-  global_index_name ROOT_INDEX
+  url               Environment.bonsai_root_url 
+  global_index_name Environment.bonsai_index
 end
 
 require './lib/ext'
@@ -60,7 +59,7 @@ get '/search' do
     page = params["page"].to_i
   end
 
-  query = Tire.search(ROOT_INDEX) do
+  query = Tire.search(Environment.bonsai_index) do
     query do
       boolean do
         must { range :date, { from: date_start, to: date_end, boost: 10.0 } } if date
@@ -121,7 +120,7 @@ end
 
 def item_index(lang, type, letter)
   facet_name = "#{type}_#{lang}" 
-  query = Tire.search ROOT_INDEX do
+  query = Tire.search Environment.bonsai_index do
     query { string "*" } 
     facet facet_name, :global => true do
       terms facet_name, :size => 100000
