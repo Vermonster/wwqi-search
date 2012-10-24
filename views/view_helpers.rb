@@ -322,15 +322,15 @@ NOTES
     string
   end
   
-  def persian_sort(words)
+  def persian_sort(content)
     sortable = {}
     sorted = []
-    words.each_with_index do |w, i|
-      s1 = w.gsub("آ", "1").gsub("ﺍ", "2").gsub("ﺏ", "3").gsub("پ", "4").gsub("ﺕ", "5").gsub("ﺙ", "6").gsub("ﺝ", "7").gsub("چ", "a").gsub("ﺡ", "b").gsub("ﺥ", "c").gsub("ﺩ", "d").gsub("ﺫ","e").gsub("ﺭ", "f").gsub("ﺯ", "g").gsub("ژ", "h").gsub("ﺱ", "i").gsub("ﺵ", "j").gsub("ﺹ", "k").gsub("ﺽ", "l").gsub("ﻁ", "m").gsub("ﻅ", "n").gsub("ﻉ", "o").gsub("ﻍ", "p").gsub("ﻑ", "q").gsub("ﻕ", "r").gsub("ک", "s").gsub("گ", "t").gsub("ﻝ", "u").gsub("ﻡ", "v").gsub("ﻥ", "w").gsub("ﻭ", "x").gsub("ه", "y").gsub("ی", "z")
+    content.each_with_index do |(w, c), i|
+      s1 = w.gsub("آ", "1").gsub("ﺍ", "2").gsub("ﺏ", "3").gsub("پ", "4").gsub("ﺕ", "5").gsub("ﺙ", "6").gsub("ﺝ", "7").gsub("چ", "a").gsub("ﺡ", "b").gsub("ﺥ", "c").gsub("ﺩ", "d").gsub("ﺫ","e").gsub("ﺭ", "f").gsub("ﺯ", "g").gsub("ژ", "h").gsub("ﺱ", "i").gsub("ﺵ", "j").gsub("ﺹ", "k").gsub("ﺽ", "l").gsub("ﻁ", "m").gsub("ﻅ", "n").gsub("ﻉ", "o").gsub("ﻍ", "p").gsub("ﻑ", "q").gsub("ﻕ", "r").gsub("ک", "s").gsub("گ", "t").gsub("ﻝ", "u").gsub("ﻡ", "v").gsub("ﻥ", "w").gsub("ﻭ", "x").gsub("ه", "y").gsub("ی", "z").downcase
       sortable.merge!(s1 => i)
     end
     sortable.sort.each do |s|
-      sorted<<words[s[1]]
+      sorted<<content[s[1]]
     end
     sorted
   end
