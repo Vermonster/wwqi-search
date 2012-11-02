@@ -13,7 +13,7 @@
           <a href="<%= "/#{@lang}/places.html" %>">  <%= t('places') %>  </a>
           <a href="<%= "/#{@lang}/subjects.html" %>"><%= t('subjects') %></a>
         </div>
-        <h2><%= @type.capitalize %> Index</h2>
+        <h2><%= t(@type.to_s + "_index") %></h2>
       </div>
       <%
           column_1 = persian_sort(@content)
