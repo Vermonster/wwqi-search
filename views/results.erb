@@ -30,7 +30,9 @@
               </div>
               <div class="collection-meta">
                 <% if result.type.downcase == "collection" %>
-                  <span class="items-in-collection"><strong><%= with_farsi_numbers result.count %></strong><%= t("items") %></span>
+                  <span class="items-in-collection"><div padding:"10px"><strong><%= with_farsi_numbers result.count %></strong><%= t("items") %></div><div height="50">
+                    <strong><%= with_farsi_numbers result.image_count %></strong><%= t("images") %></div>
+                  </span>
                 <% else %>
                   <span class="items-in-collection"><strong><%= with_farsi_numbers result.image_count %></strong> <%= t('images') %></span>
                 <% end %>

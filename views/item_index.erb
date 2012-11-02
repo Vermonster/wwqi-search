@@ -16,10 +16,7 @@
         <h2><%= @type.capitalize %> Index</h2>
       </div>
       <%
-          column_1 = if (@lang == "fa")
-                       persian_sort(@content)
-                     else @content.sort_by { |name, count| name.downcase.strip.gsub("ʻ", "'").gsub("‘", "'") }
-                     end
+          column_1 = persian_sort(@content)
           column_2 = column_1.slice!((@content.size/2.0).round..@content.size)
         %>
       <div class="sixteen columns clearfix offset-by-one">
