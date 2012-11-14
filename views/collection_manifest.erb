@@ -32,8 +32,8 @@
               <div class="layer2"></div>
             </div>
             <div class="collection-meta">
-              <span class="items-in-collection"><div style="padding-bottom:10px;"><strong><%= with_farsi_numbers result.count %></strong><%= t("items") %></div>
-                    <strong><%= with_farsi_numbers result.image_count %></strong><%= t("images") %>
+              <span class="items-in-collection"><div style="padding-bottom:10px;"><strong><%= with_farsi_numbers collection.count %></strong><%= t("items") %></div>
+                    <strong><%= with_farsi_numbers collection.image_count %></strong><%= t("images") %>
                   </span>
               <div class="collection-essentials">
                 <h3><%= collection.title %></h3>
