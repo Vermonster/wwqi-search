@@ -326,7 +326,7 @@ NOTES
     sortable = {}
     sorted = []
     content.each_with_index do |(w, c), i|
-      s1 = w.downcase.strip.gsub("ʻ","‘").gsub(/\A’/,"1").gsub(/\A‘/,"2").gsub("آ", "3").gsub("ﺍ", "4").gsub("ﺏ", "5").gsub("پ", "6").gsub("ﺕ", "7").gsub("ﺙ", "8").gsub("ﺝ", "9").gsub("چ", "a").gsub("ﺡ", "b").gsub("ﺥ", "c").gsub("ﺩ", "d").gsub("ﺫ","e").gsub("ﺭ", "f").gsub("ﺯ", "g").gsub("ژ", "h").gsub("ﺱ", "i").gsub("ﺵ", "j").gsub("ﺹ", "k").gsub("ﺽ", "l").gsub("ﻁ", "m").gsub("ﻅ", "n").gsub("ﻉ", "o").gsub("ﻍ", "p").gsub("ﻑ", "q").gsub("ﻕ", "r").gsub("ک", "s").gsub("گ", "t").gsub("ﻝ", "u").gsub("ﻡ", "v").gsub("ﻥ", "w").gsub("ﻭ", "x").gsub("ه", "y").gsub("ی", "z").downcase
+      s1 = w.downcase.strip.gsub("ʻ","‘ ").gsub(/\A’/,"1 ").gsub(/\A‘/,"2 ").gsub("آ", "3 ").gsub("ا", "4 ").gsub("ب", "5 ").gsub("پ", "6 ").gsub("ت", "7 ").gsub("ث", "8 ").gsub("ج", "9 ").gsub("چ", "a ").gsub("ح", "b ").gsub("خ", "c ").gsub("د", "d ").gsub("ذ","e ").gsub("ر", "f ").gsub("ز", "g ").gsub("ژ", "h ").gsub("س", "i ").gsub("ش", "j ").gsub("ص", "k ").gsub("ض", "l ").gsub("ط", "m ").gsub("ظ", "n ").gsub("ع", "o ").gsub("غ", "p ").gsub("ف", "q ").gsub("ق", "r ").gsub("ک", "s ").gsub("گ", "t ").gsub("ل", "u ").gsub("م", "v ").gsub("ن", "w ").gsub("و", "x ").gsub("ه", "y ").gsub("ی", "z ")
       sortable.merge!(s1 => i)
     end
     sortable.sort.each do |s|
