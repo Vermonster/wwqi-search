@@ -21,7 +21,7 @@
         </div>
 
         <div class="six columns  omega last-column">
-          <a href="<%= loopback(lang: @lang).update_filter("collections_#{@lang}", @object.send("name_#{@lang}")).sort!.to_url %>">
+          <a href="<%= loopback(lang: @lang).update_filter("collections_#{@lang}", CGI.escape(@object.send("name_#{@lang}").to_s)).sort!.to_url %>">
             <div class="browse-collection">
               <h1><%= t('browse-this-collection') %> </h1>
             </div>
