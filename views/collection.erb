@@ -71,7 +71,7 @@
               
               <% if @object.history.present? %>
                 <li>
-                <span><%= t('history') %></span>
+                <span><%= markdown t('history') %></span>
                 <%= @object.history %>
                 </li>
               <% end %>
