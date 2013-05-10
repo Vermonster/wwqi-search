@@ -74,6 +74,11 @@
                 <%= @object.history %>
                 </li>
               <% end %>
+              
+              <li>
+              <span><%= t('dates') %></span>
+              <%= with_farsi_numbers @object.dates %>
+              </li>
 
               <li>
               <span><%= t('last_edited') %></span>
