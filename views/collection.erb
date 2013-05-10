@@ -67,7 +67,6 @@
                 <%= @object.acquisition_notes %>
                 </li>
               <% end %> 
-
               
               <% if @object.history.present? %>
                 <li>
@@ -75,13 +74,6 @@
                 <%= @object.history %>
                 </li>
               <% end %>
-
-               
-              <li>
-              <span><%= t('created_at') %></span>
-              <%= with_farsi_numbers @object.created %>
-              </li>
-
 
               <li>
               <span><%= t('last_edited') %></span>
