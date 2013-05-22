@@ -1,6 +1,7 @@
 #encoding: utf-8
 require 'net/http'
 require 'json'
+require 'kramdown'
 
 module Helpers
   def javascript(name)
@@ -8,7 +9,7 @@ module Helpers
   end
 
   def markdown(str)
-    str
+    Kramdown::Document.new(str).to_html
   end
 
   def facet_link(facet, term)
