@@ -58,6 +58,7 @@ GEM
       rubyzip
     highline (1.6.11)
     i18n (0.6.0)
+    kramdown (1.0.2)
     launchy (2.0.5)
       addressable (~> 2.2.6)
     method_source (0.7.1)
@@ -132,6 +133,7 @@ DEPENDENCIES
   enviable
   foreman
   heroku
+  kramdown
   launchy
   pg
   pry
