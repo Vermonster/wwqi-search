@@ -1358,12 +1358,13 @@ ul.collections li a .collection-essentials{
 	margin-right:70px;
 	border-right:1px solid #393939;
 	padding-right:10px;
+	min-height:120px;
 }
 ul.collections li a .items-in-collection{
 	float:right;
 	width:50px;
-	font-size:10px;
-	color:#ccc;
+	font-size:11px;
+	color:#888;
 	margin-top:20px;
 	text-align:center;
 }
@@ -1371,6 +1372,7 @@ ul.collections li a .items-in-collection strong{
 	font-size:29px;
 	display:block;
 	color:#fff;
+	margin-bottom:2px;
 }
 /* #Collection Details
 ================================================== */
