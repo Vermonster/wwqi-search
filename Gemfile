@@ -9,6 +9,7 @@ gem 'pg'
 gem 'activerecord'
 gem 'foreman'
 gem 'enviable'
+gem 'kramdown'
 
 gem 'tire', :git => "git://github.com/jfredett/tire.git", :ref => "65ee2cc198bec"
 

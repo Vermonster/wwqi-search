@@ -64,24 +64,28 @@
               <% if @object.acquisition_notes.present? %>
                 <li>
                 <span><%= t('acquisition_notes') %></span>
-                <%= @object.acquisition_notes %>
+                <%= markdown @object.acquisition_notes %>
                 </li>
               <% end %> 
-
               
               <% if @object.history.present? %>
                 <li>
                 <span><%= t('history') %></span>
-                <%= @object.history %>
+                <%= markdown @object.history %>
                 </li>
               <% end %>
-
-               
+              
               <li>
-              <span><%= t('created_at') %></span>
-              <%= with_farsi_numbers @object.created %>
+              <span><%= t('dates') %></span>
+              <%= with_farsi_numbers @object.dates %>
               </li>
-
+              
+              <% if @object.date_acquired.present? %>
+                <li>
+                <span><%= t('date_acquired') %></span>
+                <%= with_farsi_numbers @object.date_acquired %>
+                </li>
+              <% end %>
 
               <li>
               <span><%= t('last_edited') %></span>
