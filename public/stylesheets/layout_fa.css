@@ -247,7 +247,9 @@ ul.collections li a p{
 	border-right:none;
 	float:right;
 }
-
+#indexList ul li a{
+	font-size:16px;
+}
 #indexList ul li ul{margin-right:20px;margin-left:0;}
 .otherIndexes{float:left;}
 .otherIndexes a{margin-right:10px;	margin-left:0;}
