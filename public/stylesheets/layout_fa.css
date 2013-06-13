@@ -13,41 +13,14 @@
 
 /* #Site Styles
 ================================================== */
-
-
-@font-face {
-  font-family: 'BNazanin';
-	src: url('fonts/BNazanin.eot');
-	src: local('☺'), url('fonts/BNazanin.woff') format('woff'), url('fonts/BNazanin.ttf') format('truetype'), url('fonts/BNazanin.svg') format('svg');
-    font-weight: bold;
-
-}
-@font-face {
-  font-family: 'BNazaninBold';
-  src: url('fonts/B_Nazanin_Bold.eot?#') format('eot'),  /* IE6–8 */
-       url('fonts/B_Nazanin_Bold.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-       url('fonts/B_Nazanin_Bold.ttf') format('truetype'),  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
-       url('fonts/B_Nazanin_Bold.svg') format('svg'); 
-       font-weight: normal;
-
-}
-@font-face {
-  font-family: 'BDavat';
-  src: url('fonts/BDavat.eot?#') format('eot'),  /* IE6–8 */
-       url('fonts/BDavat.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-       url('fonts/BDavat.ttf') format('truetype'),  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
-       url('fonts/BDavat.svg') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
-		
-}
-
 h1{
-	font-family: 'BNazaninBold';
+	font-family:'Nazanin LT W20 Light';
 }
 
 body{
     direction:rtl;
 	text-align:right;
-	font-family:'BNazanin',Tahoma, sans-serif;
+	font-family:'Nazanin LT W20 Light', Tahoma, sans-serif;
 	font-size:16px;
 
 }
@@ -81,7 +54,7 @@ body{
 	right:15px;
 	left:auto;
 }
-.item-essentials h2{padding-right:25px; padding-left:0;font-family: 'BNazaninBold'; font-size: 28px; font-weight:normal}
+.item-essentials h2{padding-right:25px; padding-left:0;font-family:'Nazanin LT W20 Bold'; font-size: 28px; font-weight:normal}
 .item-essentials p.description{padding-right:25px;	padding-left:0px;}
 
 .item-essentials.collection-details h2,
@@ -109,7 +82,7 @@ body{
 	padding-right:40px;
 	padding-left:0;
 	background:url(../images/icon-image.png) 100% 0 no-repeat;
-	font-family: 'BNazaninBold';
+	font-family:'Nazanin LT W20 Bold';
 	
 }
 
@@ -131,7 +104,7 @@ body{
 .item-details ul li,
 .item_related ul li{clear:left; font-size: 16px;}
 .item-details ul li span, .item_related ul li span{
-	font-family:'BNazaninBold';
+	font-family:'Nazanin LT W20 Bold';
 	font-weight:normal;
 }
 .item-details ul li a {
@@ -143,7 +116,7 @@ img.icon{float:right;margin:0 0px 0 3px;}
 .clear{
 	clear:right!important;
 }
-.item-links a{background-position:0 50%; font-size: 18px; font-family: 'BNazaninBold'; font-weight:normal}
+.item-links a{background-position:0 50%; font-size: 18px; font-family:'Nazanin LT W20 Bold'; font-weight:normal}
 
 .tag {
 	background: url(../images/bullet_fa.gif) 100% 5px no-repeat;
@@ -191,7 +164,7 @@ ul.collections li a .collection-essentials{
 }
 ul.collections li a .items-in-collection{float:left;}
 ul.collections li a h3{
-	font-family: 'BNazaninBold';
+	font-family:'Nazanin LT W20 Bold';
 	font-size: 25px;
 	font-weight: normal;
 }
@@ -217,7 +190,7 @@ ul.collections li a p{
 }
 .static-content h2,
 .static-content h1,
-.static-content h3{font-family:'BNazaninBold'}
+.static-content h3{font-family:'Nazanin LT W20 Bold';}
 .static-content h1{font-size:28px; color:#000}
 .static-content a{color:#C5112C}
 .static-content h2{font-size:22px}
@@ -241,7 +214,7 @@ ul.collections li a p{
 
 #home-main .rslides li{margin-bottom:0}
 #home-main .side-stuff{margin-left:-20px; margin-right:0; padding:0 10px 50px 10px}
-#home-main .welcome{right:0;left:5px;font-size: 22px;font-family: 'BNazaninBold';font-weight: normal;}
+#home-main .welcome{right:0;left:5px;font-size: 22px;font-family:'Nazanin LT W20 Bold';font-weight: normal;}
 #home-main .welcome{background:url(../images/home-search-arrow-fa.png) 0% 0 no-repeat;}
 #home-main .welcome i{
 	left:0;
@@ -278,12 +251,12 @@ ul.collections li a p{
 	margin-right: 0;
 	padding-left:0;
 	padding-right: 0;
-	font-family:'BNazaninBold',Tahoma, sans-serif; font-weight: normal;
+	font-family:'Nazanin LT W20 Bold', Tahoma, sans-serif; font-weight: normal;
 }
 #carousel .collection-data .title{
 	font-size: 22px;
 	margin-bottom: 10px;
-	font-family:'BNazaninBold';font-weight: normal;
+	font-family:'Nazanin LT W20 Bold';font-weight: normal;
 }
 #carousel .collection-data .description{
 	font-size: 18px;
@@ -298,7 +271,7 @@ ul.collections li a p{
 ================================================== */
 
 #pageFooterWrapper { clear:right;}
-#pageFooter li { float:right;margin: 0 0px 3px 15px; font-family: 'BNazaninBold';}
+#pageFooter li { float:right;margin: 0 0px 3px 15px; font-family:'Nazanin LT W20 Bold';}
 #pageFooter a:link { color: #aaa;padding: 0 10px 0 0px;  font-size: 17px; font-weight: normal;}
 #pageFooter p{margin-left: 44px; text-align: left;direction:ltr; font-family:helvetia, sans-serif}
 #pageFooter  a:visited {padding: 0 10px 0 0px; }
@@ -318,11 +291,11 @@ ul.collections li a p{
 	padding-right:40px;
 	padding-lefT:0;
 	background:url(../images/icon-browse.png) 100% 0 no-repeat;
-	font-family: 'BNazaninBold';font-size: 28px;
+	font-family:'Nazanin LT W20 Bold';font-size: 28px;
 }
 
 #browse-bar h3 a{
-	font-family: 'BNazaninBold';font-size: 25px;font-weight: normal;
+	font-family:'Nazanin LT W20 Bold';font-size: 25px;font-weight: normal;
 }
 #browse-bar  h3.has-children{background: url("../images/arrow_collapsed_fa.png") 100% 18px no-repeat; padding-right: 15px; padding-left:5px;}
 #browse-bar h3.active{background:  url("../images/arrow_expanded.png") 100% 18px no-repeat;}
@@ -351,12 +324,12 @@ ul.collections li a p{
 .browse-search h1{
 	padding-right:40px;
 	padding-left:0;
-	background:url(../images/icon-search.png) 100% 0 no-repeat;font-family: 'BNazanin';font-size: 28px;
+	background:url(../images/icon-search.png) 100% 0 no-repeat;font-family:'Nazanin LT W20 Light';font-size: 28px;
 }
 .browse-by-type h1{
 	padding-right:40px;
 	padding-left:0;
-	background:url(../images/icon-types.png) 100% 0 no-repeat;font-family: 'BNazanin';font-size: 28px;
+	background:url(../images/icon-types.png) 100% 0 no-repeat;font-family:'Nazanin LT W20 Light';font-size: 28px;
 }
 .browse-by-type span{font-weight:normal;}
 
@@ -364,7 +337,7 @@ ul.collections li a p{
 	padding-right:40px;
 	padding-left:0;
 	background:url(../images/icon-browse.png) 100% 0 no-repeat; 
-	font-family: 'BNazanin';font-size: 28px;
+	font-family:'Nazanin LT W20 Light';font-size: 28px;
 }
 .modal-body .column{float:right!important; margin:0 1%!important}
 
@@ -373,7 +346,7 @@ ul.collections li a p{
 .browse-search span.examples{clear:right;}
 
 .view-all{float:left;font-weight:normal}
-#browse-bar .browse-by-period h1{background:url(../images/icon-period.png) 100% 0 no-repeat;font-family: 'BNazanin';font-size: 28px;}
+#browse-bar .browse-by-period h1{background:url(../images/icon-period.png) 100% 0 no-repeat;font-family:'Nazanin LT W20 Light';font-size: 28px;}
 .browse-by-period a em{float:right;margin:0 0px 0 10px;	}
 .browse-by-period ul li a span{font-size: 17px;}
 .secondary-browse-facets .four.columns{background:url(../images/2px-divider.png) 0 0 repeat-y;	}
@@ -383,8 +356,8 @@ ul.collections li a p{
 .secondary-browse-facets .places{margin-left:-10px;}
 .secondary-browse-facets .subjects{	margin-left:-10px;}
 .secondary-browse-facets ul li a{font-size: 18px;}
-.secondary-browse-facets h3{font-family: 'BNazaninBold';font-size: 20px; font-weight:normal}
-#browse-bar .list li.current{font-size:18px; font-weight:normal; font-family:'BNazaninBold'; margin-left:0px; margin-right:10px;-moz-border-radius:0 5px 5px 0;
+.secondary-browse-facets h3{font-family:'Nazanin LT W20 Bold';font-size: 20px; font-weight:normal}
+#browse-bar .list li.current{font-size:18px; font-weight:normal; font-family:'Nazanin LT W20 Bold'; margin-left:0px; margin-right:10px;-moz-border-radius:0 5px 5px 0;
 -webkit-border-radius:0 5px 5px 0;
 border-radius:0 5px 5px 0;
 padding: 0 35px 0 10px;}
@@ -392,7 +365,7 @@ padding: 0 35px 0 10px;}
 	-moz-border-radius:0 5px 5px 0;
 	-webkit-border-radius:0 5px 5px 0;
 	border-radius:0 5px 5px 0;left:0; right:0px; left:auto}
-.special-searches h3 a{font-family:'BNazanin'; font-size:20px;}
+.special-searches h3 a{ffont-family:'Nazanin LT W20 Light'; font-size:20px;}
 .special-searches h3.has-translation{
 	background:url(../images/icon-translation-black.png) 100% 0 no-repeat;
 	padding:0px 40px 0 0px;
