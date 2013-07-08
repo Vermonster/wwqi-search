@@ -855,6 +855,9 @@ span.notification{
 .item_related .title.related_item{
 	background:url(../images/icon-related.png)  0 50% no-repeat;
 }
+.item_related .title.activities{
+  background:url(../images/icon-edit.png) 0 50% no-repeat;
+}
 .item-details ul li,
 .item_related ul li{
 	list-style:none;
