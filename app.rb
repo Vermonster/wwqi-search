@@ -42,10 +42,6 @@ def add_facet(name)
   end
 end
 
-def question_url
-  puts 'Test1'
-end
-
 def on_search_page? 
   $on_search_page #this is terrible.
 end

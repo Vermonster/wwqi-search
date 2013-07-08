@@ -238,12 +238,16 @@
                     <%= related_item.title %>
                   </a>
                 <% end %>
+              </li>
               <% end %>
+            <% if user_platform_url? %>
               <li>
                 <span class="title activities"><%= t("activities") %></span>
                 <a href="<%= @object.question_url %>" class="tag">Ask a question</a>
                 <a href="<%= @object.discussion_url %>" class="tag">Start a discussion</a>
                 <a href="<%= @object.research_url %>" class="tag">Start a new research</a>
+              </li>
+            <% end %>
             </ul>
           </div>
         <% end %>

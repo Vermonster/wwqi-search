@@ -123,11 +123,15 @@ NOTES
     @object.research_url = construct_user_platform_url('research', @object.accession_number)
   end
 
+  def user_platform_url? 
+    true unless Environment.user_platform_url.nil?
+  end
+
   def construct_user_platform_url(type, accession_number)
     if type == 'research'
-      "#{ENV['USER_PLATFORM_URL']}/researches/new?accession_no=#{accession_number}"
+      "#{Environment.user_platform_url}/researches/new?accession_no=#{accession_number}"
     else
-      "#{ENV['USER_PLATFORM_URL']}/threads/new?type=#{type}&accession_no=#{accession_number}"
+      "#{Environment.user_platform_url}/threads/new?type=#{type}&accession_no=#{accession_number}"
     end
   end
 
