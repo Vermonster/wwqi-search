@@ -17,6 +17,7 @@ require './lib/translation'
 Environment.main_site_url ||= 'http://localhost:5000'
 Environment.asset_url ||= 'http://assets.wwqidev.com'
 Environment.search_url ||= 'http://localhost:5000/search'
+Environment.user_platform_url ||= 'http://localhost:3000' # URL for the user platform links
 SEARCH_BASE_URL = "http://#{URI.parse(Environment.search_url).host}"
 ELASTICSEARCH_URL = Environment.searchbox_url
 ELASTICSEARCH_INDEX = Environment.searchbox_index
@@ -39,6 +40,10 @@ def add_facet(name)
     terms name, size: 1000000
     yield if block_given?
   end
+end
+
+def question_url
+  puts 'Test1'
 end
 
 def on_search_page? 

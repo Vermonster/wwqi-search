@@ -117,6 +117,18 @@ NOTES
       OpenStruct.new(name: "Nusrat al-Saltanah to A‘zam al-Saltanah, [ca. 1927-32]", url: '#'),
       OpenStruct.new(name: "Korsi cover", url: '#')
     ]
+    # Set the user platform link urls
+    @object.question_url = construct_user_platform_url('question', @object.accession_number)
+    @object.discussion_url = construct_user_platform_url('discussion', @object.accession_number)
+    @object.research_url = construct_user_platform_url('research', @object.accession_number)
+  end
+
+  def construct_user_platform_url(type, accession_number)
+    if type == 'research'
+      "#{ENV['USER_PLATFORM_URL']}/researches/new?accession_no=#{accession_number}"
+    else
+      "#{ENV['USER_PLATFORM_URL']}/threads/new?type=#{type}&accession_no=#{accession_number}"
+    end
   end
 
   def fake_facet
@@ -213,6 +225,10 @@ NOTES
       OpenStruct.new(name: "شمس الملوک عضدی", url: '#'),
       OpenStruct.new(name: "گل پیراهن اعتضادی و دخترش قدرت ملک", url: '#')
     ]
+    # Set the user platform link urls
+    @object.question_url = construct_user_platform_url('question', @object.accession_number)
+    @object.discussion_url = construct_user_platform_url('discussion', @object.accession_number)
+    @object.research_url = construct_user_platform_url('research', @object.accession_number)
   end
 
   def load_example_collection_index! 
