@@ -254,7 +254,7 @@
                 <div id='translation'></div>
                 <a href="<%= construct_user_platform_url('question',   @object.accession_number) %>" class="tag">Ask a question</a>
                 <a href="<%= construct_user_platform_url('discussion', @object.accession_number) %>" class="tag">Start a discussion</a>
-                <a href="<%= construct_user_platform_url('research',   @object.accession_number) %>" class="tag">Start a new research</a>
+                <a href="<%= construct_user_platform_url('research',   @object.accession_number) %>" class="tag">Start a research</a>
               </li>
             <% end %>
             </ul>
@@ -272,12 +272,12 @@
     type: 'get', dataType: 'jsonp' 
   })
     .done(function(data) {
-      $('#biography').append('<div class="description">Contributed Biograpies: ' + data['Biography'] + '</div>');
-      $('#comment').append('<div class="description">In Comments: ' + data['Comment'] + '</div>');
-      $('#discussion').append('<div class="description">Related Discussions: ' + data['Discussion'] + '</div>');
+      $('#biography').append('<div class="description">Biograpies: ' + data['Biography'] + '</div>');
+      $('#comment').append('<div class="description">Comments: ' + data['Comment'] + '</div>');
+      $('#discussion').append('<div class="description">Discussions: ' + data['Discussion'] + '</div>');
       $('#question').append('<div class="description">Questions: ' + data['Question'] + '</div>');
-      $('#research').append('<div class="description">Related Researches: ' + data['Research'] + '</div>');
-      $('#transcription').append('<div class="description">Contributed Transcriptions: ' + data['Transcription'] + '</div>');
-      $('#transclation').append('<div class="description">Contributed Translations: ' + data['Translation'] + '</div>');
+      $('#research').append('<div class="description">Researches: ' + data['Research'] + '</div>');
+      $('#transcription').append('<div class="description">Transcriptions: ' + data['Transcription'] + '</div>');
+      $('#transclation').append('<div class="description">Translations: ' + data['Translation'] + '</div>');
     });
 </script>
