@@ -283,21 +283,21 @@
       $('#discussion')
         .append(
           '<a href=' 
-          + "<%= construct_user_platform_url('discussion', 'list', "#{@object.accession_number}")%>"
+          + "<%= construct_user_platform_url('Discussion', 'list', "#{@object.accession_number}")%>"
           + ' class="description">Discussions: '
           + data['Discussion']
           + '</a>');
       $('#question')
         .append(
          '<a href='
-         + "<%= construct_user_platform_url('question', 'list', "#{@object.accession_number}")%>"
+         + "<%= construct_user_platform_url('Question', 'list', "#{@object.accession_number}")%>"
          + ' class="description">Questions: '
          + data['Question']
          + '</a>');
       $('#research')
         .append(
          '<a href='
-         + "<%= construct_user_platform_url('research', 'list', "#{@object.accession_number}")%>"
+         + "<%= construct_user_platform_url('Research', 'list', "#{@object.accession_number}")%>"
          + ' class="description">Researches: '
          + data['Research']
          + '</a>');
