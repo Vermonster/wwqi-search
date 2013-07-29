@@ -252,9 +252,9 @@
                 <div id='research'></div>
                 <div id='transcription'></div>
                 <div id='translation'></div>
-                <a href="<%= construct_user_platform_url('question',   @object.accession_number) %>" class="tag">Ask a question</a>
-                <a href="<%= construct_user_platform_url('discussion', @object.accession_number) %>" class="tag">Start a discussion</a>
-                <a href="<%= construct_user_platform_url('research',   @object.accession_number) %>" class="tag">Start a research</a>
+                <a href="<%= construct_user_platform_url('question', 'new', @object.accession_number) %>" class="tag">Ask a question</a>
+                <a href="<%= construct_user_platform_url('discussion', 'new', @object.accession_number) %>" class="tag">Start a discussion</a>
+                <a href="<%= construct_user_platform_url('research', 'new', @object.accession_number) %>" class="tag">Start a research</a>
               </li>
             <% end %>
             </ul>
@@ -272,12 +272,48 @@
     type: 'get', dataType: 'jsonp' 
   })
     .done(function(data) {
-      $('#biography').append('<div class="description">Biograpies: ' + data['Biography'] + '</div>');
-      $('#comment').append('<div class="description">Comments: ' + data['Comment'] + '</div>');
-      $('#discussion').append('<div class="description">Discussions: ' + data['Discussion'] + '</div>');
-      $('#question').append('<div class="description">Questions: ' + data['Question'] + '</div>');
-      $('#research').append('<div class="description">Researches: ' + data['Research'] + '</div>');
-      $('#transcription').append('<div class="description">Transcriptions: ' + data['Transcription'] + '</div>');
-      $('#transclation').append('<div class="description">Translations: ' + data['Translation'] + '</div>');
+      $('#biography')
+        .append(
+          '<a href='
+          + "<%= construct_user_platform_url('Biography', 'list', "#{@object.accession_number}")%>"
+          + ' class="description">Biograpies: '
+          + data['Biography'] 
+          + '</a>');
+      <%# $('#comment').append('<div class="description">Comments: ' + data['Comment'] + '</div>'); %>
+      $('#discussion')
+        .append(
+          '<a href=' 
+          + "<%= construct_user_platform_url('discussion', 'list', "#{@object.accession_number}")%>"
+          + ' class="description">Discussions: '
+          + data['Discussion']
+          + '</a>');
+      $('#question')
+        .append(
+         '<a href='
+         + "<%= construct_user_platform_url('question', 'list', "#{@object.accession_number}")%>"
+         + ' class="description">Questions: '
+         + data['Question']
+         + '</a>');
+      $('#research')
+        .append(
+         '<a href='
+         + "<%= construct_user_platform_url('research', 'list', "#{@object.accession_number}")%>"
+         + ' class="description">Researches: '
+         + data['Research']
+         + '</a>');
+      $('#transcription')
+        .append(
+         '<a href='
+         + "<%= construct_user_platform_url('Transcription', 'list', "#{@object.accession_number}")%>"
+         + ' class="description">Transcriptions: '
+         + data['Transcription']
+         + '</a>');
+      $('#translation')
+        .append(
+         '<a href='
+         + "<%= construct_user_platform_url('Translation', 'list', "#{@object.accession_number}")%>"
+         + ' class="description">Translations: '
+         + data['Translation']
+         + '</a>');
     });
 </script>

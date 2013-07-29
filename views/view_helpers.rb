@@ -123,12 +123,33 @@ NOTES
     true unless Environment.user_platform_url.nil?
   end
 
-  def construct_user_platform_url(type, accession_number)
-    if type == 'research'
-      "#{Environment.user_platform_url}/researches/new?accession_no=#{accession_number}"
+  # Widget helper to create a url to the user platform site
+  def construct_user_platform_url(type, action, accession_number)
+    url = "#{Environment.user_platform_url}"
+
+    # Append a controller 
+    case type
+    when 'research'
+      url << '/researches'
+    when 'discussion'
+      url << '/threads'
+    when 'question'
+      url << '/threads'
     else
-      "#{Environment.user_platform_url}/threads/new?type=#{type}&accession_no=#{accession_number}"
+      url << '/contributions'
     end
+
+    # Append an new action if the action is new
+    url << '/new' if action == 'new'
+
+    # Starts to append the search parameters
+    url << '?'
+
+    # Append a type parameter if the type is not reseach
+    url << "type=#{type}&" unless type == 'research'
+
+    # Append an accession number parameter
+    url << "accession_no=#{accession_number}"
   end
 
   def fake_facet
