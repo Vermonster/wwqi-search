@@ -221,11 +221,11 @@ NOTES
 
     # Append a controller 
     case type
-    when 'research'
+    when 'Research'
       url << '/researches'
-    when 'discussion'
+    when 'Discussion'
       url << '/threads'
-    when 'question'
+    when 'Question'
       url << '/threads'
     else
       url << '/contributions'
