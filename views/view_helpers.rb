@@ -8,6 +8,98 @@ class String
 end
 
 module ViewHelpers
+  def load_example_person_farsi!
+    @object = OpenStruct.new
+    @object.thumbnail = "http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2062.jpg"
+    @object.name = "آرتین استپانیان"
+    @object.description = "آرتین استپانیان (متولد ۱۲۴۸)، همسر نی‌نیش امیرخانیان (استپانیان)، اولین تحصیل کرده رشته دندانپزشکی ایران است."
+    @object.long_description = <<-DESC
+آرتین استپانیان متولد ترکیه و پس از دریافت گواهی نامه از کالج آمریکایی استانبول، برای ادامه تحصیلات به انگلستان رفته مدت دو سال در یکی از دانشکده های پزشکی شهر لندن مشغول تحصیل گردید و از آنجا عازم آمریکای شمالی گردیده و وارد دانشکده دندان پزشکی فیلادلفیا شد. سپس به مدت دو سال در شهر فیلادلفیای مشغول دندان پزشکی گردید و در سال 1902میلادی، عازم ایران شده و در شهر تبریز مطب شخصی خود را دائر کرد. در مدت اقامت او در تبریز به عنوان پزشک خصوصی محمدعلی میرزا فعالیت کرد. پس از مظفرالدین شاه، ولیعهد محمدعلی میرزا به سلطنت رسید و دکتر را نیز همراه خود به تهران آورد او را به سمت دندان پزشک رسمی دربار منصوب نمود. از تاریخ 1908 میلادی دکتر مطب شخصی خود را در تهران دائرکرد و با داشتن سمت "دندان پزشک دربار" مشغول معالجه و خدمت گردید.
+DESC
+    @object.birthplace = OpenStruct.new(name: "Turkey", url: "#")
+    @object.place_of_death = OpenStruct.new(name: "Tehran", url: "#")
+    @object.dob = "1870"
+    @object.dod = "1952"
+    @object.collections = []
+    def fake_person(rel, name)
+      OpenStruct.new(relationship: OpenStruct.new(name: rel), person: OpenStruct.new(name: name,url: "#"))
+    end
+    def fake_item(role, name, date)
+      OpenStruct.new(role: OpenStruct.new(name: role), item: OpenStruct.new(name: name, url: "#", date: date))
+    end
+    @object.people_relationships = [
+      fake_person(*["دختر", "آنیک استپانیان (آواکیان)"]),
+      fake_person(*["زن", "نینیش امیرخانیان (استپانیان)"]),
+      fake_person(*["دختر", "شاکه استپانیان (آبدالیان)"]),
+      fake_person(*["پسر", "آرمن استپانیان"]),
+      fake_person(*["پسر", "سامسون استپانیان"]),
+      fake_person(*["پسر", "هوفسب استپانیان"]),
+      fake_person(*["پسر", "رستم استپانیان"]),
+      fake_person(*["داماد", "آواک آواکیان"]),
+      fake_person(*["نوه", "هووانس آواکیان"]),
+      fake_person(*["عروس", "آروسیاک"]),
+      fake_person(*["خواهر", "ربکا استپانیان"])
+    ]
+    @object.people_roles = [
+      fake_item(*[nil, "نینیش امیرخانیان (استپانیان) وآرتین استپانیان", "1910"]),
+      fake_item(*[nil, "آرتین استپانیان", "1903"]),
+      fake_item(*[nil, "نینیش امیرخانیان (استپانیان) درجمع دوستان", "حدود 1920"]),
+      fake_item(*[nil, "عکس گروهی", "1944"]),
+      fake_item(*[nil, "آنیک و آرتین استپانیان", nil]),
+      fake_item(*[nil, "نینیش امیرخانیان (استپانیان) و آرتین استپانیان", "حدود 1925"]),
+      fake_item(*[nil, "نینیش امیرخانیان (استپانیان) و آرتین استپانیان", "1954"]),
+      fake_item(*[nil, "نینیش امیرخانیان (استپانیان)، آرتین، ربکا، و آنیک استپانیان", "1940"]),
+      fake_item(*[nil, "خانواده نینیش امیرخانیان (استپانیان) در حیاط منزلشان", "1940"]),
+      fake_item(*[nil, "نینیش امیرخانیان (استپانیان) در کنار خانواده", "حدود 1958 تا 1960"]),
+      fake_item(*[nil, "آرتین استپانیان، آنیک، و شاکه استپانیان", nil]),
+      fake_item(*[nil, "کارت پستال", "1933"])
+    ]
+    @object.sex = "male"
+  end
+
+  def load_example_person!
+    # Person # 1226
+    @object = OpenStruct.new
+    @object.sex = "female"
+    @object.thumbnail = "http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2061.jpg"
+    @object.name = "Ninish Amirkhaniyan (Istipaniyan)"
+    @object.description = "Ninish Amirkhaniyan (Istipaniyan), born in 1884 in Tehran, and her husband Artin Istipaniyan had six children together."
+    @object.long_description = "Ninish Amirkhaniyan (Istipaniyan) was born in a progressive Armenian family in Tehran. She studied Sociology at Sorbonne University in Paris and taught French to Qajar Princesses such as Furugh al-Muluk and Malik al-Muluk when she came back to Iran. Muhammad Ali Mirza, who later became shah of Iran, asked her father for her hand in marriage. But she finally married Artin Istipaniyan, who is the first academically educated dentist in Iran according to the family. Ninish's children all perfected in their majors due to her emphasis on higher education."
+    @object.birthplace = OpenStruct.new(name: "Tehran", url: "#")
+    @object.dob = "1884"
+    @object.dod = "1953"
+    @object.collections = [OpenStruct.new(url: "#", title: "Avakiyan")]
+    def fake_person(rel, name)
+      OpenStruct.new(relationship: OpenStruct.new(name: rel), person: OpenStruct.new(name: name,url: "#"))
+    end
+    def fake_item(role, name, date)
+      OpenStruct.new(role: OpenStruct.new(name: role), item: OpenStruct.new(name: name, url: "#", date: date))
+    end
+    @object.people_relationships = [
+      fake_person(*["daughter", "Anik Istipaniyan (Avakiyan)"]),
+      fake_person(*["husband", "Artin Istipaniyan"]),
+      fake_person(*["daughter", "Shaki Istipaniyan (Abdaliyan)"]),
+      fake_person(*["son", "Armin Istipaniyan"]),
+      fake_person(*["son", "Samsun Istipaniyan"]),
+      fake_person(*["son", "Hufisb Istipaniyan"]),
+      fake_person(*["son", "Rustam Istipaniyan"]),
+      fake_person(*["father", "Sirp Khan Amirkhaniyan"]),
+      fake_person(*["mother", "Isabil Sururiyan (Amirkhaniyan)"]),
+      fake_person(*["sister", "Hirach Amirkhaniyan"]),
+      fake_person(*["sister", "Rose Amirkhaniyan"]),
+      fake_person(*["uncle (paternal)", "Asatur Khan Amirkhaniyan"]),
+      fake_person(*["grandchild", "Huvans Avakiyan"]),
+      fake_person(*["sister-in-law", "Rebecca Istipaniyan"])
+    ]
+    @object.people_roles = [
+      fake_item(*["No Role", "Armenian Women's Charity Society", "1958"]),
+      fake_item(*["No Role", "Shaki Istipaniyan (Abdaliyan)", "1934"]),
+      fake_item(*["No Role", "Ninish Amirkhaniyan (Istipaniyan)'s children", "1925"]),
+      fake_item(*["No Role", "Harach Amirkhaniyan with a group of friends and teachers", "circa. 1905"]),
+      fake_item(*["No Role", "Rose Amirkhaniyan among a group of friends and teachers", "circa. 1903"])
+    ]
+  end
+
   def load_example_item! 
     @object = OpenStruct.new
     @object.image_count = rand(10) + 1

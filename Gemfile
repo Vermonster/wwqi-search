@@ -22,7 +22,7 @@ group :test do
   gem 'launchy'
 end
 
-gem 'pry', require: 'pry'
+gem 'pry', :require => 'pry'
 gem 'pry-nav'
 gem 'pry-doc'
 

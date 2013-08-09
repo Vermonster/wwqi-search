@@ -1,0 +1,112 @@
+<%# encoding: utf-8                                                                    %>
+<% unless $GENERATE # prevent loading the example if we're generating the static pages %>
+  <%   load_example_person! if @lang == :en                                                %>
+  <%   load_example_person_farsi! if @lang == :fa                                          %>
+<% end                                                                                 %>
+
+<%= partial "header" %>
+<div id="content">
+  <div class="container clearfix white-paper-stack top-of-page"><div class="stacks"></div></div>
+  <div class="container clearfix">
+    <!--  
+
+      Person attributes:
+        - thumbnail
+        - birthplace, dob
+        - deathplace, dod
+        - collections
+        - relations to other people, with relationships
+        - relations to items, with roles
+        - name
+        - sex
+        - description
+        - long_description
+    -->
+
+    <div class="item-page clearfix">
+      <div class="ten columns alpha">
+        <div class="items-below-fold">
+          <img src=<%= @object.thumbnail %>>
+
+          <ul>
+            <li> Name: <%= @object.name %> </li>
+
+            <% if @object.dob %>
+              <li> DOB: <%= @object.dob %> </li>
+            <% end %>
+
+            <% if @object.dod %>
+              <li> DOD: <%= @object.dod %> </li>
+            <% end %>
+
+            <% if @object.description %>
+              <li>
+              Short Description:
+              <p> <%= @object.description %> </p>
+              </li>
+            <% end %>
+
+            <% if @object.long_description %>
+              <li>
+              Long Description:
+              <p> <%= @object.long_description %> </p>
+              </li>
+            <% end %>
+
+            <% if @object.birthplace %>
+              <li>
+              Birthplace: 
+              <a href=<%= @object.birthplace.url %>><%=@object.birthplace.name%></a>
+              </li>
+            <% end %>
+
+            <% if @object.place_of_death %>
+              <li>
+              Place of death: 
+              <a href=<%= @object.place_of_death.url %>><%=@object.place_of_death.name%></a>
+              </li>
+            <% end %>
+
+            <% if @object.collections.present? %>
+              <li>
+              Collections:
+              <% @object.collections.each do |collection| %>
+                <a href=<%= collection.url %>><%= collection.title %></a>
+              <% end %>
+              </li>
+            <% end %>
+
+            <% if @object.people_relationships.present? %>
+              <li>
+              Related People:
+              <ul>
+                <% @object.people_relationships.each do |pr| %>
+                  <li>
+                    <a href=<%= pr.person.url %>><%= pr.person.name %></a> (<%= pr.relationship.name %>)
+                  </li>
+                <% end %>
+              </ul>
+              </li>
+            <% end %>
+
+            <% if @object.people_roles.present? %>
+              <li>
+              Related Items:
+              <ul>
+                <% @object.people_roles.each do |pr| %>
+                  <li>
+                    <a href=<%= pr.item.url %>><%= pr.item.name %></a>
+                    <% if pr.item.date %> (<%= pr.item.date %>) <% end %>
+                  </li>
+                <% end %>
+              </ul>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= partial "footer" %>
