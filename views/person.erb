@@ -8,7 +8,7 @@
 <div id="content">
   <div class="container clearfix white-paper-stack top-of-page"><div class="stacks"></div></div>
   <div class="container clearfix">
-    <!--  
+    <!--
 
       Person attributes:
         - thumbnail
@@ -24,89 +24,120 @@
     -->
 
     <div class="item-page clearfix">
-      <div class="ten columns alpha">
-        <div class="items-below-fold">
-          <img src=<%= @object.thumbnail %>>
-
-          <ul>
-            <li> Name: <%= @object.name %> </li>
-
-            <% if @object.dob %>
-              <li> DOB: <%= @object.dob %> </li>
-            <% end %>
-
-            <% if @object.dod %>
-              <li> DOD: <%= @object.dod %> </li>
-            <% end %>
-
-            <% if @object.description %>
-              <li>
-              Short Description:
-              <p> <%= @object.description %> </p>
-              </li>
-            <% end %>
-
-            <% if @object.long_description %>
-              <li>
-              Long Description:
-              <p> <%= @object.long_description %> </p>
-              </li>
-            <% end %>
-
-            <% if @object.birthplace %>
-              <li>
-              Birthplace: 
-              <a href=<%= @object.birthplace.url %>><%=@object.birthplace.name%></a>
-              </li>
-            <% end %>
-
-            <% if @object.place_of_death %>
-              <li>
-              Place of death: 
-              <a href=<%= @object.place_of_death.url %>><%=@object.place_of_death.name%></a>
-              </li>
-            <% end %>
-
-            <% if @object.collections.present? %>
-              <li>
-              Collections:
-              <% @object.collections.each do |collection| %>
-                <a href=<%= collection.url %>><%= collection.title %></a>
+      <div class="item-essentials person container clearfix">
+        <div class="breadcrumbs">
+          <a href="javascript:;">People </a>
+          <span class="current"><%= @object.name %></span>
+        </div>
+        <div class="three columns">
+          <img class="person-thumbnail" src=<%= @object.thumbnail %>>
+        </div>
+        <div class="eight columns">
+          <h2><%= @object.name %></h2>
+          <div class="person-meta clearfix">
+            <div class="birth">
+              <% if @object.dob %>
+                <span class="dob"> <%= @object.dob %></span>
               <% end %>
-              </li>
-            <% end %>
-
-            <% if @object.people_relationships.present? %>
-              <li>
-              Related People:
-              <ul>
-                <% @object.people_relationships.each do |pr| %>
-                  <li>
-                    <a href=<%= pr.person.url %>><%= pr.person.name %></a> (<%= pr.relationship.name %>)
-                  </li>
-                <% end %>
-              </ul>
-              </li>
-            <% end %>
+              <% if @object.birthplace %>
+                <a href=<%= @object.birthplace.url %>><%=@object.birthplace.name%></a>
+              <% end %>
+            </div>
+            <div class="death">
+              <% if @object.dod %>
+                <span class="dod">— <%= @object.dod %></span>
+              <% end %>
+              <% if @object.place_of_death %>
+                <a href=<%= @object.place_of_death.url %>><%=@object.place_of_death.name%></a>
+              <% end %>
+            </div>
+          </div>
+          <% if @object.description %>
+            <div class="description">
+              <p class="short"><%= @object.description %> <% if @object.long_description %>
+                <a class="full-bio" href="javascript:;">read full bio </a><% end %></p>
+              <% if @object.long_description %>
+                <p class="long"><%= @object.long_description %> </p>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <div class="five columns omega last-column">
+          <a class="biblio" href="javascript:;"> Bibliography </a>
+          <h6> Do you know this person? </h6>
+          <a class="help-us" href="javascript:;">Help us complete this profile.</a>
+        </div>
+      </div>
+      <div class="items-below-fold person clearfix">
+        <div class="ten columns alpha">
+          <div class="item-details clearfix">
+            <h1>Related items</h1>
+            <div class="timeline">
+              <img src="/images/timeline.png">
+            </div>
 
             <% if @object.people_roles.present? %>
-              <li>
-              Related Items:
-              <ul>
+              <ul class="related-items clearfix">
                 <% @object.people_roles.each do |pr| %>
-                  <li>
-                    <a href=<%= pr.item.url %>><%= pr.item.name %></a>
-                    <% if pr.item.date %> (<%= pr.item.date %>) <% end %>
+                  <li class="clearfix">
+                    <img class="related-item-thumbnail" src="/images/empty.jpg">
+                    <div class="related-item-data">
+                      <p>
+                       <a href=<%= pr.item.url %>><%= pr.item.name %></a>
+                      <% if pr.item.date %> (<%= pr.item.date %>) <% end %>
+                      </p>
+                    </div>
                   </li>
                 <% end %>
               </ul>
-              </li>
             <% end %>
-          </ul>
+          </div>
+        </div>
+        <div class="six columns omega last-column">
+           <div class="border"></div>
+           <div class="item_related">
+            <ul>
+              <% if @object.people_relationships.present? %>
+                <li>
+                  <span class="title people">Related people</span>
+                  <% @object.people_relationships.each do |pr| %>
+                    <div class="related-person clearfix">
+                      <img src="/images/qajar_thumbnail.jpg" class="person-thumbnail">
+                      <a class="related-person-data-items" href="javascript:;">11</a>
+                      <div class="related-person-data clearfix">
+                        <a class="related-person-name" href=<%= pr.person.url %>><%= pr.person.name %> <span>(<%= pr.relationship.name %>)</span></a>
+                      </div>
+                    </div>
+
+                  <% end %>
+                </li>
+              <% end %>
+              <% if @object.collections.present? %>
+                <li>
+                <span class="title collections">Related collections</span>
+                <% @object.collections.each do |collection| %>
+                <div class="related-collection clearfix">
+                  <img src="/images/empty.jpg" class="collection-thumbnail">
+                  <div class="related-collection-data">
+                    <a href=<%= collection.url %>><%= collection.title %></a>
+                  </div>
+                </div>
+
+                <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<script type="text/javascript">
+  $(".full-bio").click(function(){
+    $(this).fadeOut();
+    $(".description .long").slideDown();
+  })
+</script>
 <%= partial "footer" %>

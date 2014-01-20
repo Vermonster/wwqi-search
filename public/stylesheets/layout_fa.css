@@ -1,4 +1,4 @@
-/* @override 
+/* @override
 	http://wwqi-static-site.s3.amazonaws.com/stylesheets/layout_fa.css
 	http://search.wwqidev.com/stylesheets/layout_fa.css
 	http://wwqi-static-site.s3-website-us-east-1.amazonaws.com/stylesheets/layout_fa.css
@@ -15,7 +15,7 @@
        url('fonts/BDavat.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
        url('fonts/BDavat.ttf') format('truetype'),  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
        url('fonts/BDavat.svg') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
-		
+
 }
 
 /* #Site Styles
@@ -90,7 +90,7 @@ body{
 	padding-left:0;
 	background:url(../images/icon-image.png) 100% 0 no-repeat;
 	font-family:'Nazanin LT W20 Bold';
-	
+
 }
 
 .browse-collection h1{
@@ -190,7 +190,7 @@ ul.collections li a p{
 /* #Static Pages
 ================================================== */
 .static-content li {
-	
+
 	padding-right: 20px;
 	background: url(../images/list_bullet_fa.gif) 100% 5px no-repeat;
 	line-height:20px;
@@ -215,7 +215,7 @@ ul.collections li a p{
 
 
 
-/* Home page 
+/* Home page
 ================================================== */
 
 
@@ -239,7 +239,7 @@ ul.collections li a p{
 #indexList ul.alphabet li {
 	border-left:1px solid #ccc;
 	border-right:none;
-	float:right;	
+	float:right;
 }
 
 #fullIndex #indexList ul.alphabet li {
@@ -345,7 +345,7 @@ ul.collections li a p{
 .browse  h1{
 	padding-right:40px;
 	padding-left:0;
-	background:url(../images/icon-browse.png) 100% 0 no-repeat; 
+	background:url(../images/icon-browse.png) 100% 0 no-repeat;
 	font-family:'Nazanin LT W20 Light';font-size: 28px;
 }
 .modal-body .column{float:right!important; margin:0 1%!important}
@@ -370,11 +370,11 @@ ul.collections li a p{
 -webkit-border-radius:0 5px 5px 0;
 border-radius:0 5px 5px 0;
 padding: 0 35px 0 10px;}
-#browse-bar .list li.current a{float:right; 
+#browse-bar .list li.current a{float:right;
 	-moz-border-radius:0 5px 5px 0;
 	-webkit-border-radius:0 5px 5px 0;
 	border-radius:0 5px 5px 0;left:0; right:0px; left:auto}
-.special-searches h3 a{ffont-family:'Nazanin LT W20 Light'; font-size:20px;}
+.special-searches h3 a{font-family:'Nazanin LT W20 Light'; font-size:20px;}
 .special-searches h3.has-translation{
 	background:url(../images/icon-translation-black.png) 100% 0 no-repeat;
 	padding:0px 40px 0 0px;
@@ -393,16 +393,16 @@ padding: 0 35px 0 10px;}
 #pagin li.next{float:left}
 #pagin li.prev{float:right}
 #pagin li.prev a span{
-	float:right; 
-	right:-11px!important; 
+	float:right;
+	right:-11px!important;
 	right:auto;
 	-moz-border-radius:0 15px 15px 0;
 	-webkit-border-radius:0 15px 15px 0;
 	border-radius:0 15px 15px 0;
 	}
 #pagin li.next a span{
-	float:left; 
-	left:-11px!important; 
+	float:left;
+	left:-11px!important;
 	right:auto;
 	-moz-border-radius:15px 0 0 15px;
 	-webkit-border-radius:15px 0 0 15px;
@@ -415,6 +415,101 @@ padding: 0 35px 0 10px;}
 	float:left;
 }
 
+/* #People page styles
+================================================== */
+.breadcrumbs{
+	font-size:14px;
+}
+.breadcrumbs .current{
+  padding-right:15px;
+  background:url(../images/arrow-breadcrumb-fa.png) 100% 5px no-repeat;
+  background-size:12px 12px;
+  display:inline-block;
+  margin-right:5px;
+}
+
+.person .person-thumbnail{
+  margin-right:20px;
+}
+
+.person .person-meta{
+	padding-right:25px;
+}
+.person .birth, .person .death{
+  display:inline-block;
+  float:right;
+  font-family:'Nazanin LT W20 Bold';
+}
+
+.person .dob, .person .dod{
+	line-height:16px;
+}
+.person .birth a,
+.person .death a{
+  padding-right:15px;
+  background:url(../images/icon-places-white.png) 100% 6px no-repeat;
+  background-size:10px auto;
+  font-size:12px;
+}
+
+
+.person .biblio{
+  padding:10px 50px 10px 10px;
+  background: #C82D00 url(../images/icon-biblio.png) 98% 50% no-repeat;
+  background-size:40px 40px;
+  font-size:17px;
+}
+
+.person h6{
+  font-size:13px;
+  margin:5px 4px 0 0px;
+}
+
+.person .help-us{
+  font-size:12px;
+  margin:0 4px 0 0px;
+}
+
+.person .related-items .related-item-thumbnail{
+	float:right;
+}
+
+.person .related-items .related-item-data{
+  margin-right:75px;
+  margin-left:0;
+}
+
+.related-person .related-person-data{
+  margin-right:10px;
+  margin-left:0;
+  float:right;
+}
+
+.related-person .person-thumbnail{
+  float:right;
+  margin-right:0;
+}
+
+.related-person .related-person-data-items{
+  float:left;
+  background:#c82d00 url(/images/icon-document.png) 5px 5px no-repeat;
+  height:30px;
+  line-height:30px;
+  color:#fff;
+  font-weight:bold;
+  padding-left:20px;
+  padding-right:10px;
+  border-radius:0 4px 4px 0;
+  -webkit-border-radius:0 4px 4px 0;
+  -moz-border-radius:0 4px 4px 0;
+}
+
+.items-below-fold.person .last-column .border{
+  left:370px;
+  right:auto;
+}
+
+
 /* #Page Styles
 ================================================== */
 
@@ -422,7 +517,12 @@ padding: 0 35px 0 10px;}
 ================================================== */
 
 	/* Smaller than standard 960 (devices and browsers) */
-	@media only screen and (max-width: 959px) {}
+	@media only screen and (max-width: 959px) {
+	.items-below-fold.person .last-column .border{
+		  left:290px;
+		  right:auto;
+		}
+}
 
 	/* Tablet Portrait size to standard 960 (devices and browsers) */
 	@media only screen and (min-width: 768px) and (max-width: 959px) {
@@ -438,7 +538,7 @@ padding: 0 35px 0 10px;}
 
 	/* All Mobile Sizes (devices and browser) */
 	@media only screen and (max-width: 767px) {
-	
+
 			.header{
 				height:auto;
 			}
@@ -524,6 +624,28 @@ padding: 0 35px 0 10px;}
 				padding-right:10px;
 			}
 
+			.person .person-meta, .person div.description{
+				padding-right:10px;
+			}
+
+			.person >.three.columns{
+	      position:absolute;
+	    }
+	    .person .person-thumbnail{
+	      width:60px;
+	      height:60px;
+	      margin-right:10px;
+	    }
+	    .person >.eight.columns{
+	      padding-right:80px;
+	      box-sizing:border-box;
+	    }
+	    .person .full-bio{
+	      height:30px;
+	      margin-top:10px;
+	      line-height:30px;
+	      padding:0 40px;
+	    }
 
 			.item_related{padding:15px}
 			ul.collections li .collection-thumb{
@@ -532,7 +654,7 @@ padding: 0 35px 0 10px;}
 				margin-right:30px;
 				position:relative;
 			}
-			
+
 			ul.collections li .collection-meta{
 				margin-right:120px;
 				margin-left:30px;
@@ -570,7 +692,7 @@ padding: 0 35px 0 10px;}
 			#home-main #search-wrapper{left:0}
 			#home-main #search-wrapper h4{margin-right:20px}
 			#content .item-page, #content .shaded-panel{margin-top:0px}
-			#pageFooter li { font-size:11px; margin-left:0px} 
+			#pageFooter li { font-size:11px; margin-left:0px}
 			#home-main .side-stuff #about p {max-height:none; margin-bottom:15px;font-size:18px;margin-left: 10px;}
 			#home-main .side-stuff #about {padding-right:0; margin-left:10px}
 			.browse-search {margin: 0px 0px 0px}
@@ -607,29 +729,46 @@ padding: 0 35px 0 10px;}
 				width:33%;
 				float:left;
 			}
-		
+
 			#browse-bar h3.active{background:  url("../images/arrow_expanded.png") 97% 12px no-repeat;}
 			#content .shaded-panel.has-sidebar.main-panel-is-dark{background: none}
 			#pageFooter p{text-align: center; margin:0;}
 			#home-main .welcome{background:url(../images/30black.png);}
+
+			.related-person .related-person-data-items{
+	      border-radius:4px;
+	      -webkit-border-radius:4px;
+	      -moz-border-radius:4px;
+	    }
+	    .related-person .related-person-name{
+	    	font-size:16px;
+	    }
+	    .related-person .person-thumbnail{
+	    	-moz-border-radius:30px;
+	    	-webkit-border-radius:30px;
+	    	border-radius:50px;
+	    }
+	    .related-person .related-person-data{
+	    	height:60px;
+	    }
 	}
 
 	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
 	@media only screen and (min-width: 480px) and (max-width: 767px) {
-	
+
 	}
 
 	/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 	@media only screen and (max-width: 479px) {
-			
-		
-		
+
+
+
 			ul.collections li .collection-meta{
 				margin-right:30px;
 				margin-left:30px;
 				margin-top:10px;
 			}
-			
+
 			ul.collections li .collection-thumb{
 				float:none;
 				width:auto;
@@ -639,7 +778,7 @@ padding: 0 35px 0 10px;}
 			ul.collections li .collection-thumb img{
 				width:100%;
 			}
-			
+
 			.collection-highlights div{
 				float:right;
 			}
