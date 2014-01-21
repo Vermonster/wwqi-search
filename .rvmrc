@@ -1,2 +1,0 @@
-RVM_STRING="rvm use ruby-1.9.3-p392@wwqi-search --create --verbose"
-[ -e './.rvmrc_local' ] && source './.rvmrc_local' || $RVM_STRING
