@@ -265,6 +265,7 @@
 </div>
 </div>
 <%= partial "footer" %>
+<% if user_platform_url? %>
 <script type='text/javascript'>
   $.ajax({ url: 
     "<%= "#{ENV['USER_PLATFORM_URL']}/activity/activity_data?accession_no=#{@object.accession_number}"%>",
@@ -316,3 +317,4 @@
          + '</a>');
     });
 </script>
+<% end %>
