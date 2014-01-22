@@ -157,7 +157,7 @@ get '/:lang/people.html'   do |lang| item_index(lang, :people,   params["letter"
 get '/:lang/places.html'   do |lang| item_index(lang, :places,   params["letter"]) end
 
 if ENV['FAKE_PAGES']
-  %w(item collection collection_manifest person).each do |page|
+  %w(item collection collection_manifest person person_manifest).each do |page|
     get "/:lang/#{page}.html" do |lang|
       @lang = lang.to_sym
       erb page.to_sym

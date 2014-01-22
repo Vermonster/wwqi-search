@@ -1,0 +1,54 @@
+<%# encoding: utf-8 %>
+<% unless $GENERATE # prevent loading the example if we're generating the static pages %>
+  <% if @lang == :en
+load_example_person_index!
+ else
+   load_example_person_index_farsi!
+ end
+ %>
+<% end  %>
+
+<%= partial "header" %>
+<div id="content">
+  <div class="container clearfix white-paper-stack top-of-page"><div class="stacks"></div>
+
+    <div class="clearfix" id="indexList">
+
+      <div class="extra-padding">
+
+        <div class="otherIndexes">
+          <a href="<%= "/#{@lang}/genres.html" %>">  <%= t('genres') %>  </a>
+          <a href="<%= "/#{@lang}/people.html" %>">  <%= t('people') %>  </a>
+          <a href="<%= "/#{@lang}/places.html" %>">  <%= t('places') %>  </a>
+          <a href="<%= "/#{@lang}/subjects.html" %>"><%= t('subjects') %></a>
+        </div>
+        <h2><%= t("person_index") %></h2>
+      </div>
+      <%
+          column_1 = persian_sort(@content)
+          column_2 = column_1.slice!((@content.size/2.0).round..@content.size)
+        %>
+      <div class="sixteen columns clearfix offset-by-one">
+        <ul class="subjects_list seven columns alpha">
+          <% column_1.each do |name, count| %>
+            <li class="person_item">
+              <a href="#">
+                <%= name.strip %> <span>(<%= count %>)</span>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+        <ul class="subjects_list seven columns alpha">
+          <% column_2.each do |name, count| %>
+            <li class="person_item">
+              <a href="#">
+                <%= name.strip %> <span>(<%= count %>)</span>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<%= partial "footer" %>
