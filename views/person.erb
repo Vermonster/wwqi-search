@@ -37,7 +37,7 @@
           <div class="person-meta clearfix">
             <div class="birth">
               <% if @object.dob %>
-                <span class="dob"> <%= @object.dob %></span>
+                <span class="dob"> <%= @object.local_date(:dob_exact) %></span>
               <% end %>
               <% if @object.birthplace %>
                 <a href=<%= @object.birthplace.url %>><%=@object.birthplace.name%></a>
@@ -45,7 +45,7 @@
             </div>
             <div class="death">
               <% if @object.dod %>
-                <span class="dod">— <%= @object.dod %></span>
+                <span class="dod">— <%= @object.local_date(:dod_exact) %></span>
               <% end %>
               <% if @object.place_of_death %>
                 <a href=<%= @object.place_of_death.url %>><%=@object.place_of_death.name%></a>
@@ -84,7 +84,7 @@
                     <div class="related-item-data">
                       <p>
                        <a href=<%= pr.item.url %>><%= pr.item.title %></a>
-                      <% if pr.item.date %> (<%= pr.item.date %>) <% end %>
+                      <% if pr.item.local_date %> (<%= pr.item.local_date %>) <% end %>
                       </p>
                     </div>
                   </li>

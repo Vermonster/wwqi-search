@@ -18,14 +18,21 @@ module ViewHelpers
 DESC
     @object.birthplace = OpenStruct.new(name: "Turkey", url: "#")
     @object.place_of_death = OpenStruct.new(name: "Tehran", url: "#")
-    @object.dob = "1870"
-    @object.dod = "1952"
+    @object.instance_eval do
+      def local_date(type)
+        if type == :dob_exact
+          "1870"
+        elsif type == :dod_exact
+          "1952"
+        end
+      end
+    end
     @object.collections = []
     def fake_person(rel, name)
       OpenStruct.new(relationship: OpenStruct.new(title: rel), related_person: OpenStruct.new(name: name,url: "#"))
     end
     def fake_item(role, name, date)
-      OpenStruct.new(role: OpenStruct.new(name: role), item: OpenStruct.new(url: "#", date: date, title: name))
+      OpenStruct.new(role: OpenStruct.new(name: role), item: OpenStruct.new(url: "#", local_date: date, title: name))
     end
     @object.people_relationships = [
       fake_person(*["دختر", "آنیک استپانیان (آواکیان)"]),
@@ -66,14 +73,21 @@ DESC
     @object.description = "Ninish Amirkhaniyan (Istipaniyan), born in 1884 in Tehran, and her husband Artin Istipaniyan had six children together."
     @object.long_description = "Ninish Amirkhaniyan (Istipaniyan) was born in a progressive Armenian family in Tehran. She studied Sociology at Sorbonne University in Paris and taught French to Qajar Princesses such as Furugh al-Muluk and Malik al-Muluk when she came back to Iran. Muhammad Ali Mirza, who later became shah of Iran, asked her father for her hand in marriage. But she finally married Artin Istipaniyan, who is the first academically educated dentist in Iran according to the family. Ninish's children all perfected in their majors due to her emphasis on higher education."
     @object.birthplace = OpenStruct.new(name: "Tehran", url: "#")
-    @object.dob = "1884"
-    @object.dod = "1953"
+    @object.instance_eval do
+      def local_date(type)
+        if type == :dob_exact
+          "1884"
+        elsif type == :dod_exact
+          "1953"
+        end
+      end
+    end
     @object.collections = [OpenStruct.new(url: "#", title: "Avakiyan")]
     def fake_person(rel, name)
       OpenStruct.new(relationship: OpenStruct.new(title: rel), related_person: OpenStruct.new(name: name,url: "#"))
     end
     def fake_item(role, name, date)
-      OpenStruct.new(role: OpenStruct.new(name: role), item: OpenStruct.new(url: "#", date: date, title: name))
+      OpenStruct.new(role: OpenStruct.new(name: role), item: OpenStruct.new(url: "#", local_date: date, title: name))
     end
     @object.people_relationships = [
       fake_person(*["daughter", "Anik Istipaniyan (Avakiyan)"]),
