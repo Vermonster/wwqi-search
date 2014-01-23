@@ -186,12 +186,15 @@ NOTES
     @object.genres = [
       fake_facet
     ]
-    @object
+
+    def fake_person
+      OpenStruct.new(name: 'person name', url: '#')
+    end
     @object.people = [
-      fake_facet,
-      fake_facet,
-      fake_facet,
-      fake_facet,
+      fake_person,
+      fake_person,
+      fake_person,
+      fake_person,
     ]
 
     @object.subjects = [
