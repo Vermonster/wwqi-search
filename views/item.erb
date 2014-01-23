@@ -201,7 +201,7 @@
                 <li>
                 <span class="title people"><%= t("people") %></span>
                 <% @object.people.each do |person| %>
-                  <a href="<%= loopback(lang: @lang).update_filter("people_#{@lang}", person.name.to_s).to_url %>" class="tag">
+                  <a href="<%= person.url %>" class="tag">
                     <%= person.name %>
                   </a>
                 <% end %>
