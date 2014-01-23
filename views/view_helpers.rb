@@ -22,10 +22,10 @@ DESC
     @object.dod = "1952"
     @object.collections = []
     def fake_person(rel, name)
-      OpenStruct.new(relationship: OpenStruct.new(name: rel), person: OpenStruct.new(name: name,url: "#"))
+      OpenStruct.new(relationship: OpenStruct.new(title: rel), related_person: OpenStruct.new(name: name,url: "#"))
     end
     def fake_item(role, name, date)
-      OpenStruct.new(role: OpenStruct.new(name: role), item: OpenStruct.new(name: name, url: "#", date: date))
+      OpenStruct.new(role: OpenStruct.new(name: role), item: OpenStruct.new(url: "#", date: date, title: name))
     end
     @object.people_relationships = [
       fake_person(*["دختر", "آنیک استپانیان (آواکیان)"]),
@@ -70,10 +70,10 @@ DESC
     @object.dod = "1953"
     @object.collections = [OpenStruct.new(url: "#", title: "Avakiyan")]
     def fake_person(rel, name)
-      OpenStruct.new(relationship: OpenStruct.new(name: rel), person: OpenStruct.new(name: name,url: "#"))
+      OpenStruct.new(relationship: OpenStruct.new(title: rel), related_person: OpenStruct.new(name: name,url: "#"))
     end
     def fake_item(role, name, date)
-      OpenStruct.new(role: OpenStruct.new(name: role), item: OpenStruct.new(name: name, url: "#", date: date))
+      OpenStruct.new(role: OpenStruct.new(name: role), item: OpenStruct.new(url: "#", date: date, title: name))
     end
     @object.people_relationships = [
       fake_person(*["daughter", "Anik Istipaniyan (Avakiyan)"]),

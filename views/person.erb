@@ -83,7 +83,7 @@
                     <img class="related-item-thumbnail" src="/images/empty.jpg">
                     <div class="related-item-data">
                       <p>
-                       <a href=<%= pr.item.url %>><%= pr.item.name %></a>
+                       <a href=<%= pr.item.url %>><%= pr.item.title %></a>
                       <% if pr.item.date %> (<%= pr.item.date %>) <% end %>
                       </p>
                     </div>
@@ -105,7 +105,7 @@
                       <img src="/images/qajar_thumbnail.jpg" class="person-thumbnail">
                       <a class="related-person-data-items" href="javascript:;">11</a>
                       <div class="related-person-data clearfix">
-                        <a class="related-person-name" href=<%= pr.person.url %>><%= pr.person.name %> <span>(<%= pr.relationship.name %>)</span></a>
+                        <a class="related-person-name" href=<%= pr.related_person.url %>><%= pr.related_person.name %> <span>(<%= pr.relationship.title %>)</span></a>
                       </div>
                     </div>
 
