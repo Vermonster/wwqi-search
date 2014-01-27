@@ -22,17 +22,24 @@
           margin   : 0
         });
 
+    $('#personscarousel').elastislide({
+          imageW   : 140,
+          minItems : 1,
+          border   : 0,
+          margin   : 20
+        });
+
 		$('audio,video').mediaelementplayer({audioWidth: 260});
-		
+
 		$('.facet-modal').on('shown', function () {
 		  // do something…
 			if (!$('.modal-body',this).attr("data-columnized")){
 				$('.modal-body',this).columnize({columns:4});
 				$('.modal-body',this).attr("data-columnized","true");
 			}
-			
+
 		})
-   
+
   });
 
 </script>

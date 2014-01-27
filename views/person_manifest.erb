@@ -23,30 +23,80 @@ load_example_person_index!
           <a href="<%= "/#{@lang}/subjects.html" %>"><%= t('subjects') %></a>
         </div>
         <h2><%= t("person_index") %></h2>
+        <div id="personscarousel" class="es-carousel-wrapper persons">
+          <h2>Latest profiles</h2>
+          <div class="es-carousel">
+            <span class="swipe"></span>
+            <ul>
+              <li>
+                <a href="/en/collection/1016-1139.html"><img src="http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2061.jpg" alt="Bahram Sheikholeslami" class="person-thumbnail"></a>
+                <a href="#" class="name">Giti Ghajar Davalu </a>
+              </li>
+              <li>
+                <a href="/en/collection/1016-1139.html"><img src="http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2061.jpg" alt="Bahram Sheikholeslami" class="person-thumbnail"></a>
+                <a href="#" class="name">Giti Ghajar Davalu </a>
+              </li>
+              <li>
+                <a href="/en/collection/1016-1139.html"><img src="http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2061.jpg" alt="Bahram Sheikholeslami" class="person-thumbnail"></a>
+                <a href="#" class="name">Giti Ghajar Davalu </a>
+              </li>
+              <li>
+                <a href="/en/collection/1016-1139.html"><img src="http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2061.jpg" alt="Bahram Sheikholeslami" class="person-thumbnail"></a>
+                <a href="#" class="name">Giti Ghajar Davalu </a>
+              </li>
+              <li>
+                <a href="/en/collection/1016-1139.html"><img src="http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2061.jpg" alt="Bahram Sheikholeslami" class="person-thumbnail"></a>
+                <a href="#" class="name">Giti Ghajar Davalu s</a>
+              </li>
+              <li>
+                <a href="/en/collection/1016-1139.html"><img src="http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2061.jpg" alt="Bahram Sheikholeslami" class="person-thumbnail"></a>
+                <a href="#" class="name" class="name">Giti Ghajar Davalu </a>
+              </li>
+              <li>
+                <a href="/en/collection/1016-1139.html"><img src="http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2061.jpg" alt="Bahram Sheikholeslami" class="person-thumbnail"></a>
+                <a href="#" class="name">Giti Ghajar Davalu </a>
+              </li>
+              <li>
+                <a href="/en/collection/1016-1139.html"><img src="http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2061.jpg" alt="Bahram Sheikholeslami" class="person-thumbnail"></a>
+                <a href="#" class="name">Giti Ghajar Davalu </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <%
-          column_1 = persian_sort(@content)
-          column_2 = column_1.slice!((@content.size/2.0).round..@content.size)
-        %>
-      <div class="sixteen columns clearfix offset-by-one">
-        <ul class="subjects_list seven columns alpha">
-          <% column_1.each do |name, count| %>
-            <li class="person_item">
-              <a href="#">
-                <%= name.strip %> <span>(<%= count %>)</span>
-              </a>
-            </li>
-          <% end %>
-        </ul>
-        <ul class="subjects_list seven columns alpha">
-          <% column_2.each do |name, count| %>
-            <li class="person_item">
-              <a href="#">
-                <%= name.strip %> <span>(<%= count %>)</span>
-              </a>
-            </li>
-          <% end %>
-        </ul>
+      <div class="persons_list clearfix">
+        <%
+            column_1 = persian_sort(@content)
+            column_2 = column_1.slice!((@content.size/2.0).round..@content.size)
+          %>
+        <div class="fourteen columns clearfix offset-by-one">
+          <div class="row">
+            <ul class="subjects_list seven columns alpha">
+              <% column_1.each do |name, count| %>
+                <li class="person_item clearfix">
+                  <img src="/images/noimage.jpg" class="person-image">
+                  <a class="person-link" href="#link_to_person">
+                    <%= name.strip %>
+                  </a>
+                  <a class="item-link" href="#link_to_item"><%= count %>
+                  </a>
+                </li>
+              <% end %>
+            </ul>
+            <ul class="subjects_list seven columns omega">
+              <% column_2.each do |name, count| %>
+                <li class="person_item clearfix">
+                  <img src="/images/noimage.jpg" class="person-image">
+                  <a class="person-link" href="#link_to_person">
+                    <%= name.strip %>
+                  </a>
+                  <a class="item-link" href="#link_to_item"><%= count %>
+                  </a>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>

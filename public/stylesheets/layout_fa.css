@@ -510,6 +510,30 @@ padding: 0 35px 0 10px;}
 }
 
 
+.persons_list .person_item a.person-link{
+
+  margin-left:40px;
+  margin-right:30px;
+
+}
+.persons_list .person_item  .person-image{
+  left:auto;
+  right:0px;
+}
+.persons_list .person_item a.item-link{
+
+  left:0px;
+  right:auto;
+  background:url(../images/icon-item-red.png) 0 3px no-repeat;
+  padding-left:15px;
+  background-size:12px auto;
+  font-family:'BDavat';
+  line-height:27px;
+
+}
+
+
+
 /* #Page Styles
 ================================================== */
 
