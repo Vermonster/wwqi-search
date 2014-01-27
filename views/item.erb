@@ -267,7 +267,6 @@
   }).done(function(data) {
     <% %w(Discussion Question Research Transcription Translation Biography).each do |type| %>
       count = data['<%= type %>'];
-      console.log(count);
       if (count && count > 0) {
         $('#user-platform-links').append(
           '<a href='
