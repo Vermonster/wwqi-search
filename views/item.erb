@@ -245,15 +245,15 @@
                 <span class="title activities">
                   <%= t("activities") %>
                 </span>
+                <a href="<%= construct_user_platform_url('Question', 'new', @object.accession_number) %>" class="tag">Ask a question</a>
+                <a href="<%= construct_user_platform_url('Discussion', 'new', @object.accession_number) %>" class="tag">Start a discussion</a>
+                <a href="<%= construct_user_platform_url('Research', 'new', @object.accession_number) %>" class="tag">Start a research</a>
                 <div id='biography'></div>
                 <div id='discussion'></div>
                 <div id='question'></div>
                 <div id='research'></div>
                 <div id='transcription'></div>
                 <div id='translation'></div>
-                <a href="<%= construct_user_platform_url('question', 'new', @object.accession_number) %>" class="tag">Ask a question</a>
-                <a href="<%= construct_user_platform_url('discussion', 'new', @object.accession_number) %>" class="tag">Start a discussion</a>
-                <a href="<%= construct_user_platform_url('research', 'new', @object.accession_number) %>" class="tag">Start a research</a>
               </li>
             <% end %>
             </ul>
@@ -267,54 +267,22 @@
 <%= partial "footer" %>
 <% if user_platform_url? %>
 <script type='text/javascript'>
-  $.ajax({ url: 
-    "<%= "#{ENV['USER_PLATFORM_URL']}/activity/activity_data?accession_no=#{@object.accession_number}"%>",
-    type: 'get', dataType: 'jsonp' 
-  })
-    .done(function(data) {
-      $('#biography')
-        .append(
+  $.ajax({ url:
+    '<%= "#{ENV['USER_PLATFORM_URL']}/activity/activity_data.json?accession_no=#{@object.accession_number}"%>',
+    type: 'get', dataType: 'jsonp'
+  }).done(function(data) {
+    <% %w(Discussion Question Research Transcription Translation Biography).each do |type| %>
+      count = data['<%= type %>'];
+      console.log(count);
+      if (count && count > 0) {
+        $('#<%= type.downcase %>').append(
           '<a href='
-          + "<%= construct_user_platform_url('Biography', 'list', "#{@object.accession_number}")%>"
-          + ' class="description">Biograpies: '
-          + data['Biography'] 
-          + '</a>');
-      <%# $('#comment').append('<div class="description">Comments: ' + data['Comment'] + '</div>'); %>
-      $('#discussion')
-        .append(
-          '<a href=' 
-          + "<%= construct_user_platform_url('Discussion', 'list', "#{@object.accession_number}")%>"
-          + ' class="description">Discussions: '
-          + data['Discussion']
-          + '</a>');
-      $('#question')
-        .append(
-         '<a href='
-         + "<%= construct_user_platform_url('Question', 'list', "#{@object.accession_number}")%>"
-         + ' class="description">Questions: '
-         + data['Question']
-         + '</a>');
-      $('#research')
-        .append(
-         '<a href='
-         + "<%= construct_user_platform_url('Research', 'list', "#{@object.accession_number}")%>"
-         + ' class="description">Researches: '
-         + data['Research']
-         + '</a>');
-      $('#transcription')
-        .append(
-         '<a href='
-         + "<%= construct_user_platform_url('Transcription', 'list', "#{@object.accession_number}")%>"
-         + ' class="description">Transcriptions: '
-         + data['Transcription']
-         + '</a>');
-      $('#translation')
-        .append(
-         '<a href='
-         + "<%= construct_user_platform_url('Translation', 'list', "#{@object.accession_number}")%>"
-         + ' class="description">Translations: '
-         + data['Translation']
-         + '</a>');
-    });
+          + "<%= construct_user_platform_url(type, 'list', "#{@object.accession_number}")%>"
+          + ' class="description tag"><%= type %> ('
+          + count
+          + ')</a>');
+      }
+    <% end %>
+  });
 </script>
 <% end %>
