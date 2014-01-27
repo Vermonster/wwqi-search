@@ -242,10 +242,18 @@
               <% end %>
             <% if user_platform_url? %>
               <li>
-                <span class="title activities"><%= t("activities") %></span>
-                <a href="<%= construct_user_platform_url('question',   @object.accession_number) %>" class="tag">Ask a question</a>
-                <a href="<%= construct_user_platform_url('discussion', @object.accession_number) %>" class="tag">Start a discussion</a>
-                <a href="<%= construct_user_platform_url('research',   @object.accession_number) %>" class="tag">Start a new research</a>
+                <span class="title activities">
+                  <%= t("activities") %>
+                </span>
+                <a href="<%= construct_user_platform_url('Question', 'new', @object.accession_number) %>" class="tag">Ask a question</a>
+                <a href="<%= construct_user_platform_url('Discussion', 'new', @object.accession_number) %>" class="tag">Start a discussion</a>
+                <a href="<%= construct_user_platform_url('Research', 'new', @object.accession_number) %>" class="tag">Start a research</a>
+                <div id='biography'></div>
+                <div id='discussion'></div>
+                <div id='question'></div>
+                <div id='research'></div>
+                <div id='transcription'></div>
+                <div id='translation'></div>
               </li>
             <% end %>
             </ul>
@@ -257,3 +265,24 @@
 </div>
 </div>
 <%= partial "footer" %>
+<% if user_platform_url? %>
+<script type='text/javascript'>
+  $.ajax({ url:
+    '<%= "#{ENV['USER_PLATFORM_URL']}/activity/activity_data.json?accession_no=#{@object.accession_number}"%>',
+    type: 'get', dataType: 'jsonp'
+  }).done(function(data) {
+    <% %w(Discussion Question Research Transcription Translation Biography).each do |type| %>
+      count = data['<%= type %>'];
+      console.log(count);
+      if (count && count > 0) {
+        $('#<%= type.downcase %>').append(
+          '<a href='
+          + "<%= construct_user_platform_url(type, 'list', "#{@object.accession_number}")%>"
+          + ' class="description tag"><%= type %> ('
+          + count
+          + ')</a>');
+      }
+    <% end %>
+  });
+</script>
+<% end %>
