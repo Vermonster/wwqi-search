@@ -2161,6 +2161,9 @@ ul.collections li a .items-in-collection strong{
 .browse-by-period .undated a em img{
 	background-position:-270px 0;
 }
+.browse-by-period .post-qajar a em img{
+  background-position:-210px 0;
+}
 
 .secondary-browse-facets{
 	overflow:hidden;
