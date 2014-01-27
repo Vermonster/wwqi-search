@@ -241,19 +241,13 @@
               </li>
               <% end %>
             <% if user_platform_url? %>
-              <li>
+              <li id='user-platform-links'>
                 <span class="title activities">
                   <%= t("activities") %>
                 </span>
                 <a href="<%= construct_user_platform_url('Question', 'new', @object.accession_number) %>" class="tag">Ask a question</a>
                 <a href="<%= construct_user_platform_url('Discussion', 'new', @object.accession_number) %>" class="tag">Start a discussion</a>
                 <a href="<%= construct_user_platform_url('Research', 'new', @object.accession_number) %>" class="tag">Start a research</a>
-                <div id='biography'></div>
-                <div id='discussion'></div>
-                <div id='question'></div>
-                <div id='research'></div>
-                <div id='transcription'></div>
-                <div id='translation'></div>
               </li>
             <% end %>
             </ul>
@@ -275,7 +269,7 @@
       count = data['<%= type %>'];
       console.log(count);
       if (count && count > 0) {
-        $('#<%= type.downcase %>').append(
+        $('#user-platform-links').append(
           '<a href='
           + "<%= construct_user_platform_url(type, 'list', "#{@object.accession_number}")%>"
           + ' class="description tag"><%= type %> ('
