@@ -268,7 +268,7 @@
 <% if user_platform_url? %>
 <script type='text/javascript'>
   $.ajax({ url:
-    '<%= "#{ENV['USER_PLATFORM_URL']}/activity/activity_data.json?accession_no=#{@object.accession_number}"%>',
+    '<%= "#{Environment.user_platform_url}/activity/activity_data.json?accession_no=#{@object.accession_number}"%>',
     type: 'get', dataType: 'jsonp'
   }).done(function(data) {
     <% %w(Discussion Question Research Transcription Translation Biography).each do |type| %>
