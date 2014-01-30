@@ -245,9 +245,9 @@
                 <span class="title activities">
                   <%= t("activities") %>
                 </span>
-                <a href="<%= construct_user_platform_url('Question', 'new', @object.accession_number) %>" class="tag">Ask a question</a>
-                <a href="<%= construct_user_platform_url('Discussion', 'new', @object.accession_number) %>" class="tag">Start a discussion</a>
-                <a href="<%= construct_user_platform_url('Research', 'new', @object.accession_number) %>" class="tag">Start research</a>
+                <a href="<%= construct_user_platform_url('Question', 'new', @object.accession_number) %>" class="tag"><%= t('ask_a_question') %></a>
+                <a href="<%= construct_user_platform_url('Discussion', 'new', @object.accession_number) %>" class="tag"><%= t('start_a_discussion') %></a>
+                <a href="<%= construct_user_platform_url('Research', 'new', @object.accession_number) %>" class="tag"><%= t('start_research') %></a>
               </li>
             <% end %>
             </ul>
@@ -271,9 +271,9 @@
         $('#user-platform-links').append(
           '<a href='
           + "<%= construct_user_platform_url(type, 'list', "#{@object.accession_number}")%>"
-          + ' class="description tag"><%= type %> ('
+          + ' class="description tag"><%= t(type.downcase) %>: '
           + count
-          + ')</a>');
+          + '</a>');
       }
     <% end %>
   });
