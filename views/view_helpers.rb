@@ -227,6 +227,8 @@ NOTES
       url << '/threads'
     when 'Question'
       url << '/threads'
+    when 'Correction'
+      url << '/corrections'
     else
       url << '/contributions'
     end
@@ -238,7 +240,7 @@ NOTES
     url << '?'
 
     # Append a type parameter if the type is not reseach
-    url << "type=#{type}&" unless type == 'research'
+    url << "type=#{type}&" unless %w(Research Correction).include?(type)
 
     # Append an accession number parameter
     url << "accession_no=#{accession_number}"

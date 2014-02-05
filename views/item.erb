@@ -248,6 +248,7 @@
                 <a href="<%= construct_user_platform_url('Question', 'new', @object.accession_number) %>" class="tag"><%= t('ask_a_question') %></a>
                 <a href="<%= construct_user_platform_url('Discussion', 'new', @object.accession_number) %>" class="tag"><%= t('start_a_discussion') %></a>
                 <a href="<%= construct_user_platform_url('Research', 'new', @object.accession_number) %>" class="tag"><%= t('start_research') %></a>
+                <a href="<%= construct_user_platform_url('Correction', 'new', @object.accession_number) %>" class="tag"><%= t('submit_a_correction') %></a>
               </li>
             <% end %>
             </ul>
