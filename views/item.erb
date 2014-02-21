@@ -245,10 +245,21 @@
                 <span class="title activities">
                   <%= t("activities") %>
                 </span>
-                <a href="<%= construct_user_platform_url('Question', 'new', @object.accession_number) %>" class="tag"><%= t('ask_a_question') %></a>
-                <a href="<%= construct_user_platform_url('Discussion', 'new', @object.accession_number) %>" class="tag"><%= t('start_a_discussion') %></a>
-                <a href="<%= construct_user_platform_url('Research', 'new', @object.accession_number) %>" class="tag"><%= t('start_research') %></a>
-                <a href="<%= construct_user_platform_url('Correction', 'new', @object.accession_number) %>" class="tag"><%= t('submit_a_correction') %></a>
+                <a class='tag' href="<%= "#{Environment.user_platform_url}/threads/new?accession_no=#{@object.accession_number}"%>">
+                  <%= t('research-platform-new-thread') %>
+                </a>
+                <a class='tag' href="<%= "#{Environment.user_platform_url}/researches/new?accession_no=#{@object.accession_number}"%>">
+                  <%= t('research-platform-new-research') %>
+                </a>
+                <a class='tag' href="<%= "#{Environment.user_platform_url}/corrections/new?accession_no=#{@object.accession_number}"%>">
+                  <%= t('research-platform-new-correction') %>
+                </a>
+                <a class='tag' href="<%= "#{Environment.user_platform_url}/contributions/new?type=Translation&accession_no=#{@object.accession_number}"%>">
+                  <%= t('research-platform-new-translation') %>
+                </a>
+                <a class='tag' href="<%= "#{Environment.user_platform_url}/contributions/new?type=Transcription&accession_no=#{@object.accession_number}"%>">
+                  <%= t('research-platform-new-transcription') %>
+                </a>
               </li>
             <% end %>
             </ul>
@@ -267,13 +278,12 @@
     type: 'get', dataType: 'jsonp'
   }).done(function(data) {
     <% %w(Discussion Question Research Transcription Translation Biography).each do |type| %>
+      <% url = construct_user_platform_url(type, 'list', "#{@object.accession_number}") %>
       count = data['<%= type %>'];
       if (count && count > 0) {
         $('#user-platform-links').append(
-          '<a href='
-          + "<%= construct_user_platform_url(type, 'list', "#{@object.accession_number}")%>"
-          + ' class="description tag"><%= t(type.downcase) %>: '
-          + count
+          '<a href="<%= url %>" class="description tag">'
+          + '<%= t("research-platform-#{type.downcase}") %>'
           + '</a>');
       }
     <% end %>
