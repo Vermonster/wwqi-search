@@ -42,8 +42,8 @@ def add_facet(name)
   end
 end
 
-def on_search_page? 
-  $on_search_page #this is terrible.
+def on_search_page?
+  true
 end
 
 get '/search' do
@@ -114,47 +114,12 @@ get '/search' do
   @lang = lang
   @query = query_string
 
-  $deliberate_hack = false
-  $on_search_page = true
-
   erb :results
-end
-
-def item_index(lang, type, letter)
-  facet_name = "#{type}_#{lang}" 
-  query = Tire.search(ELASTICSEARCH_INDEX) do
-    query { string "*" } 
-    facet facet_name, :global => true do
-      terms facet_name, :size => 100000
-    end
-  end
-  @lang = lang.to_sym
-  @type = type
-  @content = query.results.facets[facet_name]["terms"].map(&:values).delete_if{|item| !item[0].downcase.starts_with?(letter.downcase) if letter }
-  
-  @object = Class.new do
-    def initialize(type)
-      @type = type
-    end
-
-    def __url(target_lang)
-      "/#{target_lang}/#{@type}.html"
-    end
-  end.new(type)
-  
-  $deliberate_hack = true
-  $on_search_page = false
-  erb :item_index 
 end
 
 get '/' do
   redirect Environment.main_site_url, 301
 end
-
-get '/:lang/genres.html'   do |lang| item_index(lang, :genres,   params["letter"]) end
-get '/:lang/subjects.html' do |lang| item_index(lang, :subjects, params["letter"]) end
-get '/:lang/people.html'   do |lang| item_index(lang, :people,   params["letter"]) end
-get '/:lang/places.html'   do |lang| item_index(lang, :places,   params["letter"]) end
 
 if ENV['FAKE_PAGES']
   %w(item collection collection_manifest person person_manifest).each do |page|

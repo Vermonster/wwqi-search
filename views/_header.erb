@@ -2,7 +2,7 @@
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--><html dir=<%= @lang == :en ? "ltr" : "rtl" %>><!--<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html dir=<%= @lang.to_s == 'en' ? "ltr" : "rtl" %>><!--<![endif]-->
 
 <head>
 	<meta charset="utf-8">
@@ -85,21 +85,15 @@
             <%#<a href="/archive/my_selections.html" class="module-link">My Selections <span class="notification">12</span></a>%>
             <%#</li>%>
             <li>
-              <% target_lang = @lang == :en ? :fa : :en %>
-              <% text_lang = @lang == :en ? 'فارسی' : 'English' %>
+              <% target_lang = @lang.to_sym == :en ? :fa : :en %>
+              <% text_lang = @lang.to_sym == :en ? 'فارسی' : 'English' %>
 
               <% if on_search_page? %>
                 <a href='<%= loopback(params.merge(lang: target_lang)).to_url %>' class='lang lang-selector', dir='rtl'><%= text_lang %></a>
               <% else %>
-                <% if $deliberate_hack %>
-                  <a href='<%= Environment.search_base_url + @object.__url(target_lang) %>' class='lang lang-selector' dir='rtl'>
-                    <%= text_lang %>
-                  </a>
-                <% else %>
-                  <a href='<%= Environment.main_site_url + @object.__url(target_lang) %>' class='lang lang-selector' dir='rtl'>
-                    <%= text_lang %>
-                  </a>
-                <% end %>
+                <a href='<%= "#{Environment.main_site_url}#{@object.__url(target_lang)}" %>' class='lang lang-selector' dir='rtl'>
+                  <%= text_lang %>
+                </a>
               <% end %>
             </li>
           </ul>
@@ -115,10 +109,12 @@
             <%= lang_link_to("#{t('collections')}<span>#{t('view-our-holdings')}</span>", 'collections/manifest.html', lang: @lang) %>
             </li>
             <li>
-            <%= lang_link_to("#{t('contact')}<span>#{t('get-in-touch')}</span>", 'contact.html', lang: @lang) %>
+            <%= lang_link_to("#{t('people')}<span>#{t('discover-individuals')}</span>", 'people/manifest.html', lang: @lang) %>
             </li>
             <li>
-            <%= lang_link_to("#{t('faq')}<span>#{t('have-questions')}</span>", 'faq.html', lang: @lang) %>
+              <a href="<%= Environment.user_platform_url %>">
+                <%= t('user-platform') %><span><%= t('share-your-research') %></span>
+              </a>
             </li>
           </ul>
         </div>
