@@ -1142,9 +1142,16 @@ timeline:
   date:
   - startDate: '1301'
     headline: birth-timeline-message
-    text: تهران
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2061.jpg?1361902386
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2061.jpg?1361902386
+    text: تهران رد ، <a href='/fa/people/2070.html'>ایزابل سروریان (امیرخانیان)</a>
+      و <a href='/fa/people/2069.html'>سرپ خان امیرخانیان</a> رسپ
   - startDate: '1372'
     headline: death-timeline-message
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2061.jpg?1361902386
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2061.jpg?1361902386
   - startDate: '1330'
     headline: daughter-timeline-message
     text: <a href='/fa/people/2063.html'>آنیک استپانیان (آواکیان)</a>
@@ -2062,9 +2069,16 @@ timeline:
   date:
   - startDate: '1884'
     headline: birth-timeline-message
-    text: Tehran
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2061.jpg?1361902386
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2061.jpg?1361902386
+    text: Born to <a href='/en/people/2070.html'>Isabil Sururiyan (Amirkhaniyan)</a>
+      and <a href='/en/people/2069.html'>Sirp Khan Amirkhaniyan</a>, Tehran
   - startDate: '1953'
     headline: death-timeline-message
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2061.jpg?1361902386
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2061.jpg?1361902386
   - startDate: '1912'
     headline: daughter-timeline-message
     text: <a href='/en/people/2063.html'>Anik Istipaniyan (Avakiyan)</a>
