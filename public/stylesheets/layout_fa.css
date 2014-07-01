@@ -72,7 +72,7 @@ body{
 	padding:0 5px 0 10px;
 	background:url(../images/bg_white_ribbon.png) top right no-repeat;
 }
-.item-thumbnail .item-image-frame{
+.item-thumbnail{
 	margin-right:20px;
 	margin-left:0;
 }
@@ -490,20 +490,6 @@ padding: 0 35px 0 10px;}
   margin-right:0;
 }
 
-.related-person .related-person-data-items{
-  float:left;
-  background:#c82d00 url(/images/icon-document.png) 5px 5px no-repeat;
-  height:30px;
-  line-height:30px;
-  color:#fff;
-  font-weight:bold;
-  padding-left:20px;
-  padding-right:10px;
-  border-radius:0 4px 4px 0;
-  -webkit-border-radius:0 4px 4px 0;
-  -moz-border-radius:0 4px 4px 0;
-}
-
 .items-below-fold.person .last-column .border{
   left:370px;
   right:auto;
@@ -531,7 +517,10 @@ padding: 0 35px 0 10px;}
   line-height:27px;
 
 }
-
+/* Override TimelineJS style to correctly display the 'previous nav' in Farsi  */
+#person-timeline .vco-slider .nav-previous {
+    left: 0;
+}
 
 
 /* #Page Styles
@@ -629,7 +618,7 @@ padding: 0 35px 0 10px;}
 			.item-essentials{
 				padding-bottom:0px;
 			}
-			.item-thumbnail .item-image-frame{
+			.item-thumbnail{
 				width:355px;
 				height:350px;
 				margin-right:30px;
@@ -759,11 +748,6 @@ padding: 0 35px 0 10px;}
 			#pageFooter p{text-align: center; margin:0;}
 			#home-main .welcome{background:url(../images/30black.png);}
 
-			.related-person .related-person-data-items{
-	      border-radius:4px;
-	      -webkit-border-radius:4px;
-	      -moz-border-radius:4px;
-	    }
 	    .related-person .related-person-name{
 	    	font-size:16px;
 	    }
@@ -807,7 +791,7 @@ padding: 0 35px 0 10px;}
 				float:right;
 			}
 			#content .shaded-panel.has-sidebar.main-panel-is-dark{background: none}
-			.item-thumbnail .item-image-frame{
+			.item-thumbnail{
 				width:240px;
 				height:240px;
 			}

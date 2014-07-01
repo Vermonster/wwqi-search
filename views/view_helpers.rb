@@ -7,111 +7,54 @@ class String
   end
 end
 
-module ViewHelpers
-  def load_example_person_farsi!
-    @object = OpenStruct.new
-    @object.thumbnail = "http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2062.jpg"
-    @object.name = "آرتین استپانیان"
-    @object.description = "آرتین استپانیان (متولد ۱۲۴۸)، همسر نی‌نیش امیرخانیان (استپانیان)، اولین تحصیل کرده رشته دندانپزشکی ایران است."
-    @object.long_description = <<-DESC
-آرتین استپانیان متولد ترکیه و پس از دریافت گواهی نامه از کالج آمریکایی استانبول، برای ادامه تحصیلات به انگلستان رفته مدت دو سال در یکی از دانشکده های پزشکی شهر لندن مشغول تحصیل گردید و از آنجا عازم آمریکای شمالی گردیده و وارد دانشکده دندان پزشکی فیلادلفیا شد. سپس به مدت دو سال در شهر فیلادلفیای مشغول دندان پزشکی گردید و در سال 1902میلادی، عازم ایران شده و در شهر تبریز مطب شخصی خود را دائر کرد. در مدت اقامت او در تبریز به عنوان پزشک خصوصی محمدعلی میرزا فعالیت کرد. پس از مظفرالدین شاه، ولیعهد محمدعلی میرزا به سلطنت رسید و دکتر را نیز همراه خود به تهران آورد او را به سمت دندان پزشک رسمی دربار منصوب نمود. از تاریخ 1908 میلادی دکتر مطب شخصی خود را در تهران دائرکرد و با داشتن سمت "دندان پزشک دربار" مشغول معالجه و خدمت گردید.
-DESC
-    @object.birthplace = OpenStruct.new(name: "Turkey", url: "#")
-    @object.place_of_death = OpenStruct.new(name: "Tehran", url: "#")
-    @object.instance_eval do
-      def local_date(type)
-        if type == :dob_exact
-          "1870"
-        elsif type == :dod_exact
-          "1952"
-        end
+class NestedHash
+  def initialize(hash)
+    @h = HashWithIndifferentAccess.new(hash)
+  end
+
+  def process_array(array)
+    array.map do |el|
+      case el
+      when Array then process_array(el)
+      when Hash then NestedHash.new(el)
+      else el
       end
     end
-    @object.collections = []
-    def fake_person(rel, name)
-      OpenStruct.new(relationship: OpenStruct.new(title: rel), related_person: OpenStruct.new(name: name,url: "#"))
+  end
+
+  def method_missing(method, *args)
+    if @h.has_key?(method)
+      result = @h[method]
+      result = NestedHash.new(result) if result.is_a?(Hash)
+      result = process_array(result) if result.is_a?(Array)
+      result
     end
-    def fake_item(role, name, date)
-      OpenStruct.new(role: OpenStruct.new(name: role), item: OpenStruct.new(url: "#", local_date: date, title: name))
+  end
+end
+
+module ViewHelpers
+  def load_example_person_farsi!
+    @object = NestedHash.new(YAML.load(FA_YAML))
+
+    def @object.local_date(m)
+      send(m)
     end
-    @object.people_relationships = [
-      fake_person(*["دختر", "آنیک استپانیان (آواکیان)"]),
-      fake_person(*["زن", "نینیش امیرخانیان (استپانیان)"]),
-      fake_person(*["دختر", "شاکه استپانیان (آبدالیان)"]),
-      fake_person(*["پسر", "آرمن استپانیان"]),
-      fake_person(*["پسر", "سامسون استپانیان"]),
-      fake_person(*["پسر", "هوفسب استپانیان"]),
-      fake_person(*["پسر", "رستم استپانیان"]),
-      fake_person(*["داماد", "آواک آواکیان"]),
-      fake_person(*["نوه", "هووانس آواکیان"]),
-      fake_person(*["عروس", "آروسیاک"]),
-      fake_person(*["خواهر", "ربکا استپانیان"])
-    ]
-    @object.people_roles = [
-      fake_item(*[nil, "نینیش امیرخانیان (استپانیان) وآرتین استپانیان", "1910"]),
-      fake_item(*[nil, "آرتین استپانیان", "1903"]),
-      fake_item(*[nil, "نینیش امیرخانیان (استپانیان) درجمع دوستان", "حدود 1920"]),
-      fake_item(*[nil, "عکس گروهی", "1944"]),
-      fake_item(*[nil, "آنیک و آرتین استپانیان", nil]),
-      fake_item(*[nil, "نینیش امیرخانیان (استپانیان) و آرتین استپانیان", "حدود 1925"]),
-      fake_item(*[nil, "نینیش امیرخانیان (استپانیان) و آرتین استپانیان", "1954"]),
-      fake_item(*[nil, "نینیش امیرخانیان (استپانیان)، آرتین، ربکا، و آنیک استپانیان", "1940"]),
-      fake_item(*[nil, "خانواده نینیش امیرخانیان (استپانیان) در حیاط منزلشان", "1940"]),
-      fake_item(*[nil, "نینیش امیرخانیان (استپانیان) در کنار خانواده", "حدود 1958 تا 1960"]),
-      fake_item(*[nil, "آرتین استپانیان، آنیک، و شاکه استپانیان", nil]),
-      fake_item(*[nil, "کارت پستال", "1933"])
-    ]
-    @object.sex = "male"
+
+    def @object.as_timeline_json(l)
+      YAML.load(FA_TIMELINE_YAML)
+    end
   end
 
   def load_example_person!
-    # Person # 1226
-    @object = OpenStruct.new
-    @object.sex = "female"
-    @object.thumbnail = "http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2061.jpg"
-    @object.name = "Ninish Amirkhaniyan (Istipaniyan)"
-    @object.description = "Ninish Amirkhaniyan (Istipaniyan), born in 1884 in Tehran, and her husband Artin Istipaniyan had six children together."
-    @object.long_description = "Ninish Amirkhaniyan (Istipaniyan) was born in a progressive Armenian family in Tehran. She studied Sociology at Sorbonne University in Paris and taught French to Qajar Princesses such as Furugh al-Muluk and Malik al-Muluk when she came back to Iran. Muhammad Ali Mirza, who later became shah of Iran, asked her father for her hand in marriage. But she finally married Artin Istipaniyan, who is the first academically educated dentist in Iran according to the family. Ninish's children all perfected in their majors due to her emphasis on higher education."
-    @object.birthplace = OpenStruct.new(name: "Tehran", url: "#")
-    @object.instance_eval do
-      def local_date(type)
-        if type == :dob_exact
-          "1884"
-        elsif type == :dod_exact
-          "1953"
-        end
-      end
+    @object = NestedHash.new(YAML.load(EN_YAML))
+
+    def @object.local_date(m)
+      send(m)
     end
-    @object.collections = [OpenStruct.new(url: "#", title: "Avakiyan")]
-    def fake_person(rel, name)
-      OpenStruct.new(relationship: OpenStruct.new(title: rel), related_person: OpenStruct.new(name: name,url: "#"))
+
+    def @object.as_timeline_json(l)
+      YAML.load(EN_TIMELINE_YAML)
     end
-    def fake_item(role, name, date)
-      OpenStruct.new(role: OpenStruct.new(name: role), item: OpenStruct.new(url: "#", local_date: date, title: name))
-    end
-    @object.people_relationships = [
-      fake_person(*["daughter", "Anik Istipaniyan (Avakiyan)"]),
-      fake_person(*["husband", "Artin Istipaniyan"]),
-      fake_person(*["daughter", "Shaki Istipaniyan (Abdaliyan)"]),
-      fake_person(*["son", "Armin Istipaniyan"]),
-      fake_person(*["son", "Samsun Istipaniyan"]),
-      fake_person(*["son", "Hufisb Istipaniyan"]),
-      fake_person(*["son", "Rustam Istipaniyan"]),
-      fake_person(*["father", "Sirp Khan Amirkhaniyan"]),
-      fake_person(*["mother", "Isabil Sururiyan (Amirkhaniyan)"]),
-      fake_person(*["sister", "Hirach Amirkhaniyan"]),
-      fake_person(*["sister", "Rose Amirkhaniyan"]),
-      fake_person(*["uncle (paternal)", "Asatur Khan Amirkhaniyan"]),
-      fake_person(*["grandchild", "Huvans Avakiyan"]),
-      fake_person(*["sister-in-law", "Rebecca Istipaniyan"])
-    ]
-    @object.people_roles = [
-      fake_item(*["No Role", "Armenian Women's Charity Society", "1958"]),
-      fake_item(*["No Role", "Shaki Istipaniyan (Abdaliyan)", "1934"]),
-      fake_item(*["No Role", "Ninish Amirkhaniyan (Istipaniyan)'s children", "1925"]),
-      fake_item(*["No Role", "Harach Amirkhaniyan with a group of friends and teachers", "circa. 1905"]),
-      fake_item(*["No Role", "Rose Amirkhaniyan among a group of friends and teachers", "circa. 1903"])
-    ]
   end
 
   def load_example_item! 
@@ -684,3 +627,1844 @@ class NilClass
   end
 
 end
+
+FA_YAML = <<-YAML
+---
+:sex: female
+:thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2061.jpg?1361902386
+:name: نینیش امیرخانیان (استپانیان)
+:description: نینیش امیرخانیان (استپانیان)، متولد سال ۱۲۶۲ در تهران و همسرش آرتین
+  استپانیان صاحب شش فرزند بودند.
+:long_description: ! 'نینیش امیرخانیان (استپانیان) در یک خانواده ارمنی پیشرو در تهران
+  به دنیا آمد. او تحصیلات عالی خود را در زمینه رشته جامعه شناسی دردانشگاه سوربن در
+  شهر پاریس به اتمام رساند و پس از بازگشت به ایران به خاطر تسلط به زبان فرانسه جهت
+  تدریس به شاهزاده خانم های قاجار به حرمسرا راه یافت و به بسیاری از آنان درس فرانسه
+  داد از جمله این شاهزاده خانم ها که رابطه نزدیکی با نی نیش داشتند می توان به تاج
+  السلطنه و فروغ الدوله اشاره کرد. همچنین محمدعلی میرزا(که سپس شاه ایران شد) نی نیش
+  را از پدرش سرپ خان خواستگاری کرد. اما سرانجام نینیش با آرتین استپانیان، اولین دندانپزشک
+  رسمی ایران ازدواج کرد. '
+:birthplace:
+  :name: تهران
+  :url: ! '#'
+:dob_exact: '1884'
+:dod_exact: '1953'
+:published_collections:
+- :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/collection_thumbs/collection_56.jpg?1362438745
+  :title: آواکیان
+:sources:
+:people_relationships:
+- :relationship:
+    :title: دختر
+  :related_person:
+    :name: آنیک استپانیان (آواکیان)
+    :url: ! '#'
+    :published_items:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2063.jpg?1361910312
+- :relationship:
+    :title: شوهر
+  :related_person:
+    :name: آرتین استپانیان
+    :url: ! '#'
+    :published_items:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2062.jpg?1361907866
+- :relationship:
+    :title: دختر
+  :related_person:
+    :name: شاکه استپانیان (آبدالیان)
+    :url: ! '#'
+    :published_items:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2064.jpg?1361913132
+- :relationship:
+    :title: پسر
+  :related_person:
+    :name: آرمن استپانیان
+    :url: ! '#'
+    :published_items:
+    - 0
+    - 0
+    - 0
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2065.jpg?1361913509
+- :relationship:
+    :title: پسر
+  :related_person:
+    :name: سامسون استپانیان
+    :url: ! '#'
+    :published_items:
+    - 0
+    - 0
+    - 0
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2066.jpg?1361913892
+- :relationship:
+    :title: پسر
+  :related_person:
+    :name: هوفسب استپانیان
+    :url: ! '#'
+    :published_items:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2067.jpg?1361914610
+- :relationship:
+    :title: پسر
+  :related_person:
+    :name: رستم استپانیان
+    :url: ! '#'
+    :published_items:
+    - 0
+    - 0
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2068.jpg?1361914951
+- :relationship:
+    :title: پدر
+  :related_person:
+    :name: سرپ خان امیرخانیان
+    :url: ! '#'
+    :published_items:
+    - 0
+    - 0
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2069.jpg?1361916233
+- :relationship:
+    :title: مادر
+  :related_person:
+    :name: ایزابل سروریان (امیرخانیان)
+    :url: ! '#'
+    :published_items:
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2070.jpg?1361916648
+- :relationship:
+    :title: خواهر
+  :related_person:
+    :name: هراچ امیرخانیان
+    :url: ! '#'
+    :published_items:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2071.jpg?1361917824
+- :relationship:
+    :title: خواهر
+  :related_person:
+    :name: رز امیرخانیان
+    :url: ! '#'
+    :published_items:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2073.jpg?1361918671
+- :relationship:
+    :title: عمو
+  :related_person:
+    :name: آساطور خان امیرخانیان
+    :url: ! '#'
+    :published_items:
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2122.jpg?1362421128
+- :relationship:
+    :title: نوه
+  :related_person:
+    :name: هووانس آواکیان
+    :url: ! '#'
+    :published_items:
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2129.jpg?1362423941
+- :relationship:
+    :title: خواهر زن، خواهر شوهر
+  :related_person:
+    :name: ربکا استپانیان
+    :url: ! '#'
+    :published_items:
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2139.jpg?1362428843
+:published_items:
+- :url: ! '#'
+  :title: گروهی از اعضای انجمن خیریه بانوان ارامنه
+  :local_date: 1377 یا 1378 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3985.jpg?1363017667
+- :url: ! '#'
+  :title: شاکه استپانیان (آبدالیان)
+  :local_date: 1352 یا 1353 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3987.jpg?1363018276
+- :url: ! '#'
+  :title: فرزندان نینیش امیرخانیان (استپانیان)
+  :local_date: 1343 یا 1344 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3989.jpg?1363018946
+- :url: ! '#'
+  :title: هراچ امیرخانیان در بین همکلاسیها و معلمان
+  :local_date: حدود 1322 یا 1323 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3991.jpg?1363019708
+- :url: ! '#'
+  :title: رز امیرخانیان در بین همکلاسیها و معلمان
+  :local_date: حدود 1320 یا 1321 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3992.jpg?1363020139
+- :url: ! '#'
+  :title: هوفسب، آرمن و سامسون
+  :local_date: 1337 یا 1338 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3993.jpg?1363020405
+- :url: ! '#'
+  :title: آنیک استپانیان در لباس عروسی
+  :local_date: 1358 یا 1359 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3994.jpg?1363020727
+- :url: ! '#'
+  :title: هووانس خان ماسِیان
+  :local_date: حدود 1317 یا 1318 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3995.jpg?1363021178
+- :url: ! '#'
+  :title: ! 'خواهران و فرزندان نینیش امیرخانیان (استپانیان) '
+  :local_date: حدود 1338 یا 1339 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3996.jpg?1363021513
+- :url: ! '#'
+  :title: فرزندان نینیش امیرخانیان (استپانیان)
+  :local_date: 1331 یا 1332 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3997.jpg?1363021793
+- :url: ! '#'
+  :title: کارت ویزیت آنیک استپانیان
+  :local_date:
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3999.jpg?1363022881
+- :url: ! '#'
+  :title: نینیش امیرخانیان (استپانیان) وآرتین استپانیان
+  :local_date: 1327 یا 1328 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4000.jpg?1363023258
+- :url: ! '#'
+  :title: ! ' عکس گروهی'
+  :local_date: حدود 1335 یا 1336 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3998.jpg?1363022127
+- :url: ! '#'
+  :title: هراچ  و رز امیرخانیان
+  :local_date: 1317 یا 1318 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4003.jpg?1363024203
+- :url: ! '#'
+  :title: ! ' خواهر و دو دختر نینیش استپانیان (امیرخانیان)'
+  :local_date: حدود 1346 یا 1347 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4007.jpg?1363026055
+- :url: ! '#'
+  :title: عکس گروهی
+  :local_date: حدود 1317 یا 1318 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4008.jpg?1363026349
+- :url: ! '#'
+  :title: هراچ امیرخانیان
+  :local_date: 1322 یا 1323 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4009.jpg?1363026627
+- :url: ! '#'
+  :title: هراچ امیرخانیان و رز امیرخانیان در عکس گروهی
+  :local_date: 1366 یا 1367 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4011.jpg?1363027322
+- :url: ! '#'
+  :title: هراچ امیرخانیان و رز امیرخانیان در سفر هندوستان
+  :local_date: 1368 یا 1369 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4012.jpg?1363030575
+- :url: ! '#'
+  :title: هراچ امیرخانیان و رز امیرخانیان در سفر هندوستان
+  :local_date: 1368 یا 1369 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4013.jpg?1363030800
+- :url: ! '#'
+  :title: هراچ امیرخانیان و رز امیرخانیان در سفر هندوستان
+  :local_date: 1370 یا 1371 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4014.jpg?1363031161
+- :url: ! '#'
+  :title: هراچ امیرخانیان
+  :local_date: حدود 1333 یا 1334 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4015.jpg?1363031543
+- :url: ! '#'
+  :title: شاکه استپانیان (آبدالیان)
+  :local_date: 1357 یا 1358 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4016.jpg?1363031792
+- :url: ! '#'
+  :title: عکس گروهی
+  :local_date: 1394 یا 1395 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4018.jpg?1363032298
+- :url: ! '#'
+  :title: عکس گروهی
+  :local_date: 1381 یا 1382 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4019.jpg?1363032551
+- :url: ! '#'
+  :title: عکس گروهی
+  :local_date: حدود 1384 یا 1385 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4020.jpg?1363033311
+- :url: ! '#'
+  :title: عکس گروهی
+  :local_date:
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4021.jpg?1363033819
+- :url: ! '#'
+  :title: آنیک استپانیان
+  :local_date: 1420 یا 1421 ق تا 1421 یا 1422 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4022.jpg?1363034096
+- :url: ! '#'
+  :title: عکس گروهی
+  :local_date: 1342 یا 1343 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4023.jpg?1363034367
+- :url: ! '#'
+  :title: هراچ امیرخانیان
+  :local_date: 1323 یا 1324 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4004.jpg?1363024840
+- :url: ! '#'
+  :title: ! 'رز امیرخانیان '
+  :local_date: 1323 یا 1324 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4005.jpg?1363025138
+- :url: ! '#'
+  :title: عکس گروهی
+  :local_date: 1368 یا 1369 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4006.jpg?1363025766
+- :url: ! '#'
+  :title: عکس گروهی
+  :local_date: 1350 یا 1351 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4026.jpg?1363035188
+- :url: ! '#'
+  :title: فروغالدوله و دخترانش٬ فروغالملوک و ملکالملوک
+  :local_date: 20 صفر 1328 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3984.jpg?1363016796
+- :url: ! '#'
+  :title: شاکه استپانیان (آبدالیان)
+  :local_date: 1348 یا 1349 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3986.jpg?1363018012
+- :url: ! '#'
+  :title: هراچ  و رز امیرخانیان
+  :local_date: 1366 یا 1367 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4010.jpg?1363026939
+- :url: ! '#'
+  :title: سرپ خان امیرخانیان و ایزابل امیرخانیان (سروریان)
+  :local_date: 1299 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4017.jpg?1363032059
+- :url: ! '#'
+  :title: آرتین استپانیان
+  :local_date: 1320 یا 1321 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4002.jpg?1363023906
+- :url: ! '#'
+  :title: آنیک استپانیان
+  :local_date: 1357 یا 1358 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4024.jpg?1363034658
+- :url: ! '#'
+  :title: عکس گروهی
+  :local_date: 1350 یا 1351 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4025.jpg?1363034957
+- :url: ! '#'
+  :title: نینیش امیرخانیان (استپانیان)
+  :local_date: حدود 1333 یا 1334 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4001.jpg?1363023568
+- :url: ! '#'
+  :title: نینیش امیرخانیان (استپانیان) درجمع دوستان
+  :local_date: حدود 1338 یا 1339 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3990.jpg?1363019333
+- :url: ! '#'
+  :title: عکس گروهی
+  :local_date: 1350 یا 1351 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4027.jpg?1363035577
+- :url: ! '#'
+  :title: عکس گروهی
+  :local_date: 1363 یا 1364 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4058.jpg?1364222987
+- :url: ! '#'
+  :title: نینیش امیرخانیان (استپانیان) در میان اقوام
+  :local_date: 1358 یا 1359 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4059.jpg?1364223248
+- :url: ! '#'
+  :title: آنیک و آرتین استپانیان
+  :local_date:
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4060.jpg?1364223577
+- :url: ! '#'
+  :title: نینیش امیرخانیان (استپانیان) و آرتین استپانیان
+  :local_date: حدود 1343 یا 1344 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4061.jpg?1364224519
+- :url: ! '#'
+  :title: نینیش امیرخانیان (استپانیان) و آرتین استپانیان
+  :local_date: 1373 یا 1374 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4062.jpg?1364225268
+- :url: ! '#'
+  :title: ! 'آنیک و شاکه استپانیان در کنار دوستانشان '
+  :local_date: 1354 یا 1355 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4063.jpg?1364225511
+- :url: ! '#'
+  :title: نینیش امیرخانیان (استپانیان)، آرتین، ربکا، و آنیک استپانیان
+  :local_date: 1358 یا 1359 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4064.jpg?1364226067
+- :url: ! '#'
+  :title: نینیش امیرخانیان (استپانیان)، هراچ امیرخانیان، شاکه استپانیان
+  :local_date: 1355 یا 1356 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4065.jpg?1364226425
+- :url: ! '#'
+  :title: ! 'نینیش امیرخانیان (استپانیان) واقوام '
+  :local_date: 1352 یا 1353 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4066.jpg?1364226701
+- :url: ! '#'
+  :title: خانواده نینیش امیرخانیان (استپانیان) در حیاط منزلشان
+  :local_date: 1358 یا 1359 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4067.jpg?1364227315
+- :url: ! '#'
+  :title: نینیش امیرخانیان (استپانیان) در کنار خانواده و دوستان
+  :local_date: 1353 یا 1354 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4068.jpg?1364227599
+- :url: ! '#'
+  :title: نینیش امیرخانیان (استپانیان) در کنار خانواده
+  :local_date: 1382 یا 1383 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4069.jpg?1364227932
+- :url: ! '#'
+  :title: نینیش امیرخانیان (استپانیان) در کنار خانواده
+  :local_date: حدود 1358 یا 1359 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4070.jpg?1364228165
+- :url: ! '#'
+  :title: نینیش امیرخانیان (استپانیان) در کنار خانواده
+  :local_date: حدود 1377 یا 1378 ق تا 1379 یا 1380 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4071.jpg?1364228513
+- :url: ! '#'
+  :title: احتمالا ملکم خان همراه همسر و فرزندش
+  :local_date:
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4056.jpg?1364222204
+- :url: ! '#'
+  :title: عکس گروهی
+  :local_date: 1372 یا 1373 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4057.jpg?1364222567
+- :url: ! '#'
+  :title: آرتین استپانیان، آنیک، و شاکه استپانیان
+  :local_date:
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4028.jpg?1363036224
+- :url: ! '#'
+  :title: نینیش امیرخانیان (استپانیان) درمیانسالی
+  :local_date: 1358 یا 1359 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4029.jpg?1363036761
+- :url: ! '#'
+  :title: فرزندان نینیش امیرخانیان (استپانیان)
+  :local_date: 1343 یا 1344 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4030.jpg?1363037119
+- :url: ! '#'
+  :title: ! 'خانواده آساطور خان امیرخانیان  '
+  :local_date: 1338 یا 1339 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4031.jpg?1363038171
+- :url: ! '#'
+  :title: کارت پستال
+  :local_date: 1351 یا 1352 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4032.jpg?1363038839
+- :url: ! '#'
+  :title: کارت پستال
+  :local_date: 1351 یا 1352 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4033.jpg?1363039137
+- :url: ! '#'
+  :title: شاکه استپانیان (آبدالیان)
+  :local_date: 1356 یا 1357 ق
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3988.jpg?1363018545
+YAML
+
+FA_TIMELINE_YAML = <<-YAML
+---
+timeline:
+  type: default
+  date:
+  - startDate: '1301'
+    headline: birth-timeline-message
+    text: تهران
+  - startDate: '1372'
+    headline: death-timeline-message
+  - startDate: '1330'
+    headline: daughter-timeline-message
+    text: <a href='/fa/people/2063.html'>آنیک استپانیان (آواکیان)</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2063.jpg?1361910312
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2063.jpg?1361910312
+  - startDate: '1332'
+    headline: daughter-timeline-message
+    text: <a href='/fa/people/2064.html'>شاکه استپانیان (آبدالیان)</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2064.jpg?1361913132
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2064.jpg?1361913132
+  - startDate: '1334'
+    headline: son-timeline-message
+    text: <a href='/fa/people/2065.html'>آرمن استپانیان</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2065.jpg?1361913509
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2065.jpg?1361913509
+  - startDate: '1336'
+    headline: son-timeline-message
+    text: <a href='/fa/people/2066.html'>سامسون استپانیان</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2066.jpg?1361913892
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2066.jpg?1361913892
+  - startDate: '1327'
+    headline: son-timeline-message
+    text: <a href='/fa/people/2067.html'>هوفسب استپانیان</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2067.jpg?1361914610
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2067.jpg?1361914610
+  - startDate: '1338'
+    headline: son-timeline-message
+    text: <a href='/fa/people/2068.html'>رستم استپانیان</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2068.jpg?1361914951
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2068.jpg?1361914951
+  - startDate: '1377'
+    headline: گروهی از اعضای انجمن خیریه بانوان ارامنه
+    text: <a href='/fa/items/1260A2.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3985.jpg?1363017667
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3985.jpg?1363017667
+  - startDate: '1352'
+    headline: شاکه استپانیان (آبدالیان)
+    text: <a href='/fa/items/1260A4.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3987.jpg?1363018276
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3987.jpg?1363018276
+  - startDate: '1343'
+    headline: فرزندان نینیش امیرخانیان (استپانیان)
+    text: <a href='/fa/items/1260A6.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3989.jpg?1363018946
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3989.jpg?1363018946
+  - startDate: '1322'
+    headline: هراچ امیرخانیان در بین همکلاسیها و معلمان
+    text: <a href='/fa/items/1260A8.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3991.jpg?1363019708
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3991.jpg?1363019708
+  - startDate: '1320'
+    headline: رز امیرخانیان در بین همکلاسیها و معلمان
+    text: <a href='/fa/items/1260A9.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3992.jpg?1363020139
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3992.jpg?1363020139
+  - startDate: '1337'
+    headline: هوفسب، آرمن و سامسون
+    text: <a href='/fa/items/1260A10.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3993.jpg?1363020405
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3993.jpg?1363020405
+  - startDate: '1358'
+    headline: آنیک استپانیان در لباس عروسی
+    text: <a href='/fa/items/1260A11.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3994.jpg?1363020727
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3994.jpg?1363020727
+  - startDate: '1317'
+    headline: هووانس خان ماسِیان
+    text: <a href='/fa/items/1260A12.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3995.jpg?1363021178
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3995.jpg?1363021178
+  - startDate: '1338'
+    headline: ! 'خواهران و فرزندان نینیش امیرخانیان (استپانیان) '
+    text: <a href='/fa/items/1260A13.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3996.jpg?1363021513
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3996.jpg?1363021513
+  - startDate: '1331'
+    headline: فرزندان نینیش امیرخانیان (استپانیان)
+    text: <a href='/fa/items/1260A14.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3997.jpg?1363021793
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3997.jpg?1363021793
+  - startDate: '1327'
+    headline: نینیش امیرخانیان (استپانیان) وآرتین استپانیان
+    text: <a href='/fa/items/1260A17.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4000.jpg?1363023258
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4000.jpg?1363023258
+  - startDate: '1335'
+    headline: ! ' عکس گروهی'
+    text: <a href='/fa/items/1260A15.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3998.jpg?1363022127
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3998.jpg?1363022127
+  - startDate: '1317'
+    headline: هراچ  و رز امیرخانیان
+    text: <a href='/fa/items/1260A20.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4003.jpg?1363024203
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4003.jpg?1363024203
+  - startDate: '1346'
+    headline: ! ' خواهر و دو دختر نینیش استپانیان (امیرخانیان)'
+    text: <a href='/fa/items/1260A24.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4007.jpg?1363026055
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4007.jpg?1363026055
+  - startDate: '1317'
+    headline: عکس گروهی
+    text: <a href='/fa/items/1260A25.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4008.jpg?1363026349
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4008.jpg?1363026349
+  - startDate: '1322'
+    headline: هراچ امیرخانیان
+    text: <a href='/fa/items/1260A26.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4009.jpg?1363026627
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4009.jpg?1363026627
+  - startDate: '1366'
+    headline: هراچ امیرخانیان و رز امیرخانیان در عکس گروهی
+    text: <a href='/fa/items/1260A28.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4011.jpg?1363027322
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4011.jpg?1363027322
+  - startDate: '1368'
+    headline: هراچ امیرخانیان و رز امیرخانیان در سفر هندوستان
+    text: <a href='/fa/items/1260A29.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4012.jpg?1363030575
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4012.jpg?1363030575
+  - startDate: '1368'
+    headline: هراچ امیرخانیان و رز امیرخانیان در سفر هندوستان
+    text: <a href='/fa/items/1260A30.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4013.jpg?1363030800
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4013.jpg?1363030800
+  - startDate: '1370'
+    headline: هراچ امیرخانیان و رز امیرخانیان در سفر هندوستان
+    text: <a href='/fa/items/1260A31.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4014.jpg?1363031161
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4014.jpg?1363031161
+  - startDate: '1333'
+    headline: هراچ امیرخانیان
+    text: <a href='/fa/items/1260A32.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4015.jpg?1363031543
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4015.jpg?1363031543
+  - startDate: '1357'
+    headline: شاکه استپانیان (آبدالیان)
+    text: <a href='/fa/items/1260A33.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4016.jpg?1363031792
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4016.jpg?1363031792
+  - startDate: '1394'
+    headline: عکس گروهی
+    text: <a href='/fa/items/1260A35.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4018.jpg?1363032298
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4018.jpg?1363032298
+  - startDate: '1381'
+    headline: عکس گروهی
+    text: <a href='/fa/items/1260A36.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4019.jpg?1363032551
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4019.jpg?1363032551
+  - startDate: '1384'
+    headline: عکس گروهی
+    text: <a href='/fa/items/1260A37.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4020.jpg?1363033311
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4020.jpg?1363033311
+  - startDate: '1420'
+    headline: آنیک استپانیان
+    text: <a href='/fa/items/1260A39.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4022.jpg?1363034096
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4022.jpg?1363034096
+  - startDate: '1342'
+    headline: عکس گروهی
+    text: <a href='/fa/items/1260A40.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4023.jpg?1363034367
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4023.jpg?1363034367
+  - startDate: '1323'
+    headline: هراچ امیرخانیان
+    text: <a href='/fa/items/1260A21.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4004.jpg?1363024840
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4004.jpg?1363024840
+  - startDate: '1323'
+    headline: ! 'رز امیرخانیان '
+    text: <a href='/fa/items/1260A22.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4005.jpg?1363025138
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4005.jpg?1363025138
+  - startDate: '1368'
+    headline: عکس گروهی
+    text: <a href='/fa/items/1260A23.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4006.jpg?1363025766
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4006.jpg?1363025766
+  - startDate: '1350'
+    headline: عکس گروهی
+    text: <a href='/fa/items/1260A43.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4026.jpg?1363035188
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4026.jpg?1363035188
+  - startDate: '1328'
+    headline: فروغالدوله و دخترانش٬ فروغالملوک و ملکالملوک
+    text: <a href='/fa/items/1260A1.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3984.jpg?1363016796
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3984.jpg?1363016796
+  - startDate: '1348'
+    headline: شاکه استپانیان (آبدالیان)
+    text: <a href='/fa/items/1260A3.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3986.jpg?1363018012
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3986.jpg?1363018012
+  - startDate: '1366'
+    headline: هراچ  و رز امیرخانیان
+    text: <a href='/fa/items/1260A27.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4010.jpg?1363026939
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4010.jpg?1363026939
+  - startDate: '1299'
+    headline: سرپ خان امیرخانیان و ایزابل امیرخانیان (سروریان)
+    text: <a href='/fa/items/1260A34.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4017.jpg?1363032059
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4017.jpg?1363032059
+  - startDate: '1320'
+    headline: آرتین استپانیان
+    text: <a href='/fa/items/1260A19.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4002.jpg?1363023906
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4002.jpg?1363023906
+  - startDate: '1357'
+    headline: آنیک استپانیان
+    text: <a href='/fa/items/1260A41.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4024.jpg?1363034658
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4024.jpg?1363034658
+  - startDate: '1350'
+    headline: عکس گروهی
+    text: <a href='/fa/items/1260A42.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4025.jpg?1363034957
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4025.jpg?1363034957
+  - startDate: '1333'
+    headline: نینیش امیرخانیان (استپانیان)
+    text: <a href='/fa/items/1260A18.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4001.jpg?1363023568
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4001.jpg?1363023568
+  - startDate: '1338'
+    headline: نینیش امیرخانیان (استپانیان) درجمع دوستان
+    text: <a href='/fa/items/1260A7.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3990.jpg?1363019333
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3990.jpg?1363019333
+  - startDate: '1350'
+    headline: عکس گروهی
+    text: <a href='/fa/items/1260A44.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4027.jpg?1363035577
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4027.jpg?1363035577
+  - startDate: '1363'
+    headline: عکس گروهی
+    text: <a href='/fa/items/1260A53.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4058.jpg?1364222987
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4058.jpg?1364222987
+  - startDate: '1358'
+    headline: نینیش امیرخانیان (استپانیان) در میان اقوام
+    text: <a href='/fa/items/1260A54.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4059.jpg?1364223248
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4059.jpg?1364223248
+  - startDate: '1343'
+    headline: نینیش امیرخانیان (استپانیان) و آرتین استپانیان
+    text: <a href='/fa/items/1260A56.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4061.jpg?1364224519
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4061.jpg?1364224519
+  - startDate: '1373'
+    headline: نینیش امیرخانیان (استپانیان) و آرتین استپانیان
+    text: <a href='/fa/items/1260A57.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4062.jpg?1364225268
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4062.jpg?1364225268
+  - startDate: '1354'
+    headline: ! 'آنیک و شاکه استپانیان در کنار دوستانشان '
+    text: <a href='/fa/items/1260A58.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4063.jpg?1364225511
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4063.jpg?1364225511
+  - startDate: '1358'
+    headline: نینیش امیرخانیان (استپانیان)، آرتین، ربکا، و آنیک استپانیان
+    text: <a href='/fa/items/1260A59.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4064.jpg?1364226067
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4064.jpg?1364226067
+  - startDate: '1355'
+    headline: نینیش امیرخانیان (استپانیان)، هراچ امیرخانیان، شاکه استپانیان
+    text: <a href='/fa/items/1260A60.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4065.jpg?1364226425
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4065.jpg?1364226425
+  - startDate: '1352'
+    headline: ! 'نینیش امیرخانیان (استپانیان) واقوام '
+    text: <a href='/fa/items/1260A61.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4066.jpg?1364226701
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4066.jpg?1364226701
+  - startDate: '1358'
+    headline: خانواده نینیش امیرخانیان (استپانیان) در حیاط منزلشان
+    text: <a href='/fa/items/1260A62.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4067.jpg?1364227315
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4067.jpg?1364227315
+  - startDate: '1353'
+    headline: نینیش امیرخانیان (استپانیان) در کنار خانواده و دوستان
+    text: <a href='/fa/items/1260A63.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4068.jpg?1364227599
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4068.jpg?1364227599
+  - startDate: '1382'
+    headline: نینیش امیرخانیان (استپانیان) در کنار خانواده
+    text: <a href='/fa/items/1260A64.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4069.jpg?1364227932
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4069.jpg?1364227932
+  - startDate: '1358'
+    headline: نینیش امیرخانیان (استپانیان) در کنار خانواده
+    text: <a href='/fa/items/1260A65.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4070.jpg?1364228165
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4070.jpg?1364228165
+  - startDate: '1377'
+    headline: نینیش امیرخانیان (استپانیان) در کنار خانواده
+    text: <a href='/fa/items/1260A66.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4071.jpg?1364228513
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4071.jpg?1364228513
+  - startDate: '1372'
+    headline: عکس گروهی
+    text: <a href='/fa/items/1260A52.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4057.jpg?1364222567
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4057.jpg?1364222567
+  - startDate: '1358'
+    headline: نینیش امیرخانیان (استپانیان) درمیانسالی
+    text: <a href='/fa/items/1260A46.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4029.jpg?1363036761
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4029.jpg?1363036761
+  - startDate: '1343'
+    headline: فرزندان نینیش امیرخانیان (استپانیان)
+    text: <a href='/fa/items/1260A47.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4030.jpg?1363037119
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4030.jpg?1363037119
+  - startDate: '1338'
+    headline: ! 'خانواده آساطور خان امیرخانیان  '
+    text: <a href='/fa/items/1260A48.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4031.jpg?1363038171
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4031.jpg?1363038171
+  - startDate: '1351'
+    headline: کارت پستال
+    text: <a href='/fa/items/1260A49.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4032.jpg?1363038839
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4032.jpg?1363038839
+  - startDate: '1351'
+    headline: کارت پستال
+    text: <a href='/fa/items/1260A50.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4033.jpg?1363039137
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4033.jpg?1363039137
+  - startDate: '1356'
+    headline: شاکه استپانیان (آبدالیان)
+    text: <a href='/fa/items/1260A5.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3988.jpg?1363018545
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3988.jpg?1363018545
+YAML
+
+EN_YAML = <<-YAML
+---
+:sex: female
+:thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2061.jpg?1361902386
+:name: Ninish Amirkhaniyan (Istipaniyan)
+:description: Ninish Amirkhaniyan (Istipaniyan), born in 1884 in Tehran, and her husband
+  Artin Istipaniyan had six children together.
+:long_description: Ninish Amirkhaniyan (Istipaniyan) was born in a progressive Armenian
+  family in Tehran. She studied Sociology at Sorbonne University in Paris and taught
+  French to Qajar Princesses such as Furugh al-Muluk and Malik al-Muluk when she came
+  back to Iran. Muhammad Ali Mirza, who later became shah of Iran, asked her father
+  for her hand in marriage. But she finally married Artin Istipaniyan, who is the
+  first academically educated dentist in Iran according to the family. Ninish's children
+  all perfected in their majors due to her emphasis on higher education.
+:birthplace:
+  :name: Tehran
+  :url: ! '#'
+:dob_exact: '1884'
+:dod_exact: '1953'
+:published_collections:
+- :title: Avakiyan
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/collection_thumbs/collection_56.jpg?1362438745
+:sources:
+:people_relationships:
+- :relationship:
+    :title: daughter
+  :related_person:
+    :name: Anik Istipaniyan (Avakiyan)
+    :url: ! '#'
+    :published_items:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2063.jpg?1361910312
+- :relationship:
+    :title: husband
+  :related_person:
+    :name: Artin Istipaniyan
+    :url: ! '#'
+    :published_items:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2062.jpg?1361907866
+- :relationship:
+    :title: daughter
+  :related_person:
+    :name: Shaki Istipaniyan (Abdaliyan)
+    :url: ! '#'
+    :published_items:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2064.jpg?1361913132
+- :relationship:
+    :title: son
+  :related_person:
+    :name: Armin Istipaniyan
+    :url: ! '#'
+    :published_items:
+    - 0
+    - 0
+    - 0
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2065.jpg?1361913509
+- :relationship:
+    :title: son
+  :related_person:
+    :name: Samsun Istipaniyan
+    :url: ! '#'
+    :published_items:
+    - 0
+    - 0
+    - 0
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2066.jpg?1361913892
+- :relationship:
+    :title: son
+  :related_person:
+    :name: Hufisb Istipaniyan
+    :url: ! '#'
+    :published_items:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2067.jpg?1361914610
+- :relationship:
+    :title: son
+  :related_person:
+    :name: Rustam Istipaniyan
+    :url: ! '#'
+    :published_items:
+    - 0
+    - 0
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2068.jpg?1361914951
+- :relationship:
+    :title: father
+  :related_person:
+    :name: Sirp Khan Amirkhaniyan
+    :url: ! '#'
+    :published_items:
+    - 0
+    - 0
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2069.jpg?1361916233
+- :relationship:
+    :title: mother
+  :related_person:
+    :name: Isabil Sururiyan (Amirkhaniyan)
+    :url: ! '#'
+    :published_items:
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2070.jpg?1361916648
+- :relationship:
+    :title: sister
+  :related_person:
+    :name: Hirach Amirkhaniyan
+    :url: ! '#'
+    :published_items:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2071.jpg?1361917824
+- :relationship:
+    :title: sister
+  :related_person:
+    :name: Rose Amirkhaniyan
+    :url: ! '#'
+    :published_items:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2073.jpg?1361918671
+- :relationship:
+    :title: uncle (paternal)
+  :related_person:
+    :name: Asatur Khan Amirkhaniyan
+    :url: ! '#'
+    :published_items:
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2122.jpg?1362421128
+- :relationship:
+    :title: grandchild
+  :related_person:
+    :name: Huvans Avakiyan
+    :url: ! '#'
+    :published_items:
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2129.jpg?1362423941
+- :relationship:
+    :title: sister-in-law
+  :related_person:
+    :name: Rebecca Istipaniyan
+    :url: ! '#'
+    :published_items:
+    - 0
+    :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2139.jpg?1362428843
+:published_items:
+- :title: Armenian Women's Charity Society
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3985.jpg?1363017667
+  :local_date: '1958'
+- :title: Shaki Istipaniyan (Abdaliyan)
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3987.jpg?1363018276
+  :local_date: '1934'
+- :title: Ninish Amirkhaniyan (Istipaniyan)'s children
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3989.jpg?1363018946
+  :local_date: '1925'
+- :title: Harach Amirkhaniyan with a group of friends and teachers
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3991.jpg?1363019708
+  :local_date: circa. 1905
+- :title: Rose Amirkhaniyan among a group of friends and teachers
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3992.jpg?1363020139
+  :local_date: circa. 1903
+- :title: Hufisb, Armin and Samsun
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3993.jpg?1363020405
+  :local_date: '1919'
+- :title: Anik Istipaniyan in her wedding dress
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3994.jpg?1363020727
+  :local_date: '1940'
+- :title: Huvans Khan Masiyan
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3995.jpg?1363021178
+  :local_date: circa. 1900
+- :title: Sisters and children of Ninish Amirkhaniyan (Istipaniyan)
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3996.jpg?1363021513
+  :local_date: circa. 1920
+- :title: Children of Ninish Amirkhaniyan (Istipaniyan)
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3997.jpg?1363021793
+  :local_date: '1913'
+- :title: Anik Istipaniyan's business card
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3999.jpg?1363022881
+  :local_date:
+- :title: Ninish Amirkhaniyan (Istipaniyan) and Artin Istipaniyan
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4000.jpg?1363023258
+  :local_date: '1910'
+- :title: Group portrait
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3998.jpg?1363022127
+  :local_date: circa. 1917
+- :title: Hirach and Rose Amirkhaniyan
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4003.jpg?1363024203
+  :local_date: '1900'
+- :title: Sister and daughters of Ninish Amirkhaniyan (Istipaniyan)
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4007.jpg?1363026055
+  :local_date: circa. 1928
+- :title: Group portrait
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4008.jpg?1363026349
+  :local_date: circa. 1900
+- :title: Hirach Amirkhaniyan
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4009.jpg?1363026627
+  :local_date: '1905'
+- :title: Hirach and Rose Amirkhaniyan in a group portrait
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4011.jpg?1363027322
+  :local_date: '1947'
+- :title: Hirach and Rose Amirkhaniyan during travel to India
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4012.jpg?1363030575
+  :local_date: '1949'
+- :title: Hirach and Rose Amirkhaniyan during travel to India
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4013.jpg?1363030800
+  :local_date: '1949'
+- :title: Hirach and Rose Amirkhaniyan during travel to India
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4014.jpg?1363031161
+  :local_date: '1951'
+- :title: Hirach Amirkhaniyan
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4015.jpg?1363031543
+  :local_date: circa. 1915
+- :title: Shaki Istipaniyan (Abdaliyan)
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4016.jpg?1363031792
+  :local_date: '1939'
+- :title: Group portrait
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4018.jpg?1363032298
+  :local_date: '1975'
+- :title: Group portrait
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4019.jpg?1363032551
+  :local_date: '1962'
+- :title: Group portrait
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4020.jpg?1363033311
+  :local_date: circa. 1965
+- :title: Group portrait
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4021.jpg?1363033819
+  :local_date:
+- :title: Anik Istipaniyan
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4022.jpg?1363034096
+  :local_date: 2000 - 2001
+- :title: Group portrait
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4023.jpg?1363034367
+  :local_date: '1924'
+- :title: Hirach Amirkhaniyan
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4004.jpg?1363024840
+  :local_date: '1906'
+- :title: Rose Amirkhaniyan
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4005.jpg?1363025138
+  :local_date: '1906'
+- :title: Group portrait
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4006.jpg?1363025766
+  :local_date: '1949'
+- :title: Group portrait
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4026.jpg?1363035188
+  :local_date: '1932'
+- :title: Furugh al-Dawlah and her daughters Furugh al-Muluk and Malik al-Muluk
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3984.jpg?1363016796
+  :local_date: 20 Safar 1328 AH
+- :title: Shaki Istipaniyan (Abdaliyan)
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3986.jpg?1363018012
+  :local_date: '1930'
+- :title: Hirach and Rose Amirkhaniyan
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4010.jpg?1363026939
+  :local_date: '1947'
+- :title: Sirp Khan Amirkhaniyan, Isabil Sururiyan (Amirkhaniyan)
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4017.jpg?1363032059
+  :local_date: 1299 AH
+- :title: Artin Istipaniyan
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4002.jpg?1363023906
+  :local_date: '1903'
+- :title: Anik Istipaniyan
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4024.jpg?1363034658
+  :local_date: '1939'
+- :title: Group portrait
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4025.jpg?1363034957
+  :local_date: '1932'
+- :title: Ninish Amirkhaniyan (Istipaniyan)
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4001.jpg?1363023568
+  :local_date: circa. 1915
+- :title: Ninish Amirkhaniyan (Istipaniyan) among a group of friends
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3990.jpg?1363019333
+  :local_date: circa. 1920
+- :title: Group portrait
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4027.jpg?1363035577
+  :local_date: '1932'
+- :title: Group portrait
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4058.jpg?1364222987
+  :local_date: '1944'
+- :title: Ninish Amirkhaniyan (Istipaniyan) and relatives
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4059.jpg?1364223248
+  :local_date: '1940'
+- :title: Anik and Artin Istipaniyan
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4060.jpg?1364223577
+  :local_date:
+- :title: Ninish Amirkhaniyan (Istipaniyan) and Artin Istipaniyan
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4061.jpg?1364224519
+  :local_date: circa. 1925
+- :title: Ninish Amirkhaniyan (Istipaniyan) and Artin Istipaniyan
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4062.jpg?1364225268
+  :local_date: '1954'
+- :title: Anik and Shaki Istipaniyan with their friends
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4063.jpg?1364225511
+  :local_date: '1936'
+- :title: Ninish Amrikhaniyan (Istipanian), Artin, Rebecca, and Anik Istipaniyan
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4064.jpg?1364226067
+  :local_date: '1940'
+- :title: Ninish Amirkhaniyan (Istipaniyan), Hirach Amirkhaniyan, Shaki Istipaniyan
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4065.jpg?1364226425
+  :local_date: '1937'
+- :title: Ninish Amirkhaniyan (Istipaniyan) and relatives
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4066.jpg?1364226701
+  :local_date: '1934'
+- :title: Ninish Amirkhaniyan (Istipaniyan) and her family at their yard
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4067.jpg?1364227315
+  :local_date: '1940'
+- :title: Ninish Amirkhaniyan (Istipaniyan) with her relatives and friends
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4068.jpg?1364227599
+  :local_date: '1935'
+- :title: Ninish Amirkhaniyan (Istipaniyan) and her family
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4069.jpg?1364227932
+  :local_date: '1963'
+- :title: Ninish Amirkhaniyan (Istipaniyan) and her family
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4070.jpg?1364228165
+  :local_date: circa. 1940
+- :title: Ninish Amirkhaniyan (Istipaniyan) and her family
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4071.jpg?1364228513
+  :local_date: circa. 1958 - 1960
+- :title: Possibly Malkum Khan with his wife and child
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4056.jpg?1364222204
+  :local_date:
+- :title: Group portrait
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4057.jpg?1364222567
+  :local_date: '1953'
+- :title: Anik Istipaniyan, Shaki Istipaniyan, and Artin Istipaniyan
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4028.jpg?1363036224
+  :local_date:
+- :title: Ninish Amirkhaniyan (Istipaniyan) in her middle age
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4029.jpg?1363036761
+  :local_date: '1940'
+- :title: Children of Ninish Amirkhaniyan (Istipaniyan)
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4030.jpg?1363037119
+  :local_date: '1925'
+- :title: Asatur Khan Amirkhaniyan's family
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4031.jpg?1363038171
+  :local_date: '1920'
+- :title: Postcard
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4032.jpg?1363038839
+  :local_date: '1933'
+- :title: Postcard
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4033.jpg?1363039137
+  :local_date: '1933'
+- :title: Shaki Istipaniyan (Abdaliyan)
+  :url: ! '#'
+  :thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3988.jpg?1363018545
+  :local_date: '1938'
+YAML
+
+EN_TIMELINE_YAML = <<-YAML
+---
+timeline:
+  type: default
+  date:
+  - startDate: '1884'
+    headline: birth-timeline-message
+    text: Tehran
+  - startDate: '1953'
+    headline: death-timeline-message
+  - startDate: '1912'
+    headline: daughter-timeline-message
+    text: <a href='/en/people/2063.html'>Anik Istipaniyan (Avakiyan)</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2063.jpg?1361910312
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2063.jpg?1361910312
+  - startDate: '1914'
+    headline: daughter-timeline-message
+    text: <a href='/en/people/2064.html'>Shaki Istipaniyan (Abdaliyan)</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2064.jpg?1361913132
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2064.jpg?1361913132
+  - startDate: '1916'
+    headline: son-timeline-message
+    text: <a href='/en/people/2065.html'>Armin Istipaniyan</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2065.jpg?1361913509
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2065.jpg?1361913509
+  - startDate: '1918'
+    headline: son-timeline-message
+    text: <a href='/en/people/2066.html'>Samsun Istipaniyan</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2066.jpg?1361913892
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2066.jpg?1361913892
+  - startDate: '1910'
+    headline: son-timeline-message
+    text: <a href='/en/people/2067.html'>Hufisb Istipaniyan</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2067.jpg?1361914610
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2067.jpg?1361914610
+  - startDate: '1920'
+    headline: son-timeline-message
+    text: <a href='/en/people/2068.html'>Rustam Istipaniyan</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2068.jpg?1361914951
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/person_2068.jpg?1361914951
+  - startDate: '1958'
+    headline: Armenian Women's Charity Society
+    text: <a href='/en/items/1260A2.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3985.jpg?1363017667
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3985.jpg?1363017667
+  - startDate: '1934'
+    headline: Shaki Istipaniyan (Abdaliyan)
+    text: <a href='/en/items/1260A4.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3987.jpg?1363018276
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3987.jpg?1363018276
+  - startDate: '1925'
+    headline: Ninish Amirkhaniyan (Istipaniyan)'s children
+    text: <a href='/en/items/1260A6.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3989.jpg?1363018946
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3989.jpg?1363018946
+  - startDate: '1905'
+    headline: Harach Amirkhaniyan with a group of friends and teachers
+    text: <a href='/en/items/1260A8.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3991.jpg?1363019708
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3991.jpg?1363019708
+  - startDate: '1903'
+    headline: Rose Amirkhaniyan among a group of friends and teachers
+    text: <a href='/en/items/1260A9.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3992.jpg?1363020139
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3992.jpg?1363020139
+  - startDate: '1919'
+    headline: Hufisb, Armin and Samsun
+    text: <a href='/en/items/1260A10.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3993.jpg?1363020405
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3993.jpg?1363020405
+  - startDate: '1940'
+    headline: Anik Istipaniyan in her wedding dress
+    text: <a href='/en/items/1260A11.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3994.jpg?1363020727
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3994.jpg?1363020727
+  - startDate: '1900'
+    headline: Huvans Khan Masiyan
+    text: <a href='/en/items/1260A12.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3995.jpg?1363021178
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3995.jpg?1363021178
+  - startDate: '1920'
+    headline: Sisters and children of Ninish Amirkhaniyan (Istipaniyan)
+    text: <a href='/en/items/1260A13.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3996.jpg?1363021513
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3996.jpg?1363021513
+  - startDate: '1913'
+    headline: Children of Ninish Amirkhaniyan (Istipaniyan)
+    text: <a href='/en/items/1260A14.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3997.jpg?1363021793
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3997.jpg?1363021793
+  - startDate: '1910'
+    headline: Ninish Amirkhaniyan (Istipaniyan) and Artin Istipaniyan
+    text: <a href='/en/items/1260A17.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4000.jpg?1363023258
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4000.jpg?1363023258
+  - startDate: '1917'
+    headline: Group portrait
+    text: <a href='/en/items/1260A15.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3998.jpg?1363022127
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3998.jpg?1363022127
+  - startDate: '1900'
+    headline: Hirach and Rose Amirkhaniyan
+    text: <a href='/en/items/1260A20.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4003.jpg?1363024203
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4003.jpg?1363024203
+  - startDate: '1928'
+    headline: Sister and daughters of Ninish Amirkhaniyan (Istipaniyan)
+    text: <a href='/en/items/1260A24.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4007.jpg?1363026055
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4007.jpg?1363026055
+  - startDate: '1900'
+    headline: Group portrait
+    text: <a href='/en/items/1260A25.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4008.jpg?1363026349
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4008.jpg?1363026349
+  - startDate: '1905'
+    headline: Hirach Amirkhaniyan
+    text: <a href='/en/items/1260A26.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4009.jpg?1363026627
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4009.jpg?1363026627
+  - startDate: '1947'
+    headline: Hirach and Rose Amirkhaniyan in a group portrait
+    text: <a href='/en/items/1260A28.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4011.jpg?1363027322
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4011.jpg?1363027322
+  - startDate: '1949'
+    headline: Hirach and Rose Amirkhaniyan during travel to India
+    text: <a href='/en/items/1260A29.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4012.jpg?1363030575
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4012.jpg?1363030575
+  - startDate: '1949'
+    headline: Hirach and Rose Amirkhaniyan during travel to India
+    text: <a href='/en/items/1260A30.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4013.jpg?1363030800
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4013.jpg?1363030800
+  - startDate: '1951'
+    headline: Hirach and Rose Amirkhaniyan during travel to India
+    text: <a href='/en/items/1260A31.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4014.jpg?1363031161
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4014.jpg?1363031161
+  - startDate: '1915'
+    headline: Hirach Amirkhaniyan
+    text: <a href='/en/items/1260A32.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4015.jpg?1363031543
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4015.jpg?1363031543
+  - startDate: '1939'
+    headline: Shaki Istipaniyan (Abdaliyan)
+    text: <a href='/en/items/1260A33.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4016.jpg?1363031792
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4016.jpg?1363031792
+  - startDate: '1975'
+    headline: Group portrait
+    text: <a href='/en/items/1260A35.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4018.jpg?1363032298
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4018.jpg?1363032298
+  - startDate: '1962'
+    headline: Group portrait
+    text: <a href='/en/items/1260A36.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4019.jpg?1363032551
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4019.jpg?1363032551
+  - startDate: '1965'
+    headline: Group portrait
+    text: <a href='/en/items/1260A37.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4020.jpg?1363033311
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4020.jpg?1363033311
+  - startDate: '2000'
+    headline: Anik Istipaniyan
+    text: <a href='/en/items/1260A39.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4022.jpg?1363034096
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4022.jpg?1363034096
+  - startDate: '1924'
+    headline: Group portrait
+    text: <a href='/en/items/1260A40.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4023.jpg?1363034367
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4023.jpg?1363034367
+  - startDate: '1906'
+    headline: Hirach Amirkhaniyan
+    text: <a href='/en/items/1260A21.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4004.jpg?1363024840
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4004.jpg?1363024840
+  - startDate: '1906'
+    headline: Rose Amirkhaniyan
+    text: <a href='/en/items/1260A22.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4005.jpg?1363025138
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4005.jpg?1363025138
+  - startDate: '1949'
+    headline: Group portrait
+    text: <a href='/en/items/1260A23.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4006.jpg?1363025766
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4006.jpg?1363025766
+  - startDate: '1932'
+    headline: Group portrait
+    text: <a href='/en/items/1260A43.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4026.jpg?1363035188
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4026.jpg?1363035188
+  - startDate: '1910'
+    headline: Furugh al-Dawlah and her daughters Furugh al-Muluk and Malik al-Muluk
+    text: <a href='/en/items/1260A1.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3984.jpg?1363016796
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3984.jpg?1363016796
+  - startDate: '1930'
+    headline: Shaki Istipaniyan (Abdaliyan)
+    text: <a href='/en/items/1260A3.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3986.jpg?1363018012
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3986.jpg?1363018012
+  - startDate: '1947'
+    headline: Hirach and Rose Amirkhaniyan
+    text: <a href='/en/items/1260A27.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4010.jpg?1363026939
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4010.jpg?1363026939
+  - startDate: '1881'
+    headline: Sirp Khan Amirkhaniyan, Isabil Sururiyan (Amirkhaniyan)
+    text: <a href='/en/items/1260A34.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4017.jpg?1363032059
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4017.jpg?1363032059
+  - startDate: '1903'
+    headline: Artin Istipaniyan
+    text: <a href='/en/items/1260A19.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4002.jpg?1363023906
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4002.jpg?1363023906
+  - startDate: '1939'
+    headline: Anik Istipaniyan
+    text: <a href='/en/items/1260A41.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4024.jpg?1363034658
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4024.jpg?1363034658
+  - startDate: '1932'
+    headline: Group portrait
+    text: <a href='/en/items/1260A42.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4025.jpg?1363034957
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4025.jpg?1363034957
+  - startDate: '1915'
+    headline: Ninish Amirkhaniyan (Istipaniyan)
+    text: <a href='/en/items/1260A18.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4001.jpg?1363023568
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4001.jpg?1363023568
+  - startDate: '1920'
+    headline: Ninish Amirkhaniyan (Istipaniyan) among a group of friends
+    text: <a href='/en/items/1260A7.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3990.jpg?1363019333
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3990.jpg?1363019333
+  - startDate: '1932'
+    headline: Group portrait
+    text: <a href='/en/items/1260A44.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4027.jpg?1363035577
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4027.jpg?1363035577
+  - startDate: '1944'
+    headline: Group portrait
+    text: <a href='/en/items/1260A53.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4058.jpg?1364222987
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4058.jpg?1364222987
+  - startDate: '1940'
+    headline: Ninish Amirkhaniyan (Istipaniyan) and relatives
+    text: <a href='/en/items/1260A54.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4059.jpg?1364223248
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4059.jpg?1364223248
+  - startDate: '1925'
+    headline: Ninish Amirkhaniyan (Istipaniyan) and Artin Istipaniyan
+    text: <a href='/en/items/1260A56.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4061.jpg?1364224519
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4061.jpg?1364224519
+  - startDate: '1954'
+    headline: Ninish Amirkhaniyan (Istipaniyan) and Artin Istipaniyan
+    text: <a href='/en/items/1260A57.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4062.jpg?1364225268
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4062.jpg?1364225268
+  - startDate: '1936'
+    headline: Anik and Shaki Istipaniyan with their friends
+    text: <a href='/en/items/1260A58.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4063.jpg?1364225511
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4063.jpg?1364225511
+  - startDate: '1940'
+    headline: Ninish Amrikhaniyan (Istipanian), Artin, Rebecca, and Anik Istipaniyan
+    text: <a href='/en/items/1260A59.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4064.jpg?1364226067
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4064.jpg?1364226067
+  - startDate: '1937'
+    headline: Ninish Amirkhaniyan (Istipaniyan), Hirach Amirkhaniyan, Shaki Istipaniyan
+    text: <a href='/en/items/1260A60.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4065.jpg?1364226425
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4065.jpg?1364226425
+  - startDate: '1934'
+    headline: Ninish Amirkhaniyan (Istipaniyan) and relatives
+    text: <a href='/en/items/1260A61.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4066.jpg?1364226701
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4066.jpg?1364226701
+  - startDate: '1940'
+    headline: Ninish Amirkhaniyan (Istipaniyan) and her family at their yard
+    text: <a href='/en/items/1260A62.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4067.jpg?1364227315
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4067.jpg?1364227315
+  - startDate: '1935'
+    headline: Ninish Amirkhaniyan (Istipaniyan) with her relatives and friends
+    text: <a href='/en/items/1260A63.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4068.jpg?1364227599
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4068.jpg?1364227599
+  - startDate: '1963'
+    headline: Ninish Amirkhaniyan (Istipaniyan) and her family
+    text: <a href='/en/items/1260A64.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4069.jpg?1364227932
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4069.jpg?1364227932
+  - startDate: '1940'
+    headline: Ninish Amirkhaniyan (Istipaniyan) and her family
+    text: <a href='/en/items/1260A65.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4070.jpg?1364228165
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4070.jpg?1364228165
+  - startDate: '1958'
+    headline: Ninish Amirkhaniyan (Istipaniyan) and her family
+    text: <a href='/en/items/1260A66.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4071.jpg?1364228513
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4071.jpg?1364228513
+  - startDate: '1953'
+    headline: Group portrait
+    text: <a href='/en/items/1260A52.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4057.jpg?1364222567
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4057.jpg?1364222567
+  - startDate: '1940'
+    headline: Ninish Amirkhaniyan (Istipaniyan) in her middle age
+    text: <a href='/en/items/1260A46.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4029.jpg?1363036761
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4029.jpg?1363036761
+  - startDate: '1925'
+    headline: Children of Ninish Amirkhaniyan (Istipaniyan)
+    text: <a href='/en/items/1260A47.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4030.jpg?1363037119
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4030.jpg?1363037119
+  - startDate: '1920'
+    headline: Asatur Khan Amirkhaniyan's family
+    text: <a href='/en/items/1260A48.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4031.jpg?1363038171
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4031.jpg?1363038171
+  - startDate: '1933'
+    headline: Postcard
+    text: <a href='/en/items/1260A49.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4032.jpg?1363038839
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4032.jpg?1363038839
+  - startDate: '1933'
+    headline: Postcard
+    text: <a href='/en/items/1260A50.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4033.jpg?1363039137
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_4033.jpg?1363039137
+  - startDate: '1938'
+    headline: Shaki Istipaniyan (Abdaliyan)
+    text: <a href='/en/items/1260A5.html'>view-item</a>
+    asset:
+      thumbnail: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3988.jpg?1363018545
+      media: http://s3.amazonaws.com/assets.qajarwomen.org/thumbs/it_3988.jpg?1363018545
+YAML

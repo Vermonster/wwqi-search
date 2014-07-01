@@ -1,8 +1,4 @@
 <%# encoding: utf-8                                                                    %>
-<% unless $GENERATE # prevent loading the example if we're generating the static pages %>
-  <%   load_example_person! if @lang == :en                                                %>
-  <%   load_example_person_farsi! if @lang == :fa                                          %>
-<% end                                                                                 %>
 
 <%= partial "header" %>
 <div id="content">
@@ -25,108 +21,145 @@
 
     <div class="item-page clearfix">
       <div class="item-essentials person container clearfix">
-        <div class="breadcrumbs">
-          <a href="javascript:;">People </a>
-          <span class="current"><%= @object.name %></span>
+        <div class="four columns">
+          <img class="person-thumbnail" src="<%= @object.thumbnail %>">
         </div>
-        <div class="three columns">
-          <img class="person-thumbnail" src=<%= @object.thumbnail %>>
-        </div>
-        <div class="eight columns">
+        <div class="twelve columns">
           <h2><%= @object.name %></h2>
           <div class="person-meta clearfix">
             <div class="birth">
-              <% if @object.dob %>
-                <span class="dob"> <%= @object.local_date(:dob_exact) %></span>
+              <% if @object.dob_exact || @object.birthplace %>
+                <span class="person-dates"><%= t('born-prefix') %></span>
+              <% end %>
+              <% if @object.dob_exact %>
+                <span class="dob"> <%= with_farsi_numbers @object.local_date(:dob_exact) %></span>
               <% end %>
               <% if @object.birthplace %>
-                <a href=<%= @object.birthplace.url %>><%=@object.birthplace.name%></a>
+                <span class="person-place"><a href="<%= loopback(lang: @lang).update_filter("places_#{@lang}", @object.birthplace.name.to_s).to_url %>">
+                  <%= @object.birthplace.name %>
+                </a></span>
               <% end %>
             </div>
             <div class="death">
-              <% if @object.dod %>
-                <span class="dod">— <%= @object.local_date(:dod_exact) %></span>
+              <% if @object.dod_exact || @object.place_of_death %>
+                <span class="person-dates"><%= t('died-prefix') %></span>
+              <% end %>
+              <% if @object.dod_exact %>
+                <span class="dod"><%= with_farsi_numbers @object.local_date(:dod_exact) %></span>
               <% end %>
               <% if @object.place_of_death %>
-                <a href=<%= @object.place_of_death.url %>><%=@object.place_of_death.name%></a>
+                <span class="person-place"><a href="<%= loopback(lang: @lang).update_filter("places_#{@lang}", @object.place_of_death.name.to_s).to_url %>">
+                  <%= @object.place_of_death.name %>
+                </a></span>
               <% end %>
             </div>
           </div>
-          <% if @object.description %>
+          <% if @object.description.present? && !@object.unpublish %>
             <div class="description">
-              <p class="short"><%= @object.description %> <% if @object.long_description %>
-                <a class="full-bio" href="javascript:;">read full bio </a><% end %></p>
-              <% if @object.long_description %>
-                <p class="long"><%= @object.long_description %> </p>
+              <p class="short">
+                <%= @object.description %>
+                <div class="button-wrapper">
+                  <% if @object.long_description.present? %>
+                    <a class="show-full-bio" href="javascript:;"><%= t('show-full-bio') %></a>
+                  <% end %>
+                  <% if @object.sources.present? %>
+                    <a class="show-biblio" href="javascript:;"><%= t('show-bibliography') %></a>
+                  <% end %>
+                </div>
+              </p>
+              <% if @object.long_description.present? %>
+                <p class="long">
+                  <%= @object.long_description %>
+                  <a class="hide-full-bio" href="javascript:;"><%= t('hide-full-bio') %></a>
+                </p>
+              <% end %>
+              <% if @object.sources.present? %>
+                <p class="bibliography">
+                  <%= @object.sources %>
+                  <a class="hide-biblio" href="javascript:;"><%= t('hide-bibliography') %></a>
+                </p>
               <% end %>
             </div>
           <% end %>
         </div>
-        <div class="five columns omega last-column">
-          <a class="biblio" href="javascript:;"> Bibliography </a>
-          <h6> Do you know this person? </h6>
-          <a class="help-us" href="javascript:;">Help us complete this profile.</a>
-        </div>
       </div>
-      <div class="items-below-fold person clearfix">
-        <div class="ten columns alpha">
-          <div class="item-details clearfix">
-            <h1>Related items</h1>
-            <div class="timeline">
-              <img src="/images/timeline.png">
-            </div>
 
-            <% if @object.people_roles.present? %>
-              <ul class="related-items clearfix">
-                <% @object.people_roles.each do |pr| %>
-                  <li class="clearfix">
-                    <img class="related-item-thumbnail" src="/images/empty.jpg">
-                    <div class="related-item-data">
-                      <p>
-                       <a href=<%= pr.item.url %>><%= pr.item.title %></a>
-                      <% if pr.item.local_date %> (<%= pr.item.local_date %>) <% end %>
-                      </p>
+      <div class='person-callout'>
+        <h6><%= t('do-you-know-this-person') %></h6>
+        <a class="help-us" href="<%= Environment.user_platform_url %>"><%= t('help-us-complete-this-profile') %></a>
+      </div>
+
+      <% timeline_json = @object.as_timeline_json(@lang) %>
+      <% number_of_timeline_entries = timeline_json['timeline']['date'].length %>
+      <% timeline_threshold = 3 %>
+
+      <div class="items-below-fold person clearfix">
+        <% if number_of_timeline_entries > timeline_threshold %>
+          <div class="item-details clearfix">
+            <div class="item-details-header">
+              <h1><%= t('timeline-header') %></h1>
+              <a href="<%= loopback(lang: @lang).update_filter("people_#{@lang}", @object.name.to_s).to_url %>"><%= t('view-as-search-results') %></a>
+            </div>
+            <div id="person-timeline" class="person-timeline"></div>
+          </div>
+        <% end %>
+        <div class="item-details row clearfix">
+          <div class="row">
+            <div class="item_related undated-related-items two-thirds column">
+              <% if @object.published_items.present? %>
+                <span class="title"><%= t('all-related-items') %></span>
+                <ul class="related-items clearfix">
+                  <% @object.published_items.each do |item| %>
+                    <li class="clearfix">
+                    <img class="related-item-thumbnail" src="<%= item.thumbnail %>">
+                      <div class="related-item-data">
+                        <p>
+                         <a href="<%= item.url %>"><%= item.title %></a>
+                        <% if item.local_date %> (<%= with_farsi_numbers item.local_date %>) <% end %>
+                        </p>
+                      </div>
+                    </li>
+                  <% end %>
+                </ul>
+              <% end %>
+            </div>
+            <div class="one-third column item_related">
+              <% if @object.published_collections.present? %>
+                <span class="title collections"><%= t('related-collections') %></span>
+                <ul>
+                  <li>
+                  <% @object.published_collections.each do |collection| %>
+                  <div class="related-collection clearfix">
+                    <img class="collection-thumbnail" src="<%= collection.thumbnail %>">
+                    <div class="related-collection-data">
+                      <a href=<%= collection.url %>><%= collection.title %></a>
                     </div>
+                  </div>
+                  <% end %>
+                  </li>
+                </ul>
+              <% end %>
+              <% if @object.people_relationships.present? %>
+                <span class="title people"><%= t('related-people') %></span>
+                <ul>
+                  <li>
+                    <% @object.people_relationships.each do |pr| %>
+                      <div class="related-person clearfix">
+                        <img class="person-thumbnail" src="<%= pr.related_person.thumbnail %>">
+                        <div class="related-person-data clearfix">
+                          <a class="related-person-name" href=<%= pr.related_person.url %>>
+                            <%= pr.related_person.name %>
+                            <span>(<%= with_farsi_numbers pr.related_person.published_items.count %>)</span>
+                            <div class="related-person-relationship"><%= pr.relationship.title %></div>
+                          </a>
+                        </div>
+                      </div>
+
+                    <% end %>
                   </li>
                 <% end %>
               </ul>
-            <% end %>
-          </div>
-        </div>
-        <div class="six columns omega last-column">
-           <div class="border"></div>
-           <div class="item_related">
-            <ul>
-              <% if @object.people_relationships.present? %>
-                <li>
-                  <span class="title people">Related people</span>
-                  <% @object.people_relationships.each do |pr| %>
-                    <div class="related-person clearfix">
-                      <img src="/images/qajar_thumbnail.jpg" class="person-thumbnail">
-                      <a class="related-person-data-items" href="javascript:;">11</a>
-                      <div class="related-person-data clearfix">
-                        <a class="related-person-name" href=<%= pr.related_person.url %>><%= pr.related_person.name %> <span>(<%= pr.relationship.title %>)</span></a>
-                      </div>
-                    </div>
-
-                  <% end %>
-                </li>
-              <% end %>
-              <% if @object.collections.present? %>
-                <li>
-                <span class="title collections">Related collections</span>
-                <% @object.collections.each do |collection| %>
-                <div class="related-collection clearfix">
-                  <img src="/images/empty.jpg" class="collection-thumbnail">
-                  <div class="related-collection-data">
-                    <a href=<%= collection.url %>><%= collection.title %></a>
-                  </div>
-                </div>
-
-                <% end %>
-                </li>
-              <% end %>
-            </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -135,9 +168,51 @@
 </div>
 
 <script type="text/javascript">
-  $(".full-bio").click(function(){
-    $(this).fadeOut();
-    $(".description .long").slideDown();
-  })
+  function scrollToPrevPosition($el) {
+    oldScrollTop = parseInt($el.data('scroll-top'));
+    if ($(window).scrollTop() > oldScrollTop ) {
+      $('html, body').animate({ scrollTop: oldScrollTop });
+    }
+  }
+  $(".show-full-bio").click(function(){
+    $(this).addClass('disabled-link');
+    $longDesc = $(".description .long");
+    $longDesc.data('scroll-top', $(window).scrollTop());
+    $longDesc.slideDown();
+  });
+  $(".show-biblio").click(function(){
+    $(this).addClass('disabled-link');
+    $biblio = $(".description .bibliography")
+    $biblio.data('scroll-top', $(window).scrollTop());
+    $biblio.slideDown();
+  });
+  $(".hide-full-bio").click(function(){
+    $(".show-full-bio").removeClass('disabled-link');
+    $longDesc = $(".description .long");
+    $longDesc.slideUp();
+    scrollToPrevPosition($longDesc);
+  });
+  $(".hide-biblio").click(function(){
+    $(".show-biblio").removeClass('disabled-link');
+    $biblio = $(".description .bibliography");
+    $biblio.slideUp();
+    scrollToPrevPosition($biblio);
+  });
 </script>
+<% if number_of_timeline_entries > timeline_threshold %>
+  <script type="text/javascript" src="http://cdn.knightlab.com/libs/timeline/latest/js/storyjs-embed.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      timelineData = <%= timeline_json.to_json %>;
+      createStoryJS({
+        type: 'timeline',
+        source: timelineData,
+        width: '100%',
+        height: '500',
+        lang: '<%= @lang %>',
+        embed_id: 'person-timeline'
+        });
+      });
+  </script>
+<% end %>
 <%= partial "footer" %>

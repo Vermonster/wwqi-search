@@ -125,6 +125,10 @@ if ENV['FAKE_PAGES']
   %w(item collection collection_manifest person person_manifest).each do |page|
     get "/:lang/#{page}.html" do |lang|
       @lang = lang.to_sym
+      case page
+      when 'person'
+        @lang == :en ? load_example_person! : load_example_person_farsi!
+      end
       erb page.to_sym
     end
   end
