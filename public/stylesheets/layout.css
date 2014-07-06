@@ -2522,7 +2522,7 @@ ul.collections.facets li a {
 .vco-slider .nav-next:hover .icon,
 .vco-slider .nav-previous:hover .date,
 .vco-slider .nav-next:hover .date,
-.vco-slider .nav-previous:hover .title, 
+.vco-slider .nav-previous:hover .title,
 .vco-slider .nav-next:hover .title {
   opacity: .8;
 }
@@ -2536,13 +2536,13 @@ ul.collections.facets li a {
 }
 
 @media only screen and (max-width: 767px) {
-  .vco-slider .nav-previous .date, 
+  .vco-slider .nav-previous .date,
   .vco-slider .nav-next .date,
-  .vco-slider .nav-previous .title, 
+  .vco-slider .nav-previous .title,
   .vco-slider .nav-next .title {
     display: none;
   }
-  
+
   #person-timeline .vco-skinny.vco-notouch .vco-slider .nav-next .icon {
     background-position: -184px 0;
   }
@@ -2620,6 +2620,7 @@ ul.collections.facets li a {
 .person .item-details:last-of-type {
   background: #efefef;
   border-top: 1px solid #d5d5d5;
+  margin-bottom:0;
 }
 
 .related-person{

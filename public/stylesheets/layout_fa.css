@@ -42,7 +42,7 @@ body{
 .header .toolbar ul{float:left;}
 .header .menu ul{margin:0px 120px 0px 0px;}
 .header .menu ul li{float:right;}
-.header .menu ul li a{float:right;padding:12px 25px 0 25px;border-left:1px solid #444; border-right:none; font-size: 22px; font-weight: bold;}
+.header .menu ul li a{float:right;padding:12px 25px 0 25px;border-left:1px solid #444; border-right:none; font-size: 18px; font-weight: bold;}
 .header .menu ul li a span{
 	font-size:16px;
 	font-weight:normal;
@@ -61,7 +61,7 @@ body{
 	right:15px;
 	left:auto;
 }
-.item-essentials h2{padding-right:25px; padding-left:0;font-family:'Nazanin LT W20 Bold'; font-size: 28px; font-weight:normal}
+.item-essentials h2{padding-right:25px; padding-left:0;font-family:'Nazanin LT W20 Bold'; font-size: 25px; font-weight:normal}
 .item-essentials p.description{padding-right:25px;	padding-left:0px;}
 
 .item-essentials.collection-details h2,
@@ -107,7 +107,8 @@ body{
 }
 
 .last-column{float:left!important;}
-.item_related .title{padding: 10px 25px 10px 0px; background-position:100% 50%!important}
+.item_related .title, .item_related span.title{padding: 10px 25px 10px 0px; background-position:100% 50%!important}
+.undated-related-items .title{margin-right:0px; margin-left:20px;}
 .item-details ul li,
 .item_related ul li{clear:left; font-size: 16px;}
 .item-details ul li span, .item_related ul li span{
@@ -221,7 +222,7 @@ ul.collections li a p{
 
 #home-main .rslides li{margin-bottom:0}
 #home-main .side-stuff{margin-left:-20px; margin-right:0; padding:0 10px 50px 10px}
-#home-main .welcome{right:0;left:5px;font-size: 22px;font-family:'Nazanin LT W20 Bold';font-weight: normal;}
+#home-main .welcome{right:0;left:5px;font-size: 19px;font-family:'Nazanin LT W20 Bold';font-weight: normal;}
 #home-main .welcome{background:url(../images/home-search-arrow-fa.png) 0% 0 no-repeat;}
 #home-main .welcome i{
 	left:0;
@@ -254,7 +255,7 @@ ul.collections li a p{
 .otherIndexes{float:left;}
 .otherIndexes a{margin-right:10px;	margin-left:0;}
 #carousel h2{
-	font-size: 24px;
+	font-size: 20px;
 	height: 38px; padding: 0 35px;line-height: 38px;
 	margin-left: 0;
 	margin-right: 0;
@@ -263,12 +264,14 @@ ul.collections li a p{
 	font-family:'Nazanin LT W20 Bold', Tahoma, sans-serif; font-weight: normal;
 }
 #carousel .collection-data .title{
-	font-size: 22px;
+	font-size: 18px;
 	margin-bottom: 10px;
+	margin-top:5px;
 	font-family:'Nazanin LT W20 Bold';font-weight: normal;
 }
 #carousel .collection-data .description{
-	font-size: 18px;
+	font-size: 15px;
+	line-height:18px;
 }
 
 .es-carousel-wrapper{
@@ -364,8 +367,8 @@ ul.collections li a p{
 .secondary-browse-facets .people{margin-left:-10px;}
 .secondary-browse-facets .places{margin-left:-10px;}
 .secondary-browse-facets .subjects{	margin-left:-10px;}
-.secondary-browse-facets ul li a{font-size: 18px;}
-.secondary-browse-facets h3{font-family:'Nazanin LT W20 Bold';font-size: 20px; font-weight:normal}
+.secondary-browse-facets ul li a{font-size: 16px;}
+.secondary-browse-facets h3{font-family:'Nazanin LT W20 Bold';font-size: 18px; font-weight:normal}
 #browse-bar .list li.current{font-size:18px; font-weight:normal; font-family:'Nazanin LT W20 Bold'; margin-left:0px; margin-right:10px;-moz-border-radius:0 5px 5px 0;
 -webkit-border-radius:0 5px 5px 0;
 border-radius:0 5px 5px 0;
@@ -374,7 +377,7 @@ padding: 0 35px 0 10px;}
 	-moz-border-radius:0 5px 5px 0;
 	-webkit-border-radius:0 5px 5px 0;
 	border-radius:0 5px 5px 0;left:0; right:0px; left:auto}
-.special-searches h3 a{font-family:'Nazanin LT W20 Light'; font-size:20px;}
+.special-searches h3 a{font-family:'Nazanin LT W20 Light'; font-size:18px;}
 .special-searches h3.has-translation{
 	background:url(../images/icon-translation-black.png) 100% 0 no-repeat;
 	padding:0px 40px 0 0px;
@@ -436,9 +439,12 @@ padding: 0 35px 0 10px;}
 	padding-right:25px;
 }
 .person .birth, .person .death{
-  display:inline-block;
-  float:right;
   font-family:'Nazanin LT W20 Bold';
+}
+
+.person-place{
+	margin-right:5px;
+	margin-left:none;
 }
 
 .person .dob, .person .dod{
@@ -522,7 +528,23 @@ padding: 0 35px 0 10px;}
     left: 0;
 }
 
+.person .show-full-bio, .person .show-biblio, .person .hide-full-bio, .person .hide-biblio{
+	margin-right:0;
+	margin-left:15px;
+}
 
+.person .item-details-header a{
+	padding-right:15px;
+}
+
+.person .related-collection .collection-thumbnail{
+	float:right;
+}
+.person .related-collection-data{
+	float:right;
+	margin-left:0;
+	margin-right:5px;
+}
 /* #Page Styles
 ================================================== */
 
@@ -752,12 +774,14 @@ padding: 0 35px 0 10px;}
 	    	font-size:16px;
 	    }
 	    .related-person .person-thumbnail{
-	    	-moz-border-radius:30px;
-	    	-webkit-border-radius:30px;
-	    	border-radius:50px;
+	    	margin-right:0;
 	    }
 	    .related-person .related-person-data{
 	    	height:60px;
+	    }
+
+	    .person .related-items .related-item-data{
+	    	overflow:hidden;
 	    }
 	}
 
@@ -798,6 +822,45 @@ padding: 0 35px 0 10px;}
 	}
 
 
+
+/* timeline js farsification
+-------------------------------------------------------------- */
+.vco-slider .slider-item .content .pad-left .text .container{
+	padding-right:30px;
+	padding-left:0;
+	direction:rtl;
+}
+
+.vco-slider .slider-item .content .content-container .text .container{
+	text-align:right!important;
+}
+
+#person-timeline .nav-next, #person-timeline .nav-previous{
+	z-index:1000;
+
+}
+.vco-slider,
+#person-timeline .vco-storyjs .vco-feature h3{
+	font-family:'Nazanin LT W20 Bold'!important;
+}
+
+.vco-slider .slider-item .content .content-container .text .container h2.date{
+font-family: 'BDavat'!important;
+font-size:20px!important;
+}
+
+.vco-slider{
+	direction:ltr;
+	font-family:'Nazanin LT W20 Bold'!important;
+}
+.vco-slider .nav-previous .nav-container, .vco-slider .nav-next .nav-container{
+	font-family:'Nazanin LT W20 Bold'!important;
+}
+.vco-slider .nav-next .date,
+.vco-slider .nav-previous .date{
+	font-family: 'BDavat'!important;
+
+}
 /* #Font-Face
 ================================================== */
 /* 	This is the proper syntax for an @font-face file

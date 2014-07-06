@@ -1,4 +1,4 @@
-class Translation < ActiveRecord::Base                                      
+class Translation < ActiveRecord::Base
   class << self
     if Environment.skip_database
       def lookup(key, locale)
@@ -15,9 +15,17 @@ class Translation < ActiveRecord::Base
       'born-prefix' => 'b.',
       'died-prefix' => 'd.',
       'do-you-know-this-person' => 'Do you know this person?',
-      'help-us-complete-this-profile' => 'Help us complete this profile.'
+      'help-us-complete-this-profile' => 'Help us complete this profile.',
+      'timeline-header' => 'Life events and dated items',
+      'view-as-search-results' => 'view as search results'
     },
     fa: {
+      'born-prefix' => 'تواد',
+      'died-prefix' => 'مرگ',
+      'do-you-know-this-person' => 'آیا این شخص را می‌شناسید؟',
+      'help-us-complete-this-profile' => 'ما را در تکمیل این مشخصات یاری کنید',
+      'timeline-header' => 'وقایع زندگی و اقلام مورخ',
+      'view-as-search-results' => 'مشاهده به صورت نتایج جستجو'
     }
   )
 end
