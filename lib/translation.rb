@@ -17,15 +17,17 @@ class Translation < ActiveRecord::Base
       'do-you-know-this-person' => 'Do you know this person?',
       'help-us-complete-this-profile' => 'Help us complete this profile.',
       'timeline-header' => 'Life events and dated items',
-      'view-as-search-results' => 'view as search results'
+      'view-as-search-results' => 'view as search results',
+      'view-item' => 'View item'
     },
     fa: {
       'born-prefix' => 'تواد',
       'died-prefix' => 'مرگ',
-      'do-you-know-this-person' => 'آیا این شخص را می‌شناسید؟',
-      'help-us-complete-this-profile' => 'ما را در تکمیل این مشخصات یاری کنید',
-      'timeline-header' => 'وقایع زندگی و اقلام مورخ',
-      'view-as-search-results' => 'مشاهده به صورت نتایج جستجو'
+      'do-you-know-this-person' => 'این فرد را می‌شناسید؟',
+      'help-us-complete-this-profile' => 'به تکمیل اطلاعات این فرد کمک کنید',
+      'timeline-header' => 'وقایع زندگی و اقلامِ با تاریخ',
+      'view-as-search-results' => 'مشاهده به صورت نتایج جستجو',
+      'view-item' => 'مشاهده این سند'
     }
   )
 end
