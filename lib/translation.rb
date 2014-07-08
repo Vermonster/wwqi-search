@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Translation < ActiveRecord::Base
   class << self
     if Environment.skip_database
