@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/wwqi/tire.git
+  remote: https://github.com/wwqi/tire.git
   revision: 65ee2cc198bec1242a47cb2e6c9c3ea258457b0e
   ref: 65ee2cc198bec
   specs:
