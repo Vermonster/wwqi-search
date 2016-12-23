@@ -175,4 +175,3 @@ module Helpers
     Loopback.new(opts || params)
   end
 end
-

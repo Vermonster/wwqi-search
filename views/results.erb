@@ -8,7 +8,11 @@
         <div class="browse-search">
           <h1> <%= t("search") %> </h1>
           <div class="clearfix searchbox">
-            <%= partial :search_form %>
+            <form class='searchform' method='GET' action='<%= Environment.search_url %>'>
+              <input type="text" value="<%= respond_to?(:params) ? params["query"] : "" %>" placeholder="<%= t('search_prompt') %>" name="query" class="swap_value" id="s" />
+              <input type='hidden' name='lang' value='<%= @lang %>' />
+              <button id="search" type="submit"></button>
+            </form>
           </div>
           <div class="results-found">
             <%= t("total-results-found") %> <%= with_farsi_numbers @total_results %>

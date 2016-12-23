@@ -5,14 +5,10 @@ gem 'sinatra'
 gem 'rake'
 gem 'thin'
 gem 'sass'
-gem 'pg'
-gem 'activerecord'
 gem 'foreman'
 gem 'enviable'
 gem 'kramdown'
-
-gem 'tire', :git => "git://github.com/jfredett/tire.git", :ref => "65ee2cc198bec"
-
+gem 'tire', :git => "git://github.com/wwqi/tire.git", :ref => "65ee2cc198bec"
 gem 'heroku'
 
 group :test do
