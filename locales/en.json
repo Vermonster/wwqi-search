@@ -370,7 +370,6 @@
   "view_all_items_with_translations": "View All Items with a Translation",
   "view_all_items_with_transcriptions": "View All Items with a Transcription",
   "has-no-translation": null,
-  "has-no-transcription": null,
   "transcription": "Transcription",
   "technical_summary": "A 15-minute video on the benefits and structure of the new site and the importance of the graph techniques that will be used.",
   "subjects_index": "Subject Index",
@@ -426,5 +425,6 @@
   "related-people": "Related people",
   "related-collections": "Collections",
   "husband-death-timeline-message": "Husband's death",
-  "wife-death-timeline-message": "Wife's death"
+  "wife-death-timeline-message": "Wife's death",
+  "has-no-transcription": "Has no Persian Transcription"
 }
