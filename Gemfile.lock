@@ -1,14 +1,14 @@
 GIT
   remote: https://github.com/wwqi/tire.git
-  revision: 65ee2cc198bec1242a47cb2e6c9c3ea258457b0e
-  ref: 65ee2cc198bec
+  revision: 4371244c4ace39219b5d440e93b1177730182707
+  ref: 4371244c
   specs:
     tire (0.4.3)
       activemodel (>= 3.0)
       hashr (~> 0.0.19)
       multi_json (~> 1.0)
       rake
-      rest-client (~> 1.6)
+      rest-client (~> 1.8)
 
 GEM
   remote: https://rubygems.org/

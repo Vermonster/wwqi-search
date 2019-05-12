@@ -9,7 +9,7 @@ gem 'sass'
 gem 'foreman'
 gem 'enviable'
 gem 'kramdown'
-gem 'tire', :git => "https://github.com/wwqi/tire.git", :ref => "65ee2cc198bec"
+gem 'tire', :git => "https://github.com/wwqi/tire.git", :ref => "4371244c"
 
 group :test do
   gem 'rspec'
