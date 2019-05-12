@@ -1,4 +1,5 @@
 source "https://rubygems.org"
+ruby '2.3.1'
 
 gem 'activesupport'
 gem 'sinatra'
@@ -9,7 +10,6 @@ gem 'foreman'
 gem 'enviable'
 gem 'kramdown'
 gem 'tire', :git => "https://github.com/wwqi/tire.git", :ref => "65ee2cc198bec"
-gem 'heroku'
 
 group :test do
   gem 'rspec'
@@ -19,7 +19,3 @@ group :test do
 end
 
 gem 'pry', :require => 'pry'
-gem 'pry-nav'
-gem 'pry-doc'
-
-gem 'capistrano'
