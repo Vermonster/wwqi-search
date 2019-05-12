@@ -3,7 +3,29 @@ require 'net/http'
 require 'json'
 require 'kramdown'
 
-PERIOD_FILTERS = JSON.parse(Net::HTTP.get(URI("http://www.qajarwomen.org.s3.amazonaws.com/period_manifest.json")))
+#PERIOD_FILTERS = JSON.parse(Net::HTTP.get(URI("http://www.qajarwomen.org.s3.amazonaws.com/period_manifest.json")))
+
+PERIOD_FILTERS = {
+  "en" => [
+    {"name"=>"Pre-Qajar", "start_at"=>"12-31-1749", "end_at"=>"03-21-1786"},
+    {"name"=>"Aqa Muhammad Khan", "start_at"=>"03-21-1786", "end_at"=>"06-17-1797"},
+    {"name"=>"Fath ‘Ali Shah", "start_at"=>"07-28-1797", "end_at"=>"10-24-1834"},
+    {"name"=>"Muhammad Shah", "start_at"=>"11-09-1834", "end_at"=>"09-05-1848"},
+    {"name"=>"Nasir al-Din Shah", "start_at"=>"09-13-1848", "end_at"=>"05-01-1896"},
+    {"name"=>"Muzaffar al-Din Shah", "start_at"=>"06-08-1896", "end_at"=>"01-04-1907"},
+    {"name"=>"Muhammad ‘Ali Shah", "start_at"=>"01-05-1907", "end_at"=>"06-21-1925"},
+    {"name"=>"Ahmad Shah", "start_at"=>"07-16-1909", "end_at"=>"10-31-1925"},
+    {"name"=>"Post-Qajar", "start_at"=>"12-12-1925", "end_at"=>"12-31-2075"}],
+  "fa" => [
+    {"name"=>"پیش از قاجار", "start_at"=>"12-31-1749", "end_at"=>"03-21-1786"},
+    {"name"=>"آقا محمد خان", "start_at"=>"03-21-1786", "end_at"=>"06-17-1797"},
+    {"name"=>"فتحعلی شاه", "start_at"=>"07-28-1797", "end_at"=>"10-24-1834"},
+    {"name"=>"محمد شاه", "start_at"=>"11-09-1834", "end_at"=>"09-05-1848"},
+    {"name"=>"ناصرالدين شاه", "start_at"=>"09-13-1848", "end_at"=>"05-01-1896"},
+    {"name"=>"مظفرالدين شاه", "start_at"=>"06-08-1896", "end_at"=>"01-04-1907"},
+    {"name"=>"محمد علی شاه", "start_at"=>"01-05-1907", "end_at"=>"06-21-1925"},
+    {"name"=>"احمد شاه", "start_at"=>"07-16-1909", "end_at"=>"10-31-1925"},
+    {"name"=>"پس از قاجار", "start_at"=>"12-12-1925", "end_at"=>"12-31-2075"}]}
 
 TRANSLATIONS = {
   'en' => JSON.parse(File.read('./locales/en.json')),
