@@ -52,7 +52,7 @@ class Loopback
 
   def query_field
     return "" unless @query.present?
-    "&query=#{@query}" 
+    "&query=#{CGI::escape(@query)}" 
   end
 
   def sort_field 
