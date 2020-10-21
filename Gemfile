@@ -19,3 +19,4 @@ group :test do
 end
 
 gem 'pry', :require => 'pry'
+gem 'rb-readline'
