@@ -43,7 +43,7 @@
                 <div class="collection-essentials">
                   <span class="date"><%= result.created_at %></span>
                   <h3><%= result.send("title_#{@lang}") || result.send("name_#{@lang}")%></h3>
-                  <p><%= result.send("description_#{@lang}").truncate(600, separator: /\s/) %></p>
+                  <p><%= result.send("description_#{@lang}").to_s.truncate(600, separator: /\s/) %></p>
                 </div>
               </div>
               <span class="draft-badge"></span>
