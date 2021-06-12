@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-ruby '2.6.3'
+ruby '2.6.7'
 
 gem 'activesupport'
 gem 'sinatra'
@@ -18,5 +18,7 @@ group :test do
   gem 'launchy'
 end
 
-gem 'pry', :require => 'pry'
-gem 'rb-readline'
+group :test, :development do
+  gem 'pry', :require => 'pry'
+  gem 'rb-readline'
+end

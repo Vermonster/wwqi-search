@@ -2,7 +2,6 @@
 require 'sinatra'
 require 'date'
 require 'tire'
-require 'pry'
 require 'sass'
 require 'active_support'
 require 'active_support/core_ext'
